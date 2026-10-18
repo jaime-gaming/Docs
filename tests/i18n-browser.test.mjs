@@ -302,3 +302,90 @@ test("el sidebar traduce los títulos de las guías", async () => {
   assert.ok(enLabels.some((label) => /Install/i.test(label)), "falta «Installation» en el sidebar");
   assert.equal(window.currentLang, "en");
 });
+
+/* ---------- Capas que se cierran con Escape y foco que vuelve ---------- */
+
+test("Escape cierra el drawer del índice y devuelve el foco al botón", async () => {
+  const env = await loadPage({ page: PAGE, mobile: true });
+  const { window, doc } = env;
+  const toggle = doc.getElementById("sidebarToggle");
+  const sidebar = doc.getElementById("docsSidebar");
+
+  // En un navegador pulsar el botón también lo enfoca; jsdom no lo hace solo.
+  toggle.focus();
+  toggle.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+  assert.equal(sidebar.classList.contains("open"), true, "el drawer no se abrió");
+  assert.equal(toggle.getAttribute("aria-expanded"), "true");
+  assert.ok(doc.querySelector(".sidebar-scrim"), "falta la capa oscura detrás del drawer");
+  assert.ok(sidebar.contains(doc.activeElement), "el foco debe entrar en el drawer");
+
+  doc.dispatchEvent(new window.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  assert.equal(sidebar.classList.contains("open"), false, "Escape no cerró el drawer");
+  assert.equal(toggle.getAttribute("aria-expanded"), "false");
+  assert.equal(doc.activeElement, toggle, "el foco debe volver a quien lo abrió");
+  assert.equal(doc.querySelector(".sidebar-scrim"), null, "la capa oscura debe retirarse");
+  assert.deepEqual(env.errors, [], env.errors.join("; "));
+});
+
+test("cerrar el drawer con la capa oscura también devuelve el foco", async () => {
+  const env = await loadPage({ page: PAGE, mobile: true });
+  const { window, doc } = env;
+  const toggle = doc.getElementById("sidebarToggle");
+  toggle.focus();
+  toggle.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+
+  doc.querySelector(".sidebar-scrim").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+  assert.equal(doc.getElementById("docsSidebar").classList.contains("open"), false);
+  assert.equal(doc.activeElement, toggle, "el foco debe volver al botón");
+});
+
+test("Escape cierra el menú burger", async () => {
+  const env = await loadPage({ page: PAGE, mobile: true });
+  const { window, doc } = env;
+  const burger = doc.getElementById("burger");
+  const menu = doc.getElementById("mobileMenu");
+
+  burger.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+  assert.equal(menu.classList.contains("open"), true, "el menú no se abrió");
+  assert.equal(burger.getAttribute("aria-expanded"), "true");
+
+  doc.dispatchEvent(new window.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  assert.equal(menu.classList.contains("open"), false, "Escape no cerró el menú burger");
+  assert.equal(burger.getAttribute("aria-expanded"), "false");
+  assert.equal(doc.activeElement, burger, "el foco debe volver al burger");
+  assert.deepEqual(env.errors, [], env.errors.join("; "));
+});
+
+test("un clic fuera del menú burger lo cierra", async () => {
+  const env = await loadPage({ page: PAGE, mobile: true });
+  const { window, doc } = env;
+  doc.getElementById("burger").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+  assert.equal(doc.getElementById("mobileMenu").classList.contains("open"), true);
+
+  doc.querySelector(".doc-body, main, body").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+  assert.equal(doc.getElementById("mobileMenu").classList.contains("open"), false, "debería cerrarse al pulsar fuera");
+});
+
+test("cambiar de idioma conserva la posición de lectura", async () => {
+  const env = await loadPage({ page: PAGE });
+  const llamadas = [];
+  env.window.scrollTo = (x, y) => llamadas.push([x, y]);
+  Object.defineProperty(env.window, "scrollY", { value: 1200, configurable: true });
+
+  clickLangSwitch(env);
+  await settle();
+
+  assert.equal(env.doc.documentElement.lang, "en", "el idioma debe haber cambiado");
+  assert.ok(llamadas.some(([, y]) => y === 1200), `no se restauró el scroll: ${JSON.stringify(llamadas)}`);
+});
+
+test("la carga inicial no fuerza el scroll", async () => {
+  // En la primera visita manda la restauración del navegador (o el #ancla):
+  // applyLang no debe pelearse con ella.
+  const llamadas = [];
+  const env = await loadPage({ page: PAGE });
+  env.window.scrollTo = (x, y) => llamadas.push([x, y]);
+  env.window.i18n.applyLang("en");
+  await settle();
+  assert.deepEqual(llamadas, [], "applyLang sin preserveScroll no debe tocar el scroll");
+});

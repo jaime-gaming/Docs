@@ -145,7 +145,8 @@ test("los resultados son del idioma activo", async () => {
 
 test("una guía ofrece limitar la búsqueda a su proyecto", async () => {
   const env = await loadPage({ page: PAGE });
-  const toggle = env.doc.querySelector("#searchModalHint .scope-toggle");
+  // Vive en la fila de la pista, junto a los atajos de teclado.
+  const toggle = env.doc.querySelector(".search-modal__hintrow .scope-toggle");
   assert.ok(toggle, "falta el conmutador de alcance en una guía");
   assert.equal(toggle.getAttribute("aria-pressed"), "false");
   assert.match(toggle.textContent, /Toda la documentación/i);
@@ -274,4 +275,127 @@ test("los textos del buscador salen del diccionario activo", async () => {
 
   await search(env, "zzzzqqqq");
   assert.match(doc.getElementById("searchResults").textContent, /No results|zzzzqqqq/i);
+});
+
+/* ---------- Semántica de combobox y nombre accesible del diálogo ---------- */
+
+test("el diálogo tiene nombre accesible real", async () => {
+  const env = await loadPage({ page: PAGE });
+  const { doc } = env;
+  const modal = doc.getElementById("searchModal");
+  const labelledBy = modal.getAttribute("aria-labelledby");
+  assert.ok(labelledBy, "el diálogo debe declararse con aria-labelledby");
+  const title = doc.getElementById(labelledBy);
+  assert.ok(title, `aria-labelledby apunta a #${labelledBy}, que no existe`);
+  assert.match(title.textContent.trim(), /buscar|search/i);
+});
+
+test("el campo es un combobox enganchado al listbox", async () => {
+  const env = await loadPage({ page: PAGE });
+  const { doc } = env;
+  const input = doc.getElementById("searchInput");
+  assert.equal(input.getAttribute("role"), "combobox");
+  assert.equal(input.getAttribute("aria-autocomplete"), "list");
+  assert.equal(input.getAttribute("aria-expanded"), "false", "cerrado debe estar colapsado");
+
+  const listbox = doc.getElementById(input.getAttribute("aria-controls"));
+  assert.equal(listbox?.getAttribute("role"), "listbox", "aria-controls debe señalar al listbox");
+});
+
+test("las flechas anuncian la opción activa por aria-activedescendant", async () => {
+  const env = await loadPage({ page: PAGE });
+  const nodes = await search(env, "instalación");
+  assert.ok(nodes.length > 1, "hace falta más de un resultado para moverse");
+
+  const input = env.doc.getElementById("searchInput");
+  assert.equal(input.getAttribute("aria-expanded"), "true");
+  assert.ok(nodes.every((node) => node.id), "cada opción necesita id");
+  assert.equal(new Set(nodes.map((n) => n.id)).size, nodes.length, "los id deben ser únicos");
+  assert.equal(input.getAttribute("aria-activedescendant"), nodes[0].id);
+
+  input.dispatchEvent(new env.window.KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+  assert.equal(input.getAttribute("aria-activedescendant"), nodes[1].id);
+  assert.equal(nodes[1].getAttribute("aria-selected"), "true");
+  assert.equal(nodes[0].getAttribute("aria-selected"), "false");
+});
+
+test("cerrar el modal deja el combobox colapsado", async () => {
+  const env = await loadPage({ page: PAGE });
+  await search(env, "instalación");
+  const input = env.doc.getElementById("searchInput");
+  assert.equal(input.getAttribute("aria-expanded"), "true");
+
+  input.dispatchEvent(new env.window.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  assert.equal(env.doc.getElementById("searchModal").hidden, true);
+  assert.equal(input.getAttribute("aria-expanded"), "false");
+  assert.equal(input.getAttribute("aria-activedescendant"), "");
+});
+
+test("sin resultados el combobox no señala ninguna opción", async () => {
+  const env = await loadPage({ page: PAGE });
+  await search(env, "zzzz-no-existe");
+  const input = env.doc.getElementById("searchInput");
+  assert.equal(env.doc.querySelectorAll(".search-result").length, 0);
+  assert.equal(input.getAttribute("aria-expanded"), "false");
+  assert.equal(input.getAttribute("aria-activedescendant"), "");
+});
+
+test("el listbox y los atajos de teclado se traducen", async () => {
+  const env = await loadPage({ page: PAGE, lang: "en", browserLang: "en-US" });
+  const { doc } = env;
+  assert.equal(doc.getElementById("searchResults").getAttribute("aria-label"), "Search results",
+    "el aria-label del listbox no debe quedarse en español");
+  const keys = doc.getElementById("searchKeys");
+  assert.ok(keys, "faltan los atajos de teclado visibles");
+  assert.match(keys.textContent, /navigate/i);
+  assert.match(keys.textContent, /open/i);
+  assert.match(keys.textContent, /close/i);
+  assert.equal(keys.getAttribute("aria-hidden"), "true", "son decorativos: el lector ya recibe el combobox");
+  assert.deepEqual(env.errors, [], env.errors.join("; "));
+});
+
+test("los atajos también están en español", async () => {
+  const env = await loadPage({ page: PAGE });
+  const keys = env.doc.getElementById("searchKeys");
+  assert.match(keys.textContent, /navegar/);
+  assert.match(keys.textContent, /cerrar/);
+  assert.equal(env.doc.getElementById("searchResults").getAttribute("aria-label"), "Resultados de búsqueda");
+});
+
+test("el Tab no escapa del modal", async () => {
+  const env = await loadPage({ page: PAGE });
+  const { window, doc } = env;
+  await search(env, "instalación");
+
+  const panel = doc.querySelector(".search-modal__panel");
+  // Fuera del espacio de nombres HTML: los <use href> de los iconos SVG también
+  // casan con [href] y no son enfocables.
+  const focusables = [...panel.querySelectorAll("button, input, [href]")]
+    .filter((node) => node.namespaceURI === "http://www.w3.org/1999/xhtml");
+  assert.ok(focusables.length >= 3, "debe haber algo que atrapar");
+  const last = focusables[focusables.length - 1];
+  const first = focusables[0];
+
+  last.focus();
+  const event = new window.KeyboardEvent("keydown", { key: "Tab", bubbles: true, cancelable: true });
+  last.dispatchEvent(event);
+  assert.equal(event.defaultPrevented, true, "el Tab en el último elemento debe interceptarse");
+  assert.equal(doc.activeElement, first, "el foco debe volver al primer elemento del panel");
+
+  const back = new window.KeyboardEvent("keydown", { key: "Tab", shiftKey: true, bubbles: true, cancelable: true });
+  first.dispatchEvent(back);
+  assert.equal(back.defaultPrevented, true, "Shift+Tab en el primero debe interceptarse");
+  assert.equal(doc.activeElement, last, "Shift+Tab debe llevar al último");
+});
+
+test("el atajo del botón se escribe según la plataforma", async () => {
+  const normal = await loadPage({ page: PAGE });
+  assert.equal(normal.doc.querySelector(".search-trigger__kbd").textContent, "Ctrl K");
+
+  const mac = await loadPage({
+    page: PAGE,
+    userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
+  });
+  assert.equal(mac.doc.querySelector(".search-trigger__kbd").textContent, "⌘K");
+  assert.deepEqual(mac.errors, [], mac.errors.join("; "));
 });

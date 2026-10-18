@@ -39,6 +39,11 @@ export const UI = {
     "search.close": "Cerrar búsqueda",
     "search.scopeAll": "Toda la documentación",
     "search.scopeProject": "Solo este proyecto",
+    "search.kbdNavigate": "navegar",
+    "search.kbdOpen": "abrir",
+    "search.kbdClose": "cerrar",
+    "search.dialogTitle": "Buscar en la documentación",
+    "search.resultsLabel": "Resultados de búsqueda",
 
     // Estructura de la página de docs
     "docs.eyebrow": "Documentación",
@@ -189,6 +194,11 @@ export const UI = {
     "search.close": "Close search",
     "search.scopeAll": "All documentation",
     "search.scopeProject": "This project only",
+    "search.kbdNavigate": "navigate",
+    "search.kbdOpen": "open",
+    "search.kbdClose": "close",
+    "search.dialogTitle": "Search the documentation",
+    "search.resultsLabel": "Search results",
 
     "docs.eyebrow": "Documentation",
     "docs.sidebarTitle": "In this documentation",

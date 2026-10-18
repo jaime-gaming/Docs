@@ -101,6 +101,7 @@
   const sidebar = document.getElementById("docsSidebar");
   const sidebarToggle = document.getElementById("sidebarToggle");
   let sidebarScrim = null;
+  let sidebarReturnFocus = null;
 
   function setSidebar(open) {
     if (!sidebar) return;
@@ -111,16 +112,31 @@
       textFor(open ? "aria.closeSidebar" : "aria.openSidebar", open ? "Cerrar índice" : "Abrir índice")
     );
     if (open) {
+      // Guardamos quién abrió el drawer para devolverle el foco al cerrarlo.
+      sidebarReturnFocus = document.activeElement;
       if (!sidebarScrim) {
         sidebarScrim = document.createElement("div");
         sidebarScrim.className = "sidebar-scrim";
         sidebarScrim.addEventListener("click", () => setSidebar(false));
         document.body.append(sidebarScrim);
       }
-      sidebar.querySelector(".side-nav__link.active")?.scrollIntoView({ block: "nearest" });
+      const active = sidebar.querySelector(".side-nav__link.active");
+      active?.scrollIntoView({ block: "nearest" });
+      (active || sidebar.querySelector(".side-nav__link"))?.focus?.({ preventScroll: true });
     } else {
       sidebarScrim?.remove();
       sidebarScrim = null;
+      // Solo devolvemos el foco si estaba dentro del drawer: así un cierre por
+      // resize no le roba el foco a quien estuviera leyendo otra cosa. Si no
+      // hay un origen útil (se abrió por código), caemos en el propio botón:
+      // un drawer cerrado nunca debe quedarse con el foco.
+      if (sidebar.contains(document.activeElement)) {
+        const returnTo = sidebarReturnFocus && sidebarReturnFocus !== document.body
+          ? sidebarReturnFocus
+          : sidebarToggle;
+        returnTo?.focus?.({ preventScroll: true });
+      }
+      sidebarReturnFocus = null;
     }
   }
 
@@ -135,6 +151,30 @@
       if (window.innerWidth > 860) setSidebar(false);
     });
   }
+
+  /* ---------- Escape: cierra cualquier capa abierta ---------- */
+  // El buscador ya gestiona su propio Escape; aquí cubrimos el menú burger y
+  // el drawer del índice, que antes solo se cerraban haciendo clic.
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (sidebar?.classList.contains("open")) {
+      setSidebar(false);
+      event.stopPropagation();
+      return;
+    }
+    if (mobileMenu?.classList.contains("open")) {
+      burger?.click();
+      burger?.focus?.();
+      event.stopPropagation();
+    }
+  });
+
+  // Clic fuera del menú burger: cerrarlo, como espera cualquier navegación.
+  document.addEventListener("click", (event) => {
+    if (!mobileMenu?.classList.contains("open")) return;
+    if (event.target.closest("#mobileMenu, #burger")) return;
+    burger?.click();
+  });
 
   /* ---------- Anclas en encabezados y copiado de código ---------- */
   const docBody = document.querySelector(".doc-body");

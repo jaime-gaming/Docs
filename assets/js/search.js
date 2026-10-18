@@ -25,6 +25,7 @@
   })();
 
   const BASE = document.querySelector('meta[name="docs:base"]')?.content || "/";
+  const HTML_NS = "http://www.w3.org/1999/xhtml";
   const getLang = () => window.currentLang || document.documentElement.lang || "es";
   const textFor = (key, fallback = "") => window.i18n?.dict?.[getLang()]?.[key] || fallback;
 
@@ -161,22 +162,36 @@
       results.innerHTML = `<p class="search-modal__empty">${escapeHtml(textFor("search.noQuery", "Prueba con «instalar», «comandos», «privacidad»…"))}</p>`;
       current = [];
       selected = 0;
+      syncCombobox();
       return;
     }
     current = search(query);
     selected = 0;
     if (!current.length) {
       results.innerHTML = `<p class="search-modal__empty">${escapeHtml(textFor("search.empty", "Sin resultados para"))} <strong>${escapeHtml(query)}</strong></p>`;
+      syncCombobox();
       return;
     }
     const label = current.length === 1 ? textFor("search.result", "resultado") : textFor("search.results", "resultados");
     results.innerHTML = current.map((entry, position) => `
-      <button class="search-result" type="button" role="option" aria-selected="${position === 0}" data-position="${position}" data-url="${escapeHtml(entry.url)}">
+      <button class="search-result" type="button" role="option" id="search-option-${position}" aria-selected="${position === 0}" data-position="${position}" data-url="${escapeHtml(entry.url)}">
         <span class="search-result__top">${iconHtml(entry.icon || "file")}<span>${escapeHtml(entry.crumb)}</span></span>
         <span class="search-result__title">${highlight(entry.heading || entry.title, terms)}</span>
         ${entry.excerpt ? `<span class="search-result__excerpt">${highlight(excerptAround(entry.excerpt, terms), terms)}</span>` : ""}
       </button>`).join("");
     results.setAttribute("aria-label", `${current.length} ${label}`);
+    syncCombobox();
+  }
+
+  /**
+   * Mantiene el contrato ARIA del combobox: aria-expanded refleja si la
+   * lista está desplegada y aria-activedescendant señala la opción activa,
+   * que es lo que un lector de pantalla anuncia al moverse con las flechas.
+   */
+  function syncCombobox() {
+    const hasOptions = current.length > 0;
+    input.setAttribute("aria-expanded", String(!modal.hidden && hasOptions));
+    input.setAttribute("aria-activedescendant", hasOptions ? `search-option-${selected}` : "");
   }
 
   function moveSelection(delta) {
@@ -187,6 +202,7 @@
       node.setAttribute("aria-selected", String(active));
       if (active) node.scrollIntoView({ block: "nearest" });
     });
+    syncCombobox();
   }
 
   function goTo(entry) {
@@ -215,8 +231,42 @@
     if (modal.hidden) return;
     modal.hidden = true;
     document.body.style.overflow = "";
+    input.setAttribute("aria-expanded", "false");
+    input.setAttribute("aria-activedescendant", "");
     lastFocused?.focus?.();
   }
+
+  /**
+   * El diálogo es aria-modal: el Tab no debe escapar a la página de fondo.
+   * Ciclamos entre los elementos enfocables del panel (entrada, cierre,
+   * conmutador de alcance y resultados).
+   */
+  const FOCUSABLE = "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])";
+  modal.addEventListener("keydown", (event) => {
+    if (event.key !== "Tab" || modal.hidden) return;
+    const panel = modal.querySelector(".search-modal__panel");
+    // No vale offsetParent: es null dentro de un position:fixed (el panel lo
+    // es), así que la trampa no atraparía nada. Filtramos por lo que de verdad
+    // impide focus, y fuera del espacio de nombres HTML: los <use href> de los
+    // iconos SVG también casan con [href] y no son enfocables.
+    const nodes = Array.from(panel.querySelectorAll(FOCUSABLE)).filter(
+      (node) => node.namespaceURI === HTML_NS
+        && !node.disabled
+        && node.getAttribute("tabindex") !== "-1"
+        && !node.closest("[hidden]")
+    );
+    if (!nodes.length) return;
+    const first = nodes[0];
+    const last = nodes[nodes.length - 1];
+    const active = document.activeElement;
+    if (event.shiftKey && (active === first || !panel.contains(active))) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && active === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
 
   let debounce = 0;
   input.addEventListener("input", () => {
@@ -246,6 +296,7 @@
     results.querySelectorAll(".search-result").forEach((other, index) => {
       other.setAttribute("aria-selected", String(index === selected));
     });
+    syncCombobox();
   });
 
   modal.querySelectorAll("[data-search-close]").forEach((node) => {
@@ -253,12 +304,15 @@
   });
 
   // Conmutador de alcance: toda la documentación o solo el proyecto actual.
+  // Fila que contiene la pista, el conmutador de alcance y los atajos.
+  const hintRow = hint?.closest(".search-modal__hintrow") || hint?.parentElement;
+
   function buildScopeToggle() {
-    if (!document.body.dataset.project || hint.querySelector(".scope-toggle")) return;
+    if (!document.body.dataset.project || !hintRow || hintRow.querySelector(".scope-toggle")) return;
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "filter-chip scope-toggle";
-    toggle.style.cssText = "margin-left:auto;padding:3px 10px;font-size:.68rem;";
+    toggle.style.cssText = "padding:3px 10px;font-size:.68rem;";
     const paint = () => {
       toggle.setAttribute("aria-pressed", String(!scopeAll));
       toggle.textContent = scopeAll
@@ -267,9 +321,24 @@
     };
     toggle.addEventListener("click", () => { scopeAll = !scopeAll; paint(); render(input.value); });
     paint();
-    hint.style.display = "flex";
-    hint.style.alignItems = "center";
-    hint.append(toggle);
+    // Se coloca entre la pista y los atajos, sin estilos inline de layout.
+    const keys = hintRow.querySelector(".search-modal__keys");
+    if (keys) hintRow.insertBefore(toggle, keys);
+    else hintRow.append(toggle);
+  }
+
+  /**
+   * El atajo se escribe como lo hace cada plataforma: ⌘K en Apple, Ctrl K en
+   * el resto. Es decorativo (aria-hidden), pero es lo primero que ve quien
+   * no sabe que puede buscar sin tocar el ratón.
+   */
+  function paintShortcutHint() {
+    const kbd = document.querySelector(".search-trigger__kbd");
+    if (!kbd) return;
+    const nav = window.navigator;
+    const apple = /Mac OS X|Macintosh|iPhone|iPad|iPod/.test(nav.userAgent || "")
+      || /Mac|iPhone|iPad/.test(nav.platform || "");
+    kbd.textContent = apple ? "⌘K" : "Ctrl K";
   }
 
   trigger?.addEventListener("click", open);
@@ -295,5 +364,8 @@
     if (!modal.hidden) render(input.value);
   });
 
-  document.addEventListener("DOMContentLoaded", buildScopeToggle);
+  document.addEventListener("DOMContentLoaded", () => {
+    buildScopeToggle();
+    paintShortcutHint();
+  });
 })();

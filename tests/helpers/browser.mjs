@@ -54,6 +54,8 @@ function localInterceptor(requested) {
  * @param {string} [options.lang] idioma guardado en localStorage
  * @param {string} [options.browserLang] navigator.language
  * @param {boolean} [options.indexFails] el índice de búsqueda responde 503
+ * @param {boolean} [options.mobile] emula la cascada de móvil que jsdom no aplica
+ * @param {string} [options.userAgent] navigator.userAgent alternativo
  * @param {object} [options.index] índice a servir (por defecto el del build)
  * @returns {Promise<object>} window, doc, errores, peticiones y observers
  */
@@ -63,13 +65,21 @@ export async function loadPage({
   browserLang = lang === "en" ? "en-US" : "es-ES",
   indexFails = false,
   index = null,
+  mobile = false,
+  userAgent = null,
 } = {}) {
   const html = readFileSync(path.join(ROOT, page), "utf8");
   const url = `https://jaime-gaming.github.io${BASE}${page.replace(/index\.html$/, "")}`;
 
   const errors = [];
   const virtualConsole = new VirtualConsole();
-  virtualConsole.on("jsdomError", (error) => errors.push(error.message));
+  // Las fuentes de Google son externas y aquí no hay red: jsdom lo reporta como
+  // error de carga. Es ruido del arnés, no un fallo del sitio, así que se
+  // filtra para que `errors` solo contenga problemas reales.
+  const EXTERNAL_NOISE = /Could not load link: "https:\/\/fonts\.(googleapis|gstatic)\.com/;
+  virtualConsole.on("jsdomError", (error) => {
+    if (!EXTERNAL_NOISE.test(error.message)) errors.push(error.message);
+  });
 
   const requested = [];
   const indexPayload = index ?? JSON.parse(readFileSync(path.join(ROOT, "assets", "data", "search-index.json"), "utf8"));
@@ -84,6 +94,10 @@ export async function loadPage({
       // lang: null simula una primera visita sin preferencia guardada.
       if (lang) window.localStorage.setItem("lang", lang);
       Object.defineProperty(window.navigator, "language", { value: browserLang, configurable: true });
+      // Para probar lo que depende de la plataforma (el atajo ⌘K / Ctrl K).
+      if (userAgent) {
+        Object.defineProperty(window.navigator, "userAgent", { value: userAgent, configurable: true });
+      }
 
       // jsdom no trae estas APIs; main.js y search.js las usan sin red.
       window.matchMedia = (query) => ({
@@ -96,6 +110,9 @@ export async function loadPage({
       });
 
       window.Element.prototype.scrollIntoView = function scrollIntoView() {};
+      // jsdom no tiene layout ni implementa scrollTo: lo emite como jsdomError
+      // ("Not implemented"), igual que scrollIntoView arriba.
+      window.scrollTo = () => {};
 
       const observers = [];
       window.IntersectionObserver = class {
@@ -130,6 +147,17 @@ export async function loadPage({
     // Red de seguridad: si algún recurso no llega, no bloquear la prueba.
     setTimeout(resolve, 1500);
   });
+
+  // jsdom no evalúa las media queries: los controles que solo existen en móvil
+  // (.burger, .sidebar-toggle) quedan en display:none y no se pueden enfocar,
+  // así que cualquier prueba de foco o del drawer fallaría por el arnés y no
+  // por el código. Con mobile:true inyectamos lo que un navegador estrecho sí
+  // aplicaría.
+  if (mobile) {
+    const style = window.document.createElement("style");
+    style.textContent = ".burger{display:block !important}.sidebar-toggle{display:inline-flex !important}";
+    window.document.head.append(style);
+  }
 
   return {
     window,

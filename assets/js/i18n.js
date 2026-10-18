@@ -35,8 +35,15 @@
     return dict[browserLang] ? browserLang : "en";
   }
 
-  function applyLang(lang, { persist = true } = {}) {
+  function applyLang(lang, { persist = true, preserveScroll = false } = {}) {
     if (!dict[lang]) lang = "es";
+    // Cambiar de idioma reescribe el cuerpo de la página. Si la versión
+    // traducida mide distinto, la lectura salta; anotamos dónde estaba quien
+    // leía para devolvérsele al terminar. Solo en cambios iniciados por la
+    // persona: en la carga inicial manda la restauración del navegador.
+    const savedScroll = preserveScroll
+      ? (window.scrollY || document.documentElement.scrollTop || 0)
+      : 0;
     document.documentElement.setAttribute("lang", lang);
 
     document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -103,6 +110,14 @@
     if (persist) storageSet("lang", lang);
     window.currentLang = lang;
     document.dispatchEvent(new CustomEvent("langchange", { detail: { lang } }));
+
+    // Después de langchange: los oyentes (índice lateral, anclas, tablas)
+    // pueden cambiar la altura del documento, así que restauramos al final y
+    // una vez más tras el reflujo.
+    if (savedScroll > 0) {
+      window.scrollTo(0, savedScroll);
+      window.requestAnimationFrame?.(() => window.scrollTo(0, savedScroll));
+    }
   }
 
   window.i18n = { dict, applyLang, detectDefaultLang };
@@ -110,14 +125,14 @@
   document.addEventListener("DOMContentLoaded", () => {
     applyLang(detectDefaultLang());
     document.getElementById("langSwitch")?.addEventListener("click", () => {
-      applyLang(window.currentLang === "es" ? "en" : "es");
+      applyLang(window.currentLang === "es" ? "en" : "es", { preserveScroll: true });
     });
   });
 
   // Varias pestañas abiertas cambian de idioma a la vez.
   window.addEventListener("storage", (event) => {
     if (event.key === "lang" && dict[event.newValue] && event.newValue !== window.currentLang) {
-      applyLang(event.newValue, { persist: false });
+      applyLang(event.newValue, { persist: false, preserveScroll: true });
     }
   });
 })();
