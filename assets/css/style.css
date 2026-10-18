@@ -709,3 +709,63 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
   .doc-card::after { transition: opacity 240ms ease; }
   @keyframes modal-in { from { opacity: 0; transform: translateY(-8px) scale(.985); } to { opacity: 1; transform: none; } }
 }
+
+/* --- Comodidad de lectura --- */
+/* Reserva el hueco de la barra de desplazamiento: sin esto, el contenido se
+   mueve unos píxeles al pasar de una página corta a una larga. */
+html { scrollbar-gutter: stable; }
+/* Equilibra las líneas de los títulos y evita viudas y huérfanas en el texto.
+   Los navegadores que no lo conocen ignoran la propiedad sin más. */
+.docs-hero h1, .doc-head__title, .doc-body h2, .doc-body h3, .doc-card__name { text-wrap: balance; }
+.doc-body p, .doc-body li, .doc-card__summary { text-wrap: pretty; }
+input, textarea { caret-color: var(--accent); }
+
+/* --- Impresión --- */
+/* Una guía se imprime para leerla en papel: fuera la interfaz, tema claro y
+   sin cortes a mitad de un bloque de código o de una tabla. */
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-raised: #f5f5f3;
+    --text: #111411;
+    --text-dim: #333833;
+    --text-faint: #555b55;
+    --accent: #111411;
+    --border: #b9bcb6;
+  }
+  body { background: #fff !important; color: #111411 !important; }
+
+  .progress-bar, .nav, .burger, .mobile-menu, .docs__sidebar, .docs__toc,
+  .sidebar-toggle, .sidebar-scrim, .to-top, .search-modal, .skip-link,
+  .code-copy, .anchor, .pager, .footer, .filter-chip, .docs-hero__cta { display: none !important; }
+
+  /* De una columna y a ancho completo: las barras laterales ya no están. */
+  .docs, .docs--with-rails { display: block !important; width: auto !important; max-width: none !important; padding: 0 !important; }
+  .docs__main, .doc-body { max-width: none !important; }
+  .doc-body { font-size: 11pt; }
+
+  /* Nada de animaciones a medio ejecutar en el papel. */
+  *, *::before, *::after { animation: none !important; transition: none !important; box-shadow: none !important; }
+
+  /* Que no se parta un bloque a mitad. */
+  .doc-body pre, .callout, .doc-table, .doc-body table, .doc-body figure { break-inside: avoid; }
+  .doc-body h2, .doc-body h3, .doc-head__title { break-after: avoid; }
+
+  a { color: #111411 !important; text-decoration: underline; }
+  /* En papel los enlaces externos no se pueden pulsar: se imprime el destino. */
+  .doc-body a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .78em; color: #555b55; word-break: break-all; }
+  .doc-body pre { border: 1px solid var(--border); white-space: pre-wrap; word-break: break-word; }
+}
+
+/* --- Alto contraste forzado (Windows) --- */
+/* Con los colores los decide el sistema, así que los estados activos se apoyan
+   en el color Highlight para no volverse invisibles. */
+@media (forced-colors: active) {
+  .progress-bar { background: Highlight; }
+  .toc__list a.active { color: Highlight; border-left-color: Highlight; }
+  .filter-chip[aria-pressed="true"], .search-result[aria-selected="true"] { border-color: Highlight; }
+  .doc-card, .callout, .search-modal__panel, .sidebar-toggle { border-color: CanvasText; }
+  .doc-body pre, .doc-body code { border-color: CanvasText; }
+}

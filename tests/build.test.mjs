@@ -375,3 +375,62 @@ test("el CSS no usa comentarios de barra doble, que no son válidos", () => {
     .filter(([, line]) => /(^|[^:"'\\/])\/\//.test(line));
   assert.deepEqual(offenders, [], `comentarios // en CSS: ${offenders.map(([n]) => n).join(", ")}`);
 });
+
+/* ---------- Impresión y alto contraste forzado ---------- */
+
+test("hay una hoja de impresión y pasa al tema claro", () => {
+  const css = read("assets/css/style.css");
+  const print = mediaBlock(css, "print");
+  assert.match(print, /--bg:\s*#fff/i, "el fondo debe volverse blanco al imprimir");
+  assert.match(print, /color-scheme:\s*light/, "falta color-scheme claro");
+  assert.match(print, /break-inside:\s*avoid/, "los bloques no deben partirse a mitad");
+});
+
+test("la impresión oculta la interfaz y no el contenido", () => {
+  const css = read("assets/css/style.css");
+  const print = mediaBlock(css, "print");
+  for (const clase of ["nav", "docs__sidebar", "docs__toc", "progress-bar", "to-top",
+    "search-modal", "sidebar-toggle", "pager", "footer", "code-copy", "anchor"]) {
+    assert.ok(print.includes(`.${clase}`), `la impresión no oculta .${clase}`);
+  }
+  assert.match(print, /display:\s*none/, "hace falta un display:none para la interfaz");
+  // El contenido no puede desaparecer: ni el cuerpo ni su cabecera.
+  assert.ok(!/\.doc-body[^{]*\{[^}]*display:\s*none/.test(print), "la impresión oculta el cuerpo");
+  assert.ok(!/\.doc-head[^{]*\{[^}]*display:\s*none/.test(print), "la impresión oculta la cabecera");
+});
+
+test("las clases de la hoja de impresión existen de verdad", () => {
+  const css = read("assets/css/style.css");
+  const print = mediaBlock(css, "print");
+  const clases = [...new Set([...print.matchAll(/\.([a-z][a-z0-9_-]*)/gi)].map((m) => m[1]))]
+    // Pseudoelementos y utilidades del propio bloque, no clases del documento.
+    .filter((c) => !["doc-body", "before", "after"].includes(c) || c === "doc-body");
+
+  // Clases que crea JavaScript en tiempo de ejecución y no están en el HTML.
+  const creadasPorJs = new Set(["code-copy", "anchor", "sidebar-scrim", "in-view", "doc-table"]);
+  const html = ["index.html", "projects/index.html", "wave/install/index.html", "404.html"]
+    .map(read).join("\n");
+  const js = ["main.js", "search.js", "i18n.js"].map((f) => read(`assets/js/${f}`)).join("\n");
+
+  const fantasmas = clases.filter((clase) =>
+    !creadasPorJs.has(clase)
+    && !html.includes(`class="${clase}`) && !html.includes(` ${clase}"`) && !html.includes(` ${clase} `)
+    && !css.includes(`.${clase}`) && !js.includes(clase));
+  assert.deepEqual(fantasmas, [], `selectores de impresión que no apuntan a nada: ${fantasmas}`);
+});
+
+test("el alto contraste forzado apoya los estados activos en Highlight", () => {
+  const css = read("assets/css/style.css");
+  const forced = mediaBlock(css, "(forced-colors: active)");
+  assert.match(forced, /\.progress-bar[^}]*Highlight/, "la barra de progreso desaparecería en alto contraste");
+  assert.match(forced, /\.toc__list a\.active[^}]*Highlight/, "el apartado activo del TOC desaparecería");
+  assert.match(forced, /CanvasText/, "los bordes deben caer en CanvasText");
+});
+
+test("los detalles tipográficos están presentes", () => {
+  const css = read("assets/css/style.css");
+  assert.match(css, /scrollbar-gutter:\s*stable/, "falta reservar el hueco de la barra de desplazamiento");
+  assert.match(css, /text-wrap:\s*balance/, "los títulos no se equilibran");
+  assert.match(css, /text-wrap:\s*pretty/, "el texto no evita viudas");
+  assert.match(css, /caret-color:\s*var\(--accent\)/, "el cursor de texto no usa el acento");
+});
