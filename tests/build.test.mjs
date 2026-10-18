@@ -329,3 +329,49 @@ test("ninguna página generada arrastra marcadores sin sustituir", () => {
     }
   }
 });
+
+/* ---------- El índice "en esta página" no desaparece en pantallas estrechas ---------- */
+
+/** Extrae el bloque @media cuya condición coincida, respetando llaves anidadas. */
+function mediaBlock(css, condition) {
+  const start = css.indexOf(`@media ${condition}`);
+  assert.ok(start >= 0, `no existe @media ${condition}`);
+  let depth = 0;
+  for (let i = css.indexOf("{", start); i < css.length; i += 1) {
+    if (css[i] === "{") depth += 1;
+    else if (css[i] === "}") {
+      depth -= 1;
+      if (depth === 0) return css.slice(start, i + 1);
+    }
+  }
+  throw new Error("bloque @media sin cerrar");
+}
+
+test("en pantallas estrechas el TOC se recoloca en vez de ocultarse", () => {
+  const css = read("assets/css/style.css");
+  const block = mediaBlock(css, "(max-width: 1180px)");
+
+  const tocRules = block.match(/\.docs__toc\s*\{[^}]*\}/g) || [];
+  assert.ok(tocRules.length, "el bloque estrecho no dice nada del TOC");
+  assert.ok(!tocRules.some((rule) => /display:\s*none/.test(rule)),
+    "el TOC vuelve a ocultarse en pantallas estrechas");
+  assert.match(block, /grid-template-areas:[^;]*toc/, "el TOC debe tener su área en la rejilla");
+  assert.match(block, /\.docs__toc \.toc__list a\s*\{[^}]*border-radius:\s*999px/,
+    "los apartados deben verse como chips");
+});
+
+test("al pasar a drawer el sidebar libera su área de la rejilla", () => {
+  const css = read("assets/css/style.css");
+  const block = mediaBlock(css, "(max-width: 860px)");
+  assert.match(block, /grid-template-areas:\s*"toc"\s*"main"/, "la rejilla de una columna debe nombrar toc y main");
+  assert.match(block, /\.docs__sidebar\s*\{[^}]*grid-area:\s*auto/,
+    "un sidebar position:fixed no debe reclamar área");
+});
+
+test("el CSS no usa comentarios de barra doble, que no son válidos", () => {
+  const css = read("assets/css/style.css");
+  const offenders = css.split("\n")
+    .map((line, i) => [i + 1, line])
+    .filter(([, line]) => /(^|[^:"'\\/])\/\//.test(line));
+  assert.deepEqual(offenders, [], `comentarios // en CSS: ${offenders.map(([n]) => n).join(", ")}`);
+});

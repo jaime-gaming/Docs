@@ -275,6 +275,14 @@
       tocLinks.forEach((link) => {
         link.classList.toggle("active", decodeURIComponent(link.getAttribute("href").slice(1)) === current.id);
       });
+      // En pantallas estrechas el índice es una fila de chips desplazable: si el
+      // apartado activo queda fuera de vista, se trae al primer plano. Se mira
+      // el layout real y no el ancho, para no duplicar el breakpoint del CSS.
+      const activeLink = tocLinks.find((link) => link.classList.contains("active"));
+      const list = activeLink?.closest(".toc__list");
+      if (list && window.getComputedStyle(list).display === "flex") {
+        activeLink.scrollIntoView({ block: "nearest", inline: "nearest" });
+      }
     }, { rootMargin: "-88px 0px -65% 0px", threshold: [0, 1] });
 
     headings.forEach((heading) => spyObserver.observe(heading));

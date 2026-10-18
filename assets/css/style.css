@@ -619,8 +619,54 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
 
 /* --- Responsive --- */
 @media (max-width: 1180px) {
-  .docs--with-rails { grid-template-columns: var(--sidebar-w) minmax(0, 1fr); }
-  .docs__toc { display: none; }
+  /* El índice "en esta página" no desaparece: se recoloca encima del artículo
+     como una fila de chips desplazable. Sigue siendo el mismo nodo, así que la
+     traducción (data-content-key="toc") y el scrollspy continúan funcionando. */
+  .docs--with-rails {
+    grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+    grid-template-areas: "sidebar toc" "sidebar main";
+    row-gap: 20px;
+  }
+  .docs__sidebar { grid-area: sidebar; }
+  .docs__main { grid-area: main; }
+  .docs__toc {
+    grid-area: toc;
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-height: none;
+    overflow: visible;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .docs__toc .toc__title { flex: 0 0 auto; margin: 0; }
+  .docs__toc .toc__list {
+    display: flex;
+    flex: 1 1 auto;
+    gap: 6px;
+    padding: 0 0 4px;
+    border-left: 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+  .docs__toc .toc__list li { flex: 0 0 auto; }
+  .docs__toc .toc__list a {
+    display: inline-block;
+    padding: 4px 11px;
+    margin-left: 0;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: .72rem;
+    white-space: nowrap;
+  }
+  .docs__toc .toc__list a:hover { border-color: var(--text-faint); color: var(--text); }
+  .docs__toc .toc__list a.active { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+  .docs__toc .toc__list .toc__h3 { padding-left: 11px; font-size: .72rem; }
+  .docs__toc .toc__progress { display: none; }
 }
 @media (max-width: 940px) {
   .docs-hero__inner { grid-template-columns: 1fr; gap: 40px; }
@@ -628,8 +674,9 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
   .stat-strip .stat:nth-child(3) { padding-left: 0; border-left: 0; }
 }
 @media (max-width: 860px) {
-  .docs--with-rails { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .docs__sidebar { position: fixed; top: var(--nav-height); bottom: 0; left: 0; z-index: 58; width: min(320px, 86vw); max-height: none; padding: 20px 20px 40px; border-right: 1px solid var(--border); background: var(--bg); transform: translateX(-102%); }
+  .docs--with-rails { grid-template-columns: minmax(0, 1fr); grid-template-areas: "toc" "main"; gap: 18px 0; }
+  /* El sidebar es fijo (fuera de flujo): no debe reclamar un área de la rejilla. */
+  .docs__sidebar { grid-area: auto; position: fixed; top: var(--nav-height); bottom: 0; left: 0; z-index: 58; width: min(320px, 86vw); max-height: none; padding: 20px 20px 40px; border-right: 1px solid var(--border); background: var(--bg); transform: translateX(-102%); }
   .docs__sidebar.open { transform: none; box-shadow: 0 0 60px -12px rgba(0, 0, 0, .8); }
   .sidebar-toggle { display: inline-flex; position: fixed; bottom: 20px; left: 20px; z-index: 59; align-items: center; gap: 8px; height: 42px; padding: 0 15px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-raised); color: var(--text); font-size: .78rem; box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .9); }
   .sidebar-toggle svg { width: 15px; height: 15px; color: var(--accent); }
