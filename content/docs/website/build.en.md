@@ -15,6 +15,18 @@ The local server binds `0.0.0.0:8000` and serves `404.html` as a fallback for th
 
 The build regenerates `index.html`, `projects/index.html`, `404.html` and the blog pages. Changes under `assets/` are served directly, without recompiling.
 
+## The three scripts
+
+`package.json` declares exactly three, and each one does a different thing:
+
+| Script | Command | What for |
+| --- | --- | --- |
+| `npm run build` | `node scripts/build.mjs` | Generates the pages, the icon sprite, `sitemap.xml`, and copies the vendors |
+| `npm test` | `node --test` | Runs the suite with Node's native runner, no framework |
+| `npm run sync:contributions` | `node scripts/sync-contributions.mjs` | Refreshes the contributions snapshot committed in the repo |
+
+The dependencies are minimal: `gray-matter`, `jsdom`, `lucide-static`, `marked` and `simple-icons` in development, and `dompurify` as the only runtime dependency.
+
 ## Full checks
 
 ```sh
@@ -24,7 +36,30 @@ npm test
 python3 scripts/preview_server.py
 ```
 
-The tests check the profile, the repositories, the language switch and the recovery with saved data when the API does not respond. They use `jsdom`, so no browser is needed.
+### What the tests check
+
+There are two files and they cover different things.
+
+**`tests/site.test.mjs`** loads the **already generated** `index.html` into `jsdom`, injects `main.js` and `i18n.js`, and starts from the saved data in `assets/data/github.json`. It is twenty-four named tests, and what they cover groups like this:
+
+| Block | What it verifies |
+| --- | --- |
+| Real data | That the profile and the public repositories are rendered, and that they **survive the language switch** |
+| Network failures | That when the API fails the saved data is used **with its date**, without claiming to be live or that Discord is offline |
+| Hero | That it uses recent owned repositories, **excludes forks and archives**, and that while GitHub loads it shows prepared phrases with no repo link |
+| README | GFM, safe HTML, Unicode, relative paths and anchors; that the project detail uses the official `/readme` endpoint and decodes UTF-8 |
+| Calendar | That choosing a day lists safe commit and issue links, that the cache is reused, that zero-contribution days do not trigger searches, and that **an old response cannot overwrite a newer one** or reopen a closed panel |
+| Official snapshot | That the calendar and the daily summary can use a dated official snapshot when external services fail |
+| Build integrity | That every generated page links the current CSS and JS hashes, and that the stylesheet parses as one design system with no duplicate base selector blocks and no hidden reveal content |
+| Icons | That they resolve to a local SVG sprite, that brand icons are published Simple Icons paths and interface symbols come from Lucide, and that loaders show **no fake progress percentage** |
+| Internationalization | That the globe alternates the flag state with an accessible destination label and persists the choice, that README accessibility labels follow the chosen language **without changing the source document**, and that all generated page labels and metadata have both Spanish and English translations |
+| Security | That a page's localized payload **cannot close its own JSON `<script>` element** |
+| Content | That the blog translates the complete article, dates, image descriptions and SEO without duplicate posts, and that the Wave launch post links the verified release while preserving platform limitations |
+
+**`tests/preview.test.mjs`** does something else: it **starts the server for real**. It launches `scripts/preview_server.py` with `PORT=0`, discovers the assigned port by reading its output, and checks over real requests that the home page serves `cache-control: no-store`, that the versioned CSS answers as `text/css`, that project routes work and that 404s come out styled.
+
+> [!NOTE]
+> This documentation uses the same pattern and takes it one step further: it also loads the generated pages into `jsdom` with their own scripts, and it has an equivalent test over its own preview server.
 
 The `checks.yml` workflow runs the build and the tests on working branches and on pull requests.
 

@@ -59,6 +59,24 @@ It uses Jogruber's public `github-contributions-api`. Its responses are stored i
 
 The calendar is keyboard-navigable and tap-selectable. Choosing a day queries the public commits, issues and pull requests for that date.
 
+### The committed snapshot
+
+Besides the live source there is a **dated official snapshot** at `assets/data/contributions.json`, refreshed with `npm run sync:contributions`.
+
+The script (`scripts/sync-contributions.mjs`) runs `execFile` against the GitHub GraphQL API and asks for the user's `contributionsCollection`:
+
+| Field in the query | What it brings |
+| --- | --- |
+| `contributionCalendar` | `totalContributions` and the weeks, with `date`, `contributionCount` and `contributionLevel` per day |
+| `commitContributionsByRepository(maxRepositories: 100)` | Per repository: `nameWithOwner`, `url`, `isPrivate` and owner, with `occurredAt` and `commitCount` for each contribution |
+| `issueContributions(first: 100)` | Title, URL, number and repository of each issue |
+| `pullRequestContributions(first: 100)` | The same for pull requests |
+
+All four parts return `pageInfo.hasNextPage`, so the script knows when it came up short.
+
+> [!IMPORTANT]
+> That JSON exists so that **the calendar and the daily summary keep working when external services fail**. It is a dated copy committed in the repository, not a browser cache: both exist and they play different roles.
+
 The five intensity levels use a green ramp consistent with the palette:
 
 ```css
@@ -94,6 +112,39 @@ READMEs are fetched from GitHub's official `/readme` endpoint — **no name, cas
 The libraries are copied to the `assets/vendor/` directory during the build and **their licenses are kept there**. The renderer supports tables, code, safe HTML, lists and images with relative paths.
 
 When a README image fails to load, a `.readme-image-fallback` placeholder is shown instead of a broken icon.
+
+### How it rewrites paths
+
+The renderer lives in `assets/js/readme.js` and exposes a single global function, `window.renderProjectMarkdown(markdown, repo)`. From the repository it builds two bases and rewrites the README's relative paths against them:
+
+```text
+rawBase  = https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{dir}
+linkBase = https://github.com/{owner}/{repo}/blob/{branch}/{dir}
+```
+
+`{dir}` is the README's directory inside the repository, and **each segment is encoded separately** with `encodeURIComponent` and then joined with `/`, so paths containing spaces or odd characters do not break. Images resolve against `rawBase` and links against `linkBase`.
+
+### Task list checkboxes
+
+Marked is configured with a custom renderer for `checkbox`. GFM task lists do not become an `<input>` — which the sanitizer would forbid — but an accessible span:
+
+```html
+<span class="readme-checkbox" role="img" aria-label="Completed">☑</span>
+```
+
+The `aria-label` comes from the active language's dictionary and the span carries `data-i18n-aria`, so **the label follows the chosen language without modifying the README's original document**.
+
+### The sanitizing policy
+
+DOMPurify runs with an HTML profile and two explicit forbid lists:
+
+| Option | Value |
+| --- | --- |
+| `USE_PROFILES` | `{ html: true }` |
+| `FORBID_TAGS` | `form`, `input`, `button`, `style`, `iframe`, `video`, `audio` |
+| `FORBID_ATTR` | `style` |
+
+The practical consequence: a third-party README cannot slip forms, interactive controls, inline styles or embedded content into the site.
 
 ## Profile data
 

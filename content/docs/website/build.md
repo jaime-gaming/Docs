@@ -15,6 +15,18 @@ El servidor local enlaza `0.0.0.0:8000` y sirve `404.html` como respaldo para la
 
 El build regenera `index.html`, `projects/index.html`, `404.html` y las páginas del blog. Los cambios en `assets/` se sirven directamente, sin recompilar.
 
+## Los tres scripts
+
+`package.json` declara exactamente tres, y cada uno hace una cosa distinta:
+
+| Script | Comando | Para qué |
+| --- | --- | --- |
+| `npm run build` | `node scripts/build.mjs` | Genera las páginas, el sprite de iconos, el `sitemap.xml` y copia los vendor |
+| `npm test` | `node --test` | Ejecuta la suite con el runner nativo de Node, sin framework |
+| `npm run sync:contributions` | `node scripts/sync-contributions.mjs` | Refresca la instantánea de contribuciones commiteada en el repo |
+
+Las dependencias son mínimas: `gray-matter`, `jsdom`, `lucide-static`, `marked` y `simple-icons` en desarrollo, y `dompurify` como única dependencia de runtime.
+
 ## Comprobaciones completas
 
 ```sh
@@ -24,7 +36,30 @@ npm test
 python3 scripts/preview_server.py
 ```
 
-Las pruebas comprueban el perfil, los repositorios, el cambio de idioma y la recuperación con datos guardados cuando la API no responde. Usan `jsdom`, así que no hace falta navegador.
+### Qué comprueban las pruebas
+
+Son dos archivos y cubren cosas distintas.
+
+**`tests/site.test.mjs`** carga el `index.html` **ya generado** en `jsdom`, le inyecta `main.js` e `i18n.js` y parte de los datos guardados en `assets/data/github.json`. Son veinticuatro pruebas con nombre, y lo que cubren se agrupa así:
+
+| Bloque | Qué verifica |
+| --- | --- |
+| Datos reales | Que se pintan el perfil y los repositorios públicos, y que **sobreviven al cambio de idioma** |
+| Fallos de red | Que si la API falla se usan los datos guardados **con su fecha**, sin fingir que están en vivo ni que Discord está desconectado |
+| Hero | Que usa repositorios propios recientes, **excluye forks y archivados**, y que mientras GitHub carga enseña frases preparadas sin enlace |
+| README | GFM, HTML seguro, Unicode, rutas relativas y anclas; que el detalle de proyecto usa el endpoint oficial `/readme` y decodifica UTF-8 |
+| Calendario | Que al elegir un día se listan commits e issues con enlaces seguros, que se reutiliza la caché, que los días sin contribuciones no disparan búsquedas, y que **una respuesta vieja no puede sobrescribir una más nueva** ni reabrir un panel cerrado |
+| Instantánea oficial | Que el calendario y el resumen diario pueden usar una instantánea oficial con fecha cuando fallan los servicios externos |
+| Integridad del build | Que cada página generada enlaza los hashes de CSS y JS actuales, y que la hoja de estilos se parsea como un único sistema de diseño sin bloques base duplicados ni contenido de revelado oculto |
+| Iconos | Que resuelven a un sprite SVG local, que los de marca son rutas publicadas de Simple Icons y los de interfaz vienen de Lucide, y que los cargadores **no enseñan porcentajes de progreso falsos** |
+| Internacionalización | Que el globo alterna el estado de la bandera con una etiqueta de destino accesible y persiste la elección, que las etiquetas de accesibilidad del README siguen el idioma **sin modificar el documento original**, y que todas las etiquetas y metadatos generados tienen traducción en los dos idiomas |
+| Seguridad | Que el payload localizado de una página **no puede cerrar su propio elemento `<script>` de JSON** |
+| Contenido | Que el blog traduce el artículo completo, las fechas, las descripciones de imagen y el SEO sin duplicar posts, y que el post de lanzamiento de Wave enlaza la release verificada conservando las limitaciones de plataforma |
+
+**`tests/preview.test.mjs`** hace otra cosa: **arranca el servidor de verdad**. Lanza `scripts/preview_server.py` con `PORT=0`, descubre el puerto asignado leyendo su salida y comprueba sobre peticiones reales que la portada sirve `cache-control: no-store`, que el CSS versionado responde como `text/css`, que las rutas de proyecto funcionan y que los 404 salen con estilo.
+
+> [!NOTE]
+> Esta documentación usa el mismo patrón y lo lleva un paso más allá: también carga las páginas generadas en `jsdom` con sus propios scripts, y tiene una prueba equivalente sobre su propio servidor de preview.
 
 El workflow `checks.yml` ejecuta build y pruebas en las ramas de trabajo y en las pull requests.
 
