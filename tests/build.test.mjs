@@ -281,6 +281,38 @@ test("toda clave data-i18n del HTML generado existe en los dos idiomas", () => {
   assert.deepEqual([...missing], [], "claves data-i18n sin traducción");
 });
 
+test("ningún enlace interno del HTML generado está muerto", () => {
+  // Cubre todo lo que el usuario puede pulsar: sidebar, migas, paginador,
+  // chips de «otros proyectos», tarjetas de la portada y los enlaces del
+  // propio contenido Markdown.
+  const files = ["index.html", "projects/index.html", "404.html"];
+  for (const project of PROJECTS) {
+    for (const page of project.pages) {
+      files.push(`${pagePath(project.slug, page.slug).replace(/^\//, "")}index.html`);
+    }
+  }
+
+  const dead = [];
+  let checked = 0;
+  for (const file of files) {
+    const doc = dom(file);
+    for (const link of doc.querySelectorAll("a[href]")) {
+      const href = link.getAttribute("href");
+      if (!href || /^(https?:|mailto:|tel:|#)/.test(href)) continue;
+      checked += 1;
+      if (!href.startsWith(BASE)) {
+        dead.push(`${file} → ${href} (fuera de BASE)`);
+        continue;
+      }
+      const rel = href.replace(BASE, "").split("#")[0];
+      const target = rel === "" ? "index.html" : `${rel}index.html`;
+      if (!existsSync(path.join(ROOT, target))) dead.push(`${file} → ${href}`);
+    }
+  }
+  assert.ok(checked > 400, `solo se comprobaron ${checked} enlaces internos`);
+  assert.deepEqual(dead, [], "enlaces internos muertos");
+});
+
 test("ninguna página generada arrastra marcadores sin sustituir", () => {
   for (const project of PROJECTS) {
     for (const page of project.pages) {
