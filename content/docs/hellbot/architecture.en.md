@@ -43,6 +43,111 @@ If you are changing **behaviour**, start here. If you are changing **wording**, 
 
 `launcher/` is a separate desktop front-end (`envfile.py` for config I/O, `runtime.py` for the supervisor thread, `gui.py` for the Tk window). **It imports the bot; the bot never imports it.**
 
+## Module map
+
+The `hell/` package is **41 modules**. They are grouped here by what they do, with each one's real responsibility as its own docstring states it.
+
+> [!NOTE]
+> The `bot.py` at the root of the repository is five lines: it imports `main` from `hell.bot` and runs it. It exists for convenience, so you can type `python bot.py`; it holds no logic.
+
+### Entrypoint, configuration and startup
+
+| Module | Responsibility |
+| --- | --- |
+| `hell/bot.py` | The bot's real entrypoint |
+| `hell/config.py` | Configuration loading, based on the environment and `.env` |
+| `hell/paths.py` | Where each thing lives on disk |
+| `hell/health.py` | Startup preflight checks |
+| `hell/single_instance.py` | Refuses a second live process against the same database |
+| `hell/logging_setup.py` | Rotating file and console logging, safe when there is no console |
+
+### Engine, time and progression
+
+| Module | Responsibility |
+| --- | --- |
+| `hell/engine.py` | The state machine: per-user time tracking and milestone detection |
+| `hell/timeline.py` | **Timeline #1**, the global event one: 0 → 160h |
+| `hell/tracking.py` | **Timeline #2**, per-user session time: 0 → Xh |
+| `hell/timeutil.py` | Time helpers |
+| `hell/milestones.py` | The milestone table. Structure only: the wording lives in `Announcements.py` |
+| `hell/difficulty.py` | Difficulties: the challenge gets harder at each milestone |
+| `hell/grace.py` | The empty-VC grace period: decides when a run is really dead |
+| `hell/continuation.py` | The end-of-160h "keep on Hell?" vote |
+| `hell/finale.py` | The 160-Hour Finale subsystem |
+| `hell/tasks.py` | Background task helper |
+
+The two timelines are separate on purpose: the event one is absolute and shared, and each user's only counts what has actually been observed.
+
+### Voice channel observation
+
+| Module | Responsibility |
+| --- | --- |
+| `hell/monitor.py` | Voice channel monitoring |
+| `hell/alivecheck.py` | Roll call ("alive checks") and dead checks |
+| `hell/aliveio.py` | The Discord implementation of the alive-check interface |
+
+### Persistence
+
+| Module | Responsibility |
+| --- | --- |
+| `hell/storage.py` | SQLite in a single file, crash safe |
+| `hell/models.py` | Plain data models, shared and with no Discord imports |
+| `hell/dbdump.py` | Full database export for the operator: the "recap it later" file |
+
+### Commands, messages and looks
+
+| Module | Responsibility |
+| --- | --- |
+| `hell/cog.py` | Commands: the `/hell` slash commands and the `!` prefix ones over DM and chat |
+| `hell/embeds.py` | How every message looks |
+| `hell/announcer.py` | Delivery: channel resolution, sending and the live progress message |
+| `hell/ui.py` | Interaction widgets and permission checks for `/hell` |
+| `hell/assets.py` | Artwork resolution for embeds |
+| `hell/texts.py` | The loader for `Announcements.py` |
+
+`hell/cog.py` is by far the largest module in the package (115 KB): it concentrates command handling, which is where the most Discord surface is touched.
+
+### Reports, leaderboard and communication
+
+| Module | Responsibility |
+| --- | --- |
+| `hell/reports.py` | Per-user end-of-event reports, the "stat cards" |
+| `hell/dm.py` | Delivery of those cards by direct message |
+| `hell/broadcast.py` | Host broadcast by DM: one markdown message to every contestant |
+| `hell/leaderboard.py` | The leaderboard: pure logic, no Discord imports |
+| `hell/gamble.py` | Gambling: parse bets, persist limits and decide whether a roll is allowed |
+
+### Security and robustness
+
+| Module | Responsibility |
+| --- | --- |
+| `hell/security.py` | Suspicion and anomaly tracking: anti-cheat and auto-heal for the event |
+| `hell/errorcodes.py` | Known, documented error codes |
+| `hell/neterrors.py` | Uniform handling of transient "Discord unreachable" failures |
+
+### Public status
+
+| Module | Responsibility |
+| --- | --- |
+| `hell/web.py` | A lightweight aiohttp server serving live event data over WebSocket |
+| `hell/status_writer.py` | Writes `docs/status.json` from the bot's internal state |
+| `hell/pages_sync.py` | Pushes `docs/` to GitHub so Pages stays current |
+
+The three form the public dashboard chain: internal state is written to `status.json`, served live over WebSocket and published to Pages.
+
+### The texts
+
+`Announcements.py`, at the root of the repository and 40 KB in size, is **the single file holding every message** the bot sends. `hell/texts.py` only loads it, and `hell/milestones.py` provides the structure without the wording.
+
+> [!IMPORTANT]
+> That is why `Announcements.py` is mandatory in any deployment: the bot reads all of its text from there and **refuses to start without it**. The `Dockerfile` copies it explicitly for the same reason.
+
+### Container health
+
+`tools/healthcheck.py` answers one concrete question: **is the bot actually watching the voice channel?** It exits 0 when healthy and 1 when not, which is what makes Docker or systemd restart it.
+
+The interesting part is what it looks at: **the state file, not the process**. A live process whose monitoring loop has stalled is worse than a crashed one, because the event keeps running while nobody is watching the channel. So if an event is RUNNING and the last observation is older than the allowed lag (`--max-lag`), the bot is declared unhealthy.
+
 ## The eleven invariants
 
 1. **Time is absolute.** Every calculation uses POSIX timestamps; nothing depends on process uptime, so a restart cannot shift or reset the timer.

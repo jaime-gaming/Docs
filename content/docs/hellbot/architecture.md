@@ -43,6 +43,111 @@ Si vas a cambiar **comportamiento**, empieza aquí. Si vas a cambiar **texto**, 
 
 `launcher/` es un front-end de escritorio separado (`envfile.py` para la E/S de configuración, `runtime.py` para el hilo supervisor, `gui.py` para la ventana Tk). **Importa el bot; el bot nunca lo importa a él.**
 
+## Mapa de módulos
+
+El paquete `hell/` son **41 módulos**. Están agrupados por lo que hacen, con la responsabilidad real de cada uno tal como la declara su propio docstring.
+
+> [!NOTE]
+> El `bot.py` de la raíz del repositorio son cinco líneas: importa `main` de `hell.bot` y lo ejecuta. Existe por comodidad, para poder escribir `python bot.py`; no contiene lógica.
+
+### Entrada, configuración y arranque
+
+| Módulo | Responsabilidad |
+| --- | --- |
+| `hell/bot.py` | El punto de entrada real del bot |
+| `hell/config.py` | Carga de la configuración, basada en entorno y `.env` |
+| `hell/paths.py` | Dónde vive cada cosa en disco |
+| `hell/health.py` | Comprobaciones previas al arranque |
+| `hell/single_instance.py` | Rechaza un segundo proceso vivo contra la misma base de datos |
+| `hell/logging_setup.py` | Registro rotativo a archivo y a consola, seguro cuando no hay consola |
+
+### Motor, tiempo y progresión
+
+| Módulo | Responsabilidad |
+| --- | --- |
+| `hell/engine.py` | La máquina de estados: tiempo por usuario y detección de hitos |
+| `hell/timeline.py` | **Línea 1**, la global del evento: 0 → 160 h |
+| `hell/tracking.py` | **Línea 2**, el tiempo de sesión por usuario: 0 → X h |
+| `hell/timeutil.py` | Utilidades de tiempo |
+| `hell/milestones.py` | La tabla de hitos. Solo la estructura: los textos viven en `Announcements.py` |
+| `hell/difficulty.py` | Dificultades: el reto se endurece en cada hito |
+| `hell/grace.py` | El período de gracia del canal vacío: decide cuándo una partida está realmente muerta |
+| `hell/continuation.py` | La votación «¿seguir en Hell?» al llegar a las 160 h |
+| `hell/finale.py` | El subsistema del Final de 160 horas |
+| `hell/tasks.py` | Helper de trabajo en segundo plano |
+
+Las dos líneas de tiempo están separadas a propósito: la del evento es absoluta y compartida, y la de cada usuario solo cuenta lo que se ha observado de verdad.
+
+### Observación del canal de voz
+
+| Módulo | Responsabilidad |
+| --- | --- |
+| `hell/monitor.py` | La monitorización del canal de voz |
+| `hell/alivecheck.py` | Los pases de lista y las comprobaciones de muerto |
+| `hell/aliveio.py` | La implementación para Discord de la interfaz de pase de lista |
+
+### Persistencia
+
+| Módulo | Responsabilidad |
+| --- | --- |
+| `hell/storage.py` | SQLite en un único archivo, a prueba de fallos |
+| `hell/models.py` | Modelos de datos planos, compartidos y sin imports de Discord |
+| `hell/dbdump.py` | Exportación completa de la base de datos para el operador: el archivo para «repasarlo luego» |
+
+### Comandos, mensajes y apariencia
+
+| Módulo | Responsabilidad |
+| --- | --- |
+| `hell/cog.py` | Los comandos: los slash `/hell` y los de prefijo `!` por MD y por chat |
+| `hell/embeds.py` | El aspecto de cada mensaje |
+| `hell/announcer.py` | La entrega: resolución del canal, envío y el mensaje de progreso en vivo |
+| `hell/ui.py` | Widgets de interacción y comprobación de permisos para `/hell` |
+| `hell/assets.py` | Resolución de las imágenes de los embeds |
+| `hell/texts.py` | El cargador de `Announcements.py` |
+
+`hell/cog.py` es con diferencia el módulo más grande del paquete (115 KB): concentra el manejo de comandos, que es donde más superficie de Discord se toca.
+
+### Informes, clasificación y comunicación
+
+| Módulo | Responsabilidad |
+| --- | --- |
+| `hell/reports.py` | Los informes por usuario al terminar el evento, las «tarjetas de estadísticas» |
+| `hell/dm.py` | La entrega de esas tarjetas por mensaje directo |
+| `hell/broadcast.py` | La difusión del anfitrión por MD: un mensaje markdown a cada concursante |
+| `hell/leaderboard.py` | La clasificación: lógica pura, sin imports de Discord |
+| `hell/gamble.py` | Las apuestas: parsearlas, persistir los límites y decidir si un tiro está permitido |
+
+### Seguridad y robustez
+
+| Módulo | Responsabilidad |
+| --- | --- |
+| `hell/security.py` | Sospecha y anomalías: antitrampas y autocuración del evento |
+| `hell/errorcodes.py` | Códigos de error conocidos y documentados |
+| `hell/neterrors.py` | Manejo uniforme de los fallos transitorios de «Discord no alcanzable» |
+
+### Estado público
+
+| Módulo | Responsabilidad |
+| --- | --- |
+| `hell/web.py` | Un servidor aiohttp ligero que sirve los datos del evento en vivo por WebSocket |
+| `hell/status_writer.py` | Escribe `docs/status.json` a partir del estado interno del bot |
+| `hell/pages_sync.py` | Sube `docs/` a GitHub para que Pages esté al día |
+
+Los tres forman la cadena del panel público: el estado interno se escribe en `status.json`, se sirve en vivo por WebSocket y se publica en Pages.
+
+### Los textos
+
+`Announcements.py`, en la raíz del repositorio y con 40 KB, es **el único archivo que contiene todos los mensajes** del bot. `hell/texts.py` se limita a cargarlo, y `hell/milestones.py` aporta la estructura sin los textos.
+
+> [!IMPORTANT]
+> Por eso `Announcements.py` es obligatorio en cualquier despliegue: el bot lee todo su texto de ahí y **se niega a arrancar sin él**. El `Dockerfile` lo copia de forma explícita por la misma razón.
+
+### Salud del contenedor
+
+`tools/healthcheck.py` responde a una pregunta concreta: **¿está el bot vigilando de verdad el canal de voz?** Sale con 0 si está sano y con 1 si no, que es lo que hace que Docker o systemd lo reinicien.
+
+Lo interesante es qué mira: **el archivo de estado, no el proceso**. Un proceso vivo cuyo bucle de monitorización se ha quedado atascado es peor que uno que ha fallado, porque el evento sigue corriendo mientras nadie observa el canal. Así que si hay un evento en marcha y la última observación es más antigua que el retraso permitido (`--max-lag`), el bot se declara no sano.
+
 ## Los once invariantes
 
 1. **El tiempo es absoluto.** Todo cálculo usa marcas POSIX; nada depende del tiempo de vida del proceso, así que un reinicio no puede desplazar ni resetear el cronómetro.

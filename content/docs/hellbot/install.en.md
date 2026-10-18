@@ -31,6 +31,24 @@ docker compose up -d      # state lives in the hell-data volume
 
 There is a systemd unit in `deploy/hellbot.service`.
 
+### What the image does
+
+The `Dockerfile` starts from `python:3.12-slim` and makes four decisions worth knowing before running the bot in a container:
+
+| Decision | Detail | Why it matters |
+| --- | --- | --- |
+| **State on a volume** | `VOLUME /data`, with `DATABASE_PATH=/data/hell.sqlite3` | Restarts **and image rebuilds** never lose the timer, the leaderboard or the milestone history |
+| **Unprivileged user** | `hellbot`, uid 10001, owning `/data` and `/app` | The bot does not run as root |
+| **A real healthcheck** | every 60 s, 10 s timeout, 90 s start period, 3 retries | It runs `tools/healthcheck.py --max-lag 120`: if an event is running and the last channel observation is older than that, the container is marked unhealthy and restarted |
+| **Only what runtime uses** | it copies `hell/`, `tools/healthcheck.py`, `docs/`, `Announcements.py` and `bot.py` | `Announcements.py` is mandatory: the bot reads all of its text from there and will not start without it |
+
+The `.dockerignore` keeps `.git/`, virtual environments and caches out of the build context, and — the important part — **everything that is state or secret**: `.env`, `data/`, `logs/` and the `*.sqlite3` files with their `-wal` and `-shm`. A database or a set of credentials is never baked into the image.
+
+> [!TIP]
+> The healthcheck looks at the **state file, not the process**. A bot that is alive but whose monitoring loop has stalled is worse than a crashed one, because the event keeps running while nobody is watching the channel. That is exactly the failure the healthcheck is designed to catch.
+
+The start command is `python bot.py`, which is the five-line entrypoint calling `hell.bot.main`.
+
 > [!WARNING]
 > **Port 8080 already in use** (`Web dashboard NOT started: port 8080 is already in use`): the dashboard binds `WEB_PORT` (8080 by default) inside the container and docker-compose publishes the *same* value, so change it in one place: `WEB_PORT=8090` in `.env` and `docker compose up -d` again.
 >

@@ -31,6 +31,24 @@ docker compose up -d      # el estado vive en el volumen hell-data
 
 Hay una unidad de systemd en `deploy/hellbot.service`.
 
+### Qué hace la imagen
+
+El `Dockerfile` parte de `python:3.12-slim` y toma cuatro decisiones que conviene conocer antes de operar el bot en un contenedor:
+
+| Decisión | Detalle | Por qué importa |
+| --- | --- | --- |
+| **Estado en un volumen** | `VOLUME /data`, con `DATABASE_PATH=/data/hell.sqlite3` | Los reinicios **y las reconstrucciones de la imagen** no pierden el cronómetro, la clasificación ni el historial de hitos |
+| **Usuario sin privilegios** | `hellbot`, uid 10001, dueño de `/data` y `/app` | El bot no corre como root |
+| **Healthcheck real** | cada 60 s, timeout 10 s, arranque 90 s, 3 reintentos | Ejecuta `tools/healthcheck.py --max-lag 120`: si hay un evento en marcha y la última observación del canal es más antigua que eso, el contenedor se marca no sano y se reinicia |
+| **Solo lo que se usa en runtime** | copia `hell/`, `tools/healthcheck.py`, `docs/`, `Announcements.py` y `bot.py` | `Announcements.py` es obligatorio: el bot lee ahí todos sus textos y no arranca sin él |
+
+El `.dockerignore` deja fuera del contexto de build `.git/`, los entornos virtuales y las cachés, y —lo importante— **todo lo que es estado o secreto**: `.env`, `data/`, `logs/` y los `*.sqlite3` con sus `-wal` y `-shm`. Nunca se hornea una base de datos ni unas credenciales dentro de la imagen.
+
+> [!TIP]
+> El healthcheck mira el **archivo de estado, no el proceso**. Un bot vivo pero con el bucle de monitorización atascado es peor que uno caído, porque el evento sigue corriendo mientras nadie observa el canal. Ese es exactamente el fallo que el healthcheck está diseñado para detectar.
+
+El comando de arranque es `python bot.py`, que es el punto de entrada de cinco líneas que llama a `hell.bot.main`.
+
 > [!WARNING]
 > **Puerto 8080 ya en uso** (`Web dashboard NOT started: port 8080 is already in use`): el dashboard enlaza `WEB_PORT` (8080 por defecto) dentro del contenedor y docker-compose publica *el mismo* valor, así que se cambia en un solo sitio: `WEB_PORT=8090` en `.env` y otra vez `docker compose up -d`.
 >
