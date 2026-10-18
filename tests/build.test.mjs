@@ -434,3 +434,68 @@ test("los detalles tipográficos están presentes", () => {
   assert.match(css, /text-wrap:\s*pretty/, "el texto no evita viudas");
   assert.match(css, /caret-color:\s*var\(--accent\)/, "el cursor de texto no usa el acento");
 });
+
+/* ---------- Salud del HTML generado en todas las páginas ---------- */
+
+function todasLasPaginas() {
+  const fijas = ["index.html", "projects/index.html", "404.html"];
+  const guias = [];
+  for (const project of PROJECTS) {
+    for (const page of project.pages) {
+      guias.push(`${pagePath(project.slug, page.slug).replace(/^\//, "")}index.html`);
+    }
+  }
+  return [...fijas, ...guias];
+}
+
+test("ningún botón queda sin nombre accesible en el HTML servido", () => {
+  const sinNombre = [];
+  for (const rel of todasLasPaginas()) {
+    const doc = dom(rel);
+    doc.querySelectorAll("button").forEach((button) => {
+      if (button.getAttribute("aria-label")?.trim()) return;
+      if (button.getAttribute("aria-labelledby")) return;
+      if (button.textContent.trim()) return;
+      sinNombre.push(`${rel} → ${button.className || button.id || "button"}`);
+    });
+  }
+  assert.deepEqual(sinNombre, [], "botones sin nombre antes de que corra el JS");
+});
+
+test("no hay identificadores duplicados en ninguna página", () => {
+  const duplicados = [];
+  for (const rel of todasLasPaginas()) {
+    const vistos = new Map();
+    dom(rel).querySelectorAll("[id]").forEach((node) => {
+      vistos.set(node.id, (vistos.get(node.id) || 0) + 1);
+    });
+    const repetidos = [...vistos].filter(([, veces]) => veces > 1).map(([id]) => id);
+    if (repetidos.length) duplicados.push(`${rel} → ${repetidos.join(", ")}`);
+  }
+  assert.deepEqual(duplicados, [], "ids duplicados rompen aria-controls y las anclas");
+});
+
+test("toda página declara idioma, título y un solo h1 de cabecera", () => {
+  const fallos = [];
+  for (const rel of todasLasPaginas()) {
+    const doc = dom(rel);
+    const lang = doc.documentElement.getAttribute("lang");
+    if (lang !== "es") fallos.push(`${rel} → lang="${lang}"`);
+    if (!doc.querySelector("title")?.textContent.trim()) fallos.push(`${rel} → sin <title>`);
+    const h1 = doc.querySelectorAll("h1");
+    if (h1.length === 0) fallos.push(`${rel} → sin h1`);
+    if (h1.length > 2) fallos.push(`${rel} → ${h1.length} h1`);
+  }
+  assert.deepEqual(fallos, [], "cabeceras mal formadas");
+});
+
+test("no hay enlaces muertos por href vacío", () => {
+  const malos = [];
+  for (const rel of todasLasPaginas()) {
+    dom(rel).querySelectorAll("a[href]").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (href === "" || href === "#") malos.push(`${rel} → "${href}"`);
+    });
+  }
+  assert.deepEqual(malos, [], "enlaces que no llevan a ningún sitio");
+});

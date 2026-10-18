@@ -96,7 +96,7 @@ ${tocHtml}
 
   const shell = sidebarHtml || tocHtml
     ? `<div class="docs docs--with-rails">
-    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
       ${renderIcon("panel")}
     </button>
     ${aside}
