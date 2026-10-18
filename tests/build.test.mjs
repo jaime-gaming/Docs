@@ -530,3 +530,69 @@ test("no hay enlaces muertos por href vacío", () => {
   }
   assert.deepEqual(malos, [], "enlaces que no llevan a ningún sitio");
 });
+
+/**
+ * Las cuatro roturas silenciosas que no dan error de build ni se ven en el
+ * terminal: un icono renombrado se pinta en blanco, una clave de traducción
+ * que falta deja texto en el idioma equivocado, un enlace interno lleva al
+ * 404 de Pages y una ancla del TOC no desplaza a ningún sitio.
+ *
+ * Un solo recorrido por página: parsear 41 documentos con jsdom es lo caro.
+ */
+test("ninguna página referencia algo que no existe", () => {
+  const sprite = read("assets/img/icons.svg");
+  const simbolos = new Set([...sprite.matchAll(/<symbol[^>]*id="([^"]+)"/g)].map((m) => m[1]));
+  const claves = new Set([...Object.keys(DICT.es), ...Object.keys(DICT.en)]);
+
+  const iconos = [];
+  const traducciones = [];
+  const anclas = [];
+  const enlaces = [];
+  let referencias = 0;
+
+  for (const rel of todasLasPaginas()) {
+    const doc = dom(rel);
+
+    // <use href="…#icon-x"> del layout y data-icon, que expande main.js.
+    doc.querySelectorAll("use[href], [data-icon]").forEach((node) => {
+      const valor = node.tagName.toLowerCase() === "use"
+        ? (node.getAttribute("href") || "").split("#")[1]
+        : node.getAttribute("data-icon");
+      if (!valor) return;
+      referencias += 1;
+      if (!simbolos.has(valor)) iconos.push(`${rel} → ${valor}`);
+    });
+
+    doc.querySelectorAll("[data-i18n],[data-i18n-aria],[data-i18n-placeholder],[data-i18n-title],[data-i18n-label],[data-i18n-alt]").forEach((node) => {
+      for (const attr of node.attributes) {
+        if (!attr.name.startsWith("data-i18n")) continue;
+        for (const key of attr.value.split(/\s+/)) {
+          if (!claves.has(key)) traducciones.push(`${rel} → ${key}`);
+        }
+      }
+    });
+
+    doc.querySelectorAll("a[href]").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (href.startsWith("#")) {
+        const destino = decodeURIComponent(href.slice(1));
+        if (destino && !destino.startsWith("icon-") && !doc.getElementById(destino)) anclas.push(`${rel} → ${href}`);
+        return;
+      }
+      if (!href.startsWith(BASE) || href.includes("/assets/")) return;
+      let relativo = href.slice(BASE.length).split("#")[0].split("?")[0];
+      if (relativo === "" || relativo.endsWith("/")) relativo += "index.html";
+      if (!existsSync(path.join(ROOT, relativo))) enlaces.push(`${rel} → ${href}`);
+    });
+  }
+
+  // Sin estas dos comprobaciones la prueba pasaría en blanco si el sprite o el
+  // marcado dejaran de generarse.
+  assert.ok(simbolos.size >= 50, `sprite con solo ${simbolos.size} símbolos`);
+  assert.ok(referencias >= 100, `solo ${referencias} referencias a iconos en ${todasLasPaginas().length} páginas`);
+
+  assert.deepEqual([...new Set(iconos)], [], "iconos que se pintarían en blanco");
+  assert.deepEqual([...new Set(traducciones)], [], "claves data-i18n ausentes del diccionario");
+  assert.deepEqual([...new Set(anclas)], [], "anclas internas sin id de destino");
+  assert.deepEqual([...new Set(enlaces)], [], "enlaces internos a páginas inexistentes");
+});
