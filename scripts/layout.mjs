@@ -85,8 +85,11 @@ ${sidebarHtml}
     </aside>`
     : "";
 
+  // data-content-key="toc" es lo que permite que i18n.js sustituya el índice al
+  // cambiar de idioma. Sin él los títulos se quedan en español y, peor, sus
+  // anclajes (#apartado-en-espanol) no existen en el cuerpo traducido.
   const rail = tocHtml
-    ? `<aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc">
+    ? `<aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
 ${tocHtml}
     </aside>`
     : "";

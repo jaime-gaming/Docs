@@ -205,10 +205,16 @@
   }
 
   /* ---------- Scrollspy del índice "en esta página" ---------- */
-  const tocLinks = Array.from(document.querySelectorAll(".toc__list a"));
+  let tocLinks = [];
   let spyObserver = null;
 
   function initScrollspy() {
+    // Se reconsultan en cada inicialización: al cambiar de idioma el índice se
+    // sustituye entero y los nodos anteriores quedan desconectados del DOM.
+    spyObserver?.disconnect();
+    spyObserver = null;
+    tocLinks = Array.from(document.querySelectorAll(".toc__list a"));
+    tocLinks.forEach((link) => link.classList.remove("active"));
     if (!tocLinks.length) return;
     const headings = tocLinks
       .map((link) => document.getElementById(decodeURIComponent(link.getAttribute("href").slice(1))))
@@ -311,9 +317,14 @@
     window.addEventListener("resize", onScroll, { passive: true });
     onScroll();
 
-    // Al cambiar de idioma, recolocar textos generados por script.
+    // Al cambiar de idioma, recolocar textos generados por script. El cuerpo y
+    // el índice lateral se sustituyen enteros desde #pageTranslations, así que
+    // todo lo que se les añadió por script hay que volver a construirlo.
     document.addEventListener("langchange", () => {
+      decorateHeadings();
+      wrapTables();
       decorateCode();
+      initScrollspy();
       if (sidebarToggle) {
         sidebarToggle.innerHTML = `${iconHtml("panel")}<span data-i18n="docs.jumpTo">${textFor("docs.jumpTo", "Ir a")}</span>`;
       }
