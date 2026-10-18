@@ -77,6 +77,32 @@ Wave is released under the **MIT License**. Dependencies retain their own licens
 
 [PixelPlayer](https://github.com/PixelPlayerHQ/PixelPlayer) is the reference for local library organisation and player interaction, but Wave is an independent implementation: it includes no PixelPlayer source code, artwork or branding. It is also not affiliated with, sponsored by or endorsed by PixelPlayer or Spotify AB.
 
+## Reading further in the repository
+
+This guide summarizes and organizes. The repository also ships its own documentation, quite a bit longer, and it is worth knowing what exists and where.
+
+| Document | Size | What it is |
+| --- | --- | --- |
+| [`README.md`](https://github.com/jaime-gaming/Wave/blob/main/README.md) | 8 KB | The presentation of the project |
+| [`docs/ARCHITECTURE.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/ARCHITECTURE.md) | 43 KB | Scope and platform decision, layers and responsibilities, directory layout, data flow, models and persistence, playback state, browser integration, interface and accessibility, privacy and security, testing and future boundaries, lyrics and profiles, and the native Mix engine |
+| [`docs/DESIGN.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/DESIGN.md) | 44 KB | The same document with one extra section at the end, "Release 0.1.0 refinements" |
+| [`docs/API_REFERENCE.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/API_REFERENCE.md) | 34 KB | The internal API reference |
+| [`docs/VALIDATION.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/VALIDATION.md) | 34 KB | The validation record: web, Android and Windows, publication and legal status, and the follow-up of each redesign |
+| [`docs/DEVELOPMENT.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/DEVELOPMENT.md) | 31 KB | The development guide |
+| [`docs/ROADMAP.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/ROADMAP.md) | 11 KB | The roadmap |
+| [`docs/PLATFORMS.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/PLATFORMS.md) | 8 KB | The platforms in version 0.1.0 |
+| [`PRIVACY.md`](https://github.com/jaime-gaming/Wave/blob/main/PRIVACY.md) | 6 KB | Privacy and local storage |
+| [`docs/media/PROMO_PRODUCTION.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/media/PROMO_PRODUCTION.md) | 5 KB | The production of the 0.1.0 product film |
+| [`CONTRIBUTING.md`](https://github.com/jaime-gaming/Wave/blob/main/CONTRIBUTING.md) | 5 KB | How to contribute |
+| [`docs/RELEASE_NOTES_0.1.0.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/RELEASE_NOTES_0.1.0.md) | 4 KB | The release notes for 0.1.0 |
+| [`CODE_OF_CONDUCT.md`](https://github.com/jaime-gaming/Wave/blob/main/CODE_OF_CONDUCT.md) | 3 KB | The code of conduct |
+| [`docs/WINDOWS_RELEASE.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/WINDOWS_RELEASE.md) | 3 KB | The Windows release preparation |
+| [`THIRD_PARTY_NOTICES.md`](https://github.com/jaime-gaming/Wave/blob/main/THIRD_PARTY_NOTICES.md) | 2 KB | The third-party notices |
+| [`CHANGELOG.md`](https://github.com/jaime-gaming/Wave/blob/main/CHANGELOG.md) | 22 KB | The changelog |
+
+> [!IMPORTANT]
+> **`ARCHITECTURE.md` and `DESIGN.md` are not two different views.** They share their title and all twelve sections, and the only content separating them is six lines at the end of `DESIGN.md`: the "Release 0.1.0 refinements" section, which spells out the three-plus-two balanced grid for Home's collection shortcuts on phones, the playlist-like daily mixes page with explicit Play and Shuffle, the scroll reset on entry, touch targets of at least 44 px, the hierarchy of the independent Windows UI with its six Settings destinations, and provider coordination — without Web Locks scheduling is tab-local, and if storage is denied the client keeps its own spacing in memory without being able to promise a shared deadline across tabs.
+
 ## Where to go next
 
 - [Installation](/wave/install/) — get it running in five minutes.

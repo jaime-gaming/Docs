@@ -86,6 +86,42 @@ jaigent chat                          # y sigue de forma interactiva
 
 `jgt` es un alias más corto del mismo comando.
 
+## Seguir leyendo en el repositorio
+
+Esta guía resume y ordena. El repositorio trae además su propia documentación, y hay un par de archivos que conviene no confundir con funcionalidad existente.
+
+| Documento | Tamaño | Qué es |
+| --- | --- | --- |
+| [`README.md`](https://github.com/jaime-gaming/jAIgent/blob/main/README.md) | 59 KB | La presentación del proyecto, muy completa |
+| [`CHANGELOG.md`](https://github.com/jaime-gaming/jAIgent/blob/main/CHANGELOG.md) | 66 KB | El registro de cambios, versión a versión |
+| [`AGENTS.md`](https://github.com/jaime-gaming/jAIgent/blob/main/AGENTS.md) | 15 KB | El contexto para agentes de código que trabajen sobre el repositorio |
+| [`SECURITY.md`](https://github.com/jaime-gaming/jAIgent/blob/main/SECURITY.md) | 12 KB | La política de seguridad |
+| [`docs/web-ui-proposal.md`](https://github.com/jaime-gaming/jAIgent/blob/main/docs/web-ui-proposal.md) | 11 KB | **Una propuesta**, no una función: una interfaz web local |
+| [`docs/architecture.md`](https://github.com/jaime-gaming/jAIgent/blob/main/docs/architecture.md) | 9 KB | La arquitectura |
+| [`docs/terminal-ui.md`](https://github.com/jaime-gaming/jAIgent/blob/main/docs/terminal-ui.md) | 8 KB | La interfaz de terminal |
+| [`docs/ci-and-releases.md`](https://github.com/jaime-gaming/jAIgent/blob/main/docs/ci-and-releases.md) | 7 KB | La integración continua y las releases |
+| [`docs/workflow-repair-v0.5.1.md`](https://github.com/jaime-gaming/jAIgent/blob/main/docs/workflow-repair-v0.5.1.md) | 4 KB | Las reparaciones de flujo de la versión 0.5.1 |
+| [`CONTRIBUTING.md`](https://github.com/jaime-gaming/jAIgent/blob/main/CONTRIBUTING.md) | 4 KB | Cómo contribuir |
+| [`LICENSE.md`](https://github.com/jaime-gaming/jAIgent/blob/main/LICENSE.md) | 4 KB | El acuerdo de licencia |
+| [`integrations/chatgpt/skills/jaigent/SKILL.md`](https://github.com/jaime-gaming/jAIgent/blob/main/integrations/chatgpt/skills/jaigent/SKILL.md) | 2 KB | La skill de la integración con ChatGPT |
+| [`src/jaigent/data/skills/spend-cap.md`](https://github.com/jaime-gaming/jAIgent/blob/main/src/jaigent/data/skills/spend-cap.md) | 1 KB | La skill integrada de tope de gasto |
+| [`src/jaigent/data/skills/compact.md`](https://github.com/jaime-gaming/jAIgent/blob/main/src/jaigent/data/skills/compact.md) | 1 KB | La skill integrada de compactado |
+| [`.github/pull_request_template.md`](https://github.com/jaime-gaming/jAIgent/blob/main/.github/pull_request_template.md) | 1 KB | La plantilla de pull request |
+
+### Dos avisos antes de leerlos
+
+> [!WARNING]
+> **`docs/web-ui-proposal.md` es solo una propuesta: no hay ninguna interfaz web implementada.** El propio documento lo dice en su primera línea y recuerda que sigue en la lista de «discutir primero en una issue» de `AGENTS.md` y `CONTRIBUTING.md`. Es material de planificación, no una especificación aprobada.
+
+Las dos skills integradas son **instrucciones, no mecanismos**. Cada una declara en su cabecera cuándo debe cargarse y qué hay que hacer, y el trabajo mecánico lo hace otra parte:
+
+| Skill | Cuándo se carga | Quién hace el trabajo de verdad |
+| --- | --- | --- |
+| `compact` | Cuando la conversación se alarga o el usuario dice «compact» | `/compact` en el chat, o `auto_compact` en ajustes. La skill solo dice **qué merece la pena conservar** |
+| `spend-cap` | Cuando el usuario menciona coste, presupuesto o gasto | El tope duro lo aplica jAIgent cuando `JAIGENT_BUDGET` (o `jaigent settings set budget 0.50`) es mayor que cero. La skill es la parte blanda: gastar menos **antes** de que la ejecución se corte |
+
+La skill de ChatGPT, por su parte, asume un **endpoint MCP remoto por HTTP protegido con OAuth**: no hace que un servidor stdio local sea alcanzable desde ChatGPT Web.
+
 ## Recorrido de la guía
 
 - [Instalación y claves](/jaigent/install/) — binario, PyPI o fuente, y cómo conseguir una clave.

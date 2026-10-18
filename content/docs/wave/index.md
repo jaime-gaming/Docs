@@ -77,6 +77,32 @@ Wave se publica bajo licencia **MIT**. Las dependencias conservan sus propias li
 
 [PixelPlayer](https://github.com/PixelPlayerHQ/PixelPlayer) es la referencia de organización de biblioteca local y de interacción del reproductor, pero Wave es una implementación independiente: no incluye código, carátulas ni marca de PixelPlayer. Tampoco está afiliado, patrocinado ni respaldado por PixelPlayer o Spotify AB.
 
+## Seguir leyendo en el repositorio
+
+Esta guía resume y ordena. El repositorio trae además su propia documentación, bastante más extensa, y conviene saber qué hay y dónde está.
+
+| Documento | Tamaño | Qué es |
+| --- | --- | --- |
+| [`README.md`](https://github.com/jaime-gaming/Wave/blob/main/README.md) | 8 KB | La presentación del proyecto |
+| [`docs/ARCHITECTURE.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/ARCHITECTURE.md) | 43 KB | Alcance y decisión de plataforma, capas y responsabilidades, estructura de directorios, flujo de datos, modelos y persistencia, estado de reproducción, integración con el navegador, interfaz y accesibilidad, privacidad y seguridad, pruebas y límites futuros, letras y perfiles, y el motor nativo de Mix |
+| [`docs/DESIGN.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/DESIGN.md) | 44 KB | El mismo documento con una sección final más, «Release 0.1.0 refinements» |
+| [`docs/API_REFERENCE.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/API_REFERENCE.md) | 34 KB | La referencia de la API interna |
+| [`docs/VALIDATION.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/VALIDATION.md) | 34 KB | El registro de validación: web, Android y Windows, publicación y estado legal, y el seguimiento de cada rediseño |
+| [`docs/DEVELOPMENT.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/DEVELOPMENT.md) | 31 KB | La guía de desarrollo |
+| [`docs/ROADMAP.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/ROADMAP.md) | 11 KB | La hoja de ruta |
+| [`docs/PLATFORMS.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/PLATFORMS.md) | 8 KB | Las plataformas en la versión 0.1.0 |
+| [`PRIVACY.md`](https://github.com/jaime-gaming/Wave/blob/main/PRIVACY.md) | 6 KB | Privacidad y almacenamiento local |
+| [`docs/media/PROMO_PRODUCTION.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/media/PROMO_PRODUCTION.md) | 5 KB | La producción del vídeo de producto de 0.1.0 |
+| [`CONTRIBUTING.md`](https://github.com/jaime-gaming/Wave/blob/main/CONTRIBUTING.md) | 5 KB | Cómo contribuir |
+| [`docs/RELEASE_NOTES_0.1.0.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/RELEASE_NOTES_0.1.0.md) | 4 KB | Las notas de la versión 0.1.0 |
+| [`CODE_OF_CONDUCT.md`](https://github.com/jaime-gaming/Wave/blob/main/CODE_OF_CONDUCT.md) | 3 KB | El código de conducta |
+| [`docs/WINDOWS_RELEASE.md`](https://github.com/jaime-gaming/Wave/blob/main/docs/WINDOWS_RELEASE.md) | 3 KB | La preparación de la release de Windows |
+| [`THIRD_PARTY_NOTICES.md`](https://github.com/jaime-gaming/Wave/blob/main/THIRD_PARTY_NOTICES.md) | 2 KB | Los avisos de terceros |
+| [`CHANGELOG.md`](https://github.com/jaime-gaming/Wave/blob/main/CHANGELOG.md) | 22 KB | El registro de cambios |
+
+> [!IMPORTANT]
+> **`ARCHITECTURE.md` y `DESIGN.md` no son dos visiones distintas.** Comparten título y los doce apartados, y el único contenido que los separa son seis líneas al final de `DESIGN.md`: la sección «Release 0.1.0 refinements», que concreta la rejilla tres más dos de los atajos de colección en móvil, la página de mezclas diarias tipo lista con reproducir y aleatorio explícitos, el reinicio del scroll al entrar, objetivos táctiles de al menos 44 px, la jerarquía de la interfaz independiente de Windows con sus seis destinos de ajustes, y la coordinación entre proveedores —sin Web Locks la planificación es local a la pestaña, y si el almacenamiento se deniega el cliente guarda su propio espaciado en memoria sin poder prometer un plazo compartido entre pestañas.
+
 ## Dónde seguir
 
 - [Instalación](/wave/install/) — ponerlo en marcha en cinco minutos.
