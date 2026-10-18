@@ -63,7 +63,13 @@ With the two big issues, which are already described: finishing the Spanish vers
 1. **Do not reformat the file wholesale.** It is ~1.04 MB with everything integrated: an indentation change produces an impossible-to-review diff.
 2. **Edit it section by section**, searching for the specific text or identifier.
 3. **Do not touch `assets [DO NOT TOUCH]/`** unless you know exactly which broken reference you are fixing.
-4. The repository includes `.github/agents/my-agent.agent.md` for coding agents working on the project.
+4. The repository includes `.github/agents/my-agent.agent.md`, a custom agent for coding agents. Mind what it is: it is named **Michael Burns**, its description is *VOID always watches…*, and its system instruction plays him as an ex-employee of VOID who tried to shut ECO down. It is stage dressing from the story built on a real piece of the platform, **not a neutral technical assistant**. If you want practical help with the code, do not count on that agent stepping out of character.
+
+### What is the repository's custom agent?
+
+A file at `.github/agents/my-agent.agent.md` in GitHub's custom agent format. It declares the name **Michael Burns** and the description *VOID always watches…*, and its system instruction, written in Spanish, casts him as an ex-employee of VOID who tried to shut ECO down once and whose whereabouts are unknown. It ends by asking him to **always speak in English**.
+
+It is committed to the default branch, which is the requirement for a custom agent to be available. It is part of the work: the detail is in [The VOID Corp world](/void/world/).
 
 ### What information should I give when opening an issue?
 

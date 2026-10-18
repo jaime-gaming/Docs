@@ -34,11 +34,16 @@ Según el propio relato, la etiqueta «Beta» no mide cuánto le falta al softwa
 ## Cómo está construido
 
 ```text
-VOID mxks version/
-├── VOID mxks version (code).html        # ~1,04 MB, todo integrado en un archivo
-└── assets [DO NOT TOUCH]/
-    └── VOIDMXKSnight_shift.mp4          # ~23,5 MB
+VOID/
+├── .github/agents/my-agent.agent.md     # agente personalizado: Michael Burns
+├── README.md                            # la guía de instalación, escrita dentro de la ficción
+└── VOID mxks version/
+    ├── VOID mxks version (code).html    # 1.091.298 bytes (~1,04 MB), todo integrado
+    └── assets [DO NOT TOUCH]/
+        └── VOIDMXKSnight_shift.mp4      # 24.686.173 bytes (~23,5 MB)
 ```
+
+El juego son esos dos archivos. El resto del repositorio es documentación y una pieza de utilería que cuenta como contenido: un **agente personalizado** para agentes de código que interpreta a Michael Burns, el ex-empleado desaparecido.
 
 Dos decisiones técnicas que definen el proyecto:
 

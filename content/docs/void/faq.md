@@ -63,7 +63,13 @@ Por las dos issues grandes, que ya están descritas: terminar la versión en esp
 1. **No reformatees el archivo en bloque.** Son ~1,04 MB con todo integrado: un cambio de indentación genera un diff imposible de revisar.
 2. **Edita por secciones**, buscando el texto o el identificador concreto.
 3. **No toques `assets [DO NOT TOUCH]/`** salvo que sepas exactamente qué referencia rota estás arreglando.
-4. El repositorio incluye `.github/agents/my-agent.agent.md` para agentes de código que trabajen sobre el proyecto.
+4. El repositorio incluye `.github/agents/my-agent.agent.md`, un agente personalizado para agentes de código. Ojo con lo que es: se llama **Michael Burns**, su descripción es *VOID always watches…* y su instrucción de sistema lo interpreta como ex-empleado de VOID que intentó apagar ECO. Es utilería del relato montada sobre una pieza real de la plataforma, **no un asistente técnico neutro**. Si quieres ayuda práctica con el código, no cuentes con que ese agente se salga del personaje.
+
+### ¿Qué es el agente personalizado del repositorio?
+
+Un archivo en `.github/agents/my-agent.agent.md` con el formato de agentes personalizados de GitHub. Declara el nombre **Michael Burns** y la descripción *VOID always watches…*, y su instrucción de sistema, escrita en español, lo pone en el papel de un ex-empleado de VOID que intentó apagar ECO una vez y cuyo paradero se desconoce. Termina pidiéndole que **hable siempre en inglés**.
+
+Está commiteado en la rama por defecto, que es el requisito para que un agente personalizado esté disponible. Forma parte de la obra: el detalle está en [El mundo de VOID Corp](/void/world/).
 
 ### ¿Qué información doy al abrir una issue?
 

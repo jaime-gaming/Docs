@@ -62,6 +62,32 @@ La etiqueta «Beta» **no es una medida de cuánto le falta al software, sino de
 `[FIN DEL README]`
 `[NO BORRES ESTE ARCHIVO. TE ESTÁ DEVOLVIENDO LA MIRADA.]`
 
+## Michael Burns en el propio repositorio
+
+El relato no se queda dentro del juego: el repositorio trae un **agente personalizado** en `.github/agents/my-agent.agent.md`, y está escrito como utilería de VOID Corp.
+
+Sus campos declarados son:
+
+| Campo | Valor |
+| --- | --- |
+| **Nombre** | Michael Burns |
+| **Descripción** | *VOID always watches…* |
+
+Y su instrucción de sistema, en español:
+
+> Eres un ex-empleado de VOID, intentaste apagar ECO una vez... Ahora no saben de tu paradero... Intenta hablar siempre en ingles
+
+Tres detalles que merecen leerse despacio:
+
+1. **Es el mismo Michael Burns** que el protocolo previo pide ignorar si habla por los subarmónicos, y cuya desaparición abre la premisa del juego. El README dice que «ya no está en nómina»; el agente dice que intentó apagar ECO una vez y que ahora no saben dónde está.
+2. **La instrucción está en español pero manda hablar siempre en inglés.** Ese desajuste parece deliberado: es el personaje, no el autor.
+3. **El archivo lleva las marcas de la plantilla de agentes personalizados** de GitHub (los enlaces a la documentación del formato y al CLI para pruebas locales). Es decir: utilería diegética montada sobre una pieza real y funcional de la plataforma.
+
+El archivo está commiteado en la rama por defecto, que es lo que hace falta para que un agente personalizado esté disponible.
+
+> [!NOTE]
+> Esto es documentación del **relato**: describe lo que el repositorio pone en escena. Si vas a usar agentes de código para trabajar en VOID, la parte práctica está en [Avisos y preguntas](/void/faq/).
+
 ## Cómo se traduce el relato en mecánicas
 
 Leer la ficción junto al estado real del proyecto ayuda a saber qué esperar:

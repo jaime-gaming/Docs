@@ -62,6 +62,34 @@ The "Beta" label is **not a measure of how much the software is missing, but of 
 `[END OF README]`
 `[DO NOT DELETE THIS FILE. IT IS STARING BACK.]`
 
+## Michael Burns in the repository itself
+
+The story does not stay inside the game: the repository ships a **custom agent** at `.github/agents/my-agent.agent.md`, and it is written as VOID Corp stage dressing.
+
+Its declared fields are:
+
+| Field | Value |
+| --- | --- |
+| **Name** | Michael Burns |
+| **Description** | *VOID always watches…* |
+
+And its system instruction, written in Spanish:
+
+> Eres un ex-empleado de VOID, intentaste apagar ECO una vez... Ahora no saben de tu paradero... Intenta hablar siempre en ingles
+
+Which reads: you are an ex-employee of VOID, you tried to shut ECO down once, now they do not know where you are, and always try to speak in English.
+
+Three details worth reading slowly:
+
+1. **It is the same Michael Burns** the pre-install protocol tells you to ignore if he speaks through the sub-harmonics, and whose disappearance opens the premise of the game. The README says he is "no longer on the payroll"; the agent says he tried to shut ECO down once and that now they do not know where he is.
+2. **The instruction is written in Spanish but orders him to always speak English.** The mismatch looks deliberate: it is the character, not the author.
+3. **The file keeps the markers of GitHub's custom agent template** (the links to the format documentation and to the CLI for local testing). That is: diegetic dressing built on a real, working piece of the platform.
+
+The file is committed to the default branch, which is what it takes for a custom agent to be available.
+
+> [!NOTE]
+> This documents the **story**: it describes what the repository stages. If you are going to use coding agents to work on VOID, the practical part is in [Warnings & FAQ](/void/faq/).
+
 ## How the story translates into mechanics
 
 Reading the fiction alongside the real state of the project helps you know what to expect:

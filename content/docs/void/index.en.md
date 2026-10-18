@@ -21,7 +21,7 @@ That is why this guide always distinguishes:
 | **The story** | VOID Corp, the ECO system, Level −3, Michael Burns, mirror-rotation authentication |
 | **The reality** | An HTML file of ~1.04 MB with everything integrated, an assets folder with a video of ~23.5 MB, and three open issues |
 
-The story is documented in [The world of VOID Corp](/void/world/). The technical side, in [Install & play](/void/install/).
+The story is documented in [The VOID Corp world](/void/world/). The technical side, in [Install & play](/void/install/).
 
 ## The premise
 
@@ -34,11 +34,16 @@ According to the story itself, the "Beta" label does not measure how much the so
 ## How it is built
 
 ```text
-VOID mxks version/
-├── VOID mxks version (code).html        # ~1.04 MB, everything integrated in one file
-└── assets [DO NOT TOUCH]/
-    └── VOIDMXKSnight_shift.mp4          # ~23.5 MB
+VOID/
+├── .github/agents/my-agent.agent.md     # custom agent: Michael Burns
+├── README.md                            # the install guide, written inside the fiction
+└── VOID mxks version/
+    ├── VOID mxks version (code).html    # 1,091,298 bytes (~1.04 MB), everything integrated
+    └── assets [DO NOT TOUCH]/
+        └── VOIDMXKSnight_shift.mp4      # 24,686,173 bytes (~23.5 MB)
 ```
+
+The game is those two files. Everything else in the repository is documentation plus one piece of stage dressing that counts as content: a **custom agent** for coding agents that plays Michael Burns, the disappeared ex-employee.
 
 Two technical decisions define the project:
 
@@ -73,5 +78,5 @@ Once the terminal boots, there are three interactions available in the beta:
 ## Guide tour
 
 - [Install & play](/void/install/) — opening it, requirements and known problems.
-- [The world of VOID Corp](/void/world/) — the story: system architecture, pre-install protocol and warnings.
-- [Notices & questions](/void/faq/) — accessibility, project status and how to contribute.
+- [The VOID Corp world](/void/world/) — the story: system architecture, pre-install protocol and warnings.
+- [Warnings & FAQ](/void/faq/) — accessibility, project status and how to contribute.
