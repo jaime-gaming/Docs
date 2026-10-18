@@ -74,9 +74,24 @@ test("los avisos se convierten en callouts traducidos", () => {
 test("cada etiqueta de aviso tiene su variante", () => {
   assert.equal(ALERTS.NOTE.variant, "note");
   assert.equal(ALERTS.TIP.variant, "tip");
+  assert.equal(ALERTS.IMPORTANT.variant, "important");
   assert.equal(ALERTS.WARNING.variant, "warning");
-  assert.equal(ALERTS.IMPORTANT.variant, "danger");
   assert.equal(ALERTS.CAUTION.variant, "danger");
+});
+
+test("cada variante de aviso tiene su regla en el CSS", () => {
+  // La variante «note» existió un tiempo sin CSS propio.
+  const css = readFileSync(new URL("../assets/css/style.css", import.meta.url), "utf8");
+  for (const variant of new Set(Object.values(ALERTS).map((alert) => alert.variant))) {
+    assert.match(css, new RegExp(`\\.callout--${variant}\\b`), `sin estilo: callout--${variant}`);
+  }
+});
+
+test("[!CAUTION] ya no sale titulado como [!IMPORTANT]", () => {
+  const es = render("> [!CAUTION]\n> cuidado\n", { lang: "es", dict: DICT.es });
+  const en = render("> [!CAUTION]\n> cuidado\n", { lang: "en", dict: DICT.en });
+  assert.match(es, /callout__title">Precaución</);
+  assert.match(en, /callout__title">Caution</);
 });
 
 test("el título del aviso se traduce con el diccionario", () => {

@@ -12,6 +12,7 @@ import { DICT } from "../scripts/dict.mjs";
 import { UI } from "../content/ui.mjs";
 import { GROUPS, PROJECTS } from "../scripts/registry.mjs";
 import { LANGUAGES } from "../scripts/config.mjs";
+import { ALERTS } from "../scripts/markdown.mjs";
 
 test("los dos idiomas tienen exactamente las mismas claves de interfaz", () => {
   const es = Object.keys(UI.es).sort();
@@ -58,10 +59,19 @@ test("los nombres de proyecto no se traducen (son nombres propios)", () => {
 });
 
 test("las claves de aviso están en los dos idiomas", () => {
+  // Derivado de ALERTS: si se añade un aviso nuevo, esta prueba lo exige sola.
   for (const lang of LANGUAGES) {
-    for (const key of ["callout.note", "callout.tip", "callout.warning", "callout.danger"]) {
+    for (const key of Object.values(ALERTS).map((alert) => alert.key)) {
       assert.ok(DICT[lang][key]?.trim(), `falta ${lang}: ${key}`);
     }
+  }
+});
+
+test("ninguna etiqueta de aviso comparte título con otra", () => {
+  // [!IMPORTANT] y [!CAUTION] llegaron a renderizar ambos «Importante».
+  for (const lang of LANGUAGES) {
+    const titulos = Object.values(ALERTS).map((alert) => DICT[lang][alert.key]);
+    assert.equal(new Set(titulos).size, titulos.length, `títulos repetidos en ${lang}: ${titulos.join(", ")}`);
   }
 });
 

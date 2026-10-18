@@ -368,6 +368,37 @@ test("al pasar a drawer el sidebar libera su área de la rejilla", () => {
     "un sidebar position:fixed no debe reclamar área");
 });
 
+test("toda var() del CSS está definida, tiene respaldo o la pone JavaScript", () => {
+  // --accent-hover llegó a usarse sin existir: la declaración se cae en silencio
+  // y el icono hereda un color que nadie eligió.
+  const css = read("assets/css/style.css");
+  const definidas = new Set([...css.matchAll(/(--[a-z0-9-]+)\s*:/g)].map((m) => m[1]));
+  // Propiedades que asignan build.mjs y main.js en tiempo de ejecución.
+  const desdeJs = new Set(["--lang-color", "--pointer-x", "--pointer-y", "--progress"]);
+
+  const huerfanas = [];
+  for (let i = css.indexOf("var("); i !== -1; i = css.indexOf("var(", i + 1)) {
+    const inicio = i + 4;
+    let depth = 1;
+    let coma = -1;
+    let fin = -1;
+    for (let j = inicio; j < css.length; j += 1) {
+      if (css[j] === "(") depth += 1;
+      else if (css[j] === ")") {
+        depth -= 1;
+        if (depth === 0) { fin = j; break; }
+      } else if (css[j] === "," && depth === 1 && coma === -1) coma = j;
+    }
+    if (fin === -1) break;
+    // La coma de respaldo puede ir anidada (rgb(0 0 0 / .5)), de ahí el depth.
+    const nombre = css.slice(inicio, coma === -1 ? fin : coma).trim();
+    const respaldo = coma === -1 ? "" : css.slice(coma + 1, fin).trim();
+    if (definidas.has(nombre) || desdeJs.has(nombre) || respaldo) continue;
+    huerfanas.push(nombre);
+  }
+  assert.deepEqual([...new Set(huerfanas)].sort(), [], "var() sin definición ni respaldo");
+});
+
 test("el CSS no usa comentarios de barra doble, que no son válidos", () => {
   const css = read("assets/css/style.css");
   const offenders = css.split("\n")

@@ -487,8 +487,15 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
 .callout__title { margin: 0; color: var(--text); font: 500 .78rem var(--font-display); letter-spacing: .02em; }
 .callout__body { color: var(--text-dim); font-size: .85rem; }
 .callout__body > :last-child { margin-bottom: 0; }
+/* Nota: el nivel más tranquilo. Se apoya en el borde y el icono neutros para
+   no competir con los avisos que sí piden atención. */
+.callout--note { border-left-color: var(--border); }
+.callout--note > svg { color: var(--text-faint); }
 .callout--tip { border-left-color: #90d79e; }
 .callout--tip > svg { color: #90d79e; }
+/* Importante: el énfasis de marca, con el acento en todo su brillo. */
+.callout--important { border-left-color: var(--accent); border-left-width: 3px; }
+.callout--important > svg { color: #d8f3a4; }
 .callout--warning { border-left-color: #e0c778; }
 .callout--warning > svg { color: #e0c778; }
 .callout--danger { border-left-color: #df8d8d; }

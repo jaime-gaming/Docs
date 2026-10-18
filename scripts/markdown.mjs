@@ -12,12 +12,15 @@
 import { marked } from "marked";
 import { main, u } from "./config.mjs";
 
+// Cada etiqueta tiene su propia variante y su propio título. Antes IMPORTANT y
+// CAUTION compartían variante y clave, así que un [!CAUTION] salía titulado
+// «Importante» y era indistinguible de un [!IMPORTANT].
 const ALERTS = {
   NOTE: { variant: "note", icon: "bulb", key: "callout.note", fallback: "Nota" },
   TIP: { variant: "tip", icon: "sparkles", key: "callout.tip", fallback: "Consejo" },
-  IMPORTANT: { variant: "danger", icon: "alert", key: "callout.danger", fallback: "Importante" },
+  IMPORTANT: { variant: "important", icon: "alert", key: "callout.important", fallback: "Importante" },
   WARNING: { variant: "warning", icon: "warn", key: "callout.warning", fallback: "Aviso" },
-  CAUTION: { variant: "danger", icon: "warn", key: "callout.danger", fallback: "Importante" },
+  CAUTION: { variant: "danger", icon: "warn", key: "callout.caution", fallback: "Precaución" },
 };
 
 const WORDS_PER_MINUTE = 210;
