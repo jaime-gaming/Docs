@@ -47,7 +47,10 @@ Hay dos tiempos muertos y cumplen funciones distintas:
 | **Revelación** | La animación que enseña el número y sus insignias | Da el golpe de efecto y deja leer qué ha salido |
 | **Enfriamiento** | La espera antes de poder volver a tirar | Marca el ritmo y da valor a las mejoras |
 
-**Las mejoras acortan ambos.** Es la primera inversión con más impacto del juego: menos espera por tirada significa más tiradas por minuto, y por tanto más EP por minuto.
+**Las mejoras acortan ambos.** Es la primera inversión con más impacto del juego: menos espera por tirada significa más tiradas por minuto, y por tanto más EP por minuto. Sin mejorar, los tempos de referencia son **45 segundos de revelación** y **60 de enfriamiento**.
+
+> [!NOTE]
+> **Los ajustes de presentación nunca cambian estos tiempos**, ni las probabilidades, ni el EP, ni los precios. Son cosméticos por definición: si uno acortara el enfriamiento, sería una mejora y estaría en la tienda.
 
 > [!NOTE]
 > **No hay límite de tiradas.** Se tira tan a menudo como se quiera una vez terminan la revelación y el enfriamiento. Tampoco hay medidor de energía ni límite diario.
@@ -59,6 +62,17 @@ El EP es tu cartera. Tres destinos:
 - **Mejoras** — acortan la revelación y el enfriamiento y multiplican la ganancia.
 - **Compañeros** — multiplican el EP que ganas. Se lleva uno a la vez.
 - **Skills** — efectos cargados que se disparan en la próxima tirada.
+
+## Marcadores y números guardados
+
+Cuando una tirada produce varios números, puedes **guardarlos**. Dos reglas que conviene tener claras, porque cambian lo que rinde cada tirada:
+
+- **El tope es de 3 marcadores.** La interfaz lo enseña en el chip **«Bookmarks (n/3)»**, y ese 3 es una decisión cerrada del proyecto.
+- **Cada número guardado paga los multiplicadores de skills de cartera**, no solo el último.
+
+Lo segundo es lo que hace que las skills de extracciones extra rindan mucho más de lo que parece a primera vista: no estás guardando un número, estás cobrándolos todos.
+
+Los multiplicadores de cartera, eso sí, **solo multiplican EP ya bancario**: nunca alteran la puntuación cruda de un número ni su rango.
 
 ## Tiradas sin conexión
 

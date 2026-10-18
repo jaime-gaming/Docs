@@ -20,6 +20,8 @@ Every number that comes up has patterns: pairs, runs, lucky sevens and many more
 
 There is no energy meter, no daily limit and no account. **You can play as much as you want** as soon as the reveal and the cooldown finish.
 
+The reference tempos are a **45-second reveal** and a **60-second cooldown**. These are real durations of the game, not approximations: some automated specs run slowly on purpose to respect them.
+
 ## Ways to grow
 
 | System | What it does |
@@ -76,3 +78,4 @@ The repository's `AGENTS.md` has the project map and the conventions for contrib
 - [Systems & progression](/rngdle-infinite/systems/) — companions, skills, tasks, rebirth, prestige and rollback.
 - [Save & sync](/rngdle-infinite/save/) — where it is stored and how to link another device.
 - [FAQ](/rngdle-infinite/faq/) — common questions and credits.
+- [Development](/rngdle-infinite/dev/) — how it is built, a map of the repository, commands and design rules.

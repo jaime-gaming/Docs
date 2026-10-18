@@ -47,7 +47,10 @@ There are two pauses and they serve different purposes:
 | **Reveal** | The animation showing the number and its badges | Gives the payoff and lets you read what came up |
 | **Cooldown** | The wait before you can roll again | Sets the rhythm and gives upgrades value |
 
-**Upgrades shorten both.** It is the highest-impact early investment in the game: less waiting per roll means more rolls per minute, and therefore more EP per minute.
+**Upgrades shorten both.** It is the highest-impact early investment in the game: less waiting per roll means more rolls per minute, and therefore more EP per minute. Without upgrades, the reference tempos are a **45-second reveal** and a **60-second cooldown**.
+
+> [!NOTE]
+> **Presentation settings never change these timings**, nor the odds, the EP or the prices. They are cosmetic by definition: if one shortened the cooldown, it would be an upgrade and it would live in the shop.
 
 > [!NOTE]
 > **There is no roll limit.** You roll as often as you want once the reveal and the cooldown are over. There is no energy meter and no daily cap either.
@@ -59,6 +62,17 @@ EP is your wallet. Three destinations:
 - **Upgrades** — shorten the reveal and the cooldown and multiply the earnings.
 - **Companions** — multiply the EP you earn. You carry one at a time.
 - **Skills** — charged effects that fire on the next roll.
+
+## Bookmarks and stored numbers
+
+When a roll produces several numbers, you can **store them**. Two rules worth having clear, because they change what each roll is worth:
+
+- **The cap is 3 bookmarks.** The interface shows it in the **"Bookmarks (n/3)"** chip, and that 3 is a closed decision of the project.
+- **Every stored number pays the wallet skill multipliers**, not only the last one.
+
+The second one is what makes extra-draw skills pay off far better than they look at first glance: you are not storing one number, you are cashing all of them.
+
+Wallet multipliers, mind you, **only multiply EP that is already banked**: they never alter the raw score of a number or its rank.
 
 ## Offline rolls
 

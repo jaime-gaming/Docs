@@ -10,7 +10,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
-import { PROJECTS } from "../scripts/registry.mjs";
+import { LANGUAGES, PROJECTS } from "../scripts/registry.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DOCS_DIR = path.join(ROOT, "content", "docs");
@@ -39,7 +39,13 @@ test("git no ignora ningún Markdown de contenido", () => {
       files.push(`content/docs/${project.slug}/${page.slug}.en.md`);
     }
   }
-  assert.equal(files.length, 74, "el registro debería dar 37 guías × 2 idiomas");
+  // Derivado del registro, no escrito a mano: añadir una guía no debe romper
+  // esta prueba, y si el registro y los idiomas no cuadran, sí debe.
+  const esperados = PROJECTS.reduce(
+    (total, project) => total + project.pages.length * LANGUAGES.length,
+    0
+  );
+  assert.equal(files.length, esperados, "debe haber un archivo por guía e idioma");
 
   let ignored = "";
   try {

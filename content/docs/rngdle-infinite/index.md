@@ -20,6 +20,8 @@ Cada número que sale tiene patrones: parejas, escaleras, sietes de la suerte y 
 
 No hay medidor de energía, ni límite diario, ni cuenta. **Se juega todo lo que se quiera** en cuanto terminan la revelación y el enfriamiento.
 
+Los tempos de referencia son **45 segundos de revelación** y **60 de enfriamiento**. Son duraciones reales del juego, no aproximaciones: hay especificaciones automáticas que se ejecutan despacio a propósito para respetarlas.
+
 ## Formas de crecer
 
 | Sistema | Qué hace |
@@ -76,3 +78,4 @@ El archivo `AGENTS.md` del repositorio tiene el mapa del proyecto y las convenci
 - [Sistemas y progresión](/rngdle-infinite/systems/) — compañeros, skills, tareas, rebirth, prestige y rollback.
 - [Partida y sincronización](/rngdle-infinite/save/) — dónde se guarda y cómo se enlaza otro dispositivo.
 - [Preguntas frecuentes](/rngdle-infinite/faq/) — dudas habituales y créditos.
+- [Desarrollo](/rngdle-infinite/dev/) — cómo está construido, mapa del repositorio, comandos y reglas de diseño.

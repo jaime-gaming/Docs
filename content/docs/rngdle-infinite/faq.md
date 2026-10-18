@@ -45,6 +45,34 @@ Dos cosas a la vez: **media colección** de insignias y **30 millones de EP gana
 
 Aparece **después de tres prestigios** y se puede repetir.
 
+### ¿Cuántos números puedo guardar?
+
+**Tres.** Ese es el tope de marcadores y aparece en el chip **«Bookmarks (n/3)»** de la interfaz. Lo importante no es el tope sino cómo se cobra: **cada número guardado paga los multiplicadores de skills de cartera**, no solo el último.
+
+### ¿Las firmas de compañero ocupan hueco?
+
+**Sí.** Una firma ocupa un hueco del rack como cualquier otro círculo. No van aparte ni son gratis: equipar una firma es gastar un hueco.
+
+### ¿El rollback está bloqueado hasta el tercer prestigio?
+
+Está **oculto, que no es lo mismo que deshabilitado**: antes de los tres prestigios no se muestra. Cuando aparece, **arranca desde 0 EP** (sin bonificación inicial) y **se puede repetir**.
+
+### ¿Trail y Drift cambian mi tirada?
+
+Son **las dos únicas excepciones** a la regla de que los compañeros no tocan la tirada, y lo hacen de una forma acotada: **usan su propia muestra aleatoria**. No modifican tu número ni su puntuación; generan un resultado adicional aparte.
+
+### ¿Los ajustes de presentación afectan a lo que gano?
+
+**Nunca.** No cambian probabilidades, EP, precios ni tiempos. Son cosméticos por definición.
+
+### ¿Mi partida pasa por un servidor al enlazar dispositivos?
+
+**No.** En el alojamiento estático el enlace va por **PeerJS sobre WebRTC** y el broker público **solo hace el handshake**: la partida viaja de dispositivo a dispositivo y nunca pasa por él. Los detalles están en [Partida y sincronización](/rngdle-infinite/save/).
+
+### ¿Puedo modificar el juego o contribuir?
+
+Sí. La guía de [Desarrollo](/rngdle-infinite/dev/) tiene el mapa del repositorio, los comandos y las pruebas. Antes de tocar nada conviene leer sus **reglas que no se negocian**: la tirada honesta, que los compañeros no cambian la tirada, el tope de 3 marcadores y que los ajustes de presentación no tocan la economía.
+
 ## Créditos
 
 - **[RNGdle](https://www.rngdle.com/)** de Cam / sparrowpatch — la idea original.

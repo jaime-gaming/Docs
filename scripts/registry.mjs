@@ -117,6 +117,7 @@ export const PROJECTS = [
       { slug: "systems", icon: "sparkles", title: { es: "Sistemas y progresión", en: "Systems & progression" } },
       { slug: "save", icon: "save", title: { es: "Partida y sincronización", en: "Save & sync" } },
       { slug: "faq", icon: "help", title: { es: "Preguntas frecuentes", en: "FAQ" } },
+      { slug: "dev", icon: "terminal", title: { es: "Desarrollo", en: "Development" } },
     ],
   },
   {
