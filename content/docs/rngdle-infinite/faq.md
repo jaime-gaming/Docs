@@ -1,0 +1,76 @@
+---
+description: "Dudas habituales sobre RNGdle Infinite, límites del juego, comportamiento offline y créditos."
+updated: "2026-10-18"
+---
+
+## Preguntas frecuentes
+
+### ¿Hay límite de tiradas?
+
+**No.** Tira tan a menudo como quieras una vez que terminan la revelación y el enfriamiento. No hay medidor de energía ni límite diario.
+
+### ¿Puedo elegir un número concreto?
+
+**No.** No hay semilla, ni editor, ni valores predefinidos. El juego consiste en reaccionar a lo que sale.
+
+### ¿Un compañero hace que mis tiradas tengan más suerte?
+
+**No.** Los compañeros multiplican el EP que ganas. Tu número y sus insignias siguen siendo los mismos.
+
+### ¿Cuentan las tiradas sin conexión?
+
+**Sí.** Pagan su EP y aparecen en tu historial. La única diferencia es que **las skills solo se cargan mientras estás en línea**.
+
+### ¿Es el RNGdle oficial?
+
+**No.** Es una recreación independiente. Los créditos del original están más abajo.
+
+### ¿Dónde se guarda mi partida?
+
+En el `localStorage` de tu navegador. No hay cuenta ni servidor. Cambiar de navegador, usar navegación privada o limpiar los datos del sitio la borra. Los detalles están en [Partida y sincronización](/rngdle-infinite/save/).
+
+### ¿Puedo jugar en dos dispositivos a la vez?
+
+Sí, con **Ajustes → Enlace de dispositivo**. El dispositivo que crea el enlace es el principal y es el que ejecuta tiradas y compras, así que las dos pantallas no se pelean por la misma tirada. **Cualquiera con el enlace puede jugar con tu cuenta.**
+
+### ¿Las skills cambian qué insignias salen?
+
+**Nunca.** Las skills afectan a lo que ganas o a cuánto esperas, no a cómo se puntúa un número.
+
+### ¿Qué hace falta para el prestige?
+
+Dos cosas a la vez: **media colección** de insignias y **30 millones de EP ganados en el ciclo**.
+
+### ¿Y el rollback?
+
+Aparece **después de tres prestigios** y se puede repetir.
+
+## Créditos
+
+- **[RNGdle](https://www.rngdle.com/)** de Cam / sparrowpatch — la idea original.
+- **[RNGdle Tools](https://rng.cubityfir.st/)** y su catálogo de insignias — la fuente de los datos de puntuación y de rango.
+- Ilustraciones de las insignias por **[Twemoji](https://github.com/jdecked/twemoji)**, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- Tipografías: **Inter** y **Space Mono** (SIL Open Font License). Iconos: **[Lucide](https://lucide.dev/)**.
+
+> [!NOTE]
+> RNGdle Infinite es una implementación independiente. No está afiliado, patrocinado ni respaldado por los autores del RNGdle original ni por RNGdle Tools.
+
+## Ejecutarlo en local
+
+```sh
+npm install
+npm run dev     # http://localhost:5173
+npm test        # suite de Playwright (necesita un binario de Chromium)
+npm run build   # build de producción
+```
+
+`AGENTS.md` en el repositorio tiene el mapa del proyecto y las convenciones para quienes contribuyen y para los agentes de código.
+
+## Informar de un problema
+
+El juego se publica desde el repositorio [`jaime-gaming/RNGdle-Infinite`](https://github.com/jaime-gaming/RNGdle-Infinite). Para un fallo concreto, una issue con estos datos ayuda a reproducirlo:
+
+- Número que salió y qué esperabas que puntuara.
+- Compañero y skills activos en ese momento.
+- Navegador y dispositivo.
+- Si venías de una tirada offline o de un enlace entre dispositivos.

@@ -1,0 +1,88 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    name: Build y pruebas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Generar el sitio
+        run: npm run build
+
+      - name: Pruebas
+        run: npm test
+
+      # Las páginas generadas no se versionan: se comprueba que el build es
+      # reproducible y que el payload de Pages queda completo.
+      - name: Preparar el payload de Pages
+        run: node scripts/stage_site.mjs
+
+      - name: Comprobar el payload
+        run: |
+          test -f _site/index.html
+          test -f _site/404.html
+          test -f _site/sitemap.xml
+          test -f _site/assets/css/style.css
+          test -f _site/assets/img/icons.svg
+          test -f _site/assets/data/search-index.json
+          test ! -e _site/node_modules
+          echo "payload correcto: $(find _site -name index.html | wc -l) páginas"
+
+  deploy:
+    name: Publicar en GitHub Pages
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: checks
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Generar y preparar el sitio
+        run: npm run stage
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir el artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Desplegar
+        id: deployment
+        uses: actions/deploy-pages@v4
