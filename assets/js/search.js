@@ -91,13 +91,38 @@
     return score;
   }
 
+  /**
+   * Variantes con acento de cada letra, para que el resaltado sea tan tolerante
+   * como la propia búsqueda: los términos llegan normalizados («instalacion»)
+   * pero el texto mostrado conserva los acentos («Instalación»).
+   */
+  const ACCENT_FAMILIES = {
+    a: "aáàäâãå", e: "eéèëêě", i: "iíìïî", o: "oóòöôõ", u: "uúùüûů",
+    c: "cçčć", n: "nñň", s: "sšś", z: "zžźż", y: "yýÿ",
+    r: "rř", d: "dď", t: "tť", l: "lľł", g: "gğ", k: "kķ",
+  };
+
+  /** Los caracteres que escapeHtml transforma hay que buscarlos como entidad. */
+  const HTML_ESCAPED = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+
+  function accentPattern(term) {
+    return term
+      .split("")
+      .map((char) => {
+        if (HTML_ESCAPED[char]) return escapeRegExp(HTML_ESCAPED[char]);
+        const family = ACCENT_FAMILIES[char];
+        return family ? `[${family}]` : escapeRegExp(char);
+      })
+      .join("");
+  }
+
   function highlight(text, terms) {
     if (!text) return "";
     let html = escapeHtml(text);
     for (const term of terms) {
       if (!term) continue;
       // Resaltar sobre el texto escapado con una comparación sin acentos.
-      const pattern = new RegExp(`(${escapeRegExp(escapeHtml(term))})`, "gi");
+      const pattern = new RegExp(`(${accentPattern(term)})`, "gi");
       html = html.replace(pattern, "<mark>$1</mark>");
     }
     return html;

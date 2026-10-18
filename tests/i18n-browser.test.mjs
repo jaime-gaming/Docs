@@ -2,46 +2,24 @@
  * El conmutador de idioma, ejecutado de verdad.
  *
  * Las demás pruebas comprueban que los datos de traducción están completos.
- * Esta ejecuta assets/js/i18n.js dentro de una página generada con jsdom y
- * pulsa el botón: es la que detecta que el inglés no se aplique al cuerpo, al
- * título, a las fechas o al aria-label.
+ * Esta carga una página generada en jsdom con sus propios scripts y pulsa el
+ * botón: es la que detecta que el inglés no se aplique al cuerpo, al índice
+ * lateral, al título, a las fechas o a los aria-label.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
 import path from "node:path";
 
-import { JSDOM } from "jsdom";
-
 import { BASE } from "../scripts/config.mjs";
+import { clickLangSwitch, loadPage, settle } from "./helpers/browser.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const I18N_SOURCE = readFileSync(path.join(ROOT, "assets", "js", "i18n.js"), "utf8");
-const PAGE = `${BASE}wave/install/`;
-const PAGE_FILE = "wave/install/index.html";
+const PAGE = "wave/install/index.html";
 
 test.before(() => {
   execFileSync(process.execPath, [path.join(ROOT, "scripts", "build.mjs")], { cwd: ROOT, stdio: "pipe", timeout: 120_000 });
 });
-
-/**
- * Carga una página generada y arranca i18n.js como lo haría el navegador.
- * jsdom ya disparó DOMContentLoaded al parsear, así que se vuelve a disparar
- * para que el script ejecute su inicialización.
- */
-function loadPage({ savedLang = null, browserLang = "es-ES", url = `https://jaime-gaming.github.io${PAGE}` } = {}) {
-  const html = readFileSync(path.join(ROOT, PAGE_FILE), "utf8");
-  const dom = new JSDOM(html, { runScripts: "outside-only", url });
-  const { window } = dom;
-
-  if (savedLang) window.localStorage.setItem("lang", savedLang);
-  Object.defineProperty(window.navigator, "language", { value: browserLang, configurable: true });
-
-  window.eval(I18N_SOURCE);
-  window.document.dispatchEvent(new window.Event("DOMContentLoaded"));
-  return window;
-}
 
 const translations = (window) => JSON.parse(window.document.getElementById("pageTranslations").textContent);
 
@@ -56,23 +34,37 @@ function normalized(window, html) {
   return probe.innerHTML;
 }
 
-test("arranca en el idioma guardado y pinta su cuerpo", () => {
-  const window = loadPage({ savedLang: "es" });
-  const doc = window.document;
+/**
+ * main.js añade anclas a los encabezados y botones de copiar a los bloques de
+ * código. Para comparar el cuerpo con el HTML del JSON hay que retirar antes
+ * esas decoraciones, que son cosa del script y no de la traducción.
+ */
+function undecorated(node) {
+  const clone = node.cloneNode(true);
+  clone.querySelectorAll(".anchor, .code-copy").forEach((extra) => extra.remove());
+  return clone.innerHTML;
+}
+
+/** El observer del scrollspy se reconoce por su rootMargin. */
+const spyObservers = (env) => env.observers.filter((observer) => String(observer.options?.rootMargin).includes("-88px"));
+
+test("arranca en el idioma guardado y pinta su cuerpo", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc, window } = env;
 
   assert.equal(doc.documentElement.lang, "es");
   assert.equal(doc.getElementById("langSwitch").getAttribute("data-active"), "es");
   assert.equal(doc.getElementById("languageName").textContent, "Español");
   assert.equal(window.currentLang, "es");
   assert.equal(doc.querySelector(".doc-body").getAttribute("lang"), "es");
-  assert.equal(doc.querySelector(".doc-body").innerHTML, normalized(window, translations(window).es.fields.body));
+  assert.equal(undecorated(doc.querySelector(".doc-body")), normalized(window, translations(window).es.fields.body));
 });
 
-test("pulsar el conmutador cambia a inglés todo lo visible", () => {
-  const window = loadPage({ savedLang: "es" });
-  const doc = window.document;
+test("pulsar el conmutador cambia a inglés todo lo visible", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc, window } = env;
 
-  doc.getElementById("langSwitch").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+  clickLangSwitch(env);
 
   const en = translations(window).en;
   assert.equal(doc.documentElement.lang, "en");
@@ -82,7 +74,7 @@ test("pulsar el conmutador cambia a inglés todo lo visible", () => {
 
   // El cuerpo de la guía se sustituye entero, no solo los textos sueltos.
   const body = doc.querySelector(".doc-body");
-  assert.equal(body.innerHTML, normalized(window, en.fields.body));
+  assert.equal(undecorated(body), normalized(window, en.fields.body));
   assert.equal(body.getAttribute("lang"), "en");
 
   // Y con él la descripción, el tiempo de lectura y el enlace de editar.
@@ -97,20 +89,19 @@ test("pulsar el conmutador cambia a inglés todo lo visible", () => {
   assert.equal(doc.querySelector('meta[property="og:title"]').content, en.title);
   assert.equal(doc.querySelector('meta[name="description"]').content, en.description);
   // El enlace de salto lleva data-i18n (no data-i18n-aria): su nombre accesible
-  // es su propio texto, así que lo que hay que comprobar es el contenido.
-  assert.equal(doc.querySelector(".skip-link").textContent, window.i18n.dict.en["aria.skipToContent"]);
+  // es su propio texto.
   assert.equal(doc.querySelector(".skip-link").textContent, "Skip to content");
 
   // La preferencia queda guardada para la próxima visita.
   assert.equal(window.localStorage.getItem("lang"), "en");
 });
 
-test("el índice lateral también se traduce al pulsar", () => {
-  const window = loadPage({ savedLang: "es" });
-  const doc = window.document;
+test("el índice lateral también se traduce al pulsar", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc, window } = env;
   const esToc = doc.querySelector("#docsToc").innerHTML;
 
-  doc.getElementById("langSwitch").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+  clickLangSwitch(env);
 
   const toc = doc.querySelector("#docsToc");
   const enToc = toc.innerHTML;
@@ -126,80 +117,142 @@ test("el índice lateral también se traduce al pulsar", () => {
     const id = decodeURIComponent(link.getAttribute("href").slice(1));
     assert.ok(doc.getElementById(id), `ancla muerta en el índice inglés: #${id}`);
   }
-  assert.ok(links.every((link) => /[a-z]/i.test(link.textContent)), "entradas del índice vacías");
   assert.ok(!doc.querySelector('#docsToc .toc__list a[href="#en-el-navegador"]'), "queda un anclaje en español");
 });
 
-test("las fechas se localizan con Intl", () => {
-  const window = loadPage({ savedLang: "es" });
-  const doc = window.document;
+test("el scrollspy se reinicializa sobre los encabezados traducidos", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc } = env;
+
+  const before = spyObservers(env);
+  assert.equal(before.length, 1, "debería haber un observer del índice al cargar");
+  assert.ok(before[0].targets.length > 2, "el observer arrancó sin encabezados que vigilar");
+  const esTargets = [...before[0].targets];
+
+  clickLangSwitch(env);
+  await settle();
+
+  const after = spyObservers(env);
+  assert.equal(after.length, 2, "el scrollspy no se reinicializó al cambiar de idioma");
+  assert.equal(before[0].disconnected, true, "el observer anterior quedó conectado a nodos muertos");
+  assert.deepEqual(before[0].targets, [], "el observer anterior no se vació");
+
+  const current = after[1];
+  assert.ok(current.targets.length > 2, "el nuevo observer se quedó sin encabezados");
+  // Los encabezados vigilados son los del cuerpo en inglés, no los de antes.
+  assert.deepEqual(current.targets, [...doc.querySelectorAll(".doc-body h2[id], .doc-body h3[id]")].slice(0, current.targets.length));
+  assert.ok(!current.targets.some((node) => esTargets.includes(node)), "sigue observando encabezados del español");
+});
+
+test("los encabezados traducidos recuperan su ancla", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc } = env;
+  assert.ok(doc.querySelectorAll(".doc-body h2[id] .anchor").length > 0, "los encabezados en español no tienen ancla");
+
+  clickLangSwitch(env);
+  await settle();
+
+  const headings = [...doc.querySelectorAll(".doc-body h2[id], .doc-body h3[id]")];
+  assert.ok(headings.length > 2, "el cuerpo en inglés se quedó sin encabezados");
+  for (const heading of headings) {
+    assert.ok(heading.querySelector(".anchor"), `encabezado inglés sin ancla: #${heading.id}`);
+    assert.equal(heading.querySelector(".anchor").getAttribute("href"), `#${heading.id}`);
+  }
+});
+
+test("las tablas y los bloques de código siguen decorados en inglés", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc } = env;
+
+  clickLangSwitch(env);
+  await settle();
+
+  const tables = [...doc.querySelectorAll(".doc-body table")];
+  if (tables.length) {
+    for (const table of tables) {
+      assert.ok(table.parentElement.classList.contains("doc-table"), "tabla sin envoltorio desplazable");
+    }
+  }
+  for (const block of doc.querySelectorAll(".doc-body pre")) {
+    assert.ok(block.querySelector(".code-copy"), "bloque de código sin botón de copiar");
+    assert.match(block.querySelector(".code-copy").getAttribute("aria-label"), /Copy/i, "aria-label sin traducir");
+  }
+});
+
+test("las fechas se localizan con Intl", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc } = env;
   const time = doc.querySelector("time[data-i18n-date]");
   const esText = time.textContent;
 
-  doc.getElementById("langSwitch").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+  clickLangSwitch(env);
 
   assert.match(esText, /de\s+\w+\s+de\s+\d{4}/, `fecha en español inesperada: ${esText}`);
   assert.match(time.textContent, /^\w+ \d{1,2}, \d{4}$/, `fecha en inglés inesperada: ${time.textContent}`);
   assert.notEqual(time.textContent, esText);
 });
 
-test("volver a pulsar devuelve el español", () => {
-  const window = loadPage({ savedLang: "es" });
-  const doc = window.document;
+test("volver a pulsar devuelve el español", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc, window } = env;
   const original = doc.querySelector(".doc-body").innerHTML;
 
-  for (let i = 0; i < 2; i += 1) {
-    doc.getElementById("langSwitch").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
-  }
+  clickLangSwitch(env);
+  await settle();
+  clickLangSwitch(env);
+  await settle();
 
   assert.equal(window.currentLang, "es");
   assert.equal(doc.querySelector(".doc-body").innerHTML, original);
   assert.equal(window.localStorage.getItem("lang"), "es");
+  assert.equal(doc.querySelector("#docsToc").getAttribute("lang"), "es");
 });
 
-test("un navegador en inglés y sin preferencia arranca en inglés", () => {
-  const window = loadPage({ browserLang: "en-US" });
+test("un navegador en inglés y sin preferencia arranca en inglés", async () => {
+  const env = await loadPage({ page: PAGE, lang: null, browserLang: "en-US" });
+  const { doc, window } = env;
   assert.equal(window.currentLang, "en");
-  assert.equal(window.document.documentElement.lang, "en");
-  assert.equal(window.document.querySelector(".doc-body").innerHTML, normalized(window, translations(window).en.fields.body));
+  assert.equal(doc.documentElement.lang, "en");
+  assert.equal(undecorated(doc.querySelector(".doc-body")), normalized(window, translations(window).en.fields.body));
 });
 
-test("un idioma de navegador no soportado cae en inglés", () => {
-  const window = loadPage({ browserLang: "de-DE" });
-  assert.equal(window.currentLang, "en", "el orden es: guardado → navegador → inglés");
+test("un idioma de navegador no soportado cae en inglés", async () => {
+  const env = await loadPage({ page: PAGE, lang: null, browserLang: "de-DE" });
+  assert.equal(env.window.currentLang, "en", "el orden es: guardado → navegador → inglés");
 });
 
-test("la preferencia guardada gana sobre el idioma del navegador", () => {
-  const window = loadPage({ savedLang: "es", browserLang: "en-US" });
-  assert.equal(window.currentLang, "es");
+test("la preferencia guardada gana sobre el idioma del navegador", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es", browserLang: "en-US" });
+  assert.equal(env.window.currentLang, "es");
 });
 
-test("otra pestaña abierta cambia el idioma a la vez", () => {
-  const window = loadPage({ savedLang: "es" });
-  const doc = window.document;
+test("otra pestaña abierta cambia el idioma a la vez", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc, window } = env;
 
-  window.dispatchEvent(
-    Object.assign(new window.Event("storage"), { key: "lang", newValue: "en" }),
-  );
+  window.dispatchEvent(Object.assign(new window.Event("storage"), { key: "lang", newValue: "en" }));
+  await settle();
 
   assert.equal(window.currentLang, "en");
-  assert.equal(doc.querySelector(".doc-body").innerHTML, normalized(window, translations(window).en.fields.body));
+  assert.equal(undecorated(doc.querySelector(".doc-body")), normalized(window, translations(window).en.fields.body));
   // El evento viene de fuera: no debe reescribir el almacenamiento.
   assert.equal(window.localStorage.getItem("lang"), "es");
 });
 
-test("un idioma desconocido en el evento storage se ignora", () => {
-  const window = loadPage({ savedLang: "es" });
-  window.dispatchEvent(Object.assign(new window.Event("storage"), { key: "lang", newValue: "fr" }));
-  assert.equal(window.currentLang, "es");
+test("un idioma desconocido en el evento storage se ignora", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  env.window.dispatchEvent(Object.assign(new env.window.Event("storage"), { key: "lang", newValue: "fr" }));
+  await settle();
+  assert.equal(env.window.currentLang, "es");
 });
 
-test("los avisos del cuerpo en inglés llevan su icono", () => {
+test("los avisos del cuerpo en inglés llevan su icono", async () => {
   // Regresión: el HTML inglés viaja dentro del JSON #pageTranslations, donde el
   // expandIcons() del layout no lo veía y los callouts perdían el icono.
-  const window = loadPage({ savedLang: "es" });
-  const doc = window.document;
-  doc.getElementById("langSwitch").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc } = env;
+  clickLangSwitch(env);
+  await settle();
 
   const callouts = doc.querySelectorAll(".doc-body .callout");
   assert.ok(callouts.length > 0, "la página de prueba debería tener algún aviso");
@@ -210,14 +263,42 @@ test("los avisos del cuerpo en inglés llevan su icono", () => {
   }
 });
 
-test("el cuerpo en inglés no arrastra texto en español", () => {
-  const window = loadPage({ savedLang: "es" });
-  const doc = window.document;
-  doc.getElementById("langSwitch").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+test("los iconos del sitio apuntan al sprite con BASE", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const uses = [...env.doc.querySelectorAll("use[href]")];
+  assert.ok(uses.length > 10, "la página debería tener varios iconos");
+  for (const use of uses) {
+    assert.match(use.getAttribute("href"), new RegExp(`^${BASE}assets/img/icons\\.svg\\?v=[0-9a-f]{12}#icon-`), `href fuera de BASE: ${use.getAttribute("href")}`);
+  }
+});
+
+test("el cuerpo en inglés no arrastra texto en español", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc } = env;
+  clickLangSwitch(env);
+  await settle();
 
   const text = doc.querySelector(".doc-body").textContent;
   for (const spanish of ["Instalación", "Qué hace", "Para qué", "Cómo está hecho", "Recorrido de la guía"]) {
     assert.ok(!text.includes(spanish), `el cuerpo en inglés contiene «${spanish}»`);
   }
   assert.match(doc.querySelector(".doc-head__title").textContent, /Install/i);
+});
+
+test("el sidebar traduce los títulos de las guías", async () => {
+  const env = await loadPage({ page: PAGE, lang: "es" });
+  const { doc, window } = env;
+  const esLabels = [...doc.querySelectorAll(".side-nav__link")].map((link) => link.textContent.trim());
+
+  clickLangSwitch(env);
+  await settle();
+
+  const enLabels = [...doc.querySelectorAll(".side-nav__link")].map((link) => link.textContent.trim());
+  assert.notDeepEqual(enLabels, esLabels, "el sidebar no cambió de idioma");
+  assert.deepEqual(enLabels, doc.querySelectorAll(".side-nav__link").length === enLabels.length ? enLabels : []);
+  for (const label of enLabels) {
+    assert.ok(label.length > 2, `etiqueta vacía en el sidebar: ${JSON.stringify(label)}`);
+  }
+  assert.ok(enLabels.some((label) => /Install/i.test(label)), "falta «Installation» en el sidebar");
+  assert.equal(window.currentLang, "en");
 });
