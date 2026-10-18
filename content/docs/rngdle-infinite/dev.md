@@ -95,8 +95,45 @@ El flujo tras un cambio que se publica:
 > [!CAUTION]
 > `docs/` es **contenido generado**. Editarlo a mano se pierde en la siguiente publicación, y commitear un `docs/` sin regenerar deja la versión pública desincronizada del código.
 
-## Datos y economía
+## Los datos de puntuación
 
-`src/data/` contiene los datos de juego ya preparados, y su propio `README.md` documenta la procedencia y la fuente fijada: las puntuaciones y los rangos vienen del catálogo de insignias de RNGdle Tools.
+Es la parte más delicada del proyecto y tiene su propio documento, `src/data/README.md`, que con 12,8 KB es **más extenso que el README principal**.
+
+Las puntuaciones y los rangos no se calculan: se **consultan** de unas tablas factuales descargadas de RNGdle Tools el **14 de septiembre de 2026** y fijadas al commit `8190166af9f259a9d3a0a941b2c9902bfbbe713f` de `CubityFirst/rngdle-ep-calculator`.
+
+| Archivo | Qué contiene |
+| --- | --- |
+| `public/data/ep-table.bin.gz` | El EP total factual de **cada entero de 0 a 1.000.000, ambos incluidos**. 2.099.404 bytes comprimidos y 4.000.004 descomprimidos: EP de 32 bits sin signo en little-endian, en el desplazamiento `4 × número` |
+| `public/data/badge-table.bin.gz` | La pertenencia factual a cada insignia. 395.276 bytes comprimidos y 29.125.233 descomprimidos: **233 filas de bitset ordenadas por insignia**, de 125.001 bytes cada una |
+| `src/data/badge-metadata.json` | Las 233 etiquetas, descripciones, emojis, valores de EP, familias y rarezas, en el orden de definición fijado aguas arriba |
+| `src/data/game-index.json` | Fuente y revisión, población, orden de filas, resúmenes y longitudes SHA-256 de ambas tablas, rutas de transporte versionadas, umbrales de nivel de tirada y recuento por nivel |
+| `src/data/diagram-hints.json` | Categorías de contribuidores observadas en casos de referencia |
+| `src/data/roll-samples.json` | Cincuenta resultados observados, **usados solo por las pruebas** |
+
+La pertenencia a una insignia se lee así, y los siete bits de relleno al final de cada fila se ignoran:
+
+```js
+bits[row * 125001 + (number >> 3)] & (1 << (number & 7))
+```
+
+> [!IMPORTANT]
+> Las probabilidades **no son estimaciones**. `matchingNumbers`, `probabilityPercent` y la `probability` formateada de cada insignia se derivan de los bitsets. Del mismo modo, los rangos en runtime se recalculan sobre la población completa de EP, no se copian de las muestras.
+
+### Por qué hay dos formatos de la misma tabla
+
+En `public/data/` conviven los `.bin.gz` y unos `.json` con un hash en el nombre. No son duplicados:
+
+- Los **`.json` son los que se sirven en runtime**. Los genera `npm run prepare:data` y son sobres de transporte con `{encoding: "gzip-base64", data: "…"}`.
+- Van en JSON ASCII a propósito: así un proxy de previsualización no puede reescribir el gzip ni el binario por el camino.
+- El nombre lleva el hash del contenido para que **una tabla vieja no pueda emparejarse con un manifiesto más nuevo**.
+- Los **`.bin.gz` siguen ahí para las pruebas offline y para poder reproducir** el proceso, pero la aplicación no los descarga.
+
+### Cambiar la revisión fijada
+
+El documento es explícito: si se cambia la revisión de origen hay que revisar **a la vez** los metadatos, el orden de filas y los umbrales de nivel de tirada. No se sustituye una tabla y ya. Las pruebas auditan cada puntuación legal, cada probabilidad de insignia, el recuento por nivel, los hashes y la concordancia con los cincuenta resultados de referencia.
+
+Y una regla más: **no se guarda ningún motor ejecutable aguas arriba en producción**.
+
+## Economía
 
 `npm run audit:economy` revisa dos cosas que conviene auditar juntas porque se influyen: los **precios** de la tienda y la **distribución de las tiradas**. Si cambias una insignia, un compañero o un precio, es el comando que dice si la economía sigue teniendo sentido.

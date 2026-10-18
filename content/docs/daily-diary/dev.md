@@ -92,6 +92,41 @@ npm run preview  # sirve el build localmente
 
 `docs/` incluye `.nojekyll` para que GitHub Pages sirva los assets tal cual. El despliegue completo está en [Instalación y uso](/daily-diary/install/).
 
+## Módulos que el diagrama del README no lista
+
+La estructura del README es acertada pero incompleta: faltan cuatro módulos de `src/utils/` que importan, y dos de ellos son de los más interesantes del proyecto.
+
+### `persist.js` — el almacén
+
+Su propia cabecera lo resume: **«escribir sin perder nada»**. Todo lo que se guarda en el cuaderno pasa por aquí, y la idea es que una escritura nunca debe llevarse por delante lo que la persona acaba de escribir.
+
+| Pieza | Qué hace |
+| --- | --- |
+| `writeRaw` | Escribe y **verifica lo escrito**, porque algunos navegadores fallan en silencio. Devuelve siempre un resultado y **nunca lanza** |
+| Cola en memoria | Si no cabe, guarda la escritura pendiente y avisa |
+| `retryPending` | Vuelve a intentarlo cuando el navegador respira: al volver a la pestaña, al cerrar un diálogo, cada pocos segundos |
+| `onSaveChange` | Los interesados pintan el aviso de «sin guardar» **solo cuando de verdad hay algo pendiente** |
+
+El módulo no sabe nada del diario: solo de cadenas y de claves. Esa separación es lo que permite probarlo sin interfaz.
+
+### `wellbeing.js` — el contenido de cada día
+
+Con 13,5 KB es el módulo que convierte las listas de `data/constants.js` en lo que se ve cada día, y lo hace **con reglas y sin ningún modelo**, igual que el resto del cuaderno. Exporta, entre otras:
+
+- `daySeed`, `getDailyWord`, `getDailyTip`, `getPersonalQuote`, `getWritingPrompt` — el contenido diario, determinista a partir de la fecha.
+- `getAgeProfile`, `getContextualAdvice`, `getGreeting` — el texto se adapta al perfil de edad y al contexto.
+- `calculateGoalStats`, `calculateEntryCompletion` — las cifras de metas y cuánto lleva escrito el día.
+- `detectCrisisRisk` y `normalizeForMatch` — detección de riesgo a partir del texto normalizado.
+- `generateThemeFaviconSvg`, `generateThemeFaviconDataUri` — el favicon se genera con el tema elegido.
+
+### `setupForm.js` — el perfil, leído sin sorpresas
+
+Lo comparten **el asistente de bienvenida y la página de Ajustes**. No toca el DOM: recibe lo que dice el formulario (nombre, edad, metas…) y devuelve el parche listo para `saveSetup`. Tenerlo aparte es lo que hace que los dos sitios no diverjan.
+
+### `transitions.js` — 273 bytes con un trabajo concreto
+
+Invalida los callbacks tardíos cuando una transición se cancela o se sustituye. `createTransitionGuard()` lleva un contador de generación: `begin()` devuelve una generación nueva y `cancel()` la incrementa, así que cualquier callback de la transición anterior sabe que ya no le toca pintar.
+
 ## Convenciones que conviene mantener
 
 - **Nada de red.** Ninguna fuente remota, ninguna API, ningún modelo. Si una función necesita algo de fuera, está rompiendo la promesa del proyecto.

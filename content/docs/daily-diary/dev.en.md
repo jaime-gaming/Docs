@@ -92,6 +92,41 @@ npm run preview  # serves the build locally
 
 `docs/` includes `.nojekyll` so GitHub Pages serves the assets as they are. The full deployment guide is in [Install & use](/daily-diary/install/).
 
+## Modules the README's diagram does not list
+
+The README's structure is accurate but incomplete: four modules under `src/utils/` are missing, and two of them are among the most interesting in the project.
+
+### `persist.js` — the store
+
+Its own header sums it up: **"write without losing anything"**. Everything saved in the notebook goes through here, and the idea is that a write must never run over what the person has just written.
+
+| Piece | What it does |
+| --- | --- |
+| `writeRaw` | Writes and **verifies what was written**, because some browsers fail silently. It always returns a result and **never throws** |
+| In-memory queue | If it does not fit, it keeps the pending write and warns |
+| `retryPending` | Retries when the browser breathes: on returning to the tab, on closing a dialog, every few seconds |
+| `onSaveChange` | Interested parties paint the "unsaved" warning **only when there really is something pending** |
+
+The module knows nothing about the diary: only strings and keys. That separation is what makes it testable without an interface.
+
+### `wellbeing.js` — each day's content
+
+At 13.5 KB it is the module that turns the lists in `data/constants.js` into what you see each day, and it does so **with rules and no model at all**, like the rest of the notebook. Among others it exports:
+
+- `daySeed`, `getDailyWord`, `getDailyTip`, `getPersonalQuote`, `getWritingPrompt` — the daily content, deterministic from the date.
+- `getAgeProfile`, `getContextualAdvice`, `getGreeting` — the text adapts to the age profile and the context.
+- `calculateGoalStats`, `calculateEntryCompletion` — the goal figures and how much of the day is written.
+- `detectCrisisRisk` and `normalizeForMatch` — risk detection from the normalized text.
+- `generateThemeFaviconSvg`, `generateThemeFaviconDataUri` — the favicon is generated from the chosen theme.
+
+### `setupForm.js` — the profile, read without surprises
+
+It is shared by **the welcome wizard and the Settings page**. It does not touch the DOM: it receives what the form says (name, age, goals…) and returns the patch ready for `saveSetup`. Keeping it apart is what stops the two places from diverging.
+
+### `transitions.js` — 273 bytes with one concrete job
+
+It invalidates late callbacks when a transition is cancelled or replaced. `createTransitionGuard()` keeps a generation counter: `begin()` returns a new generation and `cancel()` increments it, so any callback from the previous transition knows it is no longer its turn to paint.
+
 ## Conventions worth keeping
 
 - **No network.** No remote font, no API, no model. If a function needs something from outside, it is breaking the project's promise.
