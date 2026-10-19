@@ -91,14 +91,23 @@ CSS en línea, así el sitio no depende de recursos de otros repositorios.
 
 ## Despliegue
 
-GitHub Pages desde este repositorio, con el workflow `.github/workflows/build.yml`:
+GitHub Pages desde este repositorio, sirviendo la rama `gh-pages`, con el
+workflow `.github/workflows/build.yml`:
 
 - En cada pull request y push: `npm ci` → `npm run build` → `npm test` → comprobación del payload.
-- En `main`: además publica `_site/` con `actions/deploy-pages`.
+- En `main`: además genera `_site/` y lo publica en la rama `gh-pages` con git, sin acciones de terceros.
 
-Hay que activar **Settings → Pages → Source: GitHub Actions** una vez. `BASE`
-sale de `DOCS_BASE` (por defecto `/Docs/`), así que el mismo código sirve en un
-dominio propio cambiando esa variable de entorno.
+Hay que activar una vez **Settings → Pages → Build and deployment → Source:
+Deploy from a branch** y elegir la rama `gh-pages` con la carpeta `/ (root)`.
+
+El payload lleva un `.nojekyll` vacío a propósito. Pages procesa con Jekyll lo
+que sirve desde una rama, y Jekyll lee `{{…}}` como Liquid:
+`website/build/index.html` documenta la sustitución `{{CONTACT}}` de la web
+principal dentro de un `<code>`, y sin ese fichero aparecería vacía sin dar
+ningún error.
+
+`BASE` sale de `DOCS_BASE` (por defecto `/Docs/`), así que el mismo código sirve
+en un dominio propio cambiando esa variable de entorno.
 
 ## Licencia
 

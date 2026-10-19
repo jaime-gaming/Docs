@@ -19,7 +19,7 @@ const ROOT = path.resolve(__dirname, "..");
 const OUT = path.join(ROOT, "_site");
 
 /** Archivos generados de la raíz que Pages debe servir. */
-const ROOT_FILES = ["index.html", "404.html", "sitemap.xml", "robots.txt"];
+const ROOT_FILES = ["index.html", "404.html", "sitemap.xml", "robots.txt", ".nojekyll"];
 
 /** Directorios generados: los siete proyectos más el índice. */
 const ROOT_DIRS = [...PROJECTS.map((project) => project.slug), "projects", "status"];

@@ -64,7 +64,7 @@ test("git no ignora ningún Markdown de contenido", () => {
 });
 
 test("git sí ignora la salida generada", () => {
-  const generated = ["index.html", "404.html", "sitemap.xml", "_site/index.html", "projects/index.html", "status/index.html", "wave/index.html", "assets/data/search-index.json", "assets/img/icons.svg"];
+  const generated = ["index.html", "404.html", "sitemap.xml", ".nojekyll", "_site/index.html", "projects/index.html", "status/index.html", "wave/index.html", "assets/data/search-index.json", "assets/img/icons.svg"];
   let ignored = "";
   try {
     ignored = execFileSync("git", ["check-ignore", "--stdin"], {

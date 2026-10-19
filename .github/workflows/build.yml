@@ -44,6 +44,7 @@ jobs:
           test -f _site/index.html
           test -f _site/404.html
           test -f _site/sitemap.xml
+          test -f _site/.nojekyll
           test -f _site/assets/css/style.css
           test -f _site/assets/img/icons.svg
           test -f _site/assets/data/search-index.json
@@ -51,16 +52,12 @@ jobs:
           echo "payload correcto: $(find _site -name index.html | wc -l) páginas"
 
   deploy:
-    name: Publicar en GitHub Pages
+    name: Publicar en la rama gh-pages
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: checks
     runs-on: ubuntu-latest
     permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -69,20 +66,20 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Instalar dependencias
-        run: npm ci
-
       - name: Generar y preparar el sitio
         run: npm run stage
 
-      - name: Configurar Pages
-        uses: actions/configure-pages@v5
-
-      - name: Subir el artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-      - name: Desplegar
-        id: deployment
-        uses: actions/deploy-pages@v4
+      # Pages sirve la rama gh-pages (Settings → Pages → Deploy from a branch).
+      # La rama se reescribe entera en cada publicación: es salida generada y su
+      # historial no aporta nada. Solo git, sin acciones de terceros.
+      - name: Publicar en gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd _site
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Publicar ${GITHUB_SHA::7}"
+          git push -q --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages:gh-pages

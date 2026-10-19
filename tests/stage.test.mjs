@@ -79,6 +79,7 @@ test("el payload no tiene archivos sueltos fuera de lo esperado", () => {
     "404.html",
     "sitemap.xml",
     "robots.txt",
+    ".nojekyll",
     "assets",
     "projects",
     "status",

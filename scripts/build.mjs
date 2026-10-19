@@ -680,6 +680,11 @@ async function main() {
     writePage("404.html", build404()),
     writePage("sitemap.xml", buildSitemap(docs)),
     writePage("robots.txt", buildRobots()),
+    // Pages procesa con Jekyll lo que sirve desde una rama, y Jekyll lee {{…}}
+    // como Liquid. website/build/index.html documenta la sustitución {{CONTACT}}
+    // de la web principal dentro de un <code>: sin este fichero aparecería vacía
+    // y sin ningún error. Va vacío; su presencia es lo que cuenta.
+    writePage(".nojekyll", ""),
   ]);
 
   const index = buildSearchIndex(docs);

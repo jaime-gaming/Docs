@@ -11,6 +11,7 @@ node_modules/
 /404.html
 /sitemap.xml
 /robots.txt
+/.nojekyll
 /assets/img/icons.svg
 /assets/data/
 /projects/
