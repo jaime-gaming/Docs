@@ -93,6 +93,45 @@ test("las dos versiones de una página comparten fecha", () => {
   }
 });
 
+test("las dos versiones de una página tienen la misma estructura", () => {
+  // Compartir la fecha no basta. Una traducción puede llevar la fecha al día y
+  // dejarse por el camino un apartado, una tabla o un aviso, y ninguna otra
+  // prueba lo ve: cada idioma se comprueba contra sí mismo, nunca contra el otro.
+  // Se comparan los dos cuerpos rasgo a rasgo, fuera de los bloques de código,
+  // que es donde un "##" o una "|" no son estructura.
+  //
+  // Los títulos se cuentan, no se comparan: el texto sí difiere entre idiomas,
+  // y de hecho difiere también entre las dos versiones de un mismo apartado.
+  const rasgos = (body) => {
+    const limpio = body.replace(/```[\s\S]*?```/g, "");
+    const cuenta = (texto, patron) => (texto.match(patron) || []).length;
+    return {
+      "apartados ##": cuenta(limpio, /^## /gm),
+      "subapartados ###": cuenta(limpio, /^### /gm),
+      "subsubapartados ####": cuenta(limpio, /^#### /gm),
+      "tablas": cuenta(limpio, /^\|[-: |]+\|$/gm),
+      "avisos": cuenta(limpio, /^> \[!/gm),
+      "bloques de código": cuenta(body, /^```/gm) / 2,
+      "elementos de lista": cuenta(limpio, /^[-*] /gm),
+      "enlaces": cuenta(limpio, /\]\((?!#)/g),
+    };
+  };
+
+  for (const project of PROJECTS) {
+    for (const page of project.pages) {
+      const es = rasgos(load(project.slug, page.slug, "es").body);
+      const en = rasgos(load(project.slug, page.slug, "en").body);
+      for (const rasgo of Object.keys(es)) {
+        assert.equal(
+          en[rasgo],
+          es[rasgo],
+          `${project.slug}/${page.slug}: ${rasgo} — español ${es[rasgo]}, inglés ${en[rasgo]}`,
+        );
+      }
+    }
+  }
+});
+
 test("ninguna página se quedó en texto provisional", () => {
   const stubs = [];
   for (const project of PROJECTS) {
