@@ -81,6 +81,7 @@ test("el payload no tiene archivos sueltos fuera de lo esperado", () => {
     "robots.txt",
     "assets",
     "projects",
+    "status",
     ...PROJECTS.map((project) => project.slug),
   ]);
   const unexpected = readdirSync(SITE).filter((name) => !allowed.has(name));

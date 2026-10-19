@@ -22,7 +22,7 @@ const OUT = path.join(ROOT, "_site");
 const ROOT_FILES = ["index.html", "404.html", "sitemap.xml", "robots.txt"];
 
 /** Directorios generados: los siete proyectos más el índice. */
-const ROOT_DIRS = [...PROJECTS.map((project) => project.slug), "projects"];
+const ROOT_DIRS = [...PROJECTS.map((project) => project.slug), "projects", "status"];
 
 /** Todo lo que se sirve tal cual: estilos, scripts, sprite, datos y favicon. */
 const ASSET_DIRS = ["assets"];

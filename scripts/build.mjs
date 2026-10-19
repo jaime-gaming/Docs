@@ -30,6 +30,7 @@ const BUILD_DATE = new Date().toISOString().slice(0, 10);
 const GENERATED_TOP_LEVEL = new Set([
   ...PROJECTS.map((p) => p.slug),
   "projects",
+  "status",
 ]);
 const KEEP_TOP_LEVEL = new Set([
   "assets", "content", "scripts", "tests", "node_modules", ".git", ".github",
@@ -446,6 +447,57 @@ ${PROJECTS.map((project) => projectCard(project)).join("\n")}
   });
 }
 
+function buildStatus() {
+  // Misma página que /status/ en la web: el resumen se consulta en vivo al panel
+  // de incident.io y el iframe solo se carga si quien lee lo pide, porque es un
+  // tercero que puede usar sus propias cookies. La lógica vive en main.js.
+  const bodyHtml = `  <section class="section status-page">
+    <div class="section__head reveal">
+      <h1 class="section__title" data-i18n="status.title">Estado del servicio</h1>
+      <p class="section__sub" data-i18n="status.sub">Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.</p>
+    </div>
+    <div class="status-page__bar reveal">
+      <p class="status-page__note" data-i18n="status.note">Datos del panel oficial de estado</p>
+      <a class="btn btn--ghost" href="https://statuspage.incident.io/jaime-gaming" target="_blank" rel="noopener noreferrer" data-i18n="status.open">Abrir panel completo ↗</a>
+    </div>
+    <div class="status-summary reveal" id="statusSummary" data-state="loading" data-api="https://statuspage.incident.io/jaime-gaming/api/v2/summary.json" aria-live="polite" aria-busy="true">
+      <div class="status-summary__head">
+        <span class="status-summary__dot" aria-hidden="true"></span>
+        <div class="status-summary__copy">
+          <strong class="status-summary__title" id="statusOverall" data-i18n="status.loading">Consultando el estado…</strong>
+          <span class="status-summary__meta" id="statusUpdated"></span>
+        </div>
+      </div>
+      <ul class="status-components" id="statusComponents" aria-label="Componentes del servicio" data-i18n-aria="status.componentsAria"></ul>
+      <p class="status-summary__error" id="statusError" role="status" data-i18n="status.error" hidden>No se pudo consultar el estado en directo. Puedes abrir el panel completo.</p>
+    </div>
+    <section class="status-maintenance" id="statusMaintenance" aria-labelledby="statusMaintenanceTitle" hidden>
+      <h2 id="statusMaintenanceTitle" data-i18n="status.maintenanceTitle">Mantenimiento programado</h2>
+      <div id="statusMaintenanceBody"></div>
+    </section>
+    <div class="status-page__frame reveal" id="statusFrameWrap">
+      <div class="status-page__placeholder" id="statusFramePlaceholder">
+        <p data-i18n="status.frameNotice">El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.</p>
+        <button class="btn btn--ghost" id="loadStatusFrame" type="button" data-i18n="status.loadFrame">Cargar panel incrustado</button>
+      </div>
+    </div>
+    <p class="status-page__hint" data-i18n="status.hint">El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.</p>
+  </section>`;
+
+  return renderLayout({
+    title: DICT.es["status.title"],
+    description: DICT.es["status.sub"],
+    bodyHtml,
+    activePath: "/status/",
+    layout: "status",
+    translations: Object.fromEntries(LANGUAGES.map((lang) => [lang, {
+      title: DICT[lang]["status.title"],
+      description: DICT[lang]["status.sub"],
+      fields: {},
+    }])),
+  });
+}
+
 function build404() {
   const bodyHtml = `  <section class="section">
     <div class="section__head reveal" style="max-width:600px;margin-inline:auto;text-align:center;padding-block:60px">
@@ -538,7 +590,7 @@ function buildSearchIndex(docs) {
 }
 
 function buildSitemap(docs) {
-  const urls = ["/", "/projects/"];
+  const urls = ["/", "/projects/", "/status/"];
   for (const project of docs) {
     for (const page of project.pages) urls.push(pagePath(project.slug, page.slug));
   }
@@ -624,6 +676,7 @@ async function main() {
   await Promise.all([
     writePage("index.html", buildHome()),
     writePage("projects/index.html", buildProjectsIndex()),
+    writePage("status/index.html", buildStatus()),
     writePage("404.html", build404()),
     writePage("sitemap.xml", buildSitemap(docs)),
     writePage("robots.txt", buildRobots()),

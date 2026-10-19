@@ -191,10 +191,43 @@ ${expandIcons(shell)}
 </main>
 
 <footer class="footer">
-  <p>© <span id="year"></span> <span data-i18n="footer.rights">Jaime Gaming.</span> <span class="footer__note" data-i18n="footer.made">Documentación generada con Node y publicada en GitHub Pages.</span></p>
-  <div class="footer__actions">
-    <a class="footer__link" href="${main("/")}" data-i18n="footer.mainSite">Mi web</a>
-    <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop">${renderIcon("arrow")}</button>
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="${main("/")}" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer">${renderIcon("github")}</a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer">${renderIcon("youtube")}</a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer">${renderIcon("x")}</a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer">${renderIcon("discord")}</a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email">${renderIcon("mail")}</a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="${u("/")}"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="${u("/projects/")}"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="${main("/blog/")}"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="${main("/contact/")}"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="${main("/")}"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="${u("/status/")}"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="${main("/terms/")}" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="${main("/privacy/")}" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop">${renderIcon("arrow")}</button>
+    </div>
   </div>
 </footer>
 
