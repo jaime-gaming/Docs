@@ -689,3 +689,53 @@ test("las tipografías están autohospedadas y existen en disco", () => {
     );
   }
 });
+
+
+test("la portada hereda el hero de la web en vez de reimplementarlo", () => {
+  // Las reglas .hero* están copiadas byte a byte de la web. La portada llevaba
+  // encima .docs-hero__inner/__title/__subtitle con cifras parecidas pero no
+  // iguales —84px 64px contra 90px 80px, gap 64 contra 72,
+  // clamp(2.6rem, 6.2vw, 4.4rem) contra clamp(3rem, 6.8vw, 5rem)—: se veía casi
+  // igual y divergía en silencio con cada retoque, que es justo lo que pasó.
+  // Ahora el marcado usa las clases de la web y el CSS solo añade lo que la web
+  // no tiene.
+  const css = read("assets/css/style.css");
+  const usadas = new Set(
+    [...read("index.html").matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/))
+  );
+
+  for (const clase of ["hero", "hero__inner", "hero__content", "hero__title", "hero__subtitle", "hero__cta", "hero__visual"]) {
+    assert.ok(usadas.has(clase), `a la portada le falta la clase ${clase} de la web`);
+  }
+  for (const parte of ["inner", "title", "subtitle", "copy"]) {
+    assert.ok(!usadas.has(`docs-hero__${parte}`), `docs-hero__${parte} sigue tapando a hero__${parte}`);
+    assert.ok(!css.includes(`.docs-hero__${parte}`), `.docs-hero__${parte} duplica una regla de la web`);
+  }
+  assert.ok(!/^\.docs-hero \{/m.test(css), ".docs-hero vuelve a reescribir el relleno del hero");
+
+  // Lo que sí es propio de la documentación y debe seguir existiendo.
+  for (const parte of ["kicker", "meta", "cta"]) {
+    assert.ok(css.includes(`.docs-hero__${parte}`), `falta .docs-hero__${parte}`);
+  }
+});
+
+test("las tarjetas de proyecto llevan las cifras de la web", () => {
+  // .doc-card es la hermana de .project-card: mismo relleno, mismo radio, mismo
+  // alto mínimo, misma flecha en la esquina. Lo que cambia es el contenido —una
+  // caja de icono y una fila de enlaces en vez de forks y estrellas—, no el ritmo.
+  const css = read("assets/css/style.css");
+  const raiz = /^\.doc-card \{([^}]*)\}$/m.exec(css)?.[1];
+  assert.ok(raiz, "no encuentro la regla raíz de .doc-card");
+  for (const declaracion of ["gap: 14px", "min-height: 220px", "padding: 24px", "border-radius: 8px"]) {
+    assert.ok(raiz.includes(declaracion), `.doc-card debería llevar ${declaracion}, como .project-card`);
+  }
+  assert.match(css, /^\.doc-card__name \{ font: 500 1\.3rem var\(--font-display\)/m, "el nombre de la tarjeta no usa el tamaño de la web");
+  assert.match(css, /^\.doc-card__arrow \{ position: absolute; top: 20px; right: 20px/m, "la flecha no está donde la pone la web");
+});
+
+test("el theme-color es el de la web", () => {
+  // #10120f es el color que la web le pide a la barra del navegador. Aquí estaba
+  // --bg (#0d100d), que es otro tono: invisible dentro de la página y muy
+  // visible fuera, porque el marco cambia de color al entrar en la documentación.
+  assert.match(read("index.html"), /<meta name="theme-color" content="#10120f" \/>/);
+});

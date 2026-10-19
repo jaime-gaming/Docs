@@ -298,12 +298,12 @@ function totalPages() {
 
 function buildHome() {
   const hero = `  <section class="hero docs-hero">
-    <div class="docs-hero__inner">
-      <div class="docs-hero__copy">
+    <div class="hero__inner">
+      <div class="hero__content">
         <p class="docs-hero__kicker reveal" data-i18n="home.kicker">Documentación</p>
-        <h1 class="docs-hero__title reveal" data-i18n="home.title">Todos mis proyectos, <span class="hero__title-accent">documentados</span></h1>
-        <p class="docs-hero__subtitle reveal" data-i18n="home.subtitle">Un solo sitio con la documentación de todo lo que construyo.</p>
-        <div class="docs-hero__cta reveal">
+        <h1 class="hero__title reveal" data-i18n="home.title">Todos mis proyectos, <span class="hero__title-accent">documentados</span></h1>
+        <p class="hero__subtitle reveal" data-i18n="home.subtitle">Un solo sitio con la documentación de todo lo que construyo.</p>
+        <div class="hero__cta docs-hero__cta reveal">
           <a class="btn btn--primary" href="${u(pagePath(PROJECTS[0].slug, "index"))}">${renderIcon("book")}<span data-i18n="home.ctaPrimary">Empezar a leer</span></a>
           <a class="btn btn--ghost" href="${u("/projects/")}">${renderIcon("layers")}<span data-i18n="home.ctaSecondary">Ver todos los proyectos</span></a>
         </div>

@@ -115,7 +115,7 @@ ${bodyHtml}
 <title>${fullTitle}</title>
 <meta name="description" content="${safeDescription}" />
 <meta name="author" content="${SITE_NAME}" />
-<meta name="theme-color" content="#0d100d" />
+<meta name="theme-color" content="#10120f" />
 <meta name="robots" content="${noindex ? "noindex, follow" : "index, follow"}" />
 <meta name="docs:base" content="${BASE}" />
 <meta name="docs:project" content="${projectSlug}" />

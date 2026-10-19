@@ -585,13 +585,14 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
 .source-note a { color: var(--accent); }
 
 /* --- Portada de la documentación --- */
-.docs-hero { padding-block: 84px 64px; }
-.docs-hero__inner { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(250px, .75fr); align-items: center; gap: 64px; }
+/* La portada lleva class="hero docs-hero" y usa hero__inner / hero__content /
+   hero__title / hero__subtitle / hero__cta: el ritmo, las columnas y la tipografía
+   vienen de las reglas .hero* de la web, que están copiadas tal cual más arriba.
+   Aquí solo queda lo que la web no tiene —el kicker, la fila de metadatos y el
+   hueco sobre los botones— para que no haya dos fuentes de verdad que diverjan. */
 .docs-hero__kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; color: var(--accent); font: .64rem var(--font-mono); letter-spacing: .16em; text-transform: uppercase; }
 .docs-hero__kicker::after { content: ""; flex: 0 0 44px; height: 1px; background: var(--border); }
-.docs-hero__title { margin-bottom: 22px; font-size: clamp(2.6rem, 6.2vw, 4.4rem); letter-spacing: -.06em; }
-.docs-hero__subtitle { max-width: 560px; color: var(--text-dim); font-size: 1.02rem; }
-.docs-hero__cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.docs-hero__cta { margin-top: 30px; }
 .docs-hero__meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-faint); font: .66rem var(--font-mono); }
 .docs-hero__meta a { color: var(--accent); }
 
@@ -620,7 +621,7 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
 .group__count { color: var(--text-faint); font: .64rem var(--font-mono); }
 
 /* Tarjetas de proyecto */
-.doc-card { position: relative; display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 24px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); overflow: hidden; }
+.doc-card { position: relative; display: flex; flex-direction: column; gap: 14px; min-width: 0; min-height: 220px; padding: 24px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); overflow: hidden; }
 .doc-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(340px circle at var(--pointer-x, 50%) var(--pointer-y, 50%), color-mix(in srgb, var(--accent) 7%, transparent), transparent 62%); opacity: 0; }
 .doc-card:hover { border-color: var(--text-faint); }
 .doc-card:hover::after { opacity: 1; }
@@ -628,13 +629,13 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
 .doc-card__icon { display: grid; flex: 0 0 40px; place-items: center; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-raised); color: var(--accent); }
 .doc-card__icon svg { width: 19px; height: 19px; }
 .doc-card__heading { display: grid; gap: 3px; min-width: 0; }
-.doc-card__name { font: 500 1.12rem var(--font-display); letter-spacing: -.03em; overflow-wrap: anywhere; }
+.doc-card__name { font: 500 1.3rem var(--font-display); letter-spacing: -.03em; overflow-wrap: anywhere; }
 .doc-card__repo { color: var(--text-faint); font: .64rem var(--font-mono); overflow-wrap: anywhere; }
-.doc-card__arrow { position: absolute; top: 22px; right: 22px; color: var(--accent); }
+.doc-card__arrow { position: absolute; top: 20px; right: 20px; color: var(--accent); }
 .doc-card__arrow svg { width: 15px; height: 15px; }
 .doc-card__tagline { margin: 0; color: var(--text); font-size: .88rem; }
 .doc-card__summary { margin: 0; color: var(--text-dim); font-size: .82rem; }
-.doc-card__meta { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border); color: var(--text-faint); font: .68rem var(--font-mono); }
+.doc-card__meta { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); color: var(--text-faint); font: .68rem var(--font-mono); }
 .doc-card__meta > span { display: inline-flex; align-items: center; gap: 6px; }
 .doc-card__meta svg { width: 12px; height: 12px; }
 .doc-card__links { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -737,7 +738,6 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
   .docs__toc .toc__progress { display: none; }
 }
 @media (max-width: 940px) {
-  .docs-hero__inner { grid-template-columns: 1fr; gap: 40px; }
   .stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 0; }
   .stat-strip .stat:nth-child(3) { padding-left: 0; border-left: 0; }
 }
@@ -755,7 +755,6 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
   .search-trigger { padding: 0 11px; }
   .nav__github { display: none; }
   .docs { padding-block: 28px 56px; }
-  .docs-hero { padding-block: 52px 40px; }
   .pager { grid-template-columns: minmax(0, 1fr); }
   .pager__link--next { text-align: left; justify-items: start; }
 }
