@@ -68,11 +68,11 @@ This guide summarizes and orders things. This is what the repository holds, with
 | [`render.yaml`](https://github.com/jaime-gaming/daily-diary/blob/main/render.yaml) | 299 B | The Render deployment |
 
 > [!NOTE]
-> There is no `docs/` folder: the README is all the documentation the project has. The modules its structure diagram does not list are described in [Development](/daily-diary/dev/).
+> There is no `docs/` folder: the README is all the documentation the project has. The modules its structure diagram does not list are described in [Structure & development](/daily-diary/dev/).
 
 ## Guide tour
 
-- [Install & use](/daily-diary/install/) — running it locally, deploying it and the saving model.
+- [Install & run](/daily-diary/install/) — running it locally, deploying it and the saving model.
 - [The five areas](/daily-diary/areas/) — Today, Routine, Archive, Progress and Thoughts in detail.
 - [Data & privacy](/daily-diary/data/) — the `localStorage` keys, the entry format and backups.
 - [Structure & development](/daily-diary/dev/) — folders, modules and tests.

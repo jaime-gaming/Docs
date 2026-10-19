@@ -279,3 +279,29 @@ test("cada portada de proyecto enlaza todas sus demás páginas", () => {
   }
   assert.deepEqual(faltan, [], "páginas sin enlace desde su propia portada");
 });
+
+test("el texto de cada enlace interno coincide con el título del registro", () => {
+  // Si el enlace dice otra cosa, el lector no reconoce en el sidebar la página a
+  // la que acaba de llegar. Ocurrió en cinco sitios, incluido un index.md que
+  // llamaba «Arquitectura y seguridad» a la Referencia de tools.
+  const titulos = new Map();
+  for (const project of PROJECTS) {
+    for (const page of project.pages) titulos.set(`/${project.slug}/${page.slug}/`, page.title);
+  }
+
+  const malos = [];
+  for (const project of PROJECTS) {
+    for (const name of readdirSync(path.join(DOCS_DIR, project.slug))) {
+      if (!name.endsWith(".md")) continue;
+      const lang = name.endsWith(".en.md") ? "en" : "es";
+      const texto = readFileSync(path.join(DOCS_DIR, project.slug, name), "utf8");
+      for (const [, etiqueta, destino] of texto.matchAll(/\[([^\]]+)\]\((\/[a-z0-9.-]+\/[a-z-]+\/)\)/g)) {
+        const titulo = titulos.get(destino);
+        if (!titulo) continue; // destino no registrado: lo vigila otra prueba
+        const limpio = etiqueta.replace(/[*`]/g, "").trim();
+        if (limpio !== titulo[lang]) malos.push(`${project.slug}/${name} → ${destino} dice «${limpio}», el registro «${titulo[lang]}»`);
+      }
+    }
+  }
+  assert.deepEqual(malos, [], "textos de enlace que no coinciden con el título del registro");
+});

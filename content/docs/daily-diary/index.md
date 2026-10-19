@@ -68,7 +68,7 @@ Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamañ
 | [`render.yaml`](https://github.com/jaime-gaming/daily-diary/blob/main/render.yaml) | 299 B | El despliegue en Render |
 
 > [!NOTE]
-> No hay carpeta `docs/`: el README es toda la documentación del proyecto. Los módulos que su diagrama de estructura no lista están descritos en [Desarrollo](/daily-diary/dev/).
+> No hay carpeta `docs/`: el README es toda la documentación del proyecto. Los módulos que su diagrama de estructura no lista están descritos en [Estructura y desarrollo](/daily-diary/dev/).
 
 ## Recorrido de la guía
 

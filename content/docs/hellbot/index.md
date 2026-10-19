@@ -103,7 +103,8 @@ Esta guía resume y ordena. El repositorio trae además su propia documentación
 ## Recorrido de la guía
 
 - [Reglas del evento](/hellbot/rules/) — cronologías, hitos, dificultades, apuestas y final.
+- [Casos límite](/hellbot/edge-cases/) — los 32 casos raros, agrupados, y qué hace el bot en cada uno.
 - [Instalación y despliegue](/hellbot/install/) — Windows, consola, Docker, systemd y permisos de Discord.
 - [Comandos](/hellbot/commands/) — los 25 comandos, quién puede usarlos y qué hacen.
 - [Dashboard en vivo](/hellbot/dashboard/) — la web pública y la del operador.
-- [Arquitectura](/hellbot/architecture/) — módulos, invariantes y casos límite cubiertos por pruebas.
+- [Arquitectura](/hellbot/architecture/) — módulos, invariantes y el mapa de los 41.

@@ -90,7 +90,7 @@ npm run build    # generates docs/ (the production build)
 npm run preview  # serves the build locally
 ```
 
-`docs/` includes `.nojekyll` so GitHub Pages serves the assets as they are. The full deployment guide is in [Install & use](/daily-diary/install/).
+`docs/` includes `.nojekyll` so GitHub Pages serves the assets as they are. The full deployment guide is in [Install & run](/daily-diary/install/).
 
 ## Modules the README's diagram does not list
 

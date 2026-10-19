@@ -73,7 +73,7 @@ updated: "2026-10-18"
 
 Un solo `Agent`, un solo registro de herramientas y una sola implementación de aprobación y checkpoints. El CLI y el gateway compatible con OpenAI conducen el mismo bucle; el MCP local expone el registro; el puente entrante de ChatGPT compone ese mismo registro para llamadas directas y delega los turnos completos de agente o sesión a través del gateway existente. **No crea un segundo agente ni duplica la lógica de las herramientas.**
 
-Los detalles están en [Arquitectura y seguridad](/jaigent/reference/).
+Los detalles están en [Referencia de tools](/jaigent/reference/).
 
 ## Empezar en cuatro comandos
 

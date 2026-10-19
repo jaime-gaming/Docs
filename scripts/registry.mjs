@@ -88,6 +88,7 @@ export const PROJECTS = [
     pages: [
       { slug: "index", icon: "compass", title: { es: "Visión general", en: "Overview" } },
       { slug: "rules", icon: "scroll", title: { es: "Reglas del evento", en: "Event rules" } },
+      { slug: "edge-cases", icon: "alert", title: { es: "Casos límite", en: "Edge cases" } },
       { slug: "install", icon: "download", title: { es: "Instalación y despliegue", en: "Install & deploy" } },
       { slug: "commands", icon: "terminal", title: { es: "Comandos", en: "Commands" } },
       { slug: "dashboard", icon: "monitor", title: { es: "Dashboard en vivo", en: "Live dashboard" } },
