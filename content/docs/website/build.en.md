@@ -40,7 +40,7 @@ python3 scripts/preview_server.py
 
 There are two files and they cover different things.
 
-**`tests/site.test.mjs`** loads the **already generated** `index.html` into `jsdom`, injects `main.js` and `i18n.js`, and starts from the saved data in `assets/data/github.json`. It is twenty-four named tests, and what they cover groups like this:
+**`tests/site.test.mjs`** loads the **already generated** `index.html` into `jsdom`, injects `main.js` and `i18n.js`, and starts from the saved data in `assets/data/github.json`. It is **twenty-six named tests**, two of them parameterized inside a loop — the loader-states one runs for success, repo failure and readme failure, and the contact-copy one for success and for failure — so each pass **executes twenty-nine**. What they cover groups like this:
 
 | Block | What it verifies |
 | --- | --- |
@@ -54,6 +54,9 @@ There are two files and they cover different things.
 | Icons | That they resolve to a local SVG sprite, that brand icons are published Simple Icons paths and interface symbols come from Lucide, and that loaders show **no fake progress percentage** |
 | Internationalization | That the globe alternates the flag state with an accessible destination label and persists the choice, that README accessibility labels follow the chosen language **without changing the source document**, and that all generated page labels and metadata have both Spanish and English translations |
 | Security | That a page's localized payload **cannot close its own JSON `<script>` element** |
+| Home page | That badges and public activity are removed, that Pineapple is mentioned **exactly once** and that verified socials are included |
+| SEO | That the metadata and the sitemap identify Jaime Gaming and the public site |
+| Contact | That the page has real contact links **without JavaScript**, one h1, a canonical URL and a sitemap entry; and that the clipboard copy reports success or failure **without claiming what did not happen**, localizing mail subjects |
 | Content | That the blog translates the complete article, dates, image descriptions and SEO without duplicate posts, and that the Wave launch post links the verified release while preserving platform limitations |
 
 **`tests/preview.test.mjs`** does something else: it **starts the server for real**. It launches `scripts/preview_server.py` with `PORT=0`, discovers the assigned port by reading its output, and checks over real requests that the home page serves `cache-control: no-store`, that the versioned CSS answers as `text/css`, that project routes work and that 404s come out styled.

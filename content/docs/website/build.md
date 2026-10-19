@@ -40,7 +40,7 @@ python3 scripts/preview_server.py
 
 Son dos archivos y cubren cosas distintas.
 
-**`tests/site.test.mjs`** carga el `index.html` **ya generado** en `jsdom`, le inyecta `main.js` e `i18n.js` y parte de los datos guardados en `assets/data/github.json`. Son veinticuatro pruebas con nombre, y lo que cubren se agrupa así:
+**`tests/site.test.mjs`** carga el `index.html` **ya generado** en `jsdom`, le inyecta `main.js` e `i18n.js` y parte de los datos guardados en `assets/data/github.json`. Son **veintiséis pruebas con nombre**, dos de ellas parametrizadas dentro de un bucle —la de los estados del cargador corre para éxito, fallo de repositorio y fallo de README, y la de la copia de contacto para éxito y para fallo—, de modo que cada pasada **ejecuta veintinueve**. Lo que cubren se agrupa así:
 
 | Bloque | Qué verifica |
 | --- | --- |
@@ -54,6 +54,9 @@ Son dos archivos y cubren cosas distintas.
 | Iconos | Que resuelven a un sprite SVG local, que los de marca son rutas publicadas de Simple Icons y los de interfaz vienen de Lucide, y que los cargadores **no enseñan porcentajes de progreso falsos** |
 | Internacionalización | Que el globo alterna el estado de la bandera con una etiqueta de destino accesible y persiste la elección, que las etiquetas de accesibilidad del README siguen el idioma **sin modificar el documento original**, y que todas las etiquetas y metadatos generados tienen traducción en los dos idiomas |
 | Seguridad | Que el payload localizado de una página **no puede cerrar su propio elemento `<script>` de JSON** |
+| Portada | Que se retiran las insignias y la actividad pública, que Pineapple se menciona **una sola vez** y que se incluyen las redes verificadas |
+| SEO | Que los metadatos y el sitemap identifican a Jaime Gaming y el sitio público |
+| Contacto | Que la página tiene enlaces de contacto reales **sin JavaScript**, un solo h1, URL canónica y entrada en el sitemap; y que la copia al portapapeles informa de éxito o de fallo **sin fingir lo que no ocurrió**, localizando los asuntos del correo |
 | Contenido | Que el blog traduce el artículo completo, las fechas, las descripciones de imagen y el SEO sin duplicar posts, y que el post de lanzamiento de Wave enlaza la release verificada conservando las limitaciones de plataforma |
 
 **`tests/preview.test.mjs`** hace otra cosa: **arranca el servidor de verdad**. Lanza `scripts/preview_server.py` con `PORT=0`, descubre el puerto asignado leyendo su salida y comprueba sobre peticiones reales que la portada sirve `cache-control: no-store`, que el CSS versionado responde como `text/css`, que las rutas de proyecto funcionan y que los 404 salen con estilo.

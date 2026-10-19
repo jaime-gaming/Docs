@@ -110,7 +110,7 @@ Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamañ
 | [`assets/js/main.js`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/js/main.js) | 69 KB | La lógica de la portada: tarjetas, calendario de contribuciones, revelado al hacer scroll y el enrutado |
 | [`assets/data/github.json`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/data/github.json) | 54 KB | La instantánea commiteada de los repositorios |
 | [`assets/data/contributions.json`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/data/contributions.json) | 53 KB | La instantánea commiteada del calendario de contribuciones |
-| [`tests/site.test.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/tests/site.test.mjs) | 37 KB | Las 24 pruebas del sitio |
+| [`tests/site.test.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/tests/site.test.mjs) | 37 KB | Las 29 pruebas del sitio (26 declaradas, dos de ellas parametrizadas en bucle) |
 | [`assets/js/i18n.js`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/js/i18n.js) | 30 KB | El conmutador ES ↔ EN y las traducciones |
 | [`assets/css/style.css`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/css/style.css) | 28 KB | **La hoja de la que está clonada la estética de esta documentación** |
 | [`index.html`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/index.html) | 24 KB | La portada |
