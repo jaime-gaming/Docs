@@ -261,3 +261,21 @@ test("las vallas de código están cerradas", () => {
     }
   }
 });
+
+test("cada portada de proyecto enlaza todas sus demás páginas", () => {
+  // Al añadir /wave/dev/ y /jaigent/security/ las portadas se quedaron sin
+  // enlazarlas: el sidebar las mostraba, pero el recorrido de la guía no, que
+  // es por donde se lee una documentación seguida.
+  const faltan = [];
+  for (const project of PROJECTS) {
+    for (const lang of LANGUAGES) {
+      const file = lang === "es" ? "index.md" : "index.en.md";
+      const texto = readFileSync(path.join(DOCS_DIR, project.slug, file), "utf8");
+      for (const page of project.pages) {
+        if (page.slug === "index") continue;
+        if (!texto.includes(`/${project.slug}/${page.slug}/`)) faltan.push(`${project.slug}/${file} → ${page.slug}`);
+      }
+    }
+  }
+  assert.deepEqual(faltan, [], "páginas sin enlace desde su propia portada");
+});

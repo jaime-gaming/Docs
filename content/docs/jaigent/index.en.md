@@ -130,3 +130,4 @@ The ChatGPT skill, for its part, assumes a **remote OAuth-protected HTTP MCP end
 - [MCP & your own API](/jaigent/mcp/) — connecting ChatGPT Web, Claude Desktop and your apps.
 - [Skills, plugins & schedules](/jaigent/extend/) — extending it with local files.
 - [Tools reference](/jaigent/reference/) — tools table, variables and the safety model.
+- [Security](/jaigent/security/) — what it defends, what it deliberately does not, and how to report a vulnerability.

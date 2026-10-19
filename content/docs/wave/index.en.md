@@ -110,3 +110,4 @@ This guide summarizes and organizes. The repository also ships its own documenta
 - [Platforms](/wave/platforms/) — what exists on web, Windows and Android.
 - [Architecture](/wave/architecture/) — layers, data flow and modules.
 - [Privacy & data](/wave/privacy/) — what is stored, where, and what leaves the device.
+- [Development](/wave/dev/) — requirements, commands, browser tests and the ten typical failures.

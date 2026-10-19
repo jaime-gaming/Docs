@@ -110,3 +110,4 @@ Esta guía resume y ordena. El repositorio trae además su propia documentación
 - [Plataformas](/wave/platforms/) — qué hay en web, Windows y Android.
 - [Arquitectura](/wave/architecture/) — capas, flujo de datos y módulos.
 - [Privacidad y datos](/wave/privacy/) — qué se guarda, dónde y qué sale del dispositivo.
+- [Desarrollo](/wave/dev/) — requisitos, comandos, pruebas de navegador y los diez fallos típicos.
