@@ -64,7 +64,7 @@ test("git no ignora ningún Markdown de contenido", () => {
 });
 
 test("git sí ignora la salida generada", () => {
-  const generated = ["index.html", "404.html", "sitemap.xml", "_site/index.html", "projects/index.html", "wave/index.html", "assets/data/search-index.json", "assets/img/icons.svg"];
+  const generated = ["index.html", "404.html", "sitemap.xml", "_site/index.html", "projects/index.html", "status/index.html", "wave/index.html", "assets/data/search-index.json", "assets/img/icons.svg"];
   let ignored = "";
   try {
     ignored = execFileSync("git", ["check-ignore", "--stdin"], {
@@ -84,7 +84,16 @@ test("git sí ignora la salida generada", () => {
 });
 
 test("los assets fuente no se confunden con los generados", () => {
-  for (const file of ["assets/css/style.css", "assets/js/main.js", "assets/js/i18n.js", "assets/js/search.js", "assets/img/favicon.svg"]) {
+  for (const file of [
+    "assets/css/style.css", "assets/js/main.js", "assets/js/i18n.js", "assets/js/search.js",
+    "assets/img/favicon.svg",
+    // Las tipografías y sus licencias SIL son fuente: una regla "/assets/" a
+    // secas, o un "fonts/" sin anclar, las dejaría fuera del repositorio y el
+    // sitio publicado volvería a caer en las fuentes del sistema.
+    "assets/fonts/dm-sans-latin-400-normal.woff2",
+    "assets/fonts/space-grotesk-latin-700-normal.woff2",
+    "assets/vendor/dm-sans.LICENSE.txt",
+  ]) {
     let ignored = "";
     try {
       ignored = execFileSync("git", ["check-ignore", file], { cwd: ROOT, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] });
