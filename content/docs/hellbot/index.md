@@ -71,10 +71,34 @@ hell/              el bot: núcleo puro (motor, cronologías, gracia, clasificac
                    + borde de Discord (monitor, embeds, anunciador, comandos…)
 launcher/          panel de control de escritorio (editor de config, supervisor, Tk)
 tools/             check.sh (lint + tipos + tests) y simulate.py (simulación offline)
-docs/              notas de arquitectura
+docs/              el dashboard publicado en Pages y las notas de arquitectura
 ```
 
 `engine.py` y todo lo que hay por debajo **no importa nada de Discord**. El monitor le pasa valores simples `Observation(now, participants)` —con bots y `@clanker` ya filtrados— y recibe eventos de dominio simples (`MilestoneReached`, `EventFailed`, `EventCompleted`, `EventCancelled`) que el anunciador convierte en mensajes. **Por eso todo el reglamento es testeable de forma unitaria.**
+
+## Seguir leyendo en el repositorio
+
+Esta guía resume y ordena. El repositorio trae además su propia documentación, bastante más extensa, y conviene saber qué hay y dónde está.
+
+| Documento | Tamaño | Qué es |
+| --- | --- | --- |
+| [`README.md`](https://github.com/jaime-gaming/hellbot/blob/main/README.md) | 40 KB | Arranque rápido, el panel de control, la lista de comprobación de Discord, los comandos, cómo funciona y los casos límite (todos cubiertos por pruebas) |
+| [`docs/ARCHITECTURE.md`](https://github.com/jaime-gaming/hellbot/blob/main/docs/ARCHITECTURE.md) | 11 KB | Las capas, los dos relojes, las **11 invariantes**, el modelo de datos SQLite v3 y los campos que bastan para reconstruir el evento tras un fallo |
+| [`Announcements.py`](https://github.com/jaime-gaming/hellbot/blob/main/Announcements.py) | 41 KB | Todos los textos, recompensas y colores. El bot **no arranca sin él** |
+| [`docs/index.html`](https://github.com/jaime-gaming/hellbot/blob/main/docs/index.html) | 60 KB | El dashboard público, *Welcome to Hell — Live Dashboard* |
+| [`docs/dev.html`](https://github.com/jaime-gaming/hellbot/blob/main/docs/dev.html) | 31 KB | El dashboard de desarrollo y operador |
+| [`tools/check.sh`](https://github.com/jaime-gaming/hellbot/blob/main/tools/check.sh) | 1,5 KB | Compilar, pyflakes, ruff, mypy, pytest y simulaciones |
+| [`tools/simulate.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/simulate.py) | 8 KB | Imprime cada mensaje de una partida completa sin conexión; `--fail-at 40` la mata a las 40 horas |
+| [`tools/healthcheck.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/healthcheck.py) | 3 KB | Inspecciona el **fichero de estado**, no el proceso |
+| [`tools/make_icon.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/make_icon.py) | 2,5 KB | Deriva los iconos del logo maestro; necesita Pillow, que el bot en runtime no usa |
+| [`tools/demo_web.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/demo_web.py) | 2 KB | El dashboard real contra un bot simulado, sin conectar a Discord |
+| [`Dockerfile`](https://github.com/jaime-gaming/hellbot/blob/main/Dockerfile) | 1 KB | `python:3.12-slim`, volumen `/data`, uid 10001 |
+| [`bot.py`](https://github.com/jaime-gaming/hellbot/blob/main/bot.py) | 113 B | Entrada de conveniencia: importa `hell.bot.main` |
+| [`docker-compose.yml`](https://github.com/jaime-gaming/hellbot/blob/main/docker-compose.yml) | 534 B | El servicio y sus variables |
+| [`requirements.txt`](https://github.com/jaime-gaming/hellbot/blob/main/requirements.txt) · [`requirements-dev.txt`](https://github.com/jaime-gaming/hellbot/blob/main/requirements-dev.txt) | 51 B · 66 B | Lo de runtime y lo de desarrollo |
+
+> [!NOTE]
+> `hell/` son **41 módulos** y el repositorio entero **114 ficheros**. El mapa de los 41, agrupados por responsabilidad, está en [Arquitectura](/hellbot/architecture/).
 
 ## Recorrido de la guía
 

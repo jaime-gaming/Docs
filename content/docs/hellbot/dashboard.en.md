@@ -34,6 +34,31 @@ GitHub Pages (static)  ──►  is there a live bot?
                             └─ no  ──► synced static status.json
 ```
 
+### What is committed in `docs/`
+
+The two pages are not generated at deploy time: they are repository files, and `docs/` is exactly what `hell/pages_sync.py` uploads.
+
+| File | Size | What it is |
+| --- | --- | --- |
+| [`docs/index.html`](https://github.com/jaime-gaming/hellbot/blob/main/docs/index.html) | 60 KB | The public dashboard, titled *Welcome to Hell — Live Dashboard* |
+| [`docs/dev.html`](https://github.com/jaime-gaming/hellbot/blob/main/docs/dev.html) | 31 KB | The operator one, *Welcome to Hell — Dev & Operator Dashboard*; it links back to `index.html` |
+| [`docs/status.json`](https://github.com/jaime-gaming/hellbot/blob/main/docs/status.json) | 3.5 KB | The static fallback snapshot |
+| [`docs/ARCHITECTURE.md`](https://github.com/jaime-gaming/hellbot/blob/main/docs/ARCHITECTURE.md) | 11 KB | The architecture notes |
+| [`docs/_config.yml`](https://github.com/jaime-gaming/hellbot/blob/main/docs/_config.yml) | 418 B | Site title and description |
+| [`docs/.nojekyll`](https://github.com/jaime-gaming/hellbot/blob/main/docs/.nojekyll) | 0 B | Tells Pages to serve the files as they are |
+
+The empty `.nojekyll` is what wins: as long as it is there, Pages serves the files without processing them, so the `theme: jekyll-theme-cayman` in `_config.yml` **never gets applied**. Only the title and the description in that config really count.
+
+> [!NOTE]
+> The `_config.yml` description itself states the dashboard's scope: errors, warnings, rate limits and monitor health, **with no participant data and no tokens**.
+
+> [!WARNING]
+> The comment in `_config.yml` says `index.html` and `status.json` are deployed by `.github/workflows/gh-pages.yml`, but **that workflow does not exist**: the repository has no `.github/` folder at all. What publishes `docs/` is the bot itself at runtime, through `hell/pages_sync.py` and `GITHUB_PAGES_SYNC`.
+
+### Seeing the dashboard without connecting to Discord
+
+[`tools/demo_web.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/demo_web.py) (2 KB) brings up **the exact production stack** — the `hell.web` server plus `HellBot._push_web_snapshot` — against an in-memory event with fake contestants. That is the way to check the dashboard in a browser without touching Discord.
+
 ## Related variables
 
 | Variable | Default | What it does |

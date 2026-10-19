@@ -71,10 +71,34 @@ hell/              the bot: pure core (engine, timelines, grace, leaderboard…)
                    + Discord edge (monitor, embeds, announcer, commands…)
 launcher/          desktop control panel (config editor, supervisor, tkinter UI)
 tools/             check.sh (lint+types+tests) and simulate.py (offline dry-run)
-docs/              architecture notes
+docs/              the dashboard published to Pages, and the architecture notes
 ```
 
 `engine.py` and everything below it **imports zero Discord code**. The monitor feeds it plain `Observation(now, participants)` values — with bots and `@clanker` already filtered out — and gets back plain domain events (`MilestoneReached`, `EventFailed`, `EventCompleted`, `EventCancelled`) that the announcer turns into messages. **That is why the entire rulebook is unit-testable.**
+
+## Further reading in the repository
+
+This guide summarizes and orders things. The repository also carries its own documentation, considerably more extensive, and it helps to know what is there and where.
+
+| Document | Size | What it is |
+| --- | --- | --- |
+| [`README.md`](https://github.com/jaime-gaming/hellbot/blob/main/README.md) | 40 KB | Quick start, the control panel, the Discord setup checklist, the commands, how it works and the edge cases (all covered by tests) |
+| [`docs/ARCHITECTURE.md`](https://github.com/jaime-gaming/hellbot/blob/main/docs/ARCHITECTURE.md) | 11 KB | The layers, the two clocks, the **11 invariants**, the SQLite v3 data model and the fields that suffice to reconstruct the event after a crash |
+| [`Announcements.py`](https://github.com/jaime-gaming/hellbot/blob/main/Announcements.py) | 41 KB | Every piece of wording, reward and colour. The bot **does not start without it** |
+| [`docs/index.html`](https://github.com/jaime-gaming/hellbot/blob/main/docs/index.html) | 60 KB | The public dashboard, *Welcome to Hell — Live Dashboard* |
+| [`docs/dev.html`](https://github.com/jaime-gaming/hellbot/blob/main/docs/dev.html) | 31 KB | The dev and operator dashboard |
+| [`tools/check.sh`](https://github.com/jaime-gaming/hellbot/blob/main/tools/check.sh) | 1.5 KB | Compile, pyflakes, ruff, mypy, pytest and simulations |
+| [`tools/simulate.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/simulate.py) | 8 KB | Prints every message of a full run offline; `--fail-at 40` kills it after 40 hours |
+| [`tools/healthcheck.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/healthcheck.py) | 3 KB | Inspects the **state file**, not the process |
+| [`tools/make_icon.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/make_icon.py) | 2.5 KB | Derives the icons from the master logo; needs Pillow, which the bot itself does not |
+| [`tools/demo_web.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/demo_web.py) | 2 KB | The real dashboard against a simulated bot, no Discord connection |
+| [`Dockerfile`](https://github.com/jaime-gaming/hellbot/blob/main/Dockerfile) | 1 KB | `python:3.12-slim`, `/data` volume, uid 10001 |
+| [`bot.py`](https://github.com/jaime-gaming/hellbot/blob/main/bot.py) | 113 B | Convenience entrypoint: imports `hell.bot.main` |
+| [`docker-compose.yml`](https://github.com/jaime-gaming/hellbot/blob/main/docker-compose.yml) | 534 B | The service and its variables |
+| [`requirements.txt`](https://github.com/jaime-gaming/hellbot/blob/main/requirements.txt) · [`requirements-dev.txt`](https://github.com/jaime-gaming/hellbot/blob/main/requirements-dev.txt) | 51 B · 66 B | Runtime and development |
+
+> [!NOTE]
+> `hell/` is **41 modules** and the whole repository **114 files**. The map of all 41, grouped by responsibility, is in [Architecture](/hellbot/architecture/).
 
 ## Guide tour
 

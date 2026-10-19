@@ -34,6 +34,31 @@ GitHub Pages (estático)  ──►  ¿hay bot en vivo?
                               └─ no  ──► status.json estático sincronizado
 ```
 
+### Qué hay commiteado en `docs/`
+
+Las dos páginas no se generan en el despliegue: son ficheros del repositorio, y `docs/` es exactamente lo que `hell/pages_sync.py` sube.
+
+| Fichero | Tamaño | Qué es |
+| --- | --- | --- |
+| [`docs/index.html`](https://github.com/jaime-gaming/hellbot/blob/main/docs/index.html) | 60 KB | El dashboard público, titulado *Welcome to Hell — Live Dashboard* |
+| [`docs/dev.html`](https://github.com/jaime-gaming/hellbot/blob/main/docs/dev.html) | 31 KB | El del operador, *Welcome to Hell — Dev & Operator Dashboard*; enlaza de vuelta a `index.html` |
+| [`docs/status.json`](https://github.com/jaime-gaming/hellbot/blob/main/docs/status.json) | 3,5 KB | La instantánea estática de respaldo |
+| [`docs/ARCHITECTURE.md`](https://github.com/jaime-gaming/hellbot/blob/main/docs/ARCHITECTURE.md) | 11 KB | Las notas de arquitectura |
+| [`docs/_config.yml`](https://github.com/jaime-gaming/hellbot/blob/main/docs/_config.yml) | 418 B | Título y descripción del sitio |
+| [`docs/.nojekyll`](https://github.com/jaime-gaming/hellbot/blob/main/docs/.nojekyll) | 0 B | Que Pages sirva los ficheros tal cual |
+
+El `.nojekyll` vacío es el que manda: mientras esté ahí, Pages sirve los ficheros sin procesarlos, así que el `theme: jekyll-theme-cayman` del `_config.yml` **no llega a aplicarse nunca**. De esa configuración solo cuentan de verdad el título y la descripción.
+
+> [!NOTE]
+> La propia descripción del `_config.yml` declara el alcance del dashboard: muestra errores, avisos, límites de peticiones y salud del monitor, **sin datos de participantes ni tokens**.
+
+> [!WARNING]
+> El comentario del `_config.yml` dice que `index.html` y `status.json` se despliegan con `.github/workflows/gh-pages.yml`, pero **ese workflow no existe**: el repositorio no tiene carpeta `.github/`. Lo que publica `docs/` es el propio bot en runtime, vía `hell/pages_sync.py` y `GITHUB_PAGES_SYNC`.
+
+### Ver el dashboard sin conectar a Discord
+
+[`tools/demo_web.py`](https://github.com/jaime-gaming/hellbot/blob/main/tools/demo_web.py) (2 KB) levanta **la pila de producción exacta** —el servidor `hell.web` más `HellBot._push_web_snapshot`— contra un evento en memoria con concursantes falsos. Es la forma de comprobar el dashboard en un navegador sin tocar Discord.
+
 ## Variables relacionadas
 
 | Variable | Por defecto | Qué hace |
