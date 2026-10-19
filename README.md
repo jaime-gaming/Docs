@@ -9,7 +9,7 @@ hacer scroll y conmutador de idioma ES ↔ EN.
 
 | | |
 | --- | --- |
-| Guías | 42 (84 páginas: cada una en español e inglés) |
+| Guías | 43 (86 páginas: cada una en español e inglés) |
 | Proyectos | Wave · jAIgent · hellbot · RNGdle Infinite · Diario · VOID · jaime-gaming.github.io |
 | Stack | Node + generador estático propio. Sin framework de documentación. |
 | Salida | HTML estático, CSS propio y un índice de búsqueda en JSON |

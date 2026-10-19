@@ -64,39 +64,15 @@ Si no indicas `slug` en el front matter, se deriva del nombre del archivo: a min
 
 ## Cómo funciona el cambio de idioma
 
-Es el mecanismo más característico del sitio, y **esta documentación lo usa tal cual**.
+Es el mecanismo más característico del sitio, y **esta documentación lo usa tal
+cual**. Tiene página propia: [Los dos idiomas](/website/i18n/) recorre el
+diccionario de 234 claves, los cinco atributos que dirigen la sustitución, la
+detección y la persistencia, el conmutador y la animación de retecleo.
 
-El HTML se sirve siempre en español y los textos en inglés viajan en dos sitios:
-
-1. **`assets/js/i18n.js`** — un diccionario `dict` con las claves de interfaz (`nav.home`, `hero.title`, `project.stars`, …).
-2. **`<script type="application/json" id="pageTranslations">`** — los campos específicos de cada página, generados por el build.
-
-Tres atributos dirigen la sustitución:
-
-| Atributo | Qué hace |
-| --- | --- |
-| `data-i18n="clave"` | Sustituye el `innerHTML` por el valor del diccionario |
-| `data-i18n-aria="clave"` | Sustituye el `aria-label` |
-| `data-content-key="campo"` | Sustituye desde `pageTranslations`; con `data-content-language` usa `innerHTML` y ajusta el `lang` del nodo |
-
-Las fechas se localizan aparte con `data-i18n-date` sobre un `<time datetime="…">`, formateadas con `Intl.DateTimeFormat` en `es-ES` o `en-US`.
-
-### Detección y persistencia
-
-```js
-function detectDefaultLang() {
-  const saved = storageGet("lang");
-  if (saved && dict[saved]) return saved;
-  const browserLang = (navigator.language || "es").slice(0, 2).toLowerCase();
-  return dict[browserLang] ? browserLang : "en";
-}
-```
-
-El orden es: preferencia guardada → idioma del navegador → inglés. Se guarda en `localStorage` con la clave `lang`, y un listener del evento `storage` sincroniza varias pestañas abiertas a la vez.
-
-### El conmutador
-
-El botón del globo lleva una bandera española y una británica dibujadas como patrón SVG, y muestra una u otra según `data-active`. Al cambiar de idioma se actualizan además `document.title`, las etiquetas Open Graph y Twitter, `og:locale` y los datos estructurados `Person`.
+Lo mínimo para tocar textos sin salir de aquí: las claves de la interfaz viven en
+`assets/js/i18n.js`, dentro de `dict.es` y `dict.en`, y los campos propios de
+cada página en `pageTranslations`, que genera el build. Añadir una clave es
+añadirla **en las dos ramas**, porque el sitio comprueba que no falte ninguna.
 
 ## Contactos y enlaces
 

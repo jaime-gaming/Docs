@@ -17,6 +17,7 @@ import { GROUPS, PROJECTS, groupOf, pagePath } from "../scripts/registry.mjs";
 import { LANGUAGES } from "../scripts/registry.mjs";
 import { knownIcons } from "../scripts/icons.mjs";
 import { DICT } from "../scripts/dict.mjs";
+import { UI } from "../content/ui.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const read = (rel) => readFileSync(path.join(ROOT, rel), "utf8");
@@ -816,4 +817,33 @@ test("la prosa de la documentación mide lo mismo que la prosa de la web", () =>
   assert.match(css.join("\n"), /^\.doc-body h1 \{ display: none; \}$/m);
   assert.ok(cuerpo(".doc-body h2")["margin"].startsWith("48px"), "el h2 de la documentación debe seguir respirando más que el de un README");
   assert.ok(cuerpo(".doc-body ul")["list-style"] === "none", "las listas sin numerar llevan guión propio");
+});
+
+
+test("las cifras del diccionario que declara la documentación son las reales", () => {
+  // La página website/i18n dice cuántas claves lleva el bloque #uiStrings. Es el
+  // mismo riesgo que las cifras del README, que llegaron a decir 37 guías cuando
+  // el registro llevaba 40: un número escrito en prosa no falla en ninguna parte
+  // cuando deja de ser verdad. Aquí se deriva de los dos módulos.
+  //
+  // Y la cifra no es evidente, porque el bloque no lleva solo los textos escritos
+  // a mano: dict.mjs añade las claves derivadas del registro —cuatro por
+  // proyecto, una por guía y dos por grupo—, así que añadir una guía mueve el
+  // total sin tocar content/ui.mjs.
+  const manuales = Object.keys(UI.es).length;
+  const totales = Object.keys(DICT.es).length;
+  assert.ok(totales > manuales, "el diccionario debería llevar claves derivadas del registro");
+  assert.equal(Object.keys(UI.en).length, manuales, "ui.mjs tiene distintas claves en cada idioma");
+  assert.equal(Object.keys(DICT.en).length, totales, "dict.mjs tiene distintas claves en cada idioma");
+
+  for (const [file, palabra] of [
+    ["content/docs/website/i18n.md", "claves"],
+    ["content/docs/website/i18n.en.md", "keys"],
+  ]) {
+    const texto = read(file);
+    const dichas = new Set([...texto.matchAll(new RegExp(`(\\d+) ${palabra}`, "g"))].map((m) => Number(m[1])));
+    for (const cifra of [manuales, totales]) {
+      assert.ok(dichas.has(cifra), `${file} no declara ${cifra} ${palabra}, que es lo que lleva el diccionario`);
+    }
+  }
 });

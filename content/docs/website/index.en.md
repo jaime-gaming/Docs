@@ -134,5 +134,6 @@ This guide summarizes and orders things. This is what the repository holds, with
 ## Guide tour
 
 - [Build & preview](/website/build/) — generating the site, serving it locally and the checks.
-- [Editing content](/website/content/) — adding a post, changing texts and how i18n works.
+- [Editing content](/website/content/) — adding a post and changing interface texts.
+- [The two languages](/website/i18n/) — the dictionary, the attributes, the switch and the retyping.
 - [Site architecture](/website/architecture/) — GitHub data, the calendar, Lanyard, READMEs and SEO.

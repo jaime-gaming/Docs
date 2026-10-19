@@ -193,6 +193,7 @@ export const PROJECTS = [
       { slug: "index", icon: "compass", title: { es: "Visión general", en: "Overview" } },
       { slug: "build", icon: "hammer", title: { es: "Build y preview", en: "Build & preview" } },
       { slug: "content", icon: "file", title: { es: "Editar el contenido", en: "Editing content" } },
+      { slug: "i18n", icon: "lang", title: { es: "Los dos idiomas", en: "The two languages" } },
       { slug: "architecture", icon: "boxes", title: { es: "Arquitectura del sitio", en: "Site architecture" } },
     ],
   },

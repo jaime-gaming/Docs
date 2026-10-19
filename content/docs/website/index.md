@@ -134,5 +134,6 @@ Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamañ
 ## Recorrido de la guía
 
 - [Build y preview](/website/build/) — generar el sitio, servirlo en local y las comprobaciones.
-- [Editar el contenido](/website/content/) — añadir un post, cambiar textos y cómo funciona el i18n.
+- [Editar el contenido](/website/content/) — añadir un post y cambiar textos de la interfaz.
+- [Los dos idiomas](/website/i18n/) — el diccionario, los atributos, el conmutador y el retecleo.
 - [Arquitectura del sitio](/website/architecture/) — datos de GitHub, calendario, Lanyard, READMEs y SEO.
