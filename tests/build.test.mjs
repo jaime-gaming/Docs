@@ -762,3 +762,58 @@ test("ninguna página lleva estilos en línea", () => {
   }
   assert.ok(vistas >= 7, `solo ${vistas} style="" en todo el sitio; se esperaban los colores de lenguaje`);
 });
+
+
+test("la prosa de la documentación mide lo mismo que la prosa de la web", () => {
+  // El CSS lleva copiadas las reglas .project-detail__readme de la web. Aquí no se
+  // aplican a nada —no hay fichas de proyecto ni blog— pero son la referencia de
+  // cómo se ve el Markdown renderizado en su sitio, y viven en este mismo fichero,
+  // así que la comparación se mantiene sola si él las cambia.
+  //
+  // .doc-body es la implementación propia y había derivado en siete cifras: h3 a
+  // 1.15rem contra 1.2rem, listas a 22px contra 24px, hr a 40px contra 32px, pre
+  // con 18px 20px y radio 8px contra 20px y 6px, tablas a .84rem contra .85rem,
+  // celdas a 11px contra 10px y código en línea a .82em contra .85em.
+  const css = read("assets/css/style.css").split("\n");
+  const cuerpo = (selector) => {
+    // La primera aparición: las que vienen después están dentro de un @media.
+    const linea = css.find((l) => l.startsWith(selector + " {"));
+    assert.ok(linea, `no encuentro la regla ${selector}`);
+    const mapa = {};
+    for (const declaracion of linea.slice(linea.indexOf("{") + 1, linea.lastIndexOf("}")).split(";")) {
+      const corte = declaracion.indexOf(":");
+      if (corte > 0) mapa[declaracion.slice(0, corte).trim()] = declaracion.slice(corte + 1).trim();
+    }
+    return mapa;
+  };
+
+  const comparadas = [
+    [".project-detail__readme h3, .post-detail__body h3", ".doc-body h3", ["font-size"]],
+    [".project-detail__readme :is(ul,ol), .post-detail__body :is(ul,ol)", ".doc-body :is(ul, ol)", ["padding-left"]],
+    [".project-detail__readme li + li", ".doc-body li + li", ["margin-top"]],
+    [".project-detail__readme hr, .post-detail__body hr", ".doc-body hr", ["margin-block"]],
+    [".project-detail__readme pre, .post-detail__body pre", ".doc-body pre", ["padding", "border-radius", "font-size"]],
+    [".project-detail__readme code, .post-detail__body code", ".doc-body code", ["padding", "border-radius", "font-size"]],
+    [".project-detail__readme blockquote, .post-detail__body blockquote", ".doc-body blockquote", ["margin", "padding", "border-left"]],
+    [".project-detail__readme table", ".doc-body table", ["width", "border-collapse", "font-size"]],
+    [".project-detail__readme :is(th,td)", ".doc-body :is(th, td)", ["padding"]],
+  ];
+  for (const [web, docs, propiedades] of comparadas) {
+    const origen = cuerpo(web);
+    const copia = cuerpo(docs);
+    for (const propiedad of propiedades) {
+      assert.equal(copia[propiedad], origen[propiedad],
+        `${docs} debería llevar ${propiedad}: ${origen[propiedad]}, como ${web}`);
+    }
+  }
+
+  // Lo que sí es distinto a propósito, para que quede por escrito y no se
+  // "arregle" por accidente: el h1 se esconde porque la cabecera de la página ya
+  // lleva el título; el h2 respira más porque estas guías son largas; las listas
+  // sin numerar usan un guión en vez de viñeta; y las tablas llevan filetes solo
+  // abajo y a la derecha con cabecera en versalitas monoespaciadas, que se leen
+  // mejor en tablas de referencia anchas.
+  assert.match(css.join("\n"), /^\.doc-body h1 \{ display: none; \}$/m);
+  assert.ok(cuerpo(".doc-body h2")["margin"].startsWith("48px"), "el h2 de la documentación debe seguir respirando más que el de un README");
+  assert.ok(cuerpo(".doc-body ul")["list-style"] === "none", "las listas sin numerar llevan guión propio");
+});

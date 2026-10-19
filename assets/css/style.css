@@ -501,7 +501,7 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
 .doc-body > :first-child { margin-top: 0; }
 .doc-body h1 { display: none; }
 .doc-body h2 { margin: 48px 0 16px; padding-top: 8px; font-size: 1.5rem; letter-spacing: -.035em; scroll-margin-top: calc(var(--nav-height) + 24px); }
-.doc-body h3 { margin: 32px 0 12px; font-size: 1.15rem; letter-spacing: -.02em; scroll-margin-top: calc(var(--nav-height) + 24px); }
+.doc-body h3 { margin: 32px 0 12px; font-size: 1.2rem; letter-spacing: -.02em; scroll-margin-top: calc(var(--nav-height) + 24px); }
 .doc-body h4 { margin: 24px 0 10px; font-size: .95rem; color: var(--text-dim); scroll-margin-top: calc(var(--nav-height) + 24px); }
 .doc-body h2 .anchor, .doc-body h3 .anchor { margin-left: 8px; color: var(--border); font-weight: 400; opacity: 0; }
 .doc-body h2:hover .anchor, .doc-body h3:hover .anchor { color: var(--accent); opacity: 1; }
@@ -511,20 +511,20 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
 .doc-body em { color: var(--text-dim); }
 .doc-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent); }
 .doc-body a:hover { text-decoration-color: var(--accent); }
-.doc-body :is(ul, ol) { margin: 0 0 16px; padding-left: 22px; }
+.doc-body :is(ul, ol) { margin: 0 0 16px; padding-left: 24px; }
 .doc-body li + li { margin-top: 6px; }
 .doc-body li::marker { color: var(--accent); }
 .doc-body ul { list-style: none; padding-left: 20px; }
 .doc-body ul > li { position: relative; }
 .doc-body ul > li::before { content: ""; position: absolute; left: -16px; top: .78em; width: 5px; height: 1px; background: var(--accent); }
 .doc-body blockquote { margin: 24px 0; padding: 4px 20px; border-left: 2px solid var(--accent); color: var(--text-dim); }
-.doc-body hr { margin-block: 40px; border: 0; border-top: 1px solid var(--border); }
+.doc-body hr { margin-block: 32px; border: 0; border-top: 1px solid var(--border); }
 .doc-body img { display: inline-block; max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; vertical-align: middle; }
 .doc-body kbd { padding: 2px 6px; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; background: var(--surface); font: .78em var(--font-mono); color: var(--text); }
 
 /* Código */
-.doc-body code { padding: 2px 5px; border-radius: 3px; background: var(--surface); border: 1px solid var(--border); font-family: var(--font-mono); font-size: .82em; color: var(--text); }
-.doc-body pre { position: relative; margin: 20px 0; overflow-x: auto; padding: 18px 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); white-space: pre; font-size: .8rem; line-height: 1.7; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.doc-body code { padding: 2px 5px; border-radius: 3px; background: var(--surface); border: 1px solid var(--border); font-family: var(--font-mono); font-size: .85em; color: var(--text); }
+.doc-body pre { position: relative; margin: 20px 0; overflow-x: auto; padding: 20px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); white-space: pre; font-size: .8rem; line-height: 1.7; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 .doc-body pre code { padding: 0; border: 0; background: none; color: var(--text-dim); font-size: inherit; }
 .doc-body pre::before { content: attr(data-lang); position: absolute; top: 0; right: 0; padding: 3px 9px; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); border-radius: 0 8px 0 6px; color: var(--text-faint); font: .58rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .doc-body pre[data-lang=""]::before, .doc-body pre:not([data-lang])::before { content: none; }
@@ -538,8 +538,8 @@ main > .section:first-child, .contact-page .section { border-top: 0; }
 
 /* Tablas */
 .doc-table { overflow-x: auto; margin-block: 24px; border: 1px solid var(--border); border-radius: 8px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
-.doc-body table { width: 100%; border-collapse: collapse; font-size: .84rem; }
-.doc-body :is(th, td) { padding: 11px 14px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+.doc-body table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.doc-body :is(th, td) { padding: 10px 14px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
 .doc-body :is(th, td):not(:last-child) { border-right: 1px solid var(--border); }
 .doc-body tr:last-child td { border-bottom: 0; }
 .doc-body th { background: var(--surface-raised); color: var(--text); font: 500 .72rem var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
