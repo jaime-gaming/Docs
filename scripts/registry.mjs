@@ -33,6 +33,7 @@ export const PROJECTS = [
       { slug: "platforms", icon: "monitor", title: { es: "Plataformas", en: "Platforms" } },
       { slug: "architecture", icon: "boxes", title: { es: "Arquitectura", en: "Architecture" } },
       { slug: "privacy", icon: "shield", title: { es: "Privacidad y datos", en: "Privacy & data" } },
+      { slug: "dev", icon: "code", title: { es: "Desarrollo", en: "Development" } },
     ],
   },
   {
@@ -62,6 +63,7 @@ export const PROJECTS = [
       { slug: "mcp", icon: "plug", title: { es: "MCP y tu propia API", en: "MCP & your own API" } },
       { slug: "extend", icon: "puzzle", title: { es: "Skills, plugins y horarios", en: "Skills, plugins & schedules" } },
       { slug: "reference", icon: "book", title: { es: "Referencia de tools", en: "Tools reference" } },
+      { slug: "security", icon: "shield", title: { es: "Seguridad", en: "Security" } },
     ],
   },
   {

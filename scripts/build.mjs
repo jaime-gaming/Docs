@@ -552,6 +552,16 @@ ${body}
 `;
 }
 
+function buildRobots() {
+  // CANONICAL_ORIGIN ya lleva BASE sin la barra final, así que el Sitemap se
+  // compone sumándole la ruta. Añadir BASE otra vez duplicaría /Docs/Docs/.
+  return `User-agent: *
+Allow: /
+
+Sitemap: ${CANONICAL_ORIGIN}/sitemap.xml
+`;
+}
+
 /* ------------------------------------------------------------------ */
 /* Limpieza de páginas huérfanas                                       */
 /* ------------------------------------------------------------------ */
@@ -616,6 +626,7 @@ async function main() {
     writePage("projects/index.html", buildProjectsIndex()),
     writePage("404.html", build404()),
     writePage("sitemap.xml", buildSitemap(docs)),
+    writePage("robots.txt", buildRobots()),
   ]);
 
   const index = buildSearchIndex(docs);

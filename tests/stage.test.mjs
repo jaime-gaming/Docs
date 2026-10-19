@@ -10,6 +10,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import path from "node:path";
 
+import { BASE } from "../scripts/config.mjs";
 import { PROJECTS } from "../scripts/registry.mjs";
 import { pagePath } from "../scripts/registry.mjs";
 
@@ -23,7 +24,7 @@ test.before(() => {
 });
 
 test("el staging copia las páginas fijas", () => {
-  for (const file of ["index.html", "404.html", "sitemap.xml"]) {
+  for (const file of ["index.html", "404.html", "sitemap.xml", "robots.txt"]) {
     assert.ok(existsSync(path.join(SITE, file)), `_site/${file} ausente`);
   }
 });
@@ -57,11 +58,27 @@ test("el payload no arrastra código fuente ni dependencias", () => {
   }
 });
 
+test("el Sitemap declarado en robots.txt es el que de verdad se publica", () => {
+  // CANONICAL_ORIGIN ya incluye BASE: añadirlo otra vez produjo
+  // https://jaime-gaming.github.io/Docs/Docs/sitemap.xml, que es un 404.
+  const robots = readFileSync(path.join(SITE, "robots.txt"), "utf8");
+  const declarado = (robots.match(/^Sitemap:\s*(\S+)$/m) || [])[1];
+  assert.ok(declarado, "robots.txt sin línea Sitemap");
+
+  const sitemap = readFileSync(path.join(SITE, "sitemap.xml"), "utf8");
+  const raiz = (sitemap.match(/<loc>([^<]+\/)<\/loc>/) || [])[1];
+  assert.ok(raiz, "sitemap.xml sin URL raíz");
+
+  assert.equal(declarado, `${raiz}sitemap.xml`);
+  assert.ok(!declarado.includes(`${BASE}${BASE.replace(/\/$/, "")}`), "BASE duplicado en la URL");
+});
+
 test("el payload no tiene archivos sueltos fuera de lo esperado", () => {
   const allowed = new Set([
     "index.html",
     "404.html",
     "sitemap.xml",
+    "robots.txt",
     "assets",
     "projects",
     ...PROJECTS.map((project) => project.slug),
