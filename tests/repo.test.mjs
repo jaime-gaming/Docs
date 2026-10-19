@@ -142,3 +142,27 @@ test("cada proyecto documentado existe en disco con sus dos idiomas", () => {
   }
   assert.deepEqual(missing, [], "contenido incompleto");
 });
+
+test("main.js no arrastra la ventana al seguir la lectura", () => {
+  // scrollIntoView desplaza a todos los antecesores desplazables, ventana
+  // incluida. El scrollspy lo usaba para traer al primer plano el chip activo
+  // del índice y, en pantallas estrechas, la fila de chips va en flujo normal
+  // por encima del texto: cada cambio de apartado devolvía al lector arriba del
+  // todo, que es exactamente «intento hacer scroll y me sube otra vez».
+  //
+  // El arreglo mueve solo el contenedor (list.scrollTo, sidebar.scrollTop). El
+  // único scrollIntoView legítimo que queda es el de llegar con un #fragmento.
+  const js = readFileSync(path.join(ROOT, "assets", "js", "main.js"), "utf8");
+  const usos = js.match(/\.scrollIntoView\(/g) ?? [];
+  assert.equal(
+    usos.length,
+    1,
+    `main.js llama ${usos.length} veces a scrollIntoView; solo debe hacerlo al llegar con un #fragmento`
+  );
+  assert.match(
+    js,
+    /window\.location\.hash[\s\S]{0,400}\.scrollIntoView\(/,
+    "el scrollIntoView que queda no es el del #fragmento"
+  );
+  assert.match(js, /list\.scrollTo\(/, "la fila de chips ya no se desplaza a sí misma");
+});

@@ -121,7 +121,13 @@
         document.body.append(sidebarScrim);
       }
       const active = sidebar.querySelector(".side-nav__link.active");
-      active?.scrollIntoView({ block: "nearest" });
+      if (active) {
+        // El mismo motivo que en la fila de chips: scrollIntoView puede arrastrar
+        // la ventana. El cajón ya se desplaza solo, así que se mueve únicamente él.
+        const box = sidebar.getBoundingClientRect();
+        const item = active.getBoundingClientRect();
+        if (item.top < box.top || item.bottom > box.bottom) sidebar.scrollTop += item.top - box.top - 16;
+      }
       (active || sidebar.querySelector(".side-nav__link"))?.focus?.({ preventScroll: true });
     } else {
       sidebarScrim?.remove();
@@ -281,7 +287,18 @@
       const activeLink = tocLinks.find((link) => link.classList.contains("active"));
       const list = activeLink?.closest(".toc__list");
       if (list && window.getComputedStyle(list).display === "flex") {
-        activeLink.scrollIntoView({ block: "nearest", inline: "nearest" });
+        // Aquí nunca scrollIntoView: desplaza también la ventana, y en pantallas
+        // estrechas la fila de chips va en flujo normal por encima del texto, así
+        // que cada cambio de apartado devolvía al lector arriba del todo. Se mueve
+        // solo el contenedor, y solo cuando el chip activo se sale de él.
+        const box = list.getBoundingClientRect();
+        const chip = activeLink.getBoundingClientRect();
+        if (chip.left < box.left || chip.right > box.right) {
+          list.scrollTo({
+            left: Math.max(0, list.scrollLeft + chip.left - box.left - (list.clientWidth - chip.width) / 2),
+            behavior: reducedMotion ? "auto" : "smooth",
+          });
+        }
       }
     }, { rootMargin: "-88px 0px -65% 0px", threshold: [0, 1] });
 
