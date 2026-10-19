@@ -9,6 +9,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 import path from "node:path";
 
 import { BASE } from "../scripts/config.mjs";
@@ -388,4 +389,73 @@ test("la carga inicial no fuerza el scroll", async () => {
   env.window.i18n.applyLang("en");
   await settle();
   assert.deepEqual(llamadas, [], "applyLang sin preserveScroll no debe tocar el scroll");
+});
+
+
+test("cambiar de idioma reteclea los textos, y con menos movimiento no", async () => {
+  // La animación más visible de la web al cambiar de idioma: los textos se borran
+  // y se vuelven a teclear bloque a bloque, con un retardo escalonado. El arnés la
+  // apaga por defecto —ver animateLang en helpers/browser.mjs— precisamente para
+  // que no vacíe los textos en mitad de otras pruebas, así que aquí se enciende a
+  // propósito y se comprueba entera: que arranca, que termina y que respeta
+  // prefers-reduced-motion.
+  const env = await loadPage({ page: "index.html", animateLang: true });
+  const { window, doc } = env;
+  const dict = window.i18n.dict;
+
+  const tecleables = [...doc.querySelectorAll("[data-i18n]")]
+    .filter((element) => !element.closest("[aria-live], [data-content-key], pre, code, textarea"))
+    .filter((element) => typeof dict.en?.[element.dataset.i18n] === "string"
+      && typeof dict.es?.[element.dataset.i18n] === "string");
+  assert.ok(tecleables.length > 10, `solo ${tecleables.length} bloques tecleables en la portada`);
+
+  window.i18n.applyLang("en");
+  assert.ok(tecleables.some((element) => element.textContent.trim() === ""),
+    "los textos se vacían antes de volver a escribirse");
+  assert.ok(tecleables.some((element) => element.getAttribute("aria-busy") === "true"),
+    "el bloque se marca ocupado mientras se teclea");
+  // La reserva de altura no se puede observar aquí: jsdom no tiene maquetación y
+  // getBoundingClientRect() devuelve siempre 0, así que la condición «solo si hay
+  // altura» no se cumple nunca. Se comprueba en el fuente, que es donde vive la
+  // decisión —medir antes de vaciar, reservar solo si el bloque medía algo y
+  // soltar la reserva al terminar, también al cancelar—.
+  const fuente = readFileSync(path.join(ROOT, "assets", "js", "i18n.js"), "utf8");
+  assert.ok(fuente.includes("block.height = block.element.getBoundingClientRect().height;"),
+    "hay que medir el bloque antes de vaciarlo");
+  assert.ok(fuente.includes("block.nodes.forEach((entry) => { entry.node.nodeValue = \"\"; });"),
+    "los nodos de texto se vacían después de medir");
+  assert.ok(/if \(block\.height > 0\) block\.element\.style\.minHeight/.test(fuente),
+    "la altura solo se reserva cuando el bloque medía algo");
+  assert.equal(fuente.split('block.element.style.minHeight = "";').length - 1, 2,
+    "la reserva se suelta al terminar y al cancelar");
+
+  // 380 ms de escalonado como máximo y 3 ms por carácter en el bloque más largo
+  // admitido (320): sobra margen, pero jsdom va más despacio que un navegador.
+  await settle(2600);
+  for (const element of tecleables) {
+    const key = element.dataset.i18n;
+    assert.equal(element.innerHTML, normalized(window, dict.en[key]), `${key} queda tecleado del todo`);
+    assert.equal(element.hasAttribute("aria-busy"), false, `${key} deja de estar ocupado`);
+    assert.equal(element.style.minHeight, "", `${key} no se queda con altura reservada`);
+  }
+
+  // Con prefers-reduced-motion: reduce no arranca y el cambio es instantáneo, que
+  // es exactamente lo que está pidiendo quien desactiva el movimiento.
+  window.matchMedia = (query) => ({
+    matches: query.includes("prefers-reduced-motion"),
+    media: query,
+    addEventListener() {},
+    removeEventListener() {},
+    addListener() {},
+    removeListener() {},
+  });
+  window.i18n.applyLang("es");
+  assert.equal(doc.querySelectorAll('[data-i18n][aria-busy="true"]').length, 0,
+    "con menos movimiento no se teclea nada");
+  for (const element of tecleables) {
+    const key = element.dataset.i18n;
+    assert.equal(element.innerHTML, normalized(window, dict.es[key]),
+      `${key} cambia al instante con menos movimiento`);
+  }
+  assert.deepEqual(env.errors, [], "el retecleo no debe provocar errores");
 });

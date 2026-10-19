@@ -57,6 +57,7 @@ function localInterceptor(requested) {
  * @param {boolean} [options.mobile] emula la cascada de móvil que jsdom no aplica
  * @param {string} [options.userAgent] navigator.userAgent alternativo
  * @param {object} [options.index] índice a servir (por defecto el del build)
+ * @param {boolean} [options.animateLang] deja que el cambio de idioma retecleé los textos
  * @returns {Promise<object>} window, doc, errores, peticiones y observers
  */
 export async function loadPage({
@@ -67,6 +68,7 @@ export async function loadPage({
   index = null,
   mobile = false,
   userAgent = null,
+  animateLang = false,
 } = {}) {
   const html = readFileSync(path.join(ROOT, page), "utf8");
   const url = `https://jaime-gaming.github.io${BASE}${page.replace(/index\.html$/, "")}`;
@@ -147,6 +149,28 @@ export async function loadPage({
     // Red de seguridad: si algún recurso no llega, no bloquear la prueba.
     setTimeout(resolve, 1500);
   });
+
+  // Al cambiar de idioma, i18n.js borra los textos y los vuelve a teclear. jsdom
+  // sí tiene requestAnimationFrame (pretendToBeVisual), así que la animación
+  // arrancaría en mitad de cualquier prueba que acabe de pulsar el conmutador y
+  // dejaría los textos vacíos justo cuando se van a afirmar.
+  //
+  // Se apaga informando prefers-reduced-motion: reduce *después* de cargar:
+  // main.js ya se guardó su MediaQueryList en la línea 17, así que su
+  // reducedMotion sigue siendo false y el scrollspy y los reveals se prueban
+  // igual que siempre; i18n.js consulta window.matchMedia en cada retecleo y ve
+  // el valor nuevo. Con animateLang:true no se toca nada y la animación se puede
+  // probar entera.
+  if (!animateLang) {
+    window.matchMedia = (query) => ({
+      matches: query.includes("prefers-reduced-motion"),
+      media: query,
+      addEventListener() {},
+      removeEventListener() {},
+      addListener() {},
+      removeListener() {},
+    });
+  }
 
   // jsdom no evalúa las media queries: los controles que solo existen en móvil
   // (.burger, .sidebar-toggle) quedan en display:none y no se pueden enfocar,

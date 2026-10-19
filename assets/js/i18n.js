@@ -35,7 +35,122 @@
     return dict[browserLang] ? browserLang : "en";
   }
 
-  function applyLang(lang, { persist = true, preserveScroll = false } = {}) {
+  // Al cambiar de idioma la web no sustituye los textos en seco: los borra y los
+  // vuelve a teclear, bloque a bloque y con un retardo escalonado. Es su
+  // animación más visible y se portó tal cual, con sus tres salvaguardas —no
+  // animar la primera aplicación, no animar si quien lee pidió menos movimiento,
+  // y no animar con la pestaña en segundo plano—.
+  let langAppliedOnce = false;
+  let typingToken = 0;
+  let typingFrame = 0;
+  let typingBlocks = [];
+
+  function motionAllowed() {
+    return typeof window.matchMedia !== "function" || !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  /** Cancela un retecleo en vuelo y devuelve los bloques a su estado normal. */
+  function stopRetyping() {
+    typingToken += 1;
+    if (typingFrame && typeof window.cancelAnimationFrame === "function") window.cancelAnimationFrame(typingFrame);
+    typingFrame = 0;
+    typingBlocks.forEach((block) => {
+      block.element.removeAttribute("aria-busy");
+      block.element.style.minHeight = "";
+    });
+    typingBlocks = [];
+  }
+
+  /**
+   * Los bloques que se van a teclear: cada elemento con data-i18n y sus nodos de
+   * texto. Se quedan fuera las regiones vivas —reteclear un aria-live le grita
+   * cada carácter a un lector de pantalla—, el cuerpo traducido de la página, que
+   * va por data-content-key y no tiene nada que hacer en una animación de un
+   * segundo, y el código, donde el espaciado es contenido.
+   *
+   * El tope de 320 caracteres evita que un texto largo tarde varios segundos.
+   */
+  function collectTypingBlocks() {
+    const blocks = [];
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+      if (element.closest("[aria-live], [data-content-key], pre, code, textarea")) return;
+      const nodes = [];
+      let total = 0;
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null);
+      let node = walker.nextNode();
+      while (node) {
+        const text = node.nodeValue || "";
+        if (text.trim()) {
+          nodes.push({ node, text });
+          total += text.length;
+        }
+        node = walker.nextNode();
+      }
+      if (!nodes.length || total < 2 || total > 320) return;
+      blocks.push({ element, nodes, total });
+    });
+    return blocks;
+  }
+
+  function retypePage() {
+    stopRetyping();
+    if (typeof window.requestAnimationFrame !== "function" || typeof document.createTreeWalker !== "function") return;
+    if (!motionAllowed() || document.visibilityState === "hidden") return;
+    const blocks = collectTypingBlocks();
+    if (!blocks.length) return;
+    const token = typingToken;
+    const originals = blocks.map((block) => block.nodes.map((entry) => entry.text));
+
+    // Se reserva la altura de cada bloque antes de vaciarlo: si no, la página
+    // entera se encoge y vuelve a crecer mientras se teclea, y quien estaba
+    // leyendo pierde el sitio.
+    blocks.forEach((block) => {
+      block.height = block.element.getBoundingClientRect().height;
+      block.nodes.forEach((entry) => { entry.node.nodeValue = ""; });
+      block.element.setAttribute("aria-busy", "true");
+      if (block.height > 0) block.element.style.minHeight = `${block.height}px`;
+    });
+    typingBlocks = blocks;
+
+    let startTime = 0;
+    function frame(now) {
+      if (token !== typingToken) return;
+      if (!startTime) startTime = now;
+      const elapsed = now - startTime;
+      let finished = true;
+      blocks.forEach((block, index) => {
+        // Cada bloque empieza 15 ms después del anterior, con un tope de 380 ms
+        // para que una página con cien textos no tarde en arrancar.
+        const budget = elapsed - Math.min(index * 15, 380);
+        if (budget < 0) { finished = false; return; }
+        // Entre 3 y 13 ms por carácter: los textos cortos se leen como un tecleo
+        // y los largos no se eternizan.
+        const speed = Math.max(3, Math.min(13, 900 / block.total));
+        const visible = Math.min(block.total, Math.floor(budget / speed));
+        let remaining = visible;
+        block.nodes.forEach((entry, nodeIndex) => {
+          const full = originals[index][nodeIndex];
+          const shown = remaining > 0 ? full.slice(0, remaining) : "";
+          if (entry.node.nodeValue !== shown) entry.node.nodeValue = shown;
+          remaining -= full.length;
+        });
+        if (visible < block.total) finished = false;
+      });
+      if (!finished) {
+        typingFrame = window.requestAnimationFrame(frame);
+        return;
+      }
+      typingFrame = 0;
+      blocks.forEach((block) => {
+        block.element.removeAttribute("aria-busy");
+        block.element.style.minHeight = "";
+      });
+      typingBlocks = [];
+    }
+    typingFrame = window.requestAnimationFrame(frame);
+  }
+
+  function applyLang(lang, { persist = true, preserveScroll = false, animate = true } = {}) {
     if (!dict[lang]) lang = "es";
     // Cambiar de idioma reescribe el cuerpo de la página. Si la versión
     // traducida mide distinto, la lectura salta; anotamos dónde estaba quien
@@ -111,6 +226,11 @@
     window.currentLang = lang;
     document.dispatchEvent(new CustomEvent("langchange", { detail: { lang } }));
 
+    // Antes de restaurar el scroll: retypePage reserva las alturas, así que la
+    // posición a la que se vuelve ya es la definitiva.
+    if (animate && langAppliedOnce) retypePage();
+    langAppliedOnce = true;
+
     // Después de langchange: los oyentes (índice lateral, anclas, tablas)
     // pueden cambiar la altura del documento, así que restauramos al final y
     // una vez más tras el reflujo.
@@ -120,7 +240,7 @@
     }
   }
 
-  window.i18n = { dict, applyLang, detectDefaultLang };
+  window.i18n = { dict, applyLang, detectDefaultLang, retypePage };
 
   document.addEventListener("DOMContentLoaded", () => {
     applyLang(detectDefaultLang());
