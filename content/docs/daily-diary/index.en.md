@@ -1,6 +1,6 @@
 ---
 description: "What Diario is, what sets it apart from other journaling apps and what it includes."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **Diario** is a personal notebook: minimal and **100% local**. No backend, no accounts, no AI and no external APIs — summaries, statistics and trends are computed in your browser with JavaScript, rules and text templates.

@@ -9,7 +9,7 @@ hacer scroll y conmutador de idioma ES ↔ EN.
 
 | | |
 | --- | --- |
-| Guías | 37 (74 páginas: cada una en español e inglés) |
+| Guías | 40 (80 páginas: cada una en español e inglés) |
 | Proyectos | Wave · jAIgent · hellbot · RNGdle Infinite · Diario · VOID · jaime-gaming.github.io |
 | Stack | Node + generador estático propio. Sin framework de documentación. |
 | Salida | HTML estático, CSS propio y un índice de búsqueda en JSON |
@@ -24,8 +24,8 @@ npm run dev        # genera el sitio y lo sirve en http://localhost:8000/Docs/
 Otros comandos:
 
 ```bash
-npm run build      # genera las páginas, el sprite de iconos, el sitemap y el índice de búsqueda
-npm test           # 70 pruebas con node --test (registro, contenido, Markdown, i18n y build completo)
+npm run build      # genera las páginas, el sprite de iconos, el sitemap, robots.txt y el índice de búsqueda
+npm test           # la suite completa con node --test (registro, contenido, Markdown, i18n, navegador, staging y build)
 npm run stage      # build + copia lo que se sirve a _site/ (el payload de GitHub Pages)
 npm run preview    # sirve lo ya generado, sin recompilar
 ```

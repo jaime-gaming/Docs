@@ -1,6 +1,6 @@
 ---
 description: "El dashboard web en vivo de hellbot: WebSocket, respaldo por sondeo, página del operador y publicación estática conectada al bot real."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 El bot sirve un **dashboard web en vivo** en `WEB_PORT` (8080 por defecto; `0` lo desactiva). Hay dos páginas: la pública `/` y la del operador `/dev`.

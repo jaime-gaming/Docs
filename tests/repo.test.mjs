@@ -105,6 +105,19 @@ test("el README describe el proyecto de verdad", () => {
   for (const project of PROJECTS) {
     assert.ok(readme.includes(project.name), `al README le falta el proyecto ${project.name}`);
   }
+
+  // Las cifras declaradas se pudren en cuanto se añade una guía: llegaron a
+  // decir 37 cuando el registro ya llevaba 40. Se derivan del registro.
+  const guias = PROJECTS.reduce((total, project) => total + project.pages.length, 0);
+  const declarado = readme.match(/\|\s*Guías\s*\|\s*(\d+)\s*\((\d+)\s*páginas/);
+  assert.ok(declarado, 'el README debe declarar «| Guías | N (M páginas…»');
+  assert.equal(Number(declarado[1]), guias, `el README dice ${declarado[1]} guías y el registro lleva ${guias}`);
+  assert.equal(Number(declarado[2]), guias * LANGUAGES.length,
+    `el README dice ${declarado[2]} páginas y son ${guias * LANGUAGES.length}`);
+
+  // El número de pruebas no se declara: cambia cada dos commits y nadie lo actualiza.
+  assert.ok(!/npm test\s*#\s*\d+\s*pruebas/.test(readme),
+    "el README vuelve a hardcodear cuántas pruebas hay");
 });
 
 test("cada proyecto documentado existe en disco con sus dos idiomas", () => {

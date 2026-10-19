@@ -1,6 +1,6 @@
 ---
 description: "Qué es Diario, qué lo hace distinto de otras apps de journaling y qué incluye."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **Diario** es un cuaderno personal, minimalista y **100 % local**. Sin backend, sin cuentas, sin IA y sin APIs externas: los resúmenes, las estadísticas y las tendencias se calculan en tu navegador con JavaScript, reglas y plantillas de texto.

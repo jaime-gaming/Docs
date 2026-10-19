@@ -1,6 +1,6 @@
 ---
 description: "Qué es hellbot, qué evento ejecuta y qué garantías ofrece como bot de producción."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **hellbot** es el bot de Discord que ejecuta *Welcome to Hell*: mantener al menos a **una persona real** en un único canal de voz, de forma **continua, durante 160 horas**. Si ese canal se vacía y nadie vuelve dentro del periodo de gracia, la partida muere **para siempre**.

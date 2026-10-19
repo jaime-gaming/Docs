@@ -1,6 +1,6 @@
 ---
 description: "Qué es RNGdle Infinite, cómo se juega en tres pasos y en qué se diferencia del RNGdle original."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **RNGdle Infinite** es un juego incremental de navegador: tira un número entero entre **0 y 1.000.000** y descubre qué lo hace especial.

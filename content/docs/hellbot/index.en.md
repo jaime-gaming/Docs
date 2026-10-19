@@ -1,6 +1,6 @@
 ---
 description: "What hellbot is, which event it runs and what guarantees it offers as a production bot."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **hellbot** is the Discord bot that runs *Welcome to Hell*: keep at least **one real human** in a single voice channel, **continuously, for 160 hours**. If that channel empties and nobody returns within the grace period, the run dies **permanently**.

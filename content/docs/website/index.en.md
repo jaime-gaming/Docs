@@ -1,6 +1,6 @@
 ---
 description: "What jaime-gaming.github.io is, what it includes and how it relates to this documentation hub."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **jaime-gaming.github.io** is Jaime Gaming's personal site, published at [jaime-gaming.github.io](https://jaime-gaming.github.io/). It is also the site **this documentation inherits its entire aesthetic from**: palette, fonts, animations and component structure.

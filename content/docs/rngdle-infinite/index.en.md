@@ -1,6 +1,6 @@
 ---
 description: "What RNGdle Infinite is, how it plays in three steps and how it differs from the original RNGdle."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **RNGdle Infinite** is a browser incremental game: roll an integer between **0 and 1,000,000** and find out what makes it special.

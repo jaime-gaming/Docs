@@ -1,6 +1,6 @@
 ---
 description: "What VOID is, its premise, how it is built and what state it is in."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **VOID** is a psychological game set in a mysterious corporation where everybody and everything disappears.

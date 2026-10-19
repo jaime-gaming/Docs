@@ -1,6 +1,6 @@
 ---
 description: "Qué es jaime-gaming.github.io, qué incluye y cómo se relaciona con este centro de documentación."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **jaime-gaming.github.io** es el sitio personal de Jaime Gaming, publicado en [jaime-gaming.github.io](https://jaime-gaming.github.io/). Es también el sitio del que **esta documentación hereda toda la estética**: paleta, tipografías, animaciones y estructura de componentes.

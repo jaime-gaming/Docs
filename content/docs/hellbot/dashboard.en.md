@@ -1,6 +1,6 @@
 ---
 description: "hellbot's live web dashboard: WebSocket, polling fallback, operator page and static publishing connected to the real bot."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 The bot serves a **live web dashboard** on `WEB_PORT` (8080 by default; `0` disables it). There are two pages: the public `/` and the operator's `/dev`.

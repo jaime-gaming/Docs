@@ -1,6 +1,6 @@
 ---
 description: "Qué es VOID, su premisa, cómo está construido y en qué estado se encuentra."
-updated: "2026-10-18"
+updated: "2026-10-19"
 ---
 
 **VOID** es un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece.
