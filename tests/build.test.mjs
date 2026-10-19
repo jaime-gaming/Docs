@@ -739,3 +739,26 @@ test("el theme-color es el de la web", () => {
   // visible fuera, porque el marco cambia de color al entrar en la documentación.
   assert.match(read("index.html"), /<meta name="theme-color" content="#10120f" \/>/);
 });
+
+test("ninguna página lleva estilos en línea", () => {
+  // Un style="" es la puerta de atrás del CSS: no lo compara ninguna prueba de
+  // paridad con la web, no se reutiliza, no responde a los puntos de ruptura y se
+  // queda obsoleto en silencio cuando cambia la regla a la que acompañaba. Había
+  // cuatro —el 404 centrado y dos huecos verticales en la portada— y ahora son
+  // modificadores BEM y selectores de hermano.
+  //
+  // La única excepción es --lang-color: no declara un estilo, pasa el color del
+  // lenguaje de cada proyecto a una regla que sí vive en el CSS.
+  const permitidas = /^--[\w-]+:$/;
+  let vistas = 0;
+  for (const rel of todasLasPaginas()) {
+    for (const bloque of read(rel).matchAll(/style="([^"]*)"/g)) {
+      for (const declaracion of bloque[1].split(";").map((d) => d.trim()).filter(Boolean)) {
+        vistas += 1;
+        const propiedad = declaracion.split(":")[0].trim();
+        assert.ok(permitidas.test(propiedad + ":"), `${rel}: estilo en línea «${declaracion}»`);
+      }
+    }
+  }
+  assert.ok(vistas >= 7, `solo ${vistas} style="" en todo el sitio; se esperaban los colores de lenguaje`);
+});

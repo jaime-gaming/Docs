@@ -344,7 +344,7 @@ ${GROUPS.map((group) => `    <div class="group reveal">
         </div>
         <span class="group__count">${group.projects.length} ${DICT.es["projects.pages"]}</span>
       </div>
-      <div class="card-grid" data-stagger>
+      <div class="projects__grid" data-stagger>
 ${group.projects.map((slug) => projectCard(projectBySlug(slug))).join("\n")}
       </div>
     </div>`).join("\n")}
@@ -373,7 +373,7 @@ ${["overview", "install", "usage", "deep", "reference"].map((key) => `      <div
         </div>
         <p class="about__text" data-i18n="home.about.text1">Texto.</p>
         <p class="about__text" data-i18n="home.about.text2">Texto.</p>
-        <h3 class="about__card-title" style="margin-top:32px" data-i18n="home.contribute.title">¿Ves un error?</h3>
+        <h3 class="about__card-title" data-i18n="home.contribute.title">¿Ves un error?</h3>
         <p class="about__text" data-i18n="home.contribute.text">Toda la documentación está en un repositorio público.</p>
         <div class="hero__cta">
           <a class="btn btn--ghost" href="${github("Docs", "/issues/new")}" target="_blank" rel="noopener noreferrer">${renderIcon("alert")}<span data-i18n="home.contribute.issue">Abrir una issue</span></a>
@@ -386,7 +386,7 @@ ${["overview", "install", "usage", "deep", "reference"].map((key) => `      <div
         <h3 class="about__card-title" data-i18n="home.about.card.title">Escrita a mano, generada con Node</h3>
         <p class="about__card-copy" data-i18n="home.about.card.text">Cada página es un Markdown en content/docs/.</p>
         <p class="about__card-stamp" data-i18n="home.about.card.stamp">VER EL REPOSITORIO ↗</p>
-        <div class="public-profile" style="margin-top:24px">
+        <div class="public-profile">
           <dl>
             <div><dt data-i18n="home.about.row.stack">Generador</dt><dd>Node · scripts/build.mjs</dd></div>
             <div><dt data-i18n="home.about.row.palette">Paleta</dt><dd>#0d100d · #c8eb85</dd></div>
@@ -427,7 +427,7 @@ function buildProjectsIndex() {
       <button class="filter-chip reveal" type="button" data-filter="all" aria-pressed="true">${renderIcon("list")}<span data-i18n="projects.group.all">Todos</span><span class="filter-chip__count">${PROJECTS.length}</span></button>
 ${chips}
     </div>
-    <div class="card-grid" id="projectCards" data-stagger>
+    <div class="projects__grid" id="projectCards" data-stagger>
 ${PROJECTS.map((project) => projectCard(project)).join("\n")}
     </div>
     <p class="pindex__empty" id="projectEmpty" hidden data-i18n="projects.empty">No hay proyectos en esta categoría.</p>
@@ -500,11 +500,11 @@ function buildStatus() {
 
 function build404() {
   const bodyHtml = `  <section class="section">
-    <div class="section__head reveal" style="max-width:600px;margin-inline:auto;text-align:center;padding-block:60px">
+    <div class="section__head section__head--center reveal">
       <p class="contact-eyebrow">404</p>
       <h1 class="section__title" data-i18n="notFound.title">Página no encontrada</h1>
       <p class="section__sub" data-i18n="notFound.sub">Puede que el enlace esté roto o que esta guía se haya movido.</p>
-      <div class="hero__cta" style="justify-content:center;margin-top:28px">
+      <div class="hero__cta hero__cta--center">
         <a class="btn btn--primary" href="${u("/")}">${renderIcon("compass")}<span data-i18n="notFound.home">Volver al inicio de la documentación</span></a>
         <a class="btn btn--ghost" href="${u("/projects/")}">${renderIcon("layers")}<span data-i18n="notFound.projects">Ver todos los proyectos</span></a>
       </div>
