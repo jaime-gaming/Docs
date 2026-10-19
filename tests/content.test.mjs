@@ -138,7 +138,12 @@ test("ninguna página se quedó en texto provisional", () => {
     for (const page of project.pages) {
       for (const lang of LANGUAGES) {
         const { file, body } = load(project.slug, page.slug, lang);
-        if (/Texto provisional|Lorem ipsum|TODO:|Por escribir/i.test(body)) stubs.push(file);
+        // Los marcadores van sin la "i": con ella, "TODO:" casa con «método:» y
+        // con «todo:», que son español normal. El resto sí da igual en
+        // mayúsculas. Y de paso entran TBD, FIXME y XXX, que faltaban.
+        const sinEscribir = /Texto provisional|Lorem ipsum|Por escribir/i.test(body)
+          || /\b(?:TODO|TBD|FIXME|XXX):/.test(body);
+        if (sinEscribir) stubs.push(file);
       }
     }
   }

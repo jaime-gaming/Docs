@@ -168,6 +168,7 @@ export const PROJECTS = [
       { slug: "index", icon: "compass", title: { es: "Visión general", en: "Overview" } },
       { slug: "install", icon: "download", title: { es: "Instalación y juego", en: "Install & play" } },
       { slug: "world", icon: "eye", title: { es: "El mundo de VOID Corp", en: "The VOID Corp world" } },
+      { slug: "engine", icon: "cpu", title: { es: "Las tripas del archivo", en: "Inside the single file" } },
       { slug: "faq", icon: "help", title: { es: "Avisos y preguntas", en: "Warnings & FAQ" } },
     ],
   },

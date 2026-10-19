@@ -92,4 +92,5 @@ This guide summarizes and orders things. This is what the repository holds, with
 
 - [Install & play](/void/install/) — opening it, requirements and known problems.
 - [The VOID Corp world](/void/world/) — the story: system architecture, pre-install protocol and warnings.
+- [Inside the single file](/void/engine/) — what is inside the HTML: media, canvas, session and the translator.
 - [Warnings & FAQ](/void/faq/) — accessibility, project status and how to contribute.
