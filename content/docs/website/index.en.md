@@ -101,6 +101,32 @@ This documentation site is **not a fork** of the main website: it is a separate 
 
 Sharing the language switch has a useful effect: both sites store the preference under the **same `lang` key in `localStorage`**, and since they share an origin, switching language on one applies to the other.
 
+## Further reading in the repository
+
+This guide summarizes and orders things. This is what the repository holds, with its real sizes, in case you want to go to the source.
+
+| Document | Size | What it is |
+| --- | --- | --- |
+| [`assets/js/main.js`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/js/main.js) | 69 KB | The home page logic: cards, contributions calendar, scroll reveal and routing |
+| [`assets/data/github.json`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/data/github.json) | 54 KB | The committed snapshot of the repositories |
+| [`assets/data/contributions.json`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/data/contributions.json) | 53 KB | The committed snapshot of the contributions calendar |
+| [`tests/site.test.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/tests/site.test.mjs) | 37 KB | The site's 24 tests |
+| [`assets/js/i18n.js`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/js/i18n.js) | 30 KB | The ES ↔ EN switcher and the translations |
+| [`assets/css/style.css`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/css/style.css) | 28 KB | **The stylesheet this documentation's look is cloned from** |
+| [`index.html`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/index.html) | 24 KB | The home page |
+| [`README.md`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/README.md) | 12 KB | The introduction and the generator's decisions |
+| [`content/home.fragment.html`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/content/home.fragment.html) | 12 KB | The home fragment the build injects |
+| [`scripts/build.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/scripts/build.mjs) | 10 KB | The static generator |
+| [`scripts/layout.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/scripts/layout.mjs) | 7 KB | The shared template |
+| [`content/blog/lanzamiento-wave.md`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/content/blog/lanzamiento-wave.md) | 6 KB | The blog post about Wave |
+| [`lanzamiento-wave.en.md`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/content/blog/lanzamiento-wave.en.md) | 5 KB | The same post in English |
+| [`404.html`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/404.html) | 6 KB | The client-side routing fallback: it serves the per-repository pages |
+| [`tests/preview.test.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/tests/preview.test.mjs) | 2 KB | The preview server's tests |
+| [`package.json`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/package.json) | 700 B | The three scripts, including `sync:contributions` |
+
+> [!NOTE]
+> The two snapshots in `assets/data/` are committed on purpose: the home page renders from what is in the repository and does not depend on GitHub answering at that moment. `npm run sync:contributions` refreshes them.
+
 ## Guide tour
 
 - [Build & preview](/website/build/) — generating the site, serving it locally and the checks.

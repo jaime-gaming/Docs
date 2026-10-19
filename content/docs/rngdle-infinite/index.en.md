@@ -72,6 +72,26 @@ npm run build   # production build
 
 The repository's `AGENTS.md` has the project map and the conventions for contributors and for coding agents.
 
+## Further reading in the repository
+
+This guide summarizes and orders things. This is what the repository holds, with its real sizes, in case you want to go to the source.
+
+| Document | Size | What it is |
+| --- | --- | --- |
+| [`AGENTS.md`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/AGENTS.md) | 8 KB | The project map and conventions, written for contributors and for coding agents |
+| [`src/data/README.md`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/src/data/README.md) | 13 KB | Where the scoring data comes from: the pinned commit, every table, its formats and what changing them requires. **Longer than the main README** |
+| [`README.md`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/README.md) | 3 KB | The game's introduction |
+| [`src/data/badge-metadata.json`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/src/data/badge-metadata.json) | 71 KB | The 233 badges with label, description, emoji, EP, family and rarity, in the pinned source's order |
+| [`src/data/roll-samples.json`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/src/data/roll-samples.json) | 152 KB | Fifty observed results. **Used by tests only**, never imported into production |
+| [`src/data/game-index.json`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/src/data/game-index.json) | 6 KB | Source and revision, population, row order, SHA-256 digests and table lengths, versioned paths and roll-tier thresholds |
+| [`vite.config.js`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/vite.config.js) | 3 KB | The build and the dev server |
+| [`src/data/diagram-hints.json`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/src/data/diagram-hints.json) | 2 KB | The observed contributor categories. **Never determines membership or EP** |
+| [`package.json`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/package.json) | 1 KB | The scripts, including `prepare:data` and `audit:economy` |
+| [`index.html`](https://github.com/jaime-gaming/RNGdle-Infinite/blob/main/index.html) | 1 KB | The entry point |
+
+> [!NOTE]
+> The two `README.md` files read in the opposite order to what their size suggests: the root one introduces the game, and the one in `src/data/` is the technical documentation of the data.
+
 ## Guide tour
 
 - [How to play](/rngdle-infinite/play/) — the roll, the scoring and the rhythm.

@@ -75,6 +75,19 @@ Una vez que la terminal arranca, las interacciones disponibles en la beta son tr
 
 > *Recuerda: si haces ping al VOID, el VOID te devuelve el ping.*
 
+## Seguir leyendo en el repositorio
+
+Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamaños reales, por si quieres ir a la fuente.
+
+| Documento | Tamaño | Qué es |
+| --- | --- | --- |
+| [`README.md`](https://github.com/jaime-gaming/VOID/blob/main/README.md) | 3 KB | La presentación y las tres issues abiertas |
+| [`.github/agents/my-agent.agent.md`](https://github.com/jaime-gaming/VOID/blob/main/.github/agents/my-agent.agent.md) | 510 B | El agente personalizado **Michael Burns**, escrito como utilería del relato |
+| [`VOID mxks version (code).html`](https://github.com/jaime-gaming/VOID/blob/main/VOID%20mxks%20version/VOID%20mxks%20version%20%28code%29.html) | 1,04 MB | El juego entero en un solo archivo, con todo integrado |
+
+> [!NOTE]
+> El repositorio son cuatro ficheros y un vídeo de 23,5 MB en `VOID mxks version/assets [DO NOT TOUCH]/`. No hay build ni dependencias que documentar: el juego **es** el archivo HTML.
+
 ## Recorrido de la guía
 
 - [Instalación y juego](/void/install/) — abrirlo, requisitos y problemas conocidos.

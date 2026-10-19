@@ -101,6 +101,32 @@ Este sitio de documentación **no es un fork** de la web principal: es un proyec
 
 Compartir el conmutador de idioma tiene un efecto útil: ambos sitios guardan la preferencia en la **misma clave `lang` de `localStorage`**, y como comparten origen, cambiar de idioma en uno se aplica al otro.
 
+## Seguir leyendo en el repositorio
+
+Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamaños reales, por si quieres ir a la fuente.
+
+| Documento | Tamaño | Qué es |
+| --- | --- | --- |
+| [`assets/js/main.js`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/js/main.js) | 69 KB | La lógica de la portada: tarjetas, calendario de contribuciones, revelado al hacer scroll y el enrutado |
+| [`assets/data/github.json`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/data/github.json) | 54 KB | La instantánea commiteada de los repositorios |
+| [`assets/data/contributions.json`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/data/contributions.json) | 53 KB | La instantánea commiteada del calendario de contribuciones |
+| [`tests/site.test.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/tests/site.test.mjs) | 37 KB | Las 24 pruebas del sitio |
+| [`assets/js/i18n.js`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/js/i18n.js) | 30 KB | El conmutador ES ↔ EN y las traducciones |
+| [`assets/css/style.css`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/assets/css/style.css) | 28 KB | **La hoja de la que está clonada la estética de esta documentación** |
+| [`index.html`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/index.html) | 24 KB | La portada |
+| [`README.md`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/README.md) | 12 KB | La presentación y las decisiones del generador |
+| [`content/home.fragment.html`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/content/home.fragment.html) | 12 KB | El fragmento de portada que el build inyecta |
+| [`scripts/build.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/scripts/build.mjs) | 10 KB | El generador estático |
+| [`scripts/layout.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/scripts/layout.mjs) | 7 KB | La plantilla común |
+| [`content/blog/lanzamiento-wave.md`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/content/blog/lanzamiento-wave.md) | 6 KB | La entrada del blog sobre Wave |
+| [`lanzamiento-wave.en.md`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/content/blog/lanzamiento-wave.en.md) | 5 KB | La misma entrada en inglés |
+| [`404.html`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/404.html) | 6 KB | El respaldo del enrutado por cliente: sirve las páginas por repositorio |
+| [`tests/preview.test.mjs`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/tests/preview.test.mjs) | 2 KB | Las pruebas del servidor de previsualización |
+| [`package.json`](https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/package.json) | 700 B | Los tres scripts, incluido `sync:contributions` |
+
+> [!NOTE]
+> Las dos instantáneas de `assets/data/` están commiteadas a propósito: la portada se renderiza con lo que hay en el repositorio y no depende de que GitHub responda en ese momento. `npm run sync:contributions` las refresca.
+
 ## Recorrido de la guía
 
 - [Build y preview](/website/build/) — generar el sitio, servirlo en local y las comprobaciones.

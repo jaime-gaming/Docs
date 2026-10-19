@@ -53,6 +53,23 @@ Pruebas de las funciones puras y de pintado (npm test)
 
 El build de producción va a `docs/`, que es lo que sirve GitHub Pages. Con `base: './'` y enlaces relativos, funciona tanto en `usuario.github.io/daily-diary/` como en un dominio propio.
 
+## Seguir leyendo en el repositorio
+
+Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamaños reales, por si quieres ir a la fuente.
+
+| Documento | Tamaño | Qué es |
+| --- | --- | --- |
+| [`src/main.js`](https://github.com/jaime-gaming/daily-diary/blob/main/src/main.js) | 179 KB | La aplicación entera: arranque, enrutado, estado y vistas. Es el fichero más grande del repositorio con diferencia |
+| [`src/data/constants.js`](https://github.com/jaime-gaming/daily-diary/blob/main/src/data/constants.js) | 25 KB | Las listas de las que bebe el contenido diario: palabras, consejos, temas, hábitos sugeridos, citas, rituales y tonos |
+| [`README.md`](https://github.com/jaime-gaming/daily-diary/blob/main/README.md) | 13 KB | La presentación, el diagrama de estructura y las convenciones |
+| [`vite.config.js`](https://github.com/jaime-gaming/daily-diary/blob/main/vite.config.js) | 2 KB | El build y el servidor de desarrollo |
+| [`index.html`](https://github.com/jaime-gaming/daily-diary/blob/main/index.html) | 957 B | El punto de entrada |
+| [`package.json`](https://github.com/jaime-gaming/daily-diary/blob/main/package.json) | 498 B | Los scripts y las dependencias |
+| [`render.yaml`](https://github.com/jaime-gaming/daily-diary/blob/main/render.yaml) | 299 B | El despliegue en Render |
+
+> [!NOTE]
+> No hay carpeta `docs/`: el README es toda la documentación del proyecto. Los módulos que su diagrama de estructura no lista están descritos en [Desarrollo](/daily-diary/dev/).
+
 ## Recorrido de la guía
 
 - [Instalación y uso](/daily-diary/install/) — ejecutarlo en local, desplegarlo y el modelo de guardado.

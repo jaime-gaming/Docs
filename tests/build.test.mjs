@@ -596,3 +596,34 @@ test("ninguna página referencia algo que no existe", () => {
   assert.deepEqual([...new Set(anclas)], [], "anclas internas sin id de destino");
   assert.deepEqual([...new Set(enlaces)], [], "enlaces internos a páginas inexistentes");
 });
+
+/**
+ * Un enlace de Markdown mal formado no falla el build: marked lo renderiza a
+ * medias y sale HTML mutilado. Ocurrió al envolver dos veces una fila de tabla
+ * (`[`[`README.md`](url)`](url)`) y produjo un <a> cuyo href contenía corchetes.
+ */
+test("ningún href arrastra sintaxis de Markdown sin procesar", () => {
+  const malos = [];
+  for (const rel of todasLasPaginas()) {
+    const doc = dom(rel);
+
+    doc.querySelectorAll("[href]").forEach((node) => {
+      const href = node.getAttribute("href");
+      if (/[\[\]`\s]/.test(href)) malos.push(`${rel} → href="${href.slice(0, 80)}"`);
+    });
+
+    // Un <code> con solo un corchete es el resto de un enlace roto.
+    doc.querySelectorAll("code").forEach((code) => {
+      if (/^[\[\]]$/.test(code.textContent.trim())) malos.push(`${rel} → <code>${code.textContent}</code>`);
+    });
+
+    // Y una celda de tabla no debe conservar "](" fuera de un <code>, que es
+    // donde sí puede aparecer como ejemplo documentado.
+    doc.querySelectorAll("td, th").forEach((celda) => {
+      const clon = celda.cloneNode(true);
+      clon.querySelectorAll("code, pre").forEach((n) => n.remove());
+      if (clon.textContent.includes("](")) malos.push(`${rel} → ${celda.textContent.trim().slice(0, 80)}`);
+    });
+  }
+  assert.deepEqual([...new Set(malos)], [], "Markdown crudo en el HTML servido");
+});
