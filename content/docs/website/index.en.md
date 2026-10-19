@@ -101,6 +101,10 @@ This documentation site is **not a fork** of the main website: it is a separate 
 
 Sharing the language switch has a useful effect: both sites store the preference under the **same `lang` key in `localStorage`**, and since they share an origin, switching language on one applies to the other.
 
+## License
+
+The site's code is released under the **ISC** licence, declared in its `package.json`. The repository ships no `LICENSE` file of its own: the only licence texts it carries belong to the third-party libraries grouped in `assets/vendor/` (Marked, DOMPurify, Lucide and Simple Icons), which keep their own.
+
 ## Further reading in the repository
 
 This guide summarizes and orders things. This is what the repository holds, with its real sizes, in case you want to go to the source.

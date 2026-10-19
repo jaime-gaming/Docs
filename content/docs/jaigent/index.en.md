@@ -86,7 +86,14 @@ jaigent chat                          # then keep going interactively
 
 `jgt` is a shorter alias for the same command.
 
-## Reading further in the repository
+## License
+
+The agreement that governs is [`LICENSE.md`](https://github.com/jaime-gaming/jAIgent/blob/main/LICENSE.md), and **it is not an open-source licence**. It grants a limited, non-exclusive, non-transferable, revocable licence **for internal, non-commercial and educational purposes only**, and expressly forbids distributing it as part of a paid product or service, redistributing it in a bundle, installer or package marketed separately, reverse engineering it, and using it in a way that competes with the author's offerings. Only the copyright holder can authorise commercial use, and the request must be made in writing.
+
+> [!WARNING]
+> The repository's `README.md` states that the project is released under Apache-2.0, and `pyproject.toml` carries the Apache licence classifier. **Both disagree with `LICENSE.md`**, which is the governing document. Anyone considering reusing the code should read the agreement, not the README.
+
+## Further reading in the repository
 
 This guide summarizes and organizes. The repository also ships its own documentation, and a couple of files should not be mistaken for existing functionality.
 

@@ -101,6 +101,10 @@ Este sitio de documentación **no es un fork** de la web principal: es un proyec
 
 Compartir el conmutador de idioma tiene un efecto útil: ambos sitios guardan la preferencia en la **misma clave `lang` de `localStorage`**, y como comparten origen, cambiar de idioma en uno se aplica al otro.
 
+## Licencia
+
+El código del sitio se publica bajo licencia **ISC**, declarada en su `package.json`. El repositorio no incluye un fichero `LICENSE` propio: los únicos textos de licencia que trae son los de las librerías de terceros que se agrupan en `assets/vendor/` (Marked, DOMPurify, Lucide y Simple Icons), y esas conservan las suyas.
+
 ## Seguir leyendo en el repositorio
 
 Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamaños reales, por si quieres ir a la fuente.

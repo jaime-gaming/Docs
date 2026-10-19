@@ -10,7 +10,6 @@ export const UI = {
   es: {
     // Navegación
     "nav.home": "Inicio",
-    "nav.docs": "Documentación",
     "nav.projects": "Proyectos",
     "nav.search": "Buscar",
     "nav.site": "Mi web",
@@ -54,7 +53,6 @@ export const UI = {
     "docs.updated": "Última revisión",
     "docs.prev": "Anterior",
     "docs.next": "Siguiente",
-    "docs.backToProject": "Volver a la visión general",
     "docs.allProjects": "Todos los proyectos",
     "docs.readTime": "min de lectura",
     "docs.jumpTo": "Ir a",
@@ -69,10 +67,6 @@ export const UI = {
     "home.stats.pages": "páginas",
     "home.stats.languages": "idiomas",
     "home.stats.updated": "actualizada",
-    "home.groups.title": "Explora por categoría",
-    "home.groups.sub": "Cada proyecto tiene su propia guía completa, con las mismas secciones.",
-    "home.recent.title": "Documentación más reciente",
-    "home.recent.sub": "Las guías que he revisado últimamente.",
     "home.about.title": "Sobre esta documentación",
     "home.about.sub": "Cómo está hecha y cómo se mantiene.",
     "home.about.card.label": "CÓMO FUNCIONA",
@@ -95,15 +89,6 @@ export const UI = {
     "projects.group.all": "Todos",
 
     // Tarjetas y metadatos
-    "project.status": "Estado",
-    "project.language": "Lenguaje",
-    "project.license": "Licencia",
-    "project.stack": "Tecnologías",
-    "project.repo": "Repositorio",
-    "project.viewOnGithub": "Ver en GitHub",
-    "project.liveDemo": "Abrir proyecto",
-    "project.docsPages": "Páginas de esta guía",
-    "project.overview": "Visión general",
 
     // Bloques de contenido
     "callout.note": "Nota",
@@ -113,7 +98,6 @@ export const UI = {
     "callout.caution": "Precaución",
     "code.copy": "Copiar",
     "code.copied": "Copiado",
-    "table.caption": "Tabla",
 
     // Pie
     "footer.rights": "Jaime Gaming.",
@@ -168,7 +152,6 @@ export const UI = {
 
   en: {
     "nav.home": "Home",
-    "nav.docs": "Docs",
     "nav.projects": "Projects",
     "nav.search": "Search",
     "nav.site": "My site",
@@ -209,7 +192,6 @@ export const UI = {
     "docs.updated": "Last reviewed",
     "docs.prev": "Previous",
     "docs.next": "Next",
-    "docs.backToProject": "Back to the overview",
     "docs.allProjects": "All projects",
     "docs.readTime": "min read",
     "docs.jumpTo": "Go to",
@@ -223,10 +205,6 @@ export const UI = {
     "home.stats.pages": "pages",
     "home.stats.languages": "languages",
     "home.stats.updated": "updated",
-    "home.groups.title": "Browse by category",
-    "home.groups.sub": "Every project has its own complete guide, with the same sections.",
-    "home.recent.title": "Most recently updated",
-    "home.recent.sub": "The guides I have reviewed lately.",
     "home.about.title": "About these docs",
     "home.about.sub": "How they are made and how they are kept up to date.",
     "home.about.card.label": "HOW IT WORKS",
@@ -247,15 +225,6 @@ export const UI = {
     "projects.code": "Code",
     "projects.group.all": "All",
 
-    "project.status": "Status",
-    "project.language": "Language",
-    "project.license": "License",
-    "project.stack": "Technologies",
-    "project.repo": "Repository",
-    "project.viewOnGithub": "View on GitHub",
-    "project.liveDemo": "Open project",
-    "project.docsPages": "Pages in this guide",
-    "project.overview": "Overview",
 
     "callout.note": "Note",
     "callout.tip": "Tip",
@@ -264,7 +233,6 @@ export const UI = {
     "callout.caution": "Caution",
     "code.copy": "Copy",
     "code.copied": "Copied",
-    "table.caption": "Table",
 
     "footer.rights": "Jaime Gaming.",
     "footer.made": "Documentation generated with Node and published on GitHub Pages.",

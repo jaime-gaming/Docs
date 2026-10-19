@@ -7,7 +7,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import { JSDOM } from "jsdom";
@@ -626,4 +626,32 @@ test("ningún href arrastra sintaxis de Markdown sin procesar", () => {
     });
   }
   assert.deepEqual([...new Set(malos)], [], "Markdown crudo en el HTML servido");
+});
+
+test("ninguna cadena de la interfaz está definida sin usarse en ningún sitio", () => {
+  // Llegó a acumular dieciséis claves muertas sin que nada fallara: nueve
+  // etiquetas de una ficha de proyecto que se implementó de otra forma, cuatro
+  // de dos secciones de la portada que nunca se construyeron, un enlace de
+  // vuelta que las migas de pan ya cubren, una entrada de navegación duplicada
+  // y un pie de tabla genérico. Todas se servían en los dos idiomas dentro de
+  // cada página y no aparecían en ninguna. No valen nada y pesan en las 45.
+  //
+  // El diccionario va incrustado en cada HTML, así que buscar la clave tal cual
+  // siempre da positivo: hay que mirar solo los atributos que la consumen.
+  const paginas = todasLasPaginas().map(read).join("\n");
+  const codigo = [
+    ...readdirSync(path.join(ROOT, "scripts")).filter((n) => n.endsWith(".mjs")).map((n) => `scripts/${n}`),
+    ...readdirSync(path.join(ROOT, "assets", "js")).filter((n) => n.endsWith(".js")).map((n) => `assets/js/${n}`),
+  ].map(read).join("\n");
+
+  const muertas = [];
+  for (const clave of Object.keys(DICT.es)) {
+    // proj.*, page.* y group.* las deriva dict.mjs del registro y las consume el
+    // marcado generado, pero se comprueban igual: si una deja de usarse, sobra.
+    const atributo = new RegExp(`data-(?:i18n(?:-aria|-placeholder)?|content-key)="${clave}"`);
+    if (atributo.test(paginas)) continue;
+    if (codigo.includes(`"${clave}"`) || codigo.includes(`'${clave}'`) || codigo.includes("`" + clave + "`")) continue;
+    muertas.push(clave);
+  }
+  assert.deepEqual(muertas, [], "cadenas de interfaz definidas pero que no consume nada");
 });

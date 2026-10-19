@@ -95,8 +95,5 @@ test("los demos y licencias declarados son plausibles", () => {
     if (project.demo) {
       assert.match(project.demo, /^https:\/\//, `${project.slug}: demo sin https`);
     }
-    if (project.license) {
-      assert.ok(typeof project.license === "string", `${project.slug}: licencia no textual`);
-    }
   }
 });

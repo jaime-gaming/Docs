@@ -15,7 +15,6 @@ export const PROJECTS = [
     language: "TypeScript",
     languageColor: "#3178c6",
     demo: "https://jaime-gaming.github.io/Wave/",
-    license: "MIT",
     status: { es: "0.1.0 · activa", en: "0.1.0 · active" },
     tagline: {
       es: "Reproductor de música local-first para web, Android y Windows.",
@@ -44,7 +43,6 @@ export const PROJECTS = [
     language: "Python",
     languageColor: "#3572A5",
     demo: "",
-    license: "MIT",
     status: { es: "0.5.x · activa", en: "0.5.x · active" },
     tagline: {
       es: "Todos tus agentes de IA en un mismo sitio.",
@@ -75,7 +73,6 @@ export const PROJECTS = [
     language: "Python",
     languageColor: "#3572A5",
     demo: "",
-    license: "",
     status: { es: "producción · estable", en: "production · stable" },
     tagline: {
       es: "El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.",
@@ -104,7 +101,6 @@ export const PROJECTS = [
     language: "JavaScript",
     languageColor: "#f1e05a",
     demo: "https://jaime-gaming.github.io/RNGdle-Infinite/",
-    license: "",
     status: { es: "jugable · activa", en: "playable · active" },
     tagline: {
       es: "Un número, infinitas posibilidades.",
@@ -132,7 +128,6 @@ export const PROJECTS = [
     language: "JavaScript",
     languageColor: "#f1e05a",
     demo: "https://jaime-gaming.github.io/daily-diary/",
-    license: "",
     status: { es: "completo · local", en: "complete · local" },
     tagline: {
       es: "Tu espacio personal: un diario minimalista y 100 % local.",
@@ -159,7 +154,6 @@ export const PROJECTS = [
     language: "HTML",
     languageColor: "#e34c26",
     demo: "",
-    license: "",
     status: { es: "beta · en desarrollo", en: "beta · in development" },
     tagline: {
       es: "Michael Burns desapareció el año pasado. ¿Quieres entrar?",
@@ -185,7 +179,6 @@ export const PROJECTS = [
     language: "JavaScript",
     languageColor: "#f1e05a",
     demo: "https://jaime-gaming.github.io/",
-    license: "ISC",
     status: { es: "publicada · activa", en: "published · active" },
     tagline: {
       es: "El sitio personal que da origen a esta documentación.",

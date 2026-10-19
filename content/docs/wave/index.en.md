@@ -77,7 +77,7 @@ Wave is released under the **MIT License**. Dependencies retain their own licens
 
 [PixelPlayer](https://github.com/PixelPlayerHQ/PixelPlayer) is the reference for local library organisation and player interaction, but Wave is an independent implementation: it includes no PixelPlayer source code, artwork or branding. It is also not affiliated with, sponsored by or endorsed by PixelPlayer or Spotify AB.
 
-## Reading further in the repository
+## Further reading in the repository
 
 This guide summarizes and organizes. The repository also ships its own documentation, quite a bit longer, and it is worth knowing what exists and where.
 
