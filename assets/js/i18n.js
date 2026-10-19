@@ -124,8 +124,16 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     applyLang(detectDefaultLang());
-    document.getElementById("langSwitch")?.addEventListener("click", () => {
+    const switchButton = document.getElementById("langSwitch");
+    switchButton?.addEventListener("click", () => {
       applyLang(window.currentLang === "es" ? "en" : "es", { preserveScroll: true });
+      // El globo da una vuelta y su anillo se expande: el mismo gesto que en la
+      // web. Se quita la clase y se fuerza el reflujo para que vuelva a sonar si
+      // se pulsa dos veces seguidas.
+      switchButton.classList.remove("is-switching");
+      void switchButton.offsetWidth;
+      switchButton.classList.add("is-switching");
+      window.setTimeout(() => switchButton.classList.remove("is-switching"), 760);
     });
   });
 

@@ -655,3 +655,37 @@ test("ninguna cadena de la interfaz está definida sin usarse en ningún sitio",
   }
   assert.deepEqual(muertas, [], "cadenas de interfaz definidas pero que no consume nada");
 });
+
+test("las tipografías están autohospedadas y existen en disco", () => {
+  // La web sirve once woff2 propios con font-display: swap. Cargarlas de Google
+  // Fonts era la diferencia más visible entre los dos sitios: cambian el fichero,
+  // el subconjunto de glifos y el momento en que aparece el texto.
+  //
+  // Una url() rota no falla en ninguna otra prueba y se ve simplemente como una
+  // fuente del sistema, así que se comprueba que cada fichero existe, que no
+  // queda ningún CDN y que las licencias SIL viajan con las fuentes, que es lo
+  // que exige redistribuirlas.
+  const css = read("assets/css/style.css");
+  const urls = [...css.matchAll(/url\("([^"]+)"\)/g)].map((match) => match[1]);
+  assert.ok(urls.length >= 11, `solo ${urls.length} url() en el CSS; se esperaban las once fuentes`);
+  for (const url of urls) {
+    assert.ok(
+      existsSync(path.join(ROOT, "assets", "css", url)),
+      `el CSS pide ${url} y ese fichero no existe`
+    );
+  }
+  for (const familia of ["DM Sans", "Space Grotesk", "IBM Plex Mono"]) {
+    assert.match(css, new RegExp(`@font-face[^}]*"${familia}"`), `falta el @font-face de ${familia}`);
+    const licencia = `${familia.toLowerCase().replace(/ /g, "-")}.LICENSE.txt`;
+    assert.ok(
+      existsSync(path.join(ROOT, "assets", "vendor", licencia)),
+      `falta assets/vendor/${licencia}, que la licencia SIL exige distribuir con la fuente`
+    );
+  }
+  for (const rel of todasLasPaginas()) {
+    assert.ok(
+      !/fonts\.(googleapis|gstatic)\.com/.test(read(rel)),
+      `${rel} aún enlaza tipografías de un CDN`
+    );
+  }
+});
