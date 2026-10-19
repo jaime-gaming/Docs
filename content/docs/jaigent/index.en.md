@@ -131,3 +131,4 @@ The ChatGPT skill, for its part, assumes a **remote OAuth-protected HTTP MCP end
 - [Skills, plugins & schedules](/jaigent/extend/) — extending it with local files.
 - [Tools reference](/jaigent/reference/) — tools table, variables and the safety model.
 - [Security](/jaigent/security/) — what it defends, what it deliberately does not, and how to report a vulnerability.
+- [Development](/jaigent/dev/) — the environment, how the code is organised, the mock server and the workflows.

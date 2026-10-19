@@ -131,3 +131,4 @@ La skill de ChatGPT, por su parte, asume un **endpoint MCP remoto por HTTP prote
 - [Skills, plugins y horarios](/jaigent/extend/) — ampliarlo con archivos locales.
 - [Referencia de tools](/jaigent/reference/) — tabla de herramientas, variables y modelo de seguridad.
 - [Seguridad](/jaigent/security/) — qué defiende, qué no defiende a propósito y cómo informar de una vulnerabilidad.
+- [Desarrollo](/jaigent/dev/) — el entorno, cómo está organizado el código, el servidor de simulación y los workflows.

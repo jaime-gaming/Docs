@@ -64,6 +64,7 @@ export const PROJECTS = [
       { slug: "extend", icon: "puzzle", title: { es: "Skills, plugins y horarios", en: "Skills, plugins & schedules" } },
       { slug: "reference", icon: "book", title: { es: "Referencia de tools", en: "Tools reference" } },
       { slug: "security", icon: "shield", title: { es: "Seguridad", en: "Security" } },
+      { slug: "dev", icon: "code", title: { es: "Desarrollo", en: "Development" } },
     ],
   },
   {
