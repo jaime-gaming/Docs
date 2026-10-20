@@ -18,10 +18,16 @@ function assetUrl(path) {
   return `${u(path)}?v=${version}`;
 }
 
+// Los cinco enlaces de la cabecera de la web y en su orden: Inicio, Proyectos,
+// Blog, Docs y Contacto. Aquí el cuarto puesto apunta al revés —a la web, en vez
+// de a esta documentación— y los otros cuatro son exactamente los mismos. Blog y
+// Contacto viven en el sitio principal, así que salen fuera.
 const NAV_ITEMS = [
   { href: u("/"), key: "nav.home", label: "Inicio" },
   { href: u("/projects/"), key: "nav.projects", label: "Proyectos" },
+  { href: main("/blog/"), key: "nav.blog", label: "Blog", external: true },
   { href: main("/"), key: "nav.site", label: "Mi web", external: true },
+  { href: main("/contact/"), key: "nav.contact", label: "Contacto", external: true },
 ];
 
 function escapeHtml(str) {
@@ -68,10 +74,9 @@ export function renderLayout({
   const projectSlug = activeProjectSlug(activePath);
 
   const nav = NAV_ITEMS.map((item) => {
-    const active = isActiveNavItem(item, activePath) ? " active" : "";
+    const active = isActiveNavItem(item, activePath) ? ' class="active"' : "";
     const target = item.external ? ' target="_blank" rel="noopener noreferrer"' : "";
-    const arrow = item.external ? ' <span class="nav__external" aria-hidden="true">↗</span>' : "";
-    return `<a href="${item.href}"${target} data-i18n="${item.key}" class="${active.trim()}">${item.label}${arrow}</a>`;
+    return `<a href="${item.href}"${target} data-i18n="${item.key}"${active}>${item.label}</a>`;
   }).join("\n    ");
 
   const mobileNav = NAV_ITEMS.map((item) => {
@@ -173,9 +178,6 @@ ${extraHead}</head>
       </svg>
       <span class="sr-only" id="languageName">Español</span>
     </button>
-    <a class="social-icon nav__github" href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-      ${renderIcon("github")}
-    </a>
     <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
       <span></span><span></span><span></span>
     </button>
