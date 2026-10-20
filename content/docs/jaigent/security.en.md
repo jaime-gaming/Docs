@@ -1,4 +1,8 @@
 ---
+title: "Security"
+icon: "shield"
+order: 80
+blurb: "what it defends, what it deliberately does not, and how to report a vulnerability."
 description: "jAIgent's security model: what it actually defends, what it deliberately does not, supported versions and how to report a vulnerability."
 updated: "2026-10-19"
 ---

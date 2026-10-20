@@ -1,4 +1,8 @@
 ---
+title: "Architecture"
+icon: "boxes"
+order: 70
+blurb: "modules, invariants and the map of all 41."
 description: "hellbot's layers, invariants, data model and tests: why a 160-hour event cannot be lost."
 updated: "2026-10-18"
 ---

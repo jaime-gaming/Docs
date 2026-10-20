@@ -1,4 +1,8 @@
 ---
+title: "Install & deploy"
+icon: "download"
+order: 40
+blurb: "Windows, console, Docker, systemd and Discord permissions."
 description: "Starting hellbot on Windows with no console, from the console on any system, or with Docker, plus the Discord permission checklist."
 updated: "2026-10-18"
 ---

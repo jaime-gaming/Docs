@@ -1,4 +1,8 @@
 ---
+title: "Las tripas del archivo"
+icon: "cpu"
+order: 40
+blurb: "qué hay dentro del HTML: medios, canvas, sesión y el traductor."
 description: "Qué hay dentro del archivo único de VOID: las cuatro capas, los catorce audios, las cámaras hechas con canvas, el estado de sesión y el traductor automático."
 updated: "2026-10-20"
 ---

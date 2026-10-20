@@ -1,4 +1,8 @@
 ---
+title: "Datos y privacidad"
+icon: "database"
+order: 40
+blurb: "las claves de `localStorage`, el formato de una entrada y la copia de seguridad."
 description: "Las claves de localStorage, el formato exacto de una entrada, las listas personalizables y la privacidad."
 updated: "2026-10-18"
 ---

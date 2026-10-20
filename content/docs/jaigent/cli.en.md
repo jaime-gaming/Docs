@@ -1,4 +1,8 @@
 ---
+title: "Using the CLI"
+icon: "terminal"
+order: 30
+blurb: "commands, chat, undo and streaming."
 description: "Day to day in the terminal: one-shot tasks, interactive chat, undo, streaming and cost."
 updated: "2026-10-18"
 ---

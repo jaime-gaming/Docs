@@ -1,4 +1,8 @@
 ---
+title: "Installation"
+icon: "download"
+order: 20
+blurb: "get it running in five minutes."
 description: "Requirements, commands and first check to run Wave in the browser, on Windows and on Android."
 updated: "2026-10-18"
 ---

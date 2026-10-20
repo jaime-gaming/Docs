@@ -1,4 +1,8 @@
 ---
+title: "Live dashboard"
+icon: "monitor"
+order: 60
+blurb: "the public page and the operator page."
 description: "hellbot's live web dashboard: WebSocket, polling fallback, operator page and static publishing connected to the real bot."
 updated: "2026-10-19"
 ---

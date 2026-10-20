@@ -1,4 +1,8 @@
 ---
+title: "Estructura y desarrollo"
+icon: "code"
+order: 50
+blurb: "carpetas, módulos y pruebas."
 description: "Estructura de carpetas, módulos y pruebas de Diario."
 updated: "2026-10-18"
 ---

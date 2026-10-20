@@ -1,4 +1,8 @@
 ---
+title: "Install & play"
+icon: "download"
+order: 20
+blurb: "opening it, requirements and known problems."
 description: "Opening VOID, what is needed, why the assets folder cannot be moved and what problems are open."
 updated: "2026-10-18"
 ---

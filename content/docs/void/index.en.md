@@ -1,4 +1,7 @@
 ---
+title: "Overview"
+icon: "compass"
+order: 10
 description: "What VOID is, its premise, how it is built and what state it is in."
 updated: "2026-10-19"
 ---
@@ -87,10 +90,3 @@ This guide summarizes and orders things. This is what the repository holds, with
 
 > [!NOTE]
 > The repository is four files and a 23.5 MB video in `VOID mxks version/assets [DO NOT TOUCH]/`. There is no build and no dependencies to document: the game **is** the HTML file.
-
-## Guide tour
-
-- [Install & play](/void/install/) — opening it, requirements and known problems.
-- [The VOID Corp world](/void/world/) — the story: system architecture, pre-install protocol and warnings.
-- [Inside the single file](/void/engine/) — what is inside the HTML: media, canvas, session and the translator.
-- [Warnings & FAQ](/void/faq/) — accessibility, project status and how to contribute.

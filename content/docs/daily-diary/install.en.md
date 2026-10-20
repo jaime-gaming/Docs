@@ -1,4 +1,8 @@
 ---
+title: "Install & run"
+icon: "download"
+order: 20
+blurb: "running it locally, deploying it and the saving model."
 description: "Running Diario locally, deploying it to GitHub Pages or Render and understanding its saving model."
 updated: "2026-10-18"
 ---

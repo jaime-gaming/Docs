@@ -1,4 +1,7 @@
 ---
+title: "Visión general"
+icon: "compass"
+order: 10
 description: "Qué es Diario, qué lo hace distinto de otras apps de journaling y qué incluye."
 updated: "2026-10-19"
 ---
@@ -69,10 +72,3 @@ Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamañ
 
 > [!NOTE]
 > No hay carpeta `docs/`: el README es toda la documentación del proyecto. Los módulos que su diagrama de estructura no lista están descritos en [Estructura y desarrollo](/daily-diary/dev/).
-
-## Recorrido de la guía
-
-- [Instalación y uso](/daily-diary/install/) — ejecutarlo en local, desplegarlo y el modelo de guardado.
-- [Las cinco áreas](/daily-diary/areas/) — Hoy, Rutina, Archivo, Progreso y Pensamientos en detalle.
-- [Datos y privacidad](/daily-diary/data/) — las claves de `localStorage`, el formato de una entrada y la copia de seguridad.
-- [Estructura y desarrollo](/daily-diary/dev/) — carpetas, módulos y pruebas.

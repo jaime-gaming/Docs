@@ -847,3 +847,42 @@ test("las cifras del diccionario que declara la documentación son las reales", 
     }
   }
 });
+
+test("el recorrido de cada portada lo genera el build con todas sus páginas", () => {
+  // Sustituye a la comprobación sobre el Markdown: el apartado ya no se escribe,
+  // se compone con las páginas hermanas. Esto falla si el generador se olvida de
+  // alguna, si las desordena o si enlaza con un texto que no es su título.
+  for (const project of PROJECTS) {
+    const doc = new JSDOM(read(`${project.slug}/index.html`)).window.document;
+    const traducciones = JSON.parse(doc.getElementById("pageTranslations").textContent);
+    const hermanas = project.pages.filter((page) => page.slug !== "index");
+
+    for (const lang of LANGUAGES) {
+      const etiqueta = `${project.slug}/${lang}`;
+      const titulo = lang === "es" ? "Recorrido de la guía" : "Guide tour";
+      const cuerpo = lang === "es" ? doc.querySelector(".doc-body").innerHTML : traducciones.en.fields.body;
+      const donde = cuerpo.indexOf(titulo);
+      assert.ok(donde !== -1, `${etiqueta}: falta el apartado «${titulo}»`);
+      const seccion = cuerpo.slice(donde);
+
+      // Los enlaces del recorrido, en el orden en que salen.
+      // La frase puede llevar marcado dentro (`auto` sale como <code>auto</code>),
+      // así que se captura hasta el cierre del <li> y se le quitan las etiquetas.
+      const enlaces = [...seccion.matchAll(/<a href="[^"]*\/([a-z0-9-]+)\/">([^<]*)<\/a>([\s\S]*?)<\/li>/g)];
+      assert.deepEqual(
+        enlaces.map((m) => m[1]),
+        hermanas.map((page) => page.slug),
+        `${etiqueta}: el recorrido no lista sus páginas en orden`,
+      );
+      // El cuerpo es HTML: «Features & usage» llega como «Features &amp; usage».
+      const desescapar = (s) =>
+        s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+      enlaces.forEach((m, i) => {
+        assert.equal(desescapar(m[2]), hermanas[i].title[lang], `${etiqueta}: ${m[1]} no se llama como en el registro`);
+        // La frase va detrás de la raya y no puede quedarse vacía.
+        const frase = desescapar(m[3].replace(/<[^>]+>/g, "")).replace(/^\s*—\s*/, "").trim();
+        assert.ok(frase.length > 8, `${etiqueta}: ${m[1]} se quedó sin frase`);
+      });
+    }
+  }
+});

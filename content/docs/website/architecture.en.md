@@ -1,4 +1,8 @@
 ---
+title: "Site architecture"
+icon: "boxes"
+order: 50
+blurb: "GitHub data, the calendar, Lanyard, READMEs and SEO."
 description: "How the website gets its data: the GitHub API, the contribution calendar, Lanyard, READMEs and SEO."
 updated: "2026-10-18"
 ---

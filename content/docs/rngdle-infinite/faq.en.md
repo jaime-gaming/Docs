@@ -1,4 +1,8 @@
 ---
+title: "FAQ"
+icon: "help"
+order: 50
+blurb: "common questions and credits."
 description: "Common questions about RNGdle Infinite, the game's limits, offline behaviour and credits."
 updated: "2026-10-18"
 ---

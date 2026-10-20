@@ -1,4 +1,8 @@
 ---
+title: "Editing content"
+icon: "file"
+order: 30
+blurb: "adding a post and changing interface texts."
 description: "Adding a blog post, changing interface texts and how the two-language system works."
 updated: "2026-10-18"
 ---

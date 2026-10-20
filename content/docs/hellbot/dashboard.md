@@ -1,4 +1,8 @@
 ---
+title: "Dashboard en vivo"
+icon: "monitor"
+order: 60
+blurb: "la web pública y la del operador."
 description: "El dashboard web en vivo de hellbot: WebSocket, respaldo por sondeo, página del operador y publicación estática conectada al bot real."
 updated: "2026-10-19"
 ---

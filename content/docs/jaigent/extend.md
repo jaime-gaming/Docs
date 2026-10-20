@@ -1,4 +1,8 @@
 ---
+title: "Skills, plugins y horarios"
+icon: "puzzle"
+order: 60
+blurb: "ampliarlo con archivos locales."
 description: "Ampliar jAIgent con archivos locales: skills en Markdown, plugins en Python, comandos propios y horarios."
 updated: "2026-10-18"
 ---

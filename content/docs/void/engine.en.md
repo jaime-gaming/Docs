@@ -1,4 +1,8 @@
 ---
+title: "Inside the single file"
+icon: "cpu"
+order: 40
+blurb: "what is inside the HTML: media, canvas, session and the translator."
 description: "What is inside VOID's single file: the four layers, the fourteen audio elements, the cameras drawn with canvas, the session state and the automatic translator."
 updated: "2026-10-20"
 ---

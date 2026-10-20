@@ -1,4 +1,8 @@
 ---
+title: "Development"
+icon: "code"
+order: 90
+blurb: "the environment, how the code is organised, the mock server and the workflows."
 description: "Developing jAIgent: the environment, how the code is organised, how to try it without spending tokens, and the real state of the workflows and releases."
 updated: "2026-10-19"
 ---

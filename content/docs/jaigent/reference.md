@@ -1,4 +1,8 @@
 ---
+title: "Referencia de tools"
+icon: "book"
+order: 70
+blurb: "tabla de herramientas, variables y modelo de seguridad."
 description: "Tabla de herramientas del modelo, variables de entorno, arquitectura interna y modelo de seguridad."
 updated: "2026-10-18"
 ---

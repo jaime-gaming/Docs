@@ -1,4 +1,8 @@
 ---
+title: "Skills, plugins & schedules"
+icon: "puzzle"
+order: 60
+blurb: "extending it with local files."
 description: "Extending jAIgent with local files: Markdown skills, Python plugins, custom commands and schedules."
 updated: "2026-10-18"
 ---

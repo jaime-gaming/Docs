@@ -1,4 +1,8 @@
 ---
+title: "The VOID Corp world"
+icon: "eye"
+order: 30
+blurb: "the story: system architecture, pre-install protocol and warnings."
 description: "The VOID Corp story: the system architecture, the pre-install protocol and the warnings."
 updated: "2026-10-18"
 ---

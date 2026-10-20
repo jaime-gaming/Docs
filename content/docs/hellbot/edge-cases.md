@@ -1,4 +1,8 @@
 ---
+title: "Casos límite"
+icon: "alert"
+order: 30
+blurb: "los 32 casos raros, agrupados, y qué hace el bot en cada uno."
 description: "Los 32 casos límite de hellbot y qué hace el bot en cada uno: hitos, gracia, roll call, pausa, reinicios, caídas y ediciones en marcha."
 updated: "2026-10-19"
 ---

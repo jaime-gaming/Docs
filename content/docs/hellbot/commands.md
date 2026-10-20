@@ -1,4 +1,8 @@
 ---
+title: "Comandos"
+icon: "terminal"
+order: 50
+blurb: "los 25 comandos, quién puede usarlos y qué hacen."
 description: "Los comandos de hellbot: quién puede usarlos, qué hacen y qué protecciones llevan los destructivos."
 updated: "2026-10-18"
 ---

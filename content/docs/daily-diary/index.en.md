@@ -1,4 +1,7 @@
 ---
+title: "Overview"
+icon: "compass"
+order: 10
 description: "What Diario is, what sets it apart from other journaling apps and what it includes."
 updated: "2026-10-19"
 ---
@@ -69,10 +72,3 @@ This guide summarizes and orders things. This is what the repository holds, with
 
 > [!NOTE]
 > There is no `docs/` folder: the README is all the documentation the project has. The modules its structure diagram does not list are described in [Structure & development](/daily-diary/dev/).
-
-## Guide tour
-
-- [Install & run](/daily-diary/install/) — running it locally, deploying it and the saving model.
-- [The five areas](/daily-diary/areas/) — Today, Routine, Archive, Progress and Thoughts in detail.
-- [Data & privacy](/daily-diary/data/) — the `localStorage` keys, the entry format and backups.
-- [Structure & development](/daily-diary/dev/) — folders, modules and tests.

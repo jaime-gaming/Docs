@@ -1,4 +1,8 @@
 ---
+title: "Systems & progression"
+icon: "sparkles"
+order: 30
+blurb: "companions, skills, tasks, rebirth, prestige and rollback."
 description: "Companions, the skill rack, tasks and badges, rebirth, prestige and rollback: how RNGdle Infinite progresses and what nothing may change."
 updated: "2026-10-18"
 ---

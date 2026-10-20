@@ -1,4 +1,8 @@
 ---
+title: "Privacidad y datos"
+icon: "shield"
+order: 60
+blurb: "qué se guarda, dónde y qué sale del dispositivo."
 description: "Qué guarda Wave, dónde lo guarda, qué sale del dispositivo y qué puede hacer que se pierda."
 updated: "2026-10-18"
 ---

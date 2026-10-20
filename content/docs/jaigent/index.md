@@ -1,4 +1,7 @@
 ---
+title: "Visión general"
+icon: "compass"
+order: 10
 description: "Qué es jAIgent, en qué se diferencia de otros agentes y cómo encajan sus piezas."
 updated: "2026-10-18"
 ---
@@ -128,14 +131,3 @@ Las dos skills integradas son **instrucciones, no mecanismos**. Cada una declara
 | `spend-cap` | Cuando el usuario menciona coste, presupuesto o gasto | El tope duro lo aplica jAIgent cuando `JAIGENT_BUDGET` (o `jaigent settings set budget 0.50`) es mayor que cero. La skill es la parte blanda: gastar menos **antes** de que la ejecución se corte |
 
 La skill de ChatGPT, por su parte, asume un **endpoint MCP remoto por HTTP protegido con OAuth**: no hace que un servidor stdio local sea alcanzable desde ChatGPT Web.
-
-## Recorrido de la guía
-
-- [Instalación y claves](/jaigent/install/) — binario, PyPI o fuente, y cómo conseguir una clave.
-- [Uso en la terminal](/jaigent/cli/) — comandos, chat, undo y streaming.
-- [Modelos y proveedores](/jaigent/models/) — `auto`, `free` y conmutación por fallo.
-- [MCP y tu propia API](/jaigent/mcp/) — conectar ChatGPT Web, Claude Desktop y tus apps.
-- [Skills, plugins y horarios](/jaigent/extend/) — ampliarlo con archivos locales.
-- [Referencia de tools](/jaigent/reference/) — tabla de herramientas, variables y modelo de seguridad.
-- [Seguridad](/jaigent/security/) — qué defiende, qué no defiende a propósito y cómo informar de una vulnerabilidad.
-- [Desarrollo](/jaigent/dev/) — el entorno, cómo está organizado el código, el servidor de simulación y los workflows.

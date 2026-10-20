@@ -1,4 +1,8 @@
 ---
+title: "Uso en la terminal"
+icon: "terminal"
+order: 30
+blurb: "comandos, chat, undo y streaming."
 description: "El día a día en la terminal: tareas de un disparo, chat interactivo, undo, streaming y coste."
 updated: "2026-10-18"
 ---

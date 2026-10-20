@@ -1,4 +1,8 @@
 ---
+title: "Funciones y uso"
+icon: "layers"
+order: 30
+blurb: "el día a día del reproductor."
 description: "El día a día de Wave: biblioteca, mixes diarios, listas, reproducción, letras y ajustes."
 updated: "2026-10-18"
 ---

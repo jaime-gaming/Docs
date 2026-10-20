@@ -1,4 +1,7 @@
 ---
+title: "Visión general"
+icon: "compass"
+order: 10
 description: "Qué es Wave, qué problema resuelve y en qué estado se encuentra la versión 0.1.0."
 updated: "2026-10-18"
 ---
@@ -102,12 +105,3 @@ Esta guía resume y ordena. El repositorio trae además su propia documentación
 
 > [!IMPORTANT]
 > **`ARCHITECTURE.md` y `DESIGN.md` no son dos visiones distintas.** Comparten título y los doce apartados, y el único contenido que los separa son seis líneas al final de `DESIGN.md`: la sección «Release 0.1.0 refinements», que concreta la rejilla tres más dos de los atajos de colección en móvil, la página de mezclas diarias tipo lista con reproducir y aleatorio explícitos, el reinicio del scroll al entrar, objetivos táctiles de al menos 44 px, la jerarquía de la interfaz independiente de Windows con sus seis destinos de ajustes, y la coordinación entre proveedores —sin Web Locks la planificación es local a la pestaña, y si el almacenamiento se deniega el cliente guarda su propio espaciado en memoria sin poder prometer un plazo compartido entre pestañas.
-
-## Dónde seguir
-
-- [Instalación](/wave/install/) — ponerlo en marcha en cinco minutos.
-- [Funciones y uso](/wave/features/) — el día a día del reproductor.
-- [Plataformas](/wave/platforms/) — qué hay en web, Windows y Android.
-- [Arquitectura](/wave/architecture/) — capas, flujo de datos y módulos.
-- [Privacidad y datos](/wave/privacy/) — qué se guarda, dónde y qué sale del dispositivo.
-- [Desarrollo](/wave/dev/) — requisitos, comandos, pruebas de navegador y los diez fallos típicos.

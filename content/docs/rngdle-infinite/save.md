@@ -1,4 +1,8 @@
 ---
+title: "Partida y sincronización"
+icon: "save"
+order: 40
+blurb: "dónde se guarda y cómo se enlaza otro dispositivo."
 description: "Dónde se guarda la partida, cómo enlazar otro dispositivo, qué transporte usa el enlace y qué precauciones tiene."
 updated: "2026-10-18"
 ---

@@ -1,4 +1,8 @@
 ---
+title: "How to play"
+icon: "play"
+order: 20
+blurb: "the roll, the scoring and the rhythm."
 description: "The game loop: roll, score, wait and spend EP. What every part of the screen means."
 updated: "2026-10-18"
 ---

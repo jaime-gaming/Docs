@@ -1,4 +1,8 @@
 ---
+title: "Instalación"
+icon: "download"
+order: 20
+blurb: "ponerlo en marcha en cinco minutos."
 description: "Requisitos, comandos y primera comprobación para ejecutar Wave en el navegador, en Windows y en Android."
 updated: "2026-10-18"
 ---

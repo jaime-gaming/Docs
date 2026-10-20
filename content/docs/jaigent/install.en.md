@@ -1,4 +1,8 @@
 ---
+title: "Install & API keys"
+icon: "download"
+order: 20
+blurb: "binary, PyPI or source, and how to get a key."
 description: "Three ways to install jAIgent and how to get a provider key without overpaying."
 updated: "2026-10-18"
 ---

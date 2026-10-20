@@ -12,18 +12,14 @@
  */
 import { copyFile, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
-import { BASE, CANONICAL_ORIGIN, GH_USER, SITE_NAME, SITE_URL, github, main as mainSite, u } from "./config.mjs";
+import { BASE, CANONICAL_ORIGIN, DOCS_SOURCE, GH_USER, ROOT, SITE_NAME, SITE_URL, github, main as mainSite, u } from "./config.mjs";
 import { DICT } from "./dict.mjs";
 import { expandIcons, iconSprite, renderIcon } from "./icons.mjs";
 import { renderLayout } from "./layout.mjs";
 import { escapeHtml, renderMarkdown, stripTags } from "./markdown.mjs";
 import { GROUPS, LANGUAGES, PROJECTS, pagePath, projectBySlug } from "./registry.mjs";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, "..");
-const DOCS_SOURCE = path.join(ROOT, "content", "docs");
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 
 /** Directorios que el build puede borrar sin riesgo. */
@@ -84,13 +80,14 @@ async function loadDocPage(project, page, lang) {
     throw new Error(`Falta el contenido ${lang.toUpperCase()} de ${project.slug}/${page.slug}: content/docs/${project.slug}/${name}`);
   }
   const { data, content } = matter(raw);
-  const rendered = renderMarkdown(content, { lang, dict: DICT[lang] });
+  const source = page.slug === "index" ? content + recorrido(project, lang) : content;
+  const rendered = renderMarkdown(source, { lang, dict: DICT[lang] });
   return {
     project,
     page,
     lang,
     file,
-    source: content,
+    source,
     description: data.description || project.tagline[lang],
     updated: data.updated || BUILD_DATE,
     ...rendered,
@@ -113,6 +110,45 @@ async function loadProject(project) {
     pages.push({ ...page, variants, updated: variants.es.updated });
   }
   return { ...project, pages };
+}
+
+/**
+ * Apartado final de cada portada de guía: «Recorrido de la guía».
+ *
+ * No se escribe a mano en los index.md. Se compone con las páginas hermanas y
+ * se añade al Markdown ANTES de renderizar, así que entra en el índice lateral,
+ * en el buscador y en las traducciones como cualquier otro apartado: crear la
+ * página es lo único que hace falta para que aparezca aquí.
+ */
+const TOUR_HEADING = { es: "Recorrido de la guía", en: "Guide tour" };
+
+function recorrido(project, lang) {
+  const hermanas = project.pages.filter((page) => page.slug !== "index");
+  if (!hermanas.length) return "";
+  const lineas = hermanas.map(
+    (page) => `- [${page.title[lang]}](${pagePath(project.slug, page.slug)}) — ${page.blurb[lang]}`,
+  );
+  return `\n## ${TOUR_HEADING[lang]}\n\n${lineas.join("\n")}\n`;
+}
+
+/**
+ * Las cifras del README las escribe el build.
+ *
+ * Estaban a mano y se pudrían en cuanto crecía el registro: llegaron a decir 37
+ * guías cuando ya había 40. Ahora quien añade una página no tiene que acordarse
+ * de nada, y si el número cambia el build lo deja dicho en la consola.
+ */
+async function syncReadme(guias) {
+  const file = path.join(ROOT, "README.md");
+  const texto = await readFile(file, "utf8");
+  const paginas = guias * LANGUAGES.length;
+  const nuevo = texto.replace(
+    /\|\s*Guías\s*\|\s*\d+\s*\(\d+\s*páginas[^|]*\|/,
+    `| Guías | ${guias} (${paginas} páginas: cada una en español e inglés) |`,
+  );
+  if (nuevo === texto) return "";
+  await writeFile(file, nuevo, "utf8");
+  return `README.md actualizado: ${guias} guías · ${paginas} páginas`;
 }
 
 /* ------------------------------------------------------------------ */
@@ -693,6 +729,8 @@ async function main() {
   console.log(`built assets/data/search-index.json (${index.count} entradas)`);
 
   const pages = docs.reduce((sum, project) => sum + project.pages.length, 0);
+  const readme = await syncReadme(pages);
+  if (readme) console.log(readme);
   console.log(`\n${pages} guías · ${pages * LANGUAGES.length} páginas · ${docs.length} proyectos · ${((Date.now() - started) / 1000).toFixed(1)}s`);
 }
 

@@ -1,4 +1,8 @@
 ---
+title: "Desarrollo"
+icon: "code"
+order: 90
+blurb: "el entorno, cómo está organizado el código, el servidor de simulación y los workflows."
 description: "Desarrollo de jAIgent: el entorno, cómo está organizado el código, cómo probarlo sin gastar tokens y el estado real de los workflows y las releases."
 updated: "2026-10-19"
 ---

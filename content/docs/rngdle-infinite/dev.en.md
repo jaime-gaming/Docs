@@ -1,4 +1,8 @@
 ---
+title: "Development"
+icon: "terminal"
+order: 60
+blurb: "how it is built, a map of the repository, commands and design rules."
 description: "How the game is built, a map of the repository, commands, non-negotiable design rules and Playwright tests."
 updated: "2026-10-18"
 ---

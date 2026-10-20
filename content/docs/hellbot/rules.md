@@ -1,4 +1,8 @@
 ---
+title: "Reglas del evento"
+icon: "scroll"
+order: 20
+blurb: "cronologías, hitos, dificultades, apuestas y final."
 description: "El reglamento completo: dos cronologías, hitos, dificultades, apuestas, comprobaciones de vida y el final de las 160 horas."
 updated: "2026-10-18"
 ---

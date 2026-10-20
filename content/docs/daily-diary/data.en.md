@@ -1,4 +1,8 @@
 ---
+title: "Data & privacy"
+icon: "database"
+order: 40
+blurb: "the `localStorage` keys, the entry format and backups."
 description: "The localStorage keys, the exact entry format, the customisable lists and privacy."
 updated: "2026-10-18"
 ---

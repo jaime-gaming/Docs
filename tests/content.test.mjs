@@ -13,6 +13,7 @@ import path from "node:path";
 import matter from "gray-matter";
 
 import { PROJECTS } from "../scripts/registry.mjs";
+import { knownIcons } from "../scripts/icons.mjs";
 import { LANGUAGES } from "../scripts/config.mjs";
 
 const DOCS_DIR = path.resolve(import.meta.dirname, "..", "content", "docs");
@@ -45,23 +46,20 @@ test("cada proyecto tiene su carpeta con las dos versiones de cada página", () 
   }
 });
 
-test("no sobran archivos Markdown sin entrada en el registro", () => {
-  const declared = new Set();
-  for (const project of PROJECTS) {
-    for (const page of project.pages) {
-      declared.add(`${project.slug}/${page.slug}.md`);
-      declared.add(`${project.slug}/${page.slug}.en.md`);
-    }
-  }
-  const onDisk = [];
-  for (const entry of readdirSync(DOCS_DIR, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue;
-    for (const file of readdirSync(path.join(DOCS_DIR, entry.name))) {
-      if (file.endsWith(".md")) onDisk.push(`${entry.name}/${file}`);
-    }
-  }
-  const orphans = onDisk.filter((file) => !declared.has(file));
-  assert.deepEqual(orphans, [], "Markdown huérfano (no está en scripts/registry.mjs)");
+test("toda carpeta de contenido es un proyecto declarado", () => {
+  // Las páginas ya no se declaran: el registro las lee del disco, así que soltar
+  // un .md en la carpeta de un proyecto lo publica. Lo que sí hace falta
+  // declarar es el proyecto, y esta prueba atrapa la carpeta que nadie declaró.
+  const declarados = new Set(PROJECTS.map((project) => project.slug));
+  const sueltas = readdirSync(DOCS_DIR, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .filter((nombre) => !declarados.has(nombre));
+  assert.deepEqual(
+    sueltas,
+    [],
+    "carpetas en content/docs/ sin su bloque en scripts/registry.mjs (o borra la carpeta)",
+  );
 });
 
 test("el front matter lleva description y updated válidos", () => {
@@ -77,6 +75,44 @@ test("el front matter lleva description y updated válidos", () => {
       }
     }
   }
+});
+
+test("el front matter de los archivos manda sobre el registro", () => {
+  // title, icon y order viven en cada Markdown desde que el registro dejó de
+  // listar páginas. Se comprueban leyendo el disco directamente, sin pasar por
+  // PROJECTS: si registry.mjs se relajara, esto seguiría vigilando el contrato.
+  const sinTitulo = [];
+  const iconosMalos = [];
+  const ordenesMalos = [];
+  const desiguales = [];
+  const repetidos = [];
+
+  for (const project of PROJECTS) {
+    const vistos = new Map();
+    for (const page of project.pages) {
+      const datos = {};
+      for (const lang of LANGUAGES) {
+        const { file, data } = load(project.slug, page.slug, lang);
+        datos[lang] = data;
+        if (typeof data.title !== "string" || !data.title.trim()) sinTitulo.push(file);
+        if (!knownIcons.has(data.icon)) iconosMalos.push(`${file}: ${data.icon}`);
+        if (!Number.isInteger(data.order)) ordenesMalos.push(`${file}: ${JSON.stringify(data.order)}`);
+      }
+      if (datos.es.icon !== datos.en.icon || datos.es.order !== datos.en.order) {
+        desiguales.push(
+          `${project.slug}/${page.slug}: es=${datos.es.icon}/${datos.es.order} en=${datos.en.icon}/${datos.en.order}`,
+        );
+      }
+      if (vistos.has(datos.es.order)) repetidos.push(`${project.slug}/${page.slug} y ${vistos.get(datos.es.order)}: ${datos.es.order}`);
+      vistos.set(datos.es.order, page.slug);
+    }
+  }
+
+  assert.deepEqual(sinTitulo, [], "páginas sin title en el front matter");
+  assert.deepEqual(iconosMalos, [], "iconos que no están en el sprite");
+  assert.deepEqual(ordenesMalos, [], "order que no es un número entero sin comillas");
+  assert.deepEqual(desiguales, [], "icon u order distintos entre los dos idiomas");
+  assert.deepEqual(repetidos, [], "order repetido dentro de un proyecto");
 });
 
 test("las dos versiones de una página comparten fecha", () => {
@@ -306,22 +342,22 @@ test("las vallas de código están cerradas", () => {
   }
 });
 
-test("cada portada de proyecto enlaza todas sus demás páginas", () => {
-  // Al añadir /wave/dev/ y /jaigent/security/ las portadas se quedaron sin
-  // enlazarlas: el sidebar las mostraba, pero el recorrido de la guía no, que
-  // es por donde se lee una documentación seguida.
-  const faltan = [];
+test("ninguna portada vuelve a escribir el recorrido a mano", () => {
+  // Antes el recorrido de la guía era una lista escrita a mano en cada index.md
+  // y se olvidaba de las páginas nuevas: al añadir /wave/dev/ y /jaigent/
+  // security/ el sidebar las mostraba y la portada no. Ahora lo compone el build
+  // con las páginas hermanas (comprobado en tests/build.test.mjs), así que si
+  // alguien lo escribe también en el Markdown la portada lo muestra dos veces.
+  const duplicados = [];
   for (const project of PROJECTS) {
-    for (const lang of LANGUAGES) {
-      const file = lang === "es" ? "index.md" : "index.en.md";
+    for (const file of ["index.md", "index.en.md"]) {
       const texto = readFileSync(path.join(DOCS_DIR, project.slug, file), "utf8");
-      for (const page of project.pages) {
-        if (page.slug === "index") continue;
-        if (!texto.includes(`/${project.slug}/${page.slug}/`)) faltan.push(`${project.slug}/${file} → ${page.slug}`);
+      if (/^## (Recorrido de la guía|Guide tour|Dónde seguir|Where to go next)$/m.test(texto)) {
+        duplicados.push(`${project.slug}/${file}`);
       }
     }
   }
-  assert.deepEqual(faltan, [], "páginas sin enlace desde su propia portada");
+  assert.deepEqual(duplicados, [], "portadas con el recorrido escrito a mano: bórralo, lo genera el build");
 });
 
 test("el texto de cada enlace interno coincide con el título del registro", () => {

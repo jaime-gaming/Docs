@@ -1,4 +1,8 @@
 ---
+title: "Las cinco áreas"
+icon: "layout"
+order: 30
+blurb: "Hoy, Rutina, Archivo, Progreso y Pensamientos en detalle."
 description: "Las cinco áreas de Diario: Hoy, Rutina, Archivo, Progreso y Pensamientos, y los Ajustes."
 updated: "2026-10-18"
 ---

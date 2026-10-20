@@ -1,4 +1,8 @@
 ---
+title: "Modelos y proveedores"
+icon: "cpu"
+order: 40
+blurb: "`auto`, `free` y conmutación por fallo."
 description: "Diez proveedores, enrutado automático, modelos gratuitos y conmutación por fallo."
 updated: "2026-10-18"
 ---

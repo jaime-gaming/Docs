@@ -1,4 +1,8 @@
 ---
+title: "Instalación y claves"
+icon: "download"
+order: 20
+blurb: "binario, PyPI o fuente, y cómo conseguir una clave."
 description: "Tres formas de instalar jAIgent y cómo conseguir una clave de proveedor sin pagar de más."
 updated: "2026-10-18"
 ---

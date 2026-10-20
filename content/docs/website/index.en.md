@@ -1,4 +1,7 @@
 ---
+title: "Overview"
+icon: "compass"
+order: 10
 description: "What jaime-gaming.github.io is, what it includes and how it relates to this documentation hub."
 updated: "2026-10-19"
 ---
@@ -130,10 +133,3 @@ This guide summarizes and orders things. This is what the repository holds, with
 
 > [!NOTE]
 > The two snapshots in `assets/data/` are committed on purpose: the home page renders from what is in the repository and does not depend on GitHub answering at that moment. `npm run sync:contributions` refreshes them.
-
-## Guide tour
-
-- [Build & preview](/website/build/) — generating the site, serving it locally and the checks.
-- [Editing content](/website/content/) — adding a post and changing interface texts.
-- [The two languages](/website/i18n/) — the dictionary, the attributes, the switch and the retyping.
-- [Site architecture](/website/architecture/) — GitHub data, the calendar, Lanyard, READMEs and SEO.

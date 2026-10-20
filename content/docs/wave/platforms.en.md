@@ -1,4 +1,8 @@
 ---
+title: "Platforms"
+icon: "monitor"
+order: 40
+blurb: "what exists on web, Windows and Android."
 description: "Real comparison between the web, Windows and Android clients: what exists in each and what is missing."
 updated: "2026-10-18"
 ---

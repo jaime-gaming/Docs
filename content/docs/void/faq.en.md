@@ -1,4 +1,8 @@
 ---
+title: "Warnings & FAQ"
+icon: "help"
+order: 50
+blurb: "accessibility, project status and how to contribute."
 description: "Accessibility notices, the real project status and how to contribute to VOID."
 updated: "2026-10-18"
 ---

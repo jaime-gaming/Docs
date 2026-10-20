@@ -1,4 +1,8 @@
 ---
+title: "Instalación y juego"
+icon: "download"
+order: 20
+blurb: "abrirlo, requisitos y problemas conocidos."
 description: "Abrir VOID, qué hace falta, por qué no se puede mover la carpeta de recursos y qué problemas hay abiertos."
 updated: "2026-10-18"
 ---

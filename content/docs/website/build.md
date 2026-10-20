@@ -1,4 +1,8 @@
 ---
+title: "Build y preview"
+icon: "hammer"
+order: 20
+blurb: "generar el sitio, servirlo en local y las comprobaciones."
 description: "Generar la web, servirla en local con el mismo comportamiento que GitHub Pages y ejecutar las comprobaciones."
 updated: "2026-10-18"
 ---

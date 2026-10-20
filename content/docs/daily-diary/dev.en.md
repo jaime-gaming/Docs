@@ -1,4 +1,8 @@
 ---
+title: "Structure & development"
+icon: "code"
+order: 50
+blurb: "folders, modules and tests."
 description: "Diario's folder structure, modules and tests."
 updated: "2026-10-18"
 ---

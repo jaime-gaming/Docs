@@ -1,4 +1,8 @@
 ---
+title: "El mundo de VOID Corp"
+icon: "eye"
+order: 30
+blurb: "el relato: arquitectura del sistema, protocolo previo y advertencias."
 description: "El relato de VOID Corp: la arquitectura del sistema, el protocolo previo a la instalación y las advertencias."
 updated: "2026-10-18"
 ---

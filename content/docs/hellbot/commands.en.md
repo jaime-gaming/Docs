@@ -1,4 +1,8 @@
 ---
+title: "Commands"
+icon: "terminal"
+order: 50
+blurb: "the 25 commands, who can use them and what they do."
 description: "hellbot's commands: who can use them, what they do and what protections the destructive ones carry."
 updated: "2026-10-18"
 ---

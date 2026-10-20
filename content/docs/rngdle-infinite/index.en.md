@@ -1,4 +1,7 @@
 ---
+title: "Overview"
+icon: "compass"
+order: 10
 description: "What RNGdle Infinite is, how it plays in three steps and how it differs from the original RNGdle."
 updated: "2026-10-19"
 ---
@@ -91,11 +94,3 @@ This guide summarizes and orders things. This is what the repository holds, with
 
 > [!NOTE]
 > The two `README.md` files read in the opposite order to what their size suggests: the root one introduces the game, and the one in `src/data/` is the technical documentation of the data.
-
-## Guide tour
-
-- [How to play](/rngdle-infinite/play/) — the roll, the scoring and the rhythm.
-- [Systems & progression](/rngdle-infinite/systems/) — companions, skills, tasks, rebirth, prestige and rollback.
-- [Save & sync](/rngdle-infinite/save/) — where it is stored and how to link another device.
-- [FAQ](/rngdle-infinite/faq/) — common questions and credits.
-- [Development](/rngdle-infinite/dev/) — how it is built, a map of the repository, commands and design rules.

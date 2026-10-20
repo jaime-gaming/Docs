@@ -1,4 +1,8 @@
 ---
+title: "Instalación y despliegue"
+icon: "download"
+order: 40
+blurb: "Windows, consola, Docker, systemd y permisos de Discord."
 description: "Arrancar hellbot en Windows sin consola, desde consola en cualquier sistema o con Docker, y la lista de permisos de Discord."
 updated: "2026-10-18"
 ---

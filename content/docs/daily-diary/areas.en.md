@@ -1,4 +1,8 @@
 ---
+title: "The five areas"
+icon: "layout"
+order: 30
+blurb: "Today, Routine, Archive, Progress and Thoughts in detail."
 description: "Diario's five areas: Today, Routine, Archive, Progress and Thoughts, plus Settings."
 updated: "2026-10-18"
 ---

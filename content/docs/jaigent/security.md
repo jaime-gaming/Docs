@@ -1,4 +1,8 @@
 ---
+title: "Seguridad"
+icon: "shield"
+order: 80
+blurb: "qué defiende, qué no defiende a propósito y cómo informar de una vulnerabilidad."
 description: "El modelo de seguridad de jAIgent: qué defiende de verdad, qué no defiende a propósito, versiones con soporte y cómo informar de una vulnerabilidad."
 updated: "2026-10-19"
 ---

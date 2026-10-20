@@ -1,4 +1,8 @@
 ---
+title: "Models & providers"
+icon: "cpu"
+order: 40
+blurb: "`auto`, `free` and failover."
 description: "Ten providers, automatic routing, free models and failover."
 updated: "2026-10-18"
 ---

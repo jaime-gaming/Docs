@@ -1,4 +1,8 @@
 ---
+title: "Preguntas frecuentes"
+icon: "help"
+order: 50
+blurb: "dudas habituales y créditos."
 description: "Dudas habituales sobre RNGdle Infinite, límites del juego, comportamiento offline y créditos."
 updated: "2026-10-18"
 ---

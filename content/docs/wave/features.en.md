@@ -1,4 +1,8 @@
 ---
+title: "Features & usage"
+icon: "layers"
+order: 30
+blurb: "day to day with the player."
 description: "Day to day with Wave: library, daily mixes, playlists, playback, lyrics and settings."
 updated: "2026-10-18"
 ---

@@ -1,4 +1,8 @@
 ---
+title: "Development"
+icon: "code"
+order: 70
+blurb: "requirements, commands, browser tests and the ten typical failures."
 description: "How Wave is developed: requirements, commands, browser tests, debugging, the ten typical failures and the five QA checklists."
 updated: "2026-10-19"
 ---

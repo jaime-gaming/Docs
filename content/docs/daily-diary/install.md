@@ -1,4 +1,8 @@
 ---
+title: "Instalación y uso"
+icon: "download"
+order: 20
+blurb: "ejecutarlo en local, desplegarlo y el modelo de guardado."
 description: "Ejecutar Diario en local, desplegarlo en GitHub Pages o en Render y entender su modelo de guardado."
 updated: "2026-10-18"
 ---

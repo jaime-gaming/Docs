@@ -1,4 +1,8 @@
 ---
+title: "Event rules"
+icon: "scroll"
+order: 20
+blurb: "timelines, milestones, difficulties, gambling and the finale."
 description: "The complete rulebook: two timelines, milestones, difficulties, gambling, alive checks and the 160-hour finale."
 updated: "2026-10-18"
 ---

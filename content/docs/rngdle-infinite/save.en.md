@@ -1,4 +1,8 @@
 ---
+title: "Save & sync"
+icon: "save"
+order: 40
+blurb: "where it is stored and how to link another device."
 description: "Where the save lives, how to link another device, which transport the link uses and what precautions it has."
 updated: "2026-10-18"
 ---

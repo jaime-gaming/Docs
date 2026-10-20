@@ -1,4 +1,8 @@
 ---
+title: "Architecture"
+icon: "boxes"
+order: 50
+blurb: "layers, data flow and modules."
 description: "Layers, data flow, directory layout and internal modules of Wave's web client."
 updated: "2026-10-18"
 ---

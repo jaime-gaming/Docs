@@ -1,4 +1,8 @@
 ---
+title: "Avisos y preguntas"
+icon: "help"
+order: 50
+blurb: "accesibilidad, estado del proyecto y cómo contribuir."
 description: "Avisos de accesibilidad, estado real del proyecto y cómo contribuir a VOID."
 updated: "2026-10-18"
 ---

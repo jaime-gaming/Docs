@@ -1,4 +1,7 @@
 ---
+title: "Overview"
+icon: "compass"
+order: 10
 description: "What hellbot is, which event it runs and what guarantees it offers as a production bot."
 updated: "2026-10-19"
 ---
@@ -99,12 +102,3 @@ This guide summarizes and orders things. The repository also carries its own doc
 
 > [!NOTE]
 > `hell/` is **41 modules** and the whole repository **114 files**. The map of all 41, grouped by responsibility, is in [Architecture](/hellbot/architecture/).
-
-## Guide tour
-
-- [Event rules](/hellbot/rules/) — timelines, milestones, difficulties, gambling and the finale.
-- [Edge cases](/hellbot/edge-cases/) — the 32 odd cases, grouped, and what the bot does in each.
-- [Install & deploy](/hellbot/install/) — Windows, console, Docker, systemd and Discord permissions.
-- [Commands](/hellbot/commands/) — the 25 commands, who can use them and what they do.
-- [Live dashboard](/hellbot/dashboard/) — the public page and the operator page.
-- [Architecture](/hellbot/architecture/) — modules, invariants and the map of all 41.

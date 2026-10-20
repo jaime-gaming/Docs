@@ -1,4 +1,8 @@
 ---
+title: "Plataformas"
+icon: "monitor"
+order: 40
+blurb: "qué hay en web, Windows y Android."
 description: "Comparación real entre los clientes web, Windows y Android: qué hay en cada uno y qué falta."
 updated: "2026-10-18"
 ---

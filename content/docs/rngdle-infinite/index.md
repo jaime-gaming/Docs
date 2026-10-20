@@ -1,4 +1,7 @@
 ---
+title: "Visión general"
+icon: "compass"
+order: 10
 description: "Qué es RNGdle Infinite, cómo se juega en tres pasos y en qué se diferencia del RNGdle original."
 updated: "2026-10-19"
 ---
@@ -91,11 +94,3 @@ Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamañ
 
 > [!NOTE]
 > Los dos `README.md` se leen en orden distinto al que sugiere su tamaño: el de la raíz presenta el juego y el de `src/data/` es la documentación técnica de los datos.
-
-## Recorrido de la guía
-
-- [Cómo se juega](/rngdle-infinite/play/) — la tirada, la puntuación y el ritmo.
-- [Sistemas y progresión](/rngdle-infinite/systems/) — compañeros, skills, tareas, rebirth, prestige y rollback.
-- [Partida y sincronización](/rngdle-infinite/save/) — dónde se guarda y cómo se enlaza otro dispositivo.
-- [Preguntas frecuentes](/rngdle-infinite/faq/) — dudas habituales y créditos.
-- [Desarrollo](/rngdle-infinite/dev/) — cómo está construido, mapa del repositorio, comandos y reglas de diseño.

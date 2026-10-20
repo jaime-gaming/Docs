@@ -1,4 +1,8 @@
 ---
+title: "Privacy & data"
+icon: "shield"
+order: 60
+blurb: "what is stored, where, and what leaves the device."
 description: "What Wave stores, where it stores it, what leaves the device and what can make it disappear."
 updated: "2026-10-18"
 ---

@@ -1,4 +1,8 @@
 ---
+title: "Desarrollo"
+icon: "terminal"
+order: 60
+blurb: "cómo está construido, mapa del repositorio, comandos y reglas de diseño."
 description: "Cómo está construido el juego, mapa del repositorio, comandos, reglas de diseño innegociables y pruebas con Playwright."
 updated: "2026-10-18"
 ---

@@ -1,4 +1,8 @@
 ---
+title: "MCP & your own API"
+icon: "plug"
+order: 50
+blurb: "connecting ChatGPT Web, Claude Desktop and your apps."
 description: "Connecting jAIgent with ChatGPT Web, Claude Desktop and your own applications: remote MCP, stdio MCP and the OpenAI gateway."
 updated: "2026-10-18"
 ---

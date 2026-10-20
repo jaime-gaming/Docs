@@ -1,4 +1,7 @@
 ---
+title: "Overview"
+icon: "compass"
+order: 10
 description: "What Wave is, which problem it solves and where version 0.1.0 currently stands."
 updated: "2026-10-18"
 ---
@@ -102,12 +105,3 @@ This guide summarizes and organizes. The repository also ships its own documenta
 
 > [!IMPORTANT]
 > **`ARCHITECTURE.md` and `DESIGN.md` are not two different views.** They share their title and all twelve sections, and the only content separating them is six lines at the end of `DESIGN.md`: the "Release 0.1.0 refinements" section, which spells out the three-plus-two balanced grid for Home's collection shortcuts on phones, the playlist-like daily mixes page with explicit Play and Shuffle, the scroll reset on entry, touch targets of at least 44 px, the hierarchy of the independent Windows UI with its six Settings destinations, and provider coordination — without Web Locks scheduling is tab-local, and if storage is denied the client keeps its own spacing in memory without being able to promise a shared deadline across tabs.
-
-## Where to go next
-
-- [Installation](/wave/install/) — get it running in five minutes.
-- [Features & usage](/wave/features/) — day to day with the player.
-- [Platforms](/wave/platforms/) — what exists on web, Windows and Android.
-- [Architecture](/wave/architecture/) — layers, data flow and modules.
-- [Privacy & data](/wave/privacy/) — what is stored, where, and what leaves the device.
-- [Development](/wave/dev/) — requirements, commands, browser tests and the ten typical failures.

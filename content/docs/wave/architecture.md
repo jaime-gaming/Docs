@@ -1,4 +1,8 @@
 ---
+title: "Arquitectura"
+icon: "boxes"
+order: 50
+blurb: "capas, flujo de datos y módulos."
 description: "Capas, flujo de datos, estructura de carpetas y módulos internos del cliente web de Wave."
 updated: "2026-10-18"
 ---

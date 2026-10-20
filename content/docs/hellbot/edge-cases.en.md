@@ -1,4 +1,8 @@
 ---
+title: "Edge cases"
+icon: "alert"
+order: 30
+blurb: "the 32 odd cases, grouped, and what the bot does in each."
 description: "hellbot's 32 edge cases and what the bot does in each: milestones, grace, roll call, pause, restarts, outages and mid-run edits."
 updated: "2026-10-19"
 ---

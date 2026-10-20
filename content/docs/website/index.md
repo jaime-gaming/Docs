@@ -1,4 +1,7 @@
 ---
+title: "Visión general"
+icon: "compass"
+order: 10
 description: "Qué es jaime-gaming.github.io, qué incluye y cómo se relaciona con este centro de documentación."
 updated: "2026-10-19"
 ---
@@ -130,10 +133,3 @@ Esta guía resume y ordena. Esto es lo que hay en el repositorio, con sus tamañ
 
 > [!NOTE]
 > Las dos instantáneas de `assets/data/` están commiteadas a propósito: la portada se renderiza con lo que hay en el repositorio y no depende de que GitHub responda en ese momento. `npm run sync:contributions` las refresca.
-
-## Recorrido de la guía
-
-- [Build y preview](/website/build/) — generar el sitio, servirlo en local y las comprobaciones.
-- [Editar el contenido](/website/content/) — añadir un post y cambiar textos de la interfaz.
-- [Los dos idiomas](/website/i18n/) — el diccionario, los atributos, el conmutador y el retecleo.
-- [Arquitectura del sitio](/website/architecture/) — datos de GitHub, calendario, Lanyard, READMEs y SEO.

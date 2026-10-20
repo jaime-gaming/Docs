@@ -1,4 +1,8 @@
 ---
+title: "Desarrollo"
+icon: "code"
+order: 70
+blurb: "requisitos, comandos, pruebas de navegador y los diez fallos típicos."
 description: "Cómo se desarrolla Wave: requisitos, comandos, pruebas de navegador, depuración, los diez fallos típicos y las cinco listas de comprobación de QA."
 updated: "2026-10-19"
 ---

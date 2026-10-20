@@ -1,4 +1,8 @@
 ---
+title: "Cómo se juega"
+icon: "play"
+order: 20
+blurb: "la tirada, la puntuación y el ritmo."
 description: "El bucle de juego: tirar, puntuar, esperar y gastar EP. Qué significa cada parte de la pantalla."
 updated: "2026-10-18"
 ---

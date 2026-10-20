@@ -1,4 +1,8 @@
 ---
+title: "Tools reference"
+icon: "book"
+order: 70
+blurb: "tools table, variables and the safety model."
 description: "Model tools table, environment variables, internal architecture and the safety model."
 updated: "2026-10-18"
 ---

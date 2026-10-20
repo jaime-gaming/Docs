@@ -1,4 +1,8 @@
 ---
+title: "Arquitectura"
+icon: "boxes"
+order: 70
+blurb: "módulos, invariantes y el mapa de los 41."
 description: "Capas, invariantes, modelo de datos y pruebas de hellbot: por qué un evento de 160 horas no se puede perder."
 updated: "2026-10-18"
 ---

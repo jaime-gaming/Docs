@@ -1,4 +1,8 @@
 ---
+title: "Editar el contenido"
+icon: "file"
+order: 30
+blurb: "añadir un post y cambiar textos de la interfaz."
 description: "Añadir un post al blog, cambiar textos de la interfaz y cómo funciona el sistema de dos idiomas."
 updated: "2026-10-18"
 ---

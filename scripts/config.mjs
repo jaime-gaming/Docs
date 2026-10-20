@@ -6,7 +6,13 @@
  *   "/"      -> https://docs.jaime-gaming.github.io/
  */
 
+import path from "node:path";
+
 export const BASE = process.env.DOCS_BASE || "/Docs/";
+
+/** Raíz del repositorio y carpeta de los Markdown editables. */
+export const ROOT = path.resolve(import.meta.dirname, "..");
+export const DOCS_SOURCE = path.join(ROOT, "content", "docs");
 
 export const SITE_NAME = "Jaime Gaming";
 export const DOCS_NAME = "Docs";

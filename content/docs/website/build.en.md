@@ -1,4 +1,8 @@
 ---
+title: "Build & preview"
+icon: "hammer"
+order: 20
+blurb: "generating the site, serving it locally and the checks."
 description: "Generating the website, serving it locally with the same behaviour as GitHub Pages and running the checks."
 updated: "2026-10-18"
 ---
