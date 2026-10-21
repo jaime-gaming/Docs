@@ -1,0 +1,28 @@
+node_modules/
+*.log
+.DS_Store
+
+# Páginas generadas por `npm run build` en la raíz — no editar a mano.
+#
+# Todas las rutas van ancladas con "/" inicial a propósito: un patrón como
+# "wave/" coincide en cualquier nivel y se comería content/docs/wave/, que es
+# el contenido fuente. tests/repo.test.mjs vigila que no se desanclen.
+/index.html
+/404.html
+/sitemap.xml
+/robots.txt
+/.nojekyll
+/assets/img/icons.svg
+/assets/data/
+/projects/
+/status/
+/wave/
+/jaigent/
+/hellbot/
+/rngdle-infinite/
+/daily-diary/
+/void/
+/website/
+
+# Payload de GitHub Pages que prepara `npm run stage`.
+/_site/
