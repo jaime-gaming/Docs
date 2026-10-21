@@ -66,6 +66,12 @@ jobs:
           node-version: 22
           cache: npm
 
+      # Sin este paso el job revienta con ERR_MODULE_NOT_FOUND: hace checkout y
+      # setup-node, pero nada instala gray-matter ni marked. Los checks pasan
+      # porque llevan el suyo; el deploy se probó por primera vez al publicar.
+      - name: Instalar dependencias
+        run: npm ci
+
       - name: Generar y preparar el sitio
         run: npm run stage
 

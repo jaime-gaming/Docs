@@ -175,3 +175,35 @@ test("main.js no arrastra la ventana al seguir la lectura", () => {
   );
   assert.match(js, /list\.scrollTo\(/, "la fila de chips ya no se desplaza a sí misma");
 });
+
+test("ningún job del workflow usa npm sin instalar antes las dependencias", () => {
+  // El job de deploy hacía checkout + setup-node + `npm run stage` y nunca
+  // instalaba nada, así que reventaba con ERR_MODULE_NOT_FOUND: gray-matter en
+  // cuanto se mezcló la primera PR. Los checks pasaban porque ellos sí llevan su
+  // `npm ci`, y el fallo solo aparecía al publicar en main.
+  //
+  // Sin parser YAML: se sigue la sangría de dos espacios, que es donde viven los
+  // nombres de job, y se compara en qué línea instala cada uno y en cuál usa.
+  const lineas = readFileSync(path.join(ROOT, ".github/workflows/build.yml"), "utf8").split("\n");
+  const jobs = new Map();
+  let actual = null;
+  lineas.forEach((linea, i) => {
+    const cabecera = linea.match(/^ {2}([a-z][\w-]*):$/);
+    if (cabecera) {
+      actual = cabecera[1];
+      jobs.set(actual, { instala: null, usa: null });
+    }
+    if (!actual) return;
+    const paso = jobs.get(actual);
+    if (/^\s+run:\s*npm (ci|install)\b/.test(linea)) {
+      if (paso.instala === null) paso.instala = i;
+    } else if (/^\s+run:\s*(npm (run|test)\b|node )/.test(linea)) {
+      if (paso.usa === null) paso.usa = i;
+    }
+  });
+
+  const malos = [...jobs]
+    .filter(([, v]) => v.usa !== null && (v.instala === null || v.instala > v.usa))
+    .map(([job, v]) => `${job}: usa npm en la línea ${v.usa + 1} e instala en ${v.instala === null ? "ninguna" : v.instala + 1}`);
+  assert.deepEqual(malos, [], "jobs del workflow que ejecutan npm/node sin dependencias instaladas");
+});
