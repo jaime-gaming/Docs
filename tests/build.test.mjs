@@ -886,3 +886,29 @@ test("el recorrido de cada portada lo genera el build con todas sus páginas", (
     }
   }
 });
+
+test("ninguna página canoniza una URL que el sitio no sirva", () => {
+  // La 404 declaraba canonical y og:url apuntando a /Docs/404/, una ruta que no
+  // existe: el archivo es 404.html. Como además es noindex, nadie lo iba a notar.
+  // Toda URL canónica tiene que estar en el sitemap.
+  //
+  // Se lee con regexes a propósito: abrir un JSDOM por cada una de las 48 páginas
+  // revienta la memoria del proceso de pruebas.
+  const servidas = new Set([...read("sitemap.xml").matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]));
+  const archivos = ["404.html", "index.html", "projects/index.html", "status/index.html"];
+  for (const project of PROJECTS) {
+    for (const page of project.pages) {
+      archivos.push(`${pagePath(project.slug, page.slug).replace(/^\//, "")}index.html`);
+    }
+  }
+
+  const rotas = [];
+  for (const file of archivos) {
+    const html = read(file);
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    const ogUrl = html.match(/<meta property="og:url" content="([^"]+)"/)?.[1];
+    if (!canonical || !servidas.has(canonical)) rotas.push(`${file}: canonical ${canonical}`);
+    if (!ogUrl || !servidas.has(ogUrl)) rotas.push(`${file}: og:url ${ogUrl}`);
+  }
+  assert.deepEqual(rotas, [], "canonical/og:url que no están en el sitemap");
+});

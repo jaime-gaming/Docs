@@ -552,6 +552,7 @@ function build404() {
     description: "Página no encontrada.",
     bodyHtml,
     activePath: "/404/",
+    canonicalPath: "/",
     layout: "notfound",
     noindex: true,
   });

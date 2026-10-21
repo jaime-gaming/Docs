@@ -62,6 +62,7 @@ export function renderLayout({
   extraHead = "",
   layout = "docs",
   noindex = false,
+  canonicalPath = null,
 }) {
   const fullTitle =
     activePath === "/"
@@ -70,7 +71,13 @@ export function renderLayout({
         ? `${escapeHtml(title)} — Docs de ${SITE_NAME}`
         : `Docs de ${SITE_NAME}`;
   const safeDescription = escapeHtml(description || "");
-  const canonical = `${CANONICAL_ORIGIN}${activePath === "/" ? "/" : activePath}`;
+  // canonicalPath permite declarar otra URL distinta de la activa. Lo usa la 404,
+  // que no tiene ruta propia que canonizar: la suya (/Docs/404/) no la sirve nadie
+  // y su og:url salía roto al pegar el enlace en un chat. Apunta al inicio, que es
+  // a donde llevan sus dos botones. La web principal hace lo mismo: su 404
+  // canoniza a /projects/, una página real.
+  const ruta = canonicalPath || activePath;
+  const canonical = `${CANONICAL_ORIGIN}${ruta === "/" ? "/" : ruta}`;
   const projectSlug = activeProjectSlug(activePath);
 
   const nav = NAV_ITEMS.map((item) => {
