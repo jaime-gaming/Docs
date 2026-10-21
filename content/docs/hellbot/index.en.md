@@ -3,7 +3,7 @@ title: "Overview"
 icon: "compass"
 order: 10
 description: "What hellbot is, which event it runs and what guarantees it offers as a production bot."
-updated: "2026-10-19"
+updated: "2026-10-21"
 ---
 
 **hellbot** is the Discord bot that runs *Welcome to Hell*: keep at least **one real human** in a single voice channel, **continuously, for 160 hours**. If that channel empties and nobody returns within the grace period, the run dies **permanently**.
@@ -78,6 +78,14 @@ docs/              the dashboard published to Pages, and the architecture notes
 ```
 
 `engine.py` and everything below it **imports zero Discord code**. The monitor feeds it plain `Observation(now, participants)` values — with bots and `@clanker` already filtered out — and gets back plain domain events (`MilestoneReached`, `EventFailed`, `EventCompleted`, `EventCancelled`) that the announcer turns into messages. **That is why the entire rulebook is unit-testable.**
+
+## License
+
+The repository declares no license: there is no `LICENSE` file at the root and no mention of it in the `README.md`. When a project says nothing, what applies by default is **all rights reserved**: you can read it, run it, study it and adapt it for your own use, but you may not redistribute it or reuse it in another project without permission.
+
+The images in `assets/` are the bot's own logo and icons, and they are in the same situation: no declared license.
+
+If you want to run hellbot in your community, publish a modified version or take part of it into another project, write to me at [jaimegamingpro@gmail.com](mailto:jaimegamingpro@gmail.com) and we will put it in writing.
 
 ## Further reading in the repository
 

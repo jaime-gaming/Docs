@@ -3,7 +3,7 @@ title: "Visión general"
 icon: "compass"
 order: 10
 description: "Qué es Diario, qué lo hace distinto de otras apps de journaling y qué incluye."
-updated: "2026-10-19"
+updated: "2026-10-21"
 ---
 
 **Diario** es un cuaderno personal, minimalista y **100 % local**. Sin backend, sin cuentas, sin IA y sin APIs externas: los resúmenes, las estadísticas y las tendencias se calculan en tu navegador con JavaScript, reglas y plantillas de texto.
@@ -55,6 +55,14 @@ Pruebas de las funciones puras y de pintado (npm test)
 ```
 
 El build de producción va a `docs/`, que es lo que sirve GitHub Pages. Con `base: './'` y enlaces relativos, funciona tanto en `usuario.github.io/daily-diary/` como en un dominio propio.
+
+## Licencia
+
+El repositorio no declara licencia: no hay fichero `LICENSE` en la raíz ni ninguna mención en el `README.md`. Cuando un proyecto no dice nada, lo que se aplica por defecto es **todos los derechos reservados**: se puede leer, ejecutar, estudiar y adaptar para uso propio, pero no redistribuirlo ni reutilizarlo en otro proyecto sin permiso.
+
+Lo de terceros sí está licenciado: el diario empaqueta en `docs/assets/` las tipografías Fraunces, IBM Plex Mono y Space Grotesk, las tres bajo la SIL Open Font License, aunque el repositorio no incluya el texto de la licencia junto a los archivos.
+
+Si quieres publicar tu propia versión del diario o reutilizar una parte, escríbeme a [jaimegamingpro@gmail.com](mailto:jaimegamingpro@gmail.com) y lo dejamos por escrito.
 
 ## Seguir leyendo en el repositorio
 

@@ -3,7 +3,7 @@ title: "Overview"
 icon: "compass"
 order: 10
 description: "What Diario is, what sets it apart from other journaling apps and what it includes."
-updated: "2026-10-19"
+updated: "2026-10-21"
 ---
 
 **Diario** is a personal notebook: minimal and **100% local**. No backend, no accounts, no AI and no external APIs — summaries, statistics and trends are computed in your browser with JavaScript, rules and text templates.
@@ -55,6 +55,14 @@ Tests for the pure functions and for rendering (npm test)
 ```
 
 The production build goes to `docs/`, which is what GitHub Pages serves. With `base: './'` and relative links it works both at `user.github.io/daily-diary/` and on a custom domain.
+
+## License
+
+The repository declares no license: there is no `LICENSE` file at the root and no mention of it in the `README.md`. When a project says nothing, what applies by default is **all rights reserved**: you can read it, run it, study it and adapt it for your own use, but you may not redistribute it or reuse it in another project without permission.
+
+Third-party material is licensed, though: the diary bundles the Fraunces, IBM Plex Mono and Space Grotesk typefaces in `docs/assets/`, all three under the SIL Open Font License, even if the repository does not ship the license text next to the files.
+
+If you want to publish your own version of the diary or reuse part of it, write to me at [jaimegamingpro@gmail.com](mailto:jaimegamingpro@gmail.com) and we will put it in writing.
 
 ## Further reading in the repository
 

@@ -3,7 +3,7 @@ title: "Overview"
 icon: "compass"
 order: 10
 description: "What VOID is, its premise, how it is built and what state it is in."
-updated: "2026-10-19"
+updated: "2026-10-21"
 ---
 
 **VOID** is a psychological game set in a mysterious corporation where everybody and everything disappears.
@@ -77,6 +77,14 @@ Once the terminal boots, there are three interactions available in the beta:
 | `connect` | Reach the external hosts |
 
 > *Remember: if you ping the VOID, the VOID pings you back.*
+
+## License
+
+The repository declares no license: there is no `LICENSE` file and no mention of it in the `README.md`. What applies by default is **all rights reserved**, and here it is also stated inside the work itself: the game credits carry «VOID MRKS Beta // Copyright © 2026 Jaime Gaming».
+
+That covers the HTML file and its media too: the music, the sound effects and the video that comes with the playthrough.
+
+If you want to reuse anything from VOID, publish it somewhere else or make your own version, write to me at [jaimegamingpro@gmail.com](mailto:jaimegamingpro@gmail.com) and we will put it in writing.
 
 ## Further reading in the repository
 

@@ -3,7 +3,7 @@ title: "Overview"
 icon: "compass"
 order: 10
 description: "What RNGdle Infinite is, how it plays in three steps and how it differs from the original RNGdle."
-updated: "2026-10-19"
+updated: "2026-10-21"
 ---
 
 **RNGdle Infinite** is a browser incremental game: roll an integer between **0 and 1,000,000** and find out what makes it special.
@@ -74,6 +74,14 @@ npm run build   # production build
 ```
 
 The repository's `AGENTS.md` has the project map and the conventions for contributors and for coding agents.
+
+## License
+
+The repository declares no license for its code: there is no `LICENSE` file at the root. What applies by default is **all rights reserved**: you can read it, run it, study it and adapt it for your own use, but you may not redistribute it or reuse it in another project without permission.
+
+Third-party material is licensed, though: the bundled Twemoji emoji ship their own text in `public/emoji/LICENSE`, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), and the `README.md` credits the Inter and Space Mono typefaces (SIL Open Font License) and the Lucide icons.
+
+If you want to publish your own version of the game or reuse part of it, write to me at [jaimegamingpro@gmail.com](mailto:jaimegamingpro@gmail.com) and we will put it in writing.
 
 ## Further reading in the repository
 

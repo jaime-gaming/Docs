@@ -3,7 +3,7 @@ title: "Visión general"
 icon: "compass"
 order: 10
 description: "Qué es VOID, su premisa, cómo está construido y en qué estado se encuentra."
-updated: "2026-10-19"
+updated: "2026-10-21"
 ---
 
 **VOID** es un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece.
@@ -77,6 +77,14 @@ Una vez que la terminal arranca, las interacciones disponibles en la beta son tr
 | `connect` | Alcanzar los hosts externos |
 
 > *Recuerda: si haces ping al VOID, el VOID te devuelve el ping.*
+
+## Licencia
+
+El repositorio no declara licencia: no hay fichero `LICENSE` ni ninguna mención en el `README.md`. Lo que se aplica por defecto es **todos los derechos reservados**, y aquí además queda afirmado dentro de la propia obra: los créditos del juego llevan «VOID MRKS Beta // Copyright © 2026 Jaime Gaming».
+
+Eso cubre el archivo HTML y también sus medios: la música, los efectos de sonido y el vídeo que acompaña a la partida.
+
+Si quieres reutilizar algo de VOID, publicarlo en otro sitio o hacer una versión propia, escríbeme a [jaimegamingpro@gmail.com](mailto:jaimegamingpro@gmail.com) y lo dejamos por escrito.
 
 ## Seguir leyendo en el repositorio
 
