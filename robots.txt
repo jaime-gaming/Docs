@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jaime-gaming.github.io/Docs/sitemap.xml

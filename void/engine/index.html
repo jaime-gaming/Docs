@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Las tripas del archivo — Docs de Jaime Gaming</title>
+<meta name="description" content="Qué hay dentro del archivo único de VOID: las cuatro capas, los catorce audios, las cámaras hechas con canvas, el estado de sesión y el traductor automático." />
+<meta name="author" content="Jaime Gaming" />
+<meta name="theme-color" content="#10120f" />
+<meta name="robots" content="index, follow" />
+<meta name="docs:base" content="/Docs/" />
+<meta name="docs:project" content="void" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Jaime Gaming Docs" />
+<meta property="og:title" content="Las tripas del archivo — Docs de Jaime Gaming" />
+<meta property="og:description" content="Qué hay dentro del archivo único de VOID: las cuatro capas, los catorce audios, las cámaras hechas con canvas, el estado de sesión y el traductor automático." />
+<meta property="og:url" content="https://jaime-gaming.github.io/Docs/void/engine/" />
+<meta property="og:image" content="https://jaime-gaming.github.io/assets/img/social-card.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@JaimeGamingPro" />
+<meta name="twitter:title" content="Las tripas del archivo — Docs de Jaime Gaming" />
+<meta name="twitter:description" content="Qué hay dentro del archivo único de VOID: las cuatro capas, los catorce audios, las cámaras hechas con canvas, el estado de sesión y el traductor automático." />
+<link rel="canonical" href="https://jaime-gaming.github.io/Docs/void/engine/" />
+<link rel="icon" href="/Docs/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/Docs/assets/css/style.css?v=d74cfec89052" />
+</head>
+<body data-icons="/Docs/assets/img/icons.svg?v=eea9c3fe56aa" data-page="docs" data-project="void" data-path="/void/engine/">
+
+<a class="skip-link" href="#top" data-i18n="aria.skipToContent">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/Docs/" class="nav__logo" aria-label="Jaime Gaming Docs — inicio" data-i18n-aria="aria.homeLogo">JG<span class="dot">.</span><span class="nav__logo-badge">docs</span></a>
+  <nav class="nav__links" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+    <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+    <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+    <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+    <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+    <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="search-trigger" id="searchTrigger" type="button" aria-label="Buscar" data-i18n-aria="nav.search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg>
+      <span class="search-trigger__label" data-i18n="search.button">Buscar</span>
+      <kbd class="search-trigger__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+    <button class="lang-switch" id="langSwitch" data-active="es" type="button" aria-label="Cambiar idioma" data-i18n-aria="aria.langSwitch">
+      <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="languageFlagEs" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#aa151b" d="M0 0h24v24H0z"/><path fill="#f1bf00" d="M0 6h24v12H0z"/></g>
+          </pattern>
+          <pattern id="languageFlagEn" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#012169" d="M0 0h24v24H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 24 24M24 0 0 24"/><path stroke="#c8102e" stroke-width="2" d="m0 0 24 24M24 0 0 24"/><path stroke="#fff" stroke-width="8" d="M12 0v24M0 12h24"/><path stroke="#c8102e" stroke-width="4" d="M12 0v24M0 12h24"/></g>
+          </pattern>
+          <radialGradient id="languageGloss" cx="34%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".42"/>
+            <stop offset="55%" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="flag flag-es" cx="12" cy="12" r="9.5" fill="url(#languageFlagEs)"/>
+        <circle class="flag flag-en" cx="12" cy="12" r="9.5" fill="url(#languageFlagEn)"/>
+        <circle class="language-globe__gloss" cx="12" cy="12" r="9.5" fill="url(#languageGloss)" aria-hidden="true"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#0d100d" stroke-opacity=".55" stroke-width="1.9" stroke-linecap="round"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width=".9" stroke-linecap="round"/>
+      </svg>
+      <span class="sr-only" id="languageName">Español</span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil" data-i18n-aria="aria.mainNav">
+  <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+  <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+  <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+  <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+  <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+</nav>
+
+<main id="top" class="layout--docs">
+<div class="docs docs--with-rails">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-panel"></use></svg>
+    </button>
+    <aside class="docs__sidebar" id="docsSidebar" aria-label="Índice de esta documentación" data-i18n-aria="aria.sidebar">
+    <nav class="side-nav">
+      <div class="side-nav__head">
+        <span class="side-nav__eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+        <a class="side-nav__project" href="/Docs/void/">
+          <span class="side-nav__project-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg></span>
+          <span class="side-nav__project-name" data-i18n="proj.void.name">VOID</span>
+        </a>
+      </div>
+      <p class="side-nav__group" data-i18n="docs.sidebarTitle">En esta documentación</p>
+      <ol class="side-nav__list">
+      <li><a class="side-nav__link" href="/Docs/void/" data-i18n="page.void.index"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-compass"></use></svg><span>Visión general</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/void/install/" data-i18n="page.void.install"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-download"></use></svg><span>Instalación y juego</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/void/world/" data-i18n="page.void.world"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-eye"></use></svg><span>El mundo de VOID Corp</span></a></li>
+      <li><a class="side-nav__link active" href="/Docs/void/engine/" data-i18n="page.void.engine"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-cpu"></use></svg><span>Las tripas del archivo</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/void/faq/" data-i18n="page.void.faq"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-help"></use></svg><span>Avisos y preguntas</span></a></li>
+      </ol>
+      <div class="side-nav__foot">
+        <a class="side-nav__all" href="/Docs/projects/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.allProjects">Todos los proyectos</span></a>
+        <div class="side-nav__switch">
+          <span class="side-nav__switch-label" data-i18n="docs.otherProjects">Otros proyectos</span>
+          <ul class="side-nav__switch-list">
+        <li><a class="side-nav__chip" href="/Docs/wave/" title="Wave"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg><span>Wave</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/jaigent/" title="jAIgent"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg><span>jAIgent</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/hellbot/" title="hellbot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg><span>hellbot</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/rngdle-infinite/" title="RNGdle Infinite"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-dice"></use></svg><span>RNGdle Infinite</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/daily-diary/" title="Diario"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-notebook"></use></svg><span>Diario</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/website/" title="jaime-gaming.github.io"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg><span>jaime-gaming.github.io</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </aside>
+    <div class="docs__main">
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="/Docs/">Docs</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="/Docs/void/" data-i18n="proj.void.name">VOID</a>
+      <span class="breadcrumb__sep">/</span>
+      <span class="breadcrumb__current" data-i18n="page.void.engine">Las tripas del archivo</span>
+    </nav>
+    <header class="doc-head reveal">
+      <p class="doc-head__kicker"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg><span data-i18n="proj.void.name">VOID</span></p>
+      <h1 class="doc-head__title" data-i18n="page.void.engine">Las tripas del archivo</h1>
+      <p class="doc-head__desc" data-content-key="desc">Qué hay dentro del archivo único de VOID: las cuatro capas, los catorce audios, las cámaras hechas con canvas, el estado de sesión y el traductor automático.</p>
+      <div class="doc-head__meta">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-calendar"></use></svg><span data-i18n="docs.updated">Última revisión</span> <time datetime="2026-10-20" data-i18n-date>20 de octubre de 2026</time></span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-clock"></use></svg><span data-content-key="readtime">7 min de lectura</span></span>
+        <a class="doc-head__edit" href="https://github.com/jaime-gaming/VOID/blob/main/content/docs/void/engine.md" data-content-key="editHref" data-content-attr="href" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span data-i18n="docs.editOnGithub">Editar esta página en GitHub</span></a>
+      </div>
+    </header>
+    <article class="doc-body reveal" lang="es" data-content-key="body" data-content-language>
+<h1 id="las-tripas-del-archivo">Las tripas del archivo</h1>
+<p>El juego entero es un archivo. No es una forma de hablar: <code>VOID mxks version (code).html</code> pesa <strong>1.091.298 bytes</strong>, tiene <strong>20.077 líneas</strong> y <strong>995.640
+caracteres</strong>, y dentro van el marcado, los cuatro bloques de estilo y los dos
+bloques de script. Esta página cuenta qué hay ahí dentro, leído del propio
+archivo y no del README.</p>
+<p>Sirve para dos cosas: para saber qué se está ejecutando cuando se juega, y para
+no perderse al abrirlo en un editor, que es lo primero que hace cualquiera que
+quiere contribuir.</p>
+<h2 id="las-cuatro-capas-de-un-solo-archivo">Las cuatro capas de un solo archivo</h2>
+<p>No hay build, no hay dependencias y no hay ni un solo <code>&lt;link&gt;</code>: el archivo no
+pide nada al exterior para funcionar. Lo que hay es esto:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Medida</th>
+<th>Cantidad</th>
+</tr>
+</thead><tbody><tr>
+<td>Tamaño y líneas</td>
+<td>1.091.298 bytes · 20.077 líneas · 995.640 caracteres</td>
+</tr>
+<tr>
+<td>Bloques</td>
+<td>2 <code>&lt;script&gt;</code> · 4 <code>&lt;style&gt;</code> · 0 <code>&lt;link&gt;</code></td>
+</tr>
+<tr>
+<td>Código</td>
+<td>303 declaraciones <code>function</code> (302 distintas) · 1.367 <code>const</code> o <code>let</code></td>
+</tr>
+<tr>
+<td>Tiempo</td>
+<td>233 <code>setTimeout</code> · 19 <code>setInterval</code> · 13 <code>requestAnimationFrame</code></td>
+</tr>
+<tr>
+<td>Comentarios</td>
+<td>715 de línea (<code>//</code>) · 27 de bloque (<code>/* */</code>)</td>
+</tr>
+<tr>
+<td>Red</td>
+<td>4 <code>fetch</code> · 0 <code>XMLHttpRequest</code></td>
+</tr>
+</tbody></table></div>
+<p>Las cuatro capas son las de cualquier página —marcado, estilo, script y
+recursos—, solo que las tres primeras comparten archivo y la cuarta casi no
+existe: hay dos <code>&lt;img&gt;</code> y un único vídeo externo, el de la carpeta
+<code>assets [DO NOT TOUCH]</code>.</p>
+<p>Los cuatro <code>fetch</code> son todos del traductor automático, que se describe más abajo.
+<strong>Ninguna otra parte del juego llama a ningún servidor</strong>: no hay analítica, no hay telemetría y no hay peticiones a
+dominios del relato, que aparecen en los documentos internos pero no en el
+código.</p>
+<h2 id="catorce-audios-y-siete-videos">Catorce audios y siete vídeos</h2>
+<p>La capa de medios está declarada entera en el marcado, con su <code>id</code> y su volumen
+fijado de antemano. Nueve pistas de música, cada una para un contexto:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Pista</th>
+<th>Volumen</th>
+<th>Bucle</th>
+</tr>
+</thead><tbody><tr>
+<td><code>ambientMusic</code></td>
+<td>0.3</td>
+<td>sí</td>
+</tr>
+<tr>
+<td><code>officeMusic</code></td>
+<td>0.25</td>
+<td>sí</td>
+</tr>
+<tr>
+<td><code>loginMusic</code></td>
+<td>0.25</td>
+<td>sí</td>
+</tr>
+<tr>
+<td><code>desktopMusic</code></td>
+<td>0.2</td>
+<td>sí</td>
+</tr>
+<tr>
+<td><code>glitchMusic</code></td>
+<td>0.25</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>mailMusic</code></td>
+<td>0.2</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>callMusic</code></td>
+<td>0.2</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>windowOpenMusic</code></td>
+<td>0.15</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>windowCloseMusic</code></td>
+<td>0.15</td>
+<td>no</td>
+</tr>
+</tbody></table></div>
+<p>Y cinco efectos sin volumen declarado, que heredan el del elemento: <code>sfxClick</code>,
+<code>sfxHover</code>, <code>sfxDoor</code>, <code>sfxAlarm</code> y <code>sfxGlitch</code>. Ninguno lleva <code>src</code> en el
+marcado: la fuente se asigna en tiempo de ejecución, igual que el vídeo de la
+intro, que declara <code>data-asset-name=&quot;VOIDMXKSnight_shift.mp4&quot;</code> y se resuelve
+más abajo.</p>
+<p>Los siete <code>&lt;video&gt;</code> son la intro y <strong>seis cámaras de vigilancia</strong>, <code>cam1</code> a
+<code>cam6</code>, todas con <code>autoplay loop muted playsinline</code>. Van silenciadas de salida
+porque el sonido de las cámaras no es una pista: es otra cosa.</p>
+<h2 id="las-camaras-son-canvas-no-video">Las cámaras son canvas, no vídeo</h2>
+<p>Aquí está el truco mejor escondido del archivo. Las cámaras no reproducen vídeo
+grabado: <strong>se dibujan</strong>. Hay siete llamadas a <code>createElement(&#39;canvas&#39;)</code> con sus
+siete <code>getContext</code>, y los comentarios del propio código lo dicen:</p>
+<ul>
+<li>Dos lienzos de <strong>320×240</strong> para las feeds de CCTV, con el comentario «Crear
+canvas en lugar de video real (sin necesidad de internet)».</li>
+<li>Dos lienzos fuera de pantalla de <strong>640×480</strong> para generar una feed temporal con
+<code>MediaStream</code>, y una variante para la <strong>cámara 4 con interferencia extrema</strong>.</li>
+<li>Dos superposiciones de 320×240 que se colocan encima de un <code>&lt;video&gt;</code> ya
+existente, solo si no hay una previa, y que se animan con <code>animateCCTV</code>.</li>
+<li>Una captura del vídeo a pantalla completa, que toma las medidas reales del
+elemento (<code>video.videoWidth</code>) en vez de unas fijas.</li>
+</ul>
+<p>Las rejillas, el ruido y las siluetas que se ven al jugar están trazados ahí,
+línea a línea, en cada fotograma. Es la razón de que la identidad visual del
+juego —la simulación CRT de alto contraste— no dependa de ningún archivo de
+imagen: se genera mientras se mira.</p>
+<h2 id="ocho-rutas-para-encontrar-el-mp4">Ocho rutas para encontrar el mp4</h2>
+<p>El único recurso externo es el vídeo de la intro, y el archivo no da por hecho
+dónde está. Construye una lista de candidatas y las prueba en orden:</p>
+<pre data-lang="text"><code class="language-text">VOIDMXKSnight_shift.mp4
+./VOIDMXKSnight_shift.mp4
+./assets [DO NOT TOUCH]/VOIDMXKSnight_shift.mp4
+assets [DO NOT TOUCH]/VOIDMXKSnight_shift.mp4
+../assets [DO NOT TOUCH]/VOIDMXKSnight_shift.mp4
+../assets/VOIDMXKSnight_shift.mp4
+../../assets/VOIDMXKSnight_shift.mp4
+../../../assets/VOIDMXKSnight_shift.mp4</code></pre>
+<p>Cada una se resuelve con <code>new URL(ruta, window.location.href)</code> dentro de un
+<code>try/catch</code>, y cuando una responde el elemento queda marcado con
+<code>data-asset-resolved=&quot;1&quot;</code> para no volver a intentarlo. El nombre sale de
+<code>data-asset-name</code>, así que se puede sustituir el vídeo sin tocar el código.</p>
+<p>Esto matiza lo de que no se pueda mover nada: el HTML aguanta que la carpeta
+esté al lado, un nivel por encima o hasta tres niveles por encima, y aguanta que
+se llame <code>assets</code>. Lo que no aguanta es que el vídeo cambie de nombre, porque
+las ocho candidatas terminan en <code>VOIDMXKSnight_shift.mp4</code>.</p>
+<h2 id="el-estado-vive-en-la-sesion">El estado vive en la sesión</h2>
+<p>No hay partida guardada. El archivo usa <code>sessionStorage</code> para cinco cosas y
+<code>localStorage</code> para una sola, y la diferencia es deliberada:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Clave</th>
+<th>Dónde</th>
+<th>Para qué</th>
+</tr>
+</thead><tbody><tr>
+<td><code>disclaimerShown</code></td>
+<td>sesión</td>
+<td>Que el aviso de salud salga una vez por sesión</td>
+</tr>
+<tr>
+<td><code>interview_completed_this_session</code></td>
+<td>sesión</td>
+<td>Marcar que la entrevista ya se completó</td>
+</tr>
+<tr>
+<td><code>void_external_flags</code></td>
+<td>sesión</td>
+<td>Banderas de estado del relato</td>
+</tr>
+<tr>
+<td><code>void_ngplus_level</code></td>
+<td>sesión</td>
+<td>El nivel de Nueva Partida+</td>
+</tr>
+<tr>
+<td><code>void_show_amnesia_now</code></td>
+<td>sesión</td>
+<td>Disparar el mensaje de amnesia una sola vez</td>
+</tr>
+<tr>
+<td><code>voidTranslations</code></td>
+<td><strong>localStorage</strong></td>
+<td>La caché de traducciones</td>
+</tr>
+</tbody></table></div>
+<p><code>checkForNewGamePlus()</code> lo comenta sin rodeos: «localStorage deshabilitado - no
+hay persistencia entre sesiones / Pero sessionStorage permite recordar dentro de
+la misma sesión». Al detectar un nivel guardado lo incrementa, marca
+<code>isNewGamePlus</code> y lo registra en consola como <code>[NG+]</code>.</p>
+<p>El mensaje de amnesia depende de dos condiciones a la vez: estar en Nueva
+Partida+ y que <code>void_show_amnesia_now</code> valga <code>&#39;true&#39;</code>, que es lo que deja escrito
+el tramo que acaba de completar la entrevista. Se lee, <strong>se borra</strong> y se muestra
+a los 500 ms, así que no puede salir dos veces.</p>
+<div class="callout callout--note">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb"></use></svg>
+  <p class="callout__title">Nota</p>
+  <div class="callout__body">La consecuencia práctica es que cerrar la pestaña reinicia el progreso y el
+nivel de Nueva Partida+. No es un fallo que haya que arreglar: es cómo está
+escrito, con la persistencia desactivada a propósito. Lo único que sobrevive a
+la pestaña es la caché de traducciones.</div>
+</div>
+<h2 id="el-traductor-automatico">El traductor automático</h2>
+<p>El juego está escrito en español y <strong>se traduce solo al inglés mientras se
+juega</strong>. El bloque se llama <code>AutoTranslator</code> y su cabecera lo resume: traduce el
+contenido en español usando Google Translate como principal y otras APIs como
+respaldo, con las traducciones en caché para no repetir el trabajo.</p>
+<div class="doc-table"><table><thead><tr>
+<th>Orden</th>
+<th>API</th>
+<th>Dirección</th>
+<th>Tope por petición</th>
+</tr>
+</thead><tbody><tr>
+<td>1</td>
+<td><code>GoogleTranslate</code></td>
+<td><code>translate.googleapis.com/translate_a/single</code></td>
+<td>5.000 caracteres</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>MyMemory</code></td>
+<td><code>api.mymemory.translated.net/get</code></td>
+<td>500 caracteres</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>LibreTranslate</code></td>
+<td><code>translate.argosopentech.com/translate</code></td>
+<td>3.000 caracteres</td>
+</tr>
+</tbody></table></div>
+<p>El texto se parte en trozos de hasta <strong>4.500 caracteres</strong> (<code>maxChunkSize</code>) y
+entre petición y petición se esperan <strong>200 ms</strong> para no chocar con los límites de
+tasa. Cada API declara su propio método: las dos primeras hacen <code>GET</code> con
+parámetros y la tercera <code>POST</code> con <code>{ q, source: &#39;es&#39;, … }</code>, que es donde queda
+escrito que el idioma de origen es el español.</p>
+<p>Cuando una falla entra en <code>failedAPIs</code>, un <code>Set</code> que la descarta para el resto de
+la sesión, y se pasa a la siguiente. Mientras tanto se informa del avance con
+<code>lastStage</code>, <code>lastCurrent</code>, <code>lastTotal</code>, <code>lastPercentage</code> y <code>lastItem</code>, y hay un
+indicador de esquina (<code>cornerProgressEnabled</code>) con su propio temporizador de
+desaparecido.</p>
+<div class="callout callout--tip">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles"></use></svg>
+  <p class="callout__title">Consejo</p>
+  <div class="callout__body">Antes de llamar a ninguna API se intenta un cuarto <code>fetch</code>, a
+<code>void-translations-en.json</code> junto al HTML y con <code>cache: &#39;no-store&#39;</code>. Ese
+archivo <strong>no está en el repositorio</strong>, y no hace falta: es la vía para
+sustituir la traducción automática por una hecha a mano. Si existe y se puede
+leer, se usa entero; si no, se lanza <code>&#39;JSON file not found&#39;</code> y el traductor
+sigue su camino.</div>
+</div>
+<div class="callout callout--warning">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn"></use></svg>
+  <p class="callout__title">Aviso</p>
+  <div class="callout__body">Con la traducción automática activa, fragmentos del texto del juego salen del
+navegador hacia tres servicios de terceros. Es el único tráfico externo de todo
+el archivo, pero conviene saberlo: no es un juego sin conexión cuando se juega
+en inglés, y la caché en <code>localStorage</code> hace que la segunda vez ya no salga
+nada.</div>
+</div>
+<h2 id="lo-que-explica-de-los-avisos">Lo que explica de los avisos</h2>
+<p>Varias cosas que están en <a href="/Docs/void/faq/">Avisos y preguntas</a> dejan de ser
+misteriosas vistas desde aquí. Que la versión en inglés no esté terminada es
+coherente con que sea una traducción automática en tiempo de ejecución, con sus
+tres APIs y sus límites por petición. Que el aviso de salud salga cada vez que se
+abre el juego en una pestaña nueva es <code>disclaimerShown</code> en <code>sessionStorage</code>. Y
+que la simulación CRT pueda causar visión fantasma no depende de un recurso que
+se pueda quitar: se dibuja en cada fotograma.</p>
+<p>Para jugarlo tal como viene, el camino está en
+<a href="/Docs/void/install/">Instalación y juego</a>; para el relato que hay encima de todo
+esto, en <a href="/Docs/void/world/">El mundo de VOID Corp</a>.</p>
+<h2 id="contribuir-a-partir-de-aqui">Contribuir a partir de aquí</h2>
+<p>El archivo que hay que abrir es
+<a href="https://github.com/jaime-gaming/VOID/blob/main/VOID%20mxks%20version/VOID%20mxks%20version%20%28code%29.html" target="_blank" rel="noopener noreferrer"><code>VOID mxks version (code).html</code></a>,
+y se edita con un editor que aguante un millón de caracteres en un solo archivo.
+Dos consejos que salen de leerlo:</p>
+<ul>
+<li>Los 715 comentarios de línea están en los dos idiomas y explican intención, no
+sintaxis: «Cámara 4 con interferencia extrema» dice más que el código que
+viene detrás. Buscar por ellos es la forma más rápida de orientarse.</li>
+<li>Casi todo el tiempo del juego son los 233 <code>setTimeout</code>. Al tocar uno conviene
+buscar su pareja de cancelación, porque en un archivo sin módulos un retardo
+huérfano sigue disparándose después de cambiar de escena.</li>
+</ul>
+
+    </article>
+    <nav class="pager reveal" aria-label="paginación">
+    <a class="pager__link" href="/Docs/void/world/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.prev">Anterior</span></span>
+      <span class="pager__title" data-i18n="page.void.world">El mundo de VOID Corp</span>
+    </a>
+    <a class="pager__link pager__link--next" href="/Docs/void/faq/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-right"></use></svg><span data-i18n="docs.next">Siguiente</span></span>
+      <span class="pager__title" data-i18n="page.void.faq">Avisos y preguntas</span>
+    </a>
+    </nav>
+    <p class="source-note reveal" data-i18n="docs.sourceNote">Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.</p>
+    </div>
+    <aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
+    <p class="toc__title" data-i18n="docs.tocTitle">En esta página</p>
+    <ol class="toc__list">
+      <li><a href="#las-cuatro-capas-de-un-solo-archivo">Las cuatro capas de un solo archivo</a></li>
+      <li><a href="#catorce-audios-y-siete-videos">Catorce audios y siete vídeos</a></li>
+      <li><a href="#las-camaras-son-canvas-no-video">Las cámaras son canvas, no vídeo</a></li>
+      <li><a href="#ocho-rutas-para-encontrar-el-mp4">Ocho rutas para encontrar el mp4</a></li>
+      <li><a href="#el-estado-vive-en-la-sesion">El estado vive en la sesión</a></li>
+      <li><a href="#el-traductor-automatico">El traductor automático</a></li>
+      <li><a href="#lo-que-explica-de-los-avisos">Lo que explica de los avisos</a></li>
+      <li><a href="#contribuir-a-partir-de-aqui">Contribuir a partir de aquí</a></li>
+    </ol>
+    <p class="toc__progress" aria-hidden="true"><span></span></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="https://jaime-gaming.github.io/" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-github"></use></svg></a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-youtube"></use></svg></a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-x"></use></svg></a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-discord"></use></svg></a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-mail"></use></svg></a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="/Docs/"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="/Docs/projects/"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="https://jaime-gaming.github.io/blog/"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="https://jaime-gaming.github.io/contact/"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="https://jaime-gaming.github.io/"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="/Docs/status/"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="https://jaime-gaming.github.io/terms/" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="https://jaime-gaming.github.io/privacy/" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-arrow"></use></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" hidden>
+  <div class="search-modal__backdrop" data-search-close></div>
+  <div class="search-modal__panel">
+    <h2 class="sr-only" id="searchModalTitle" data-i18n="search.dialogTitle">Buscar en la documentación</h2>
+    <div class="search-modal__head">
+      <span class="search-modal__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg></span>
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar en la documentación…" data-i18n-placeholder="search.placeholder" aria-describedby="searchModalHint" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-activedescendant="" />
+      <button class="search-modal__close" type="button" data-search-close aria-label="Cerrar búsqueda" data-i18n-aria="search.close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-close"></use></svg></button>
+    </div>
+    <div class="search-modal__hintrow">
+      <p class="search-modal__hint" id="searchModalHint" data-i18n="search.hint">Escribe para filtrar páginas y apartados</p>
+      <p class="search-modal__keys" id="searchKeys" aria-hidden="true">
+        <span class="keyhint"><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="search.kbdNavigate">navegar</span></span>
+        <span class="keyhint"><kbd>↵</kbd><span data-i18n="search.kbdOpen">abrir</span></span>
+        <span class="keyhint"><kbd>Esc</kbd><span data-i18n="search.kbdClose">cerrar</span></span>
+      </p>
+    </div>
+    <div class="search-modal__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" data-i18n-aria="search.resultsLabel"></div>
+  </div>
+</div>
+
+<script type="application/json" id="uiStrings">{"es":{"nav.home":"Inicio","nav.projects":"Proyectos","nav.search":"Buscar","nav.site":"Mi web","nav.blog":"Blog","nav.contact":"Contacto","nav.openMenu":"Abrir menú","nav.closeMenu":"Cerrar menú","aria.skipToContent":"Saltar al contenido","aria.homeLogo":"Jaime Gaming Docs — inicio","aria.mainNav":"Navegación principal","aria.backToTop":"Volver arriba","aria.langSwitch":"Español. Cambiar a inglés","aria.sidebar":"Índice de esta documentación","aria.toc":"En esta página","aria.openSidebar":"Abrir índice","aria.closeSidebar":"Cerrar índice","search.button":"Buscar","search.placeholder":"Buscar en la documentación…","search.hint":"Escribe para filtrar páginas y apartados","search.empty":"Sin resultados para","search.noQuery":"Prueba con «instalar», «comandos», «privacidad»…","search.results":"resultados","search.result":"resultado","search.close":"Cerrar búsqueda","search.scopeAll":"Toda la documentación","search.scopeProject":"Solo este proyecto","search.kbdNavigate":"navegar","search.kbdOpen":"abrir","search.kbdClose":"cerrar","search.dialogTitle":"Buscar en la documentación","search.resultsLabel":"Resultados de búsqueda","docs.eyebrow":"Documentación","docs.sidebarTitle":"En esta documentación","docs.tocTitle":"En esta página","docs.editOnGithub":"Editar esta página en GitHub","docs.sourceNote":"Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.","docs.updated":"Última revisión","docs.prev":"Anterior","docs.next":"Siguiente","docs.allProjects":"Todos los proyectos","docs.readTime":"min de lectura","docs.jumpTo":"Ir a","home.kicker":"DOCUMENTACIÓN","home.title":"Todos mis proyectos, \u003cspan class=\"hero__title-accent\">documentados\u003c/span>","home.subtitle":"Un solo sitio con la documentación de todo lo que construyo: reproductores, agentes, bots, juegos y webs. Guías de instalación, arquitectura, uso y referencia.","home.ctaPrimary":"Empezar a leer","home.ctaSecondary":"Ver todos los proyectos","home.stats.projects":"proyectos","home.stats.pages":"páginas","home.stats.languages":"idiomas","home.stats.updated":"actualizada","home.about.title":"Sobre esta documentación","home.about.sub":"Cómo está hecha y cómo se mantiene.","home.about.card.label":"CÓMO FUNCIONA","home.about.card.title":"Escrita a mano, generada con Node","home.about.card.text":"Cada página es un Markdown en content/docs/. El build las convierte en HTML estático con el mismo sistema, la misma paleta y las mismas animaciones que mi web principal.","home.about.card.stamp":"VER EL REPOSITORIO ↗","home.contribute.title":"¿Ves un error?","home.contribute.text":"Toda la documentación está en un repositorio público. Abre una issue o envía una pull request con la corrección.","home.contribute.issue":"Abrir una issue","home.contribute.pr":"Proponer un cambio","home.contribute.email":"Escribirme un correo","projects.title":"Proyectos","projects.sub":"Toda la documentación, proyecto por proyecto. Cada tarjeta enlaza a su guía completa.","projects.pages":"páginas","projects.openDocs":"Abrir documentación","projects.demo":"Probar","projects.code":"Código","projects.group.all":"Todos","callout.note":"Nota","callout.tip":"Consejo","callout.warning":"Aviso","callout.important":"Importante","callout.caution":"Precaución","code.copy":"Copiar","code.copied":"Copiado","footer.rights":"Todos los derechos reservados.","footer.mainSite":"Mi web","footer.tagline":"Juegos para navegador, aplicaciones web y vídeos.","footer.site":"Sitio","footer.siteAria":"Enlaces del sitio","footer.resources":"Recursos","footer.resourcesAria":"Recursos y enlaces externos","footer.status":"Estado del servicio","footer.email":"Correo","footer.terms":"Términos del servicio","footer.privacy":"Privacidad","footer.source":"Código fuente ↗","footer.legalAria":"Términos y privacidad","aria.socials":"Redes sociales","aria.footerLogo":"Jaime Gaming — inicio","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Correo electrónico","status.title":"Estado del servicio","status.sub":"Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.","status.note":"Datos del panel oficial de estado","status.open":"Abrir panel completo ↗","status.loading":"Consultando el estado…","status.unknown":"Estado no disponible","status.error":"No se pudo consultar el estado en directo. Puedes abrir el panel completo.","status.updated":"Actualizado el {date}","status.componentsAria":"Componentes del servicio","status.allOperational":"Todos los sistemas operativos","status.minorIssues":"Incidencias menores","status.majorIssues":"Incidencia grave","status.criticalIssues":"Incidencia crítica","status.maintenanceOverall":"Mantenimiento en curso","status.operational":"Operativo","status.degraded":"Rendimiento degradado","status.partial":"Interrupción parcial","status.major":"Interrupción grave","status.underMaintenance":"En mantenimiento","status.maintenanceTitle":"Mantenimiento programado","status.maintenanceBody":"Texto publicado en el panel de estado.","status.frameNotice":"El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.","status.loadFrame":"Cargar panel incrustado","status.frameTitle":"Panel de estado de Jaime Gaming","status.hint":"El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.","notFound.title":"Página no encontrada","notFound.sub":"Puede que el enlace esté roto o que esta guía se haya movido.","notFound.home":"Volver al inicio de la documentación","notFound.projects":"Ver todos los proyectos","home.guide.title":"Cómo están organizadas las guías","home.guide.sub":"Todas siguen la misma anatomía, para que sepas dónde buscar en cada proyecto.","home.guide.overview.num":"01","home.guide.overview.title":"Visión general","home.guide.overview.desc":"Qué es el proyecto, qué problema resuelve, en qué estado está y qué lo distingue. Es la puerta de entrada de cada guía.","home.guide.install.num":"02","home.guide.install.title":"Instalación","home.guide.install.desc":"Requisitos, comandos para ponerlo en marcha y la primera comprobación de que todo funciona.","home.guide.usage.num":"03","home.guide.usage.title":"Uso","home.guide.usage.desc":"El día a día: funciones, comandos, mecánicas o flujos de trabajo, con ejemplos concretos.","home.guide.deep.num":"04","home.guide.deep.title":"Cómo está hecho","home.guide.deep.desc":"Arquitectura, estructura de carpetas, decisiones técnicas y los límites conocidos del proyecto.","home.guide.reference.num":"05","home.guide.reference.title":"Referencia","home.guide.reference.desc":"Tablas de consulta: opciones, formatos de datos, modelos, plataformas o preguntas frecuentes.","home.about.text1":"Este sitio reúne en un mismo lugar la documentación de los siete proyectos que mantengo en GitHub. Cada guía está escrita a mano a partir del README y de los documentos del repositorio, y se revisa cuando el proyecto cambia.","home.about.text2":"Nada se genera automáticamente desde GitHub ni depende de servicios externos: el contenido vive en este repositorio como Markdown, se compila a HTML estático con Node y se publica en GitHub Pages. El buscador usa un índice que se crea en ese mismo build.","home.about.row.stack":"Generador","home.about.row.palette":"Paleta","home.about.row.fonts":"Tipografías","home.about.row.host":"Publicación","home.about.row.search":"Buscador","home.about.row.searchValue":"Índice estático, sin servicios externos","docs.otherProjects":"Otros proyectos","projects.empty":"No hay proyectos en esta categoría.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentación de todos los proyectos de Jaime Gaming: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID y su web personal.","meta.projects.title":"Proyectos — Docs de Jaime Gaming","meta.projects.description":"Índice de toda la documentación, agrupada por aplicaciones, juegos, bots y web.","proj.wave.name":"Wave","proj.wave.tagline":"Reproductor de música local-first para web, Android y Windows.","proj.wave.summary":"Un hogar para la música que ya tienes. Wave guarda tu colección en el dispositivo: sin cuenta, sin suscripción y sin subir audio a ningún servidor.","proj.wave.status":"0.1.0 · activa","page.wave.index":"Visión general","page.wave.install":"Instalación","page.wave.features":"Funciones y uso","page.wave.platforms":"Plataformas","page.wave.architecture":"Arquitectura","page.wave.privacy":"Privacidad y datos","page.wave.dev":"Desarrollo","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"Todos tus agentes de IA en un mismo sitio.","proj.jaigent.summary":"Un binario y diez proveedores. Los mismos tools en la terminal, en ChatGPT Web por MCP remoto, en Claude Desktop y en cualquier app que hable OpenAI. Con deshacer en cada escritura y tope de gasto.","proj.jaigent.status":"0.5.x · activa","page.jaigent.index":"Visión general","page.jaigent.install":"Instalación y claves","page.jaigent.cli":"Uso en la terminal","page.jaigent.models":"Modelos y proveedores","page.jaigent.mcp":"MCP y tu propia API","page.jaigent.extend":"Skills, plugins y horarios","page.jaigent.reference":"Referencia de tools","page.jaigent.security":"Seguridad","page.jaigent.dev":"Desarrollo","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.","proj.hellbot.summary":"Mantén al menos a una persona real en un canal de voz durante 160 horas seguidas. Si el canal se vacía y nadie vuelve en el periodo de gracia, la partida muere para siempre.","proj.hellbot.status":"producción · estable","page.hellbot.index":"Visión general","page.hellbot.rules":"Reglas del evento","page.hellbot.edge-cases":"Casos límite","page.hellbot.install":"Instalación y despliegue","page.hellbot.commands":"Comandos","page.hellbot.dashboard":"Dashboard en vivo","page.hellbot.architecture":"Arquitectura","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"Un número, infinitas posibilidades.","proj.rngdle-infinite.summary":"Tira un número entre 0 y 1.000.000 y descubre qué lo hace especial. Un incremental de navegador con EP, insignias, compañeros, skills, rebirth, prestige y rollback.","proj.rngdle-infinite.status":"jugable · activa","page.rngdle-infinite.index":"Visión general","page.rngdle-infinite.play":"Cómo se juega","page.rngdle-infinite.systems":"Sistemas y progresión","page.rngdle-infinite.save":"Partida y sincronización","page.rngdle-infinite.faq":"Preguntas frecuentes","page.rngdle-infinite.dev":"Desarrollo","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Tu espacio personal: un diario minimalista y 100 % local.","proj.daily-diary.summary":"Sin backend, sin cuentas, sin IA y sin APIs externas. Los resúmenes, estadísticas y tendencias se calculan en tu navegador con reglas y plantillas de texto.","proj.daily-diary.status":"completo · local","page.daily-diary.index":"Visión general","page.daily-diary.install":"Instalación y uso","page.daily-diary.areas":"Las cinco áreas","page.daily-diary.data":"Datos y privacidad","page.daily-diary.dev":"Estructura y desarrollo","proj.void.name":"VOID","proj.void.tagline":"Michael Burns desapareció el año pasado. ¿Quieres entrar?","proj.void.summary":"Un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece. Interfaz CRT de alto contraste, en español e inglés.","proj.void.status":"beta · en desarrollo","page.void.index":"Visión general","page.void.install":"Instalación y juego","page.void.world":"El mundo de VOID Corp","page.void.engine":"Las tripas del archivo","page.void.faq":"Avisos y preguntas","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"El sitio personal que da origen a esta documentación.","proj.website.summary":"Portfolio oscuro y bilingüe generado con Node: proyectos sincronizados desde GitHub, calendario de contribuciones, presencia de Discord y blog desde Markdown.","proj.website.status":"publicada · activa","page.website.index":"Visión general","page.website.build":"Build y preview","page.website.content":"Editar el contenido","page.website.i18n":"Los dos idiomas","page.website.architecture":"Arquitectura del sitio","group.apps.title":"Aplicaciones y herramientas","group.apps.sub":"Software que resuelve algo concreto: música, agentes y organización personal.","group.games.title":"Juegos","group.games.sub":"Del incremental de navegador al terror psicológico.","group.bots.title":"Bots y eventos","group.bots.sub":"Automatización en directo para comunidades.","group.web.title":"Web","group.web.sub":"Los sitios que publico, incluido el que estás leyendo."},"en":{"nav.home":"Home","nav.projects":"Projects","nav.search":"Search","nav.site":"My site","nav.blog":"Blog","nav.contact":"Contact","nav.openMenu":"Open menu","nav.closeMenu":"Close menu","aria.skipToContent":"Skip to content","aria.homeLogo":"Jaime Gaming Docs — home","aria.mainNav":"Main navigation","aria.backToTop":"Back to top","aria.langSwitch":"English. Switch to Spanish","aria.sidebar":"Index of this documentation","aria.toc":"On this page","aria.openSidebar":"Open index","aria.closeSidebar":"Close index","search.button":"Search","search.placeholder":"Search the docs…","search.hint":"Type to filter pages and sections","search.empty":"No results for","search.noQuery":"Try “install”, “commands”, “privacy”…","search.results":"results","search.result":"result","search.close":"Close search","search.scopeAll":"All documentation","search.scopeProject":"This project only","search.kbdNavigate":"navigate","search.kbdOpen":"open","search.kbdClose":"close","search.dialogTitle":"Search the documentation","search.resultsLabel":"Search results","docs.eyebrow":"Documentation","docs.sidebarTitle":"In this documentation","docs.tocTitle":"On this page","docs.editOnGithub":"Edit this page on GitHub","docs.sourceNote":"Documentation written by hand for this site, based on the repository's README and docs.","docs.updated":"Last reviewed","docs.prev":"Previous","docs.next":"Next","docs.allProjects":"All projects","docs.readTime":"min read","docs.jumpTo":"Go to","home.kicker":"DOCUMENTATION","home.title":"All my projects, \u003cspan class=\"hero__title-accent\">documented\u003c/span>","home.subtitle":"One single site with the documentation of everything I build: players, agents, bots, games and websites. Install guides, architecture, usage and reference.","home.ctaPrimary":"Start reading","home.ctaSecondary":"See all projects","home.stats.projects":"projects","home.stats.pages":"pages","home.stats.languages":"languages","home.stats.updated":"updated","home.about.title":"About these docs","home.about.sub":"How they are made and how they are kept up to date.","home.about.card.label":"HOW IT WORKS","home.about.card.title":"Written by hand, generated with Node","home.about.card.text":"Every page is a Markdown file in content/docs/. The build turns them into static HTML with the same system, the same palette and the same animations as my main website.","home.about.card.stamp":"SEE THE REPOSITORY ↗","home.contribute.title":"Found a mistake?","home.contribute.text":"All of this documentation lives in a public repository. Open an issue or send a pull request with the fix.","home.contribute.issue":"Open an issue","home.contribute.pr":"Propose a change","home.contribute.email":"Send me an email","projects.title":"Projects","projects.sub":"All the documentation, project by project. Each card links to its complete guide.","projects.pages":"pages","projects.openDocs":"Open documentation","projects.demo":"Try it","projects.code":"Code","projects.group.all":"All","callout.note":"Note","callout.tip":"Tip","callout.warning":"Warning","callout.important":"Important","callout.caution":"Caution","code.copy":"Copy","code.copied":"Copied","footer.rights":"All rights reserved.","footer.mainSite":"My site","footer.tagline":"Browser games, web applications and videos.","footer.site":"Site","footer.siteAria":"Site links","footer.resources":"Resources","footer.resourcesAria":"Resources and external links","footer.status":"Service status","footer.email":"Email","footer.terms":"Terms of Service","footer.privacy":"Privacy","footer.source":"Source code ↗","footer.legalAria":"Terms and privacy","aria.socials":"Social links","aria.footerLogo":"Jaime Gaming — home","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Email","status.title":"Service status","status.sub":"Live status of the website, documentation and projects, from the official incident.io panel.","status.note":"Data from the official status panel","status.open":"Open full status page ↗","status.loading":"Checking status…","status.unknown":"Status unavailable","status.error":"Couldn't fetch the live status. You can open the full status page.","status.updated":"Updated {date}","status.componentsAria":"Service components","status.allOperational":"All systems operational","status.minorIssues":"Minor issues","status.majorIssues":"Major incident","status.criticalIssues":"Critical incident","status.maintenanceOverall":"Maintenance in progress","status.operational":"Operational","status.degraded":"Degraded performance","status.partial":"Partial outage","status.major":"Major outage","status.underMaintenance":"Under maintenance","status.maintenanceTitle":"Scheduled maintenance","status.maintenanceBody":"Text published on the status page.","status.frameNotice":"The full panel belongs to incident.io and is only loaded if you ask for it. Once loaded, it may use its own cookies.","status.loadFrame":"Load embedded panel","status.frameTitle":"Jaime Gaming status page","status.hint":"The summary refreshes when you open this page. If the embedded panel doesn’t appear, open it with the button above.","notFound.title":"Page not found","notFound.sub":"The link may be broken or this guide may have moved.","notFound.home":"Back to the docs home","notFound.projects":"See all projects","home.guide.title":"How the guides are organised","home.guide.sub":"They all follow the same anatomy, so you know where to look in every project.","home.guide.overview.num":"01","home.guide.overview.title":"Overview","home.guide.overview.desc":"What the project is, which problem it solves, what state it is in and what sets it apart. It is the entry page of every guide.","home.guide.install.num":"02","home.guide.install.title":"Installation","home.guide.install.desc":"Requirements, the commands to get it running and the first check that everything works.","home.guide.usage.num":"03","home.guide.usage.title":"Usage","home.guide.usage.desc":"Day to day: features, commands, mechanics or workflows, with concrete examples.","home.guide.deep.num":"04","home.guide.deep.title":"How it is built","home.guide.deep.desc":"Architecture, folder structure, technical decisions and the project's known limits.","home.guide.reference.num":"05","home.guide.reference.title":"Reference","home.guide.reference.desc":"Lookup tables: options, data formats, models, platforms or frequently asked questions.","home.about.text1":"This site gathers, in one single place, the documentation of the seven projects I maintain on GitHub. Every guide is written by hand from the repository's README and docs, and reviewed when the project changes.","home.about.text2":"Nothing is generated automatically from GitHub and nothing depends on external services: the content lives in this repository as Markdown, it is compiled to static HTML with Node and published on GitHub Pages. Search uses an index created in that same build.","home.about.row.stack":"Generator","home.about.row.palette":"Palette","home.about.row.fonts":"Fonts","home.about.row.host":"Publishing","home.about.row.search":"Search","home.about.row.searchValue":"Static index, no external services","docs.otherProjects":"Other projects","projects.empty":"There are no projects in this category.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentation for all of Jaime Gaming's projects: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID and his personal website.","meta.projects.title":"Projects — Jaime Gaming Docs","meta.projects.description":"Index of all the documentation, grouped by apps, games, bots and web.","proj.wave.name":"Wave","proj.wave.tagline":"A local-first music player for web, Android and Windows.","proj.wave.summary":"A home for the music you already own. Wave keeps your collection on the device: no account, no subscription and no audio uploaded to any server.","proj.wave.status":"0.1.0 · active","page.wave.index":"Overview","page.wave.install":"Installation","page.wave.features":"Features & usage","page.wave.platforms":"Platforms","page.wave.architecture":"Architecture","page.wave.privacy":"Privacy & data","page.wave.dev":"Development","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"All your agents in one place.","proj.jaigent.summary":"One binary, ten providers. The same tools in the terminal, in ChatGPT Web over remote MCP, in Claude Desktop and in any app that speaks OpenAI. With undo on every write and a hard spend cap.","proj.jaigent.status":"0.5.x · active","page.jaigent.index":"Overview","page.jaigent.install":"Install & API keys","page.jaigent.cli":"Using the CLI","page.jaigent.models":"Models & providers","page.jaigent.mcp":"MCP & your own API","page.jaigent.extend":"Skills, plugins & schedules","page.jaigent.reference":"Tools reference","page.jaigent.security":"Security","page.jaigent.dev":"Development","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"The Discord bot that runs the Welcome to Hell endurance event.","proj.hellbot.summary":"Keep at least one real human in a single voice channel for 160 consecutive hours. If that channel empties and nobody returns within the grace period, the run is dead permanently.","proj.hellbot.status":"production · stable","page.hellbot.index":"Overview","page.hellbot.rules":"Event rules","page.hellbot.edge-cases":"Edge cases","page.hellbot.install":"Install & deploy","page.hellbot.commands":"Commands","page.hellbot.dashboard":"Live dashboard","page.hellbot.architecture":"Architecture","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"One number, infinite possibilities.","proj.rngdle-infinite.summary":"Roll a number from 0 to 1,000,000 and find out what makes it special. A browser incremental with EP, badges, companions, skills, rebirth, prestige and rollback.","proj.rngdle-infinite.status":"playable · active","page.rngdle-infinite.index":"Overview","page.rngdle-infinite.play":"How to play","page.rngdle-infinite.systems":"Systems & progression","page.rngdle-infinite.save":"Save & sync","page.rngdle-infinite.faq":"FAQ","page.rngdle-infinite.dev":"Development","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Your personal space: a minimalist, 100% local diary.","proj.daily-diary.summary":"No backend, no accounts, no AI and no external APIs. Summaries, statistics and trends are computed in your browser with rules and text templates.","proj.daily-diary.status":"complete · local","page.daily-diary.index":"Overview","page.daily-diary.install":"Install & run","page.daily-diary.areas":"The five areas","page.daily-diary.data":"Data & privacy","page.daily-diary.dev":"Structure & development","proj.void.name":"VOID","proj.void.tagline":"Michael Burns disappeared last year. Would you come in?","proj.void.summary":"A psychological game set in a mysterious corporation where everyone and everything disappears. High-contrast CRT interface, in Spanish and English.","proj.void.status":"beta · in development","page.void.index":"Overview","page.void.install":"Install & play","page.void.world":"The VOID Corp world","page.void.engine":"Inside the single file","page.void.faq":"Warnings & FAQ","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"The personal site this documentation is built from.","proj.website.summary":"Dark, bilingual portfolio generated with Node: projects synced from GitHub, contributions calendar, Discord presence and a Markdown blog.","proj.website.status":"published · active","page.website.index":"Overview","page.website.build":"Build & preview","page.website.content":"Editing content","page.website.i18n":"The two languages","page.website.architecture":"Site architecture","group.apps.title":"Apps & tools","group.apps.sub":"Software that solves something concrete: music, agents and personal organisation.","group.games.title":"Games","group.games.sub":"From the browser incremental to psychological horror.","group.bots.title":"Bots & events","group.bots.sub":"Live automation for communities.","group.web.title":"Web","group.web.sub":"The sites I publish, including the one you are reading."}}</script>
+<script type="application/json" id="pageTranslations">{"es":{"title":"Las tripas del archivo · VOID — Docs de Jaime Gaming","description":"Qué hay dentro del archivo único de VOID: las cuatro capas, los catorce audios, las cámaras hechas con canvas, el estado de sesión y el traductor automático.","fields":{"body":"\u003ch1 id=\"las-tripas-del-archivo\">Las tripas del archivo\u003c/h1>\n\u003cp>El juego entero es un archivo. No es una forma de hablar: \u003ccode>VOID mxks version (code).html\u003c/code> pesa \u003cstrong>1.091.298 bytes\u003c/strong>, tiene \u003cstrong>20.077 líneas\u003c/strong> y \u003cstrong>995.640\ncaracteres\u003c/strong>, y dentro van el marcado, los cuatro bloques de estilo y los dos\nbloques de script. Esta página cuenta qué hay ahí dentro, leído del propio\narchivo y no del README.\u003c/p>\n\u003cp>Sirve para dos cosas: para saber qué se está ejecutando cuando se juega, y para\nno perderse al abrirlo en un editor, que es lo primero que hace cualquiera que\nquiere contribuir.\u003c/p>\n\u003ch2 id=\"las-cuatro-capas-de-un-solo-archivo\">Las cuatro capas de un solo archivo\u003c/h2>\n\u003cp>No hay build, no hay dependencias y no hay ni un solo \u003ccode>&lt;link&gt;\u003c/code>: el archivo no\npide nada al exterior para funcionar. Lo que hay es esto:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Medida\u003c/th>\n\u003cth>Cantidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Tamaño y líneas\u003c/td>\n\u003ctd>1.091.298 bytes · 20.077 líneas · 995.640 caracteres\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Bloques\u003c/td>\n\u003ctd>2 \u003ccode>&lt;script&gt;\u003c/code> · 4 \u003ccode>&lt;style&gt;\u003c/code> · 0 \u003ccode>&lt;link&gt;\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Código\u003c/td>\n\u003ctd>303 declaraciones \u003ccode>function\u003c/code> (302 distintas) · 1.367 \u003ccode>const\u003c/code> o \u003ccode>let\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Tiempo\u003c/td>\n\u003ctd>233 \u003ccode>setTimeout\u003c/code> · 19 \u003ccode>setInterval\u003c/code> · 13 \u003ccode>requestAnimationFrame\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Comentarios\u003c/td>\n\u003ctd>715 de línea (\u003ccode>//\u003c/code>) · 27 de bloque (\u003ccode>/* */\u003c/code>)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Red\u003c/td>\n\u003ctd>4 \u003ccode>fetch\u003c/code> · 0 \u003ccode>XMLHttpRequest\u003c/code>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Las cuatro capas son las de cualquier página —marcado, estilo, script y\nrecursos—, solo que las tres primeras comparten archivo y la cuarta casi no\nexiste: hay dos \u003ccode>&lt;img&gt;\u003c/code> y un único vídeo externo, el de la carpeta\n\u003ccode>assets [DO NOT TOUCH]\u003c/code>.\u003c/p>\n\u003cp>Los cuatro \u003ccode>fetch\u003c/code> son todos del traductor automático, que se describe más abajo.\n\u003cstrong>Ninguna otra parte del juego llama a ningún servidor\u003c/strong>: no hay analítica, no hay telemetría y no hay peticiones a\ndominios del relato, que aparecen en los documentos internos pero no en el\ncódigo.\u003c/p>\n\u003ch2 id=\"catorce-audios-y-siete-videos\">Catorce audios y siete vídeos\u003c/h2>\n\u003cp>La capa de medios está declarada entera en el marcado, con su \u003ccode>id\u003c/code> y su volumen\nfijado de antemano. Nueve pistas de música, cada una para un contexto:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Pista\u003c/th>\n\u003cth>Volumen\u003c/th>\n\u003cth>Bucle\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>ambientMusic\u003c/code>\u003c/td>\n\u003ctd>0.3\u003c/td>\n\u003ctd>sí\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>officeMusic\u003c/code>\u003c/td>\n\u003ctd>0.25\u003c/td>\n\u003ctd>sí\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>loginMusic\u003c/code>\u003c/td>\n\u003ctd>0.25\u003c/td>\n\u003ctd>sí\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>desktopMusic\u003c/code>\u003c/td>\n\u003ctd>0.2\u003c/td>\n\u003ctd>sí\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>glitchMusic\u003c/code>\u003c/td>\n\u003ctd>0.25\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>mailMusic\u003c/code>\u003c/td>\n\u003ctd>0.2\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>callMusic\u003c/code>\u003c/td>\n\u003ctd>0.2\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>windowOpenMusic\u003c/code>\u003c/td>\n\u003ctd>0.15\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>windowCloseMusic\u003c/code>\u003c/td>\n\u003ctd>0.15\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Y cinco efectos sin volumen declarado, que heredan el del elemento: \u003ccode>sfxClick\u003c/code>,\n\u003ccode>sfxHover\u003c/code>, \u003ccode>sfxDoor\u003c/code>, \u003ccode>sfxAlarm\u003c/code> y \u003ccode>sfxGlitch\u003c/code>. Ninguno lleva \u003ccode>src\u003c/code> en el\nmarcado: la fuente se asigna en tiempo de ejecución, igual que el vídeo de la\nintro, que declara \u003ccode>data-asset-name=&quot;VOIDMXKSnight_shift.mp4&quot;\u003c/code> y se resuelve\nmás abajo.\u003c/p>\n\u003cp>Los siete \u003ccode>&lt;video&gt;\u003c/code> son la intro y \u003cstrong>seis cámaras de vigilancia\u003c/strong>, \u003ccode>cam1\u003c/code> a\n\u003ccode>cam6\u003c/code>, todas con \u003ccode>autoplay loop muted playsinline\u003c/code>. Van silenciadas de salida\nporque el sonido de las cámaras no es una pista: es otra cosa.\u003c/p>\n\u003ch2 id=\"las-camaras-son-canvas-no-video\">Las cámaras son canvas, no vídeo\u003c/h2>\n\u003cp>Aquí está el truco mejor escondido del archivo. Las cámaras no reproducen vídeo\ngrabado: \u003cstrong>se dibujan\u003c/strong>. Hay siete llamadas a \u003ccode>createElement(&#39;canvas&#39;)\u003c/code> con sus\nsiete \u003ccode>getContext\u003c/code>, y los comentarios del propio código lo dicen:\u003c/p>\n\u003cul>\n\u003cli>Dos lienzos de \u003cstrong>320×240\u003c/strong> para las feeds de CCTV, con el comentario «Crear\ncanvas en lugar de video real (sin necesidad de internet)».\u003c/li>\n\u003cli>Dos lienzos fuera de pantalla de \u003cstrong>640×480\u003c/strong> para generar una feed temporal con\n\u003ccode>MediaStream\u003c/code>, y una variante para la \u003cstrong>cámara 4 con interferencia extrema\u003c/strong>.\u003c/li>\n\u003cli>Dos superposiciones de 320×240 que se colocan encima de un \u003ccode>&lt;video&gt;\u003c/code> ya\nexistente, solo si no hay una previa, y que se animan con \u003ccode>animateCCTV\u003c/code>.\u003c/li>\n\u003cli>Una captura del vídeo a pantalla completa, que toma las medidas reales del\nelemento (\u003ccode>video.videoWidth\u003c/code>) en vez de unas fijas.\u003c/li>\n\u003c/ul>\n\u003cp>Las rejillas, el ruido y las siluetas que se ven al jugar están trazados ahí,\nlínea a línea, en cada fotograma. Es la razón de que la identidad visual del\njuego —la simulación CRT de alto contraste— no dependa de ningún archivo de\nimagen: se genera mientras se mira.\u003c/p>\n\u003ch2 id=\"ocho-rutas-para-encontrar-el-mp4\">Ocho rutas para encontrar el mp4\u003c/h2>\n\u003cp>El único recurso externo es el vídeo de la intro, y el archivo no da por hecho\ndónde está. Construye una lista de candidatas y las prueba en orden:\u003c/p>\n\u003cpre data-lang=\"text\">\u003ccode class=\"language-text\">VOIDMXKSnight_shift.mp4\n./VOIDMXKSnight_shift.mp4\n./assets [DO NOT TOUCH]/VOIDMXKSnight_shift.mp4\nassets [DO NOT TOUCH]/VOIDMXKSnight_shift.mp4\n../assets [DO NOT TOUCH]/VOIDMXKSnight_shift.mp4\n../assets/VOIDMXKSnight_shift.mp4\n../../assets/VOIDMXKSnight_shift.mp4\n../../../assets/VOIDMXKSnight_shift.mp4\u003c/code>\u003c/pre>\n\u003cp>Cada una se resuelve con \u003ccode>new URL(ruta, window.location.href)\u003c/code> dentro de un\n\u003ccode>try/catch\u003c/code>, y cuando una responde el elemento queda marcado con\n\u003ccode>data-asset-resolved=&quot;1&quot;\u003c/code> para no volver a intentarlo. El nombre sale de\n\u003ccode>data-asset-name\u003c/code>, así que se puede sustituir el vídeo sin tocar el código.\u003c/p>\n\u003cp>Esto matiza lo de que no se pueda mover nada: el HTML aguanta que la carpeta\nesté al lado, un nivel por encima o hasta tres niveles por encima, y aguanta que\nse llame \u003ccode>assets\u003c/code>. Lo que no aguanta es que el vídeo cambie de nombre, porque\nlas ocho candidatas terminan en \u003ccode>VOIDMXKSnight_shift.mp4\u003c/code>.\u003c/p>\n\u003ch2 id=\"el-estado-vive-en-la-sesion\">El estado vive en la sesión\u003c/h2>\n\u003cp>No hay partida guardada. El archivo usa \u003ccode>sessionStorage\u003c/code> para cinco cosas y\n\u003ccode>localStorage\u003c/code> para una sola, y la diferencia es deliberada:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Clave\u003c/th>\n\u003cth>Dónde\u003c/th>\n\u003cth>Para qué\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>disclaimerShown\u003c/code>\u003c/td>\n\u003ctd>sesión\u003c/td>\n\u003ctd>Que el aviso de salud salga una vez por sesión\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>interview_completed_this_session\u003c/code>\u003c/td>\n\u003ctd>sesión\u003c/td>\n\u003ctd>Marcar que la entrevista ya se completó\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>void_external_flags\u003c/code>\u003c/td>\n\u003ctd>sesión\u003c/td>\n\u003ctd>Banderas de estado del relato\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>void_ngplus_level\u003c/code>\u003c/td>\n\u003ctd>sesión\u003c/td>\n\u003ctd>El nivel de Nueva Partida+\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>void_show_amnesia_now\u003c/code>\u003c/td>\n\u003ctd>sesión\u003c/td>\n\u003ctd>Disparar el mensaje de amnesia una sola vez\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>voidTranslations\u003c/code>\u003c/td>\n\u003ctd>\u003cstrong>localStorage\u003c/strong>\u003c/td>\n\u003ctd>La caché de traducciones\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>\u003ccode>checkForNewGamePlus()\u003c/code> lo comenta sin rodeos: «localStorage deshabilitado - no\nhay persistencia entre sesiones / Pero sessionStorage permite recordar dentro de\nla misma sesión». Al detectar un nivel guardado lo incrementa, marca\n\u003ccode>isNewGamePlus\u003c/code> y lo registra en consola como \u003ccode>[NG+]\u003c/code>.\u003c/p>\n\u003cp>El mensaje de amnesia depende de dos condiciones a la vez: estar en Nueva\nPartida+ y que \u003ccode>void_show_amnesia_now\u003c/code> valga \u003ccode>&#39;true&#39;\u003c/code>, que es lo que deja escrito\nel tramo que acaba de completar la entrevista. Se lee, \u003cstrong>se borra\u003c/strong> y se muestra\na los 500 ms, así que no puede salir dos veces.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Nota\u003c/p>\n  \u003cdiv class=\"callout__body\">La consecuencia práctica es que cerrar la pestaña reinicia el progreso y el\nnivel de Nueva Partida+. No es un fallo que haya que arreglar: es cómo está\nescrito, con la persistencia desactivada a propósito. Lo único que sobrevive a\nla pestaña es la caché de traducciones.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"el-traductor-automatico\">El traductor automático\u003c/h2>\n\u003cp>El juego está escrito en español y \u003cstrong>se traduce solo al inglés mientras se\njuega\u003c/strong>. El bloque se llama \u003ccode>AutoTranslator\u003c/code> y su cabecera lo resume: traduce el\ncontenido en español usando Google Translate como principal y otras APIs como\nrespaldo, con las traducciones en caché para no repetir el trabajo.\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Orden\u003c/th>\n\u003cth>API\u003c/th>\n\u003cth>Dirección\u003c/th>\n\u003cth>Tope por petición\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>1\u003c/td>\n\u003ctd>\u003ccode>GoogleTranslate\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>translate.googleapis.com/translate_a/single\u003c/code>\u003c/td>\n\u003ctd>5.000 caracteres\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>2\u003c/td>\n\u003ctd>\u003ccode>MyMemory\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>api.mymemory.translated.net/get\u003c/code>\u003c/td>\n\u003ctd>500 caracteres\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>3\u003c/td>\n\u003ctd>\u003ccode>LibreTranslate\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>translate.argosopentech.com/translate\u003c/code>\u003c/td>\n\u003ctd>3.000 caracteres\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>El texto se parte en trozos de hasta \u003cstrong>4.500 caracteres\u003c/strong> (\u003ccode>maxChunkSize\u003c/code>) y\nentre petición y petición se esperan \u003cstrong>200 ms\u003c/strong> para no chocar con los límites de\ntasa. Cada API declara su propio método: las dos primeras hacen \u003ccode>GET\u003c/code> con\nparámetros y la tercera \u003ccode>POST\u003c/code> con \u003ccode>{ q, source: &#39;es&#39;, … }\u003c/code>, que es donde queda\nescrito que el idioma de origen es el español.\u003c/p>\n\u003cp>Cuando una falla entra en \u003ccode>failedAPIs\u003c/code>, un \u003ccode>Set\u003c/code> que la descarta para el resto de\nla sesión, y se pasa a la siguiente. Mientras tanto se informa del avance con\n\u003ccode>lastStage\u003c/code>, \u003ccode>lastCurrent\u003c/code>, \u003ccode>lastTotal\u003c/code>, \u003ccode>lastPercentage\u003c/code> y \u003ccode>lastItem\u003c/code>, y hay un\nindicador de esquina (\u003ccode>cornerProgressEnabled\u003c/code>) con su propio temporizador de\ndesaparecido.\u003c/p>\n\u003cdiv class=\"callout callout--tip\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Consejo\u003c/p>\n  \u003cdiv class=\"callout__body\">Antes de llamar a ninguna API se intenta un cuarto \u003ccode>fetch\u003c/code>, a\n\u003ccode>void-translations-en.json\u003c/code> junto al HTML y con \u003ccode>cache: &#39;no-store&#39;\u003c/code>. Ese\narchivo \u003cstrong>no está en el repositorio\u003c/strong>, y no hace falta: es la vía para\nsustituir la traducción automática por una hecha a mano. Si existe y se puede\nleer, se usa entero; si no, se lanza \u003ccode>&#39;JSON file not found&#39;\u003c/code> y el traductor\nsigue su camino.\u003c/div>\n\u003c/div>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Aviso\u003c/p>\n  \u003cdiv class=\"callout__body\">Con la traducción automática activa, fragmentos del texto del juego salen del\nnavegador hacia tres servicios de terceros. Es el único tráfico externo de todo\nel archivo, pero conviene saberlo: no es un juego sin conexión cuando se juega\nen inglés, y la caché en \u003ccode>localStorage\u003c/code> hace que la segunda vez ya no salga\nnada.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"lo-que-explica-de-los-avisos\">Lo que explica de los avisos\u003c/h2>\n\u003cp>Varias cosas que están en \u003ca href=\"/Docs/void/faq/\">Avisos y preguntas\u003c/a> dejan de ser\nmisteriosas vistas desde aquí. Que la versión en inglés no esté terminada es\ncoherente con que sea una traducción automática en tiempo de ejecución, con sus\ntres APIs y sus límites por petición. Que el aviso de salud salga cada vez que se\nabre el juego en una pestaña nueva es \u003ccode>disclaimerShown\u003c/code> en \u003ccode>sessionStorage\u003c/code>. Y\nque la simulación CRT pueda causar visión fantasma no depende de un recurso que\nse pueda quitar: se dibuja en cada fotograma.\u003c/p>\n\u003cp>Para jugarlo tal como viene, el camino está en\n\u003ca href=\"/Docs/void/install/\">Instalación y juego\u003c/a>; para el relato que hay encima de todo\nesto, en \u003ca href=\"/Docs/void/world/\">El mundo de VOID Corp\u003c/a>.\u003c/p>\n\u003ch2 id=\"contribuir-a-partir-de-aqui\">Contribuir a partir de aquí\u003c/h2>\n\u003cp>El archivo que hay que abrir es\n\u003ca href=\"https://github.com/jaime-gaming/VOID/blob/main/VOID%20mxks%20version/VOID%20mxks%20version%20%28code%29.html\" target=\"_blank\" rel=\"noopener noreferrer\">\u003ccode>VOID mxks version (code).html\u003c/code>\u003c/a>,\ny se edita con un editor que aguante un millón de caracteres en un solo archivo.\nDos consejos que salen de leerlo:\u003c/p>\n\u003cul>\n\u003cli>Los 715 comentarios de línea están en los dos idiomas y explican intención, no\nsintaxis: «Cámara 4 con interferencia extrema» dice más que el código que\nviene detrás. Buscar por ellos es la forma más rápida de orientarse.\u003c/li>\n\u003cli>Casi todo el tiempo del juego son los 233 \u003ccode>setTimeout\u003c/code>. Al tocar uno conviene\nbuscar su pareja de cancelación, porque en un archivo sin módulos un retardo\nhuérfano sigue disparándose después de cambiar de escena.\u003c/li>\n\u003c/ul>\n","desc":"Qué hay dentro del archivo único de VOID: las cuatro capas, los catorce audios, las cámaras hechas con canvas, el estado de sesión y el traductor automático.","readtime":"7 min de lectura","editHref":"https://github.com/jaime-gaming/VOID/blob/main/content/docs/void/engine.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#las-cuatro-capas-de-un-solo-archivo\">Las cuatro capas de un solo archivo\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#catorce-audios-y-siete-videos\">Catorce audios y siete vídeos\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#las-camaras-son-canvas-no-video\">Las cámaras son canvas, no vídeo\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#ocho-rutas-para-encontrar-el-mp4\">Ocho rutas para encontrar el mp4\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#el-estado-vive-en-la-sesion\">El estado vive en la sesión\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#el-traductor-automatico\">El traductor automático\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#lo-que-explica-de-los-avisos\">Lo que explica de los avisos\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#contribuir-a-partir-de-aqui\">Contribuir a partir de aquí\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}},"en":{"title":"Inside the single file · VOID — Docs de Jaime Gaming","description":"What is inside VOID's single file: the four layers, the fourteen audio elements, the cameras drawn with canvas, the session state and the automatic translator.","fields":{"body":"\u003ch1 id=\"inside-the-single-file\">Inside the single file\u003c/h1>\n\u003cp>The whole game is one file. That is not a figure of speech: \u003ccode>VOID mxks version (code).html\u003c/code> weighs \u003cstrong>1,091,298 bytes\u003c/strong>, has \u003cstrong>20,077 lines\u003c/strong> and \u003cstrong>995,640\ncharacters\u003c/strong>, and inside it go the markup, the four style blocks and the two\nscript blocks. This page tells what is in there, read from the file itself and\nnot from the README.\u003c/p>\n\u003cp>It is useful for two things: knowing what is running when you play, and not\ngetting lost when opening it in an editor, which is the first thing anybody who\nwants to contribute does.\u003c/p>\n\u003ch2 id=\"the-four-layers-of-a-single-file\">The four layers of a single file\u003c/h2>\n\u003cp>There is no build, no dependencies and not a single \u003ccode>&lt;link&gt;\u003c/code>: the file asks\nnothing from the outside to work. What there is, is this:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Measure\u003c/th>\n\u003cth>Amount\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Size and lines\u003c/td>\n\u003ctd>1,091,298 bytes · 20,077 lines · 995,640 characters\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Blocks\u003c/td>\n\u003ctd>2 \u003ccode>&lt;script&gt;\u003c/code> · 4 \u003ccode>&lt;style&gt;\u003c/code> · 0 \u003ccode>&lt;link&gt;\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Code\u003c/td>\n\u003ctd>303 \u003ccode>function\u003c/code> declarations (302 distinct) · 1,367 \u003ccode>const\u003c/code> or \u003ccode>let\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Time\u003c/td>\n\u003ctd>233 \u003ccode>setTimeout\u003c/code> · 19 \u003ccode>setInterval\u003c/code> · 13 \u003ccode>requestAnimationFrame\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Comments\u003c/td>\n\u003ctd>715 line (\u003ccode>//\u003c/code>) · 27 block (\u003ccode>/* */\u003c/code>)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Network\u003c/td>\n\u003ctd>4 \u003ccode>fetch\u003c/code> · 0 \u003ccode>XMLHttpRequest\u003c/code>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>The four layers are those of any page —markup, style, script and resources—,\nexcept that the first three share a file and the fourth barely exists: there are\ntwo \u003ccode>&lt;img&gt;\u003c/code> and a single external video, the one in the \u003ccode>assets [DO NOT TOUCH]\u003c/code>\nfolder.\u003c/p>\n\u003cp>The four \u003ccode>fetch\u003c/code> calls all belong to the automatic translator, described below.\n\u003cstrong>No other part of the game calls any server\u003c/strong>: there is no analytics, no\ntelemetry and no requests to the domains of the story, which appear in the\ninternal documents but not in the code.\u003c/p>\n\u003ch2 id=\"fourteen-audio-elements-and-seven-videos\">Fourteen audio elements and seven videos\u003c/h2>\n\u003cp>The media layer is declared whole in the markup, with its \u003ccode>id\u003c/code> and its volume set\nin advance. Nine music tracks, each one for a context:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Track\u003c/th>\n\u003cth>Volume\u003c/th>\n\u003cth>Loop\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>ambientMusic\u003c/code>\u003c/td>\n\u003ctd>0.3\u003c/td>\n\u003ctd>yes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>officeMusic\u003c/code>\u003c/td>\n\u003ctd>0.25\u003c/td>\n\u003ctd>yes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>loginMusic\u003c/code>\u003c/td>\n\u003ctd>0.25\u003c/td>\n\u003ctd>yes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>desktopMusic\u003c/code>\u003c/td>\n\u003ctd>0.2\u003c/td>\n\u003ctd>yes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>glitchMusic\u003c/code>\u003c/td>\n\u003ctd>0.25\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>mailMusic\u003c/code>\u003c/td>\n\u003ctd>0.2\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>callMusic\u003c/code>\u003c/td>\n\u003ctd>0.2\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>windowOpenMusic\u003c/code>\u003c/td>\n\u003ctd>0.15\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>windowCloseMusic\u003c/code>\u003c/td>\n\u003ctd>0.15\u003c/td>\n\u003ctd>no\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>And five effects with no declared volume, which inherit the element&#39;s:\n\u003ccode>sfxClick\u003c/code>, \u003ccode>sfxHover\u003c/code>, \u003ccode>sfxDoor\u003c/code>, \u003ccode>sfxAlarm\u003c/code> and \u003ccode>sfxGlitch\u003c/code>. None of them\ncarries a \u003ccode>src\u003c/code> in the markup: the source is assigned at runtime, just like the\nintro video, which declares \u003ccode>data-asset-name=&quot;VOIDMXKSnight_shift.mp4&quot;\u003c/code> and is\nresolved further down.\u003c/p>\n\u003cp>The seven \u003ccode>&lt;video&gt;\u003c/code> elements are the intro and \u003cstrong>six surveillance cameras\u003c/strong>,\n\u003ccode>cam1\u003c/code> to \u003ccode>cam6\u003c/code>, all with \u003ccode>autoplay loop muted playsinline\u003c/code>. They start muted\nbecause the sound of the cameras is not a track: it is something else.\u003c/p>\n\u003ch2 id=\"the-cameras-are-canvas-not-video\">The cameras are canvas, not video\u003c/h2>\n\u003cp>Here is the best hidden trick in the file. The cameras do not play recorded\nvideo: \u003cstrong>they are drawn\u003c/strong>. There are seven calls to \u003ccode>createElement(&#39;canvas&#39;)\u003c/code>\nwith their seven \u003ccode>getContext\u003c/code>, and the code&#39;s own comments say so:\u003c/p>\n\u003cul>\n\u003cli>Two \u003cstrong>320×240\u003c/strong> canvases for the CCTV feeds, with the comment &quot;Crear canvas en\nlugar de video real (sin necesidad de internet)&quot;.\u003c/li>\n\u003cli>Two offscreen \u003cstrong>640×480\u003c/strong> canvases to generate a temporary feed with\n\u003ccode>MediaStream\u003c/code>, and a variant for \u003cstrong>camera 4 with extreme interference\u003c/strong>.\u003c/li>\n\u003cli>Two 320×240 overlays placed on top of an already existing \u003ccode>&lt;video&gt;\u003c/code>, only if\nthere is no previous one, animated with \u003ccode>animateCCTV\u003c/code>.\u003c/li>\n\u003cli>A full screen capture of the video, which takes the element&#39;s real dimensions\n(\u003ccode>video.videoWidth\u003c/code>) instead of fixed ones.\u003c/li>\n\u003c/ul>\n\u003cp>The grids, the noise and the silhouettes seen while playing are traced there,\nline by line, on every frame. That is why the game&#39;s visual identity —the high\ncontrast CRT simulation— does not depend on any image file: it is generated while\nit is watched.\u003c/p>\n\u003ch2 id=\"eight-paths-to-find-the-mp4\">Eight paths to find the mp4\u003c/h2>\n\u003cp>The only external resource is the intro video, and the file does not take for\ngranted where it is. It builds a list of candidates and tries them in order:\u003c/p>\n\u003cpre data-lang=\"text\">\u003ccode class=\"language-text\">VOIDMXKSnight_shift.mp4\n./VOIDMXKSnight_shift.mp4\n./assets [DO NOT TOUCH]/VOIDMXKSnight_shift.mp4\nassets [DO NOT TOUCH]/VOIDMXKSnight_shift.mp4\n../assets [DO NOT TOUCH]/VOIDMXKSnight_shift.mp4\n../assets/VOIDMXKSnight_shift.mp4\n../../assets/VOIDMXKSnight_shift.mp4\n../../../assets/VOIDMXKSnight_shift.mp4\u003c/code>\u003c/pre>\n\u003cp>Each one is resolved with \u003ccode>new URL(path, window.location.href)\u003c/code> inside a\n\u003ccode>try/catch\u003c/code>, and when one answers the element is marked with\n\u003ccode>data-asset-resolved=&quot;1&quot;\u003c/code> so it is not tried again. The name comes from\n\u003ccode>data-asset-name\u003c/code>, so the video can be replaced without touching the code.\u003c/p>\n\u003cp>This nuances the claim that nothing can be moved: the HTML tolerates the folder\nbeing next to it, one level up or even three levels up, and tolerates it being\ncalled \u003ccode>assets\u003c/code>. What it does not tolerate is the video changing its name,\nbecause the eight candidates all end in \u003ccode>VOIDMXKSnight_shift.mp4\u003c/code>.\u003c/p>\n\u003ch2 id=\"the-state-lives-in-the-session\">The state lives in the session\u003c/h2>\n\u003cp>There is no saved game. The file uses \u003ccode>sessionStorage\u003c/code> for five things and\n\u003ccode>localStorage\u003c/code> for a single one, and the difference is deliberate:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Key\u003c/th>\n\u003cth>Where\u003c/th>\n\u003cth>What for\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>disclaimerShown\u003c/code>\u003c/td>\n\u003ctd>session\u003c/td>\n\u003ctd>So the health warning shows once per session\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>interview_completed_this_session\u003c/code>\u003c/td>\n\u003ctd>session\u003c/td>\n\u003ctd>Mark that the interview is already complete\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>void_external_flags\u003c/code>\u003c/td>\n\u003ctd>session\u003c/td>\n\u003ctd>Story state flags\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>void_ngplus_level\u003c/code>\u003c/td>\n\u003ctd>session\u003c/td>\n\u003ctd>The New Game+ level\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>void_show_amnesia_now\u003c/code>\u003c/td>\n\u003ctd>session\u003c/td>\n\u003ctd>Trigger the amnesia message only once\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>voidTranslations\u003c/code>\u003c/td>\n\u003ctd>\u003cstrong>localStorage\u003c/strong>\u003c/td>\n\u003ctd>The translations cache\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>\u003ccode>checkForNewGamePlus()\u003c/code> comments it without beating around the bush:\n&quot;localStorage deshabilitado - no hay persistencia entre sesiones / Pero\nsessionStorage permite recordar dentro de la misma sesión&quot;. On detecting a saved\nlevel it increments it, sets \u003ccode>isNewGamePlus\u003c/code> and logs it to the console as\n\u003ccode>[NG+]\u003c/code>.\u003c/p>\n\u003cp>The amnesia message depends on two conditions at once: being in New Game+ and\n\u003ccode>void_show_amnesia_now\u003c/code> being \u003ccode>&#39;true&#39;\u003c/code>, which is what the stretch that has just\ncompleted the interview leaves written. It is read, \u003cstrong>deleted\u003c/strong> and shown after\n500 ms, so it cannot come out twice.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Note\u003c/p>\n  \u003cdiv class=\"callout__body\">The practical consequence is that closing the tab resets the progress and the\nNew Game+ level. It is not a bug to fix: it is how it is written, with\npersistence disabled on purpose. The only thing that survives the tab is the\ntranslations cache.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"the-automatic-translator\">The automatic translator\u003c/h2>\n\u003cp>The game is written in Spanish and \u003cstrong>translates itself into English while you\nplay\u003c/strong>. The block is called \u003ccode>AutoTranslator\u003c/code> and its header sums it up: it\ntranslates the Spanish content using Google Translate as primary and other APIs\nas fallback, with the translations cached to avoid repeating the work.\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Order\u003c/th>\n\u003cth>API\u003c/th>\n\u003cth>Address\u003c/th>\n\u003cth>Limit per request\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>1\u003c/td>\n\u003ctd>\u003ccode>GoogleTranslate\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>translate.googleapis.com/translate_a/single\u003c/code>\u003c/td>\n\u003ctd>5,000 characters\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>2\u003c/td>\n\u003ctd>\u003ccode>MyMemory\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>api.mymemory.translated.net/get\u003c/code>\u003c/td>\n\u003ctd>500 characters\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>3\u003c/td>\n\u003ctd>\u003ccode>LibreTranslate\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>translate.argosopentech.com/translate\u003c/code>\u003c/td>\n\u003ctd>3,000 characters\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>The text is split into chunks of up to \u003cstrong>4,500 characters\u003c/strong> (\u003ccode>maxChunkSize\u003c/code>) and\nbetween requests it waits \u003cstrong>200 ms\u003c/strong> to avoid hitting rate limits. Each API\ndeclares its own method: the first two do a \u003ccode>GET\u003c/code> with parameters and the third a\n\u003ccode>POST\u003c/code> with \u003ccode>{ q, source: &#39;es&#39;, … }\u003c/code>, which is where it is written down that the\nsource language is Spanish.\u003c/p>\n\u003cp>When one fails it goes into \u003ccode>failedAPIs\u003c/code>, a \u003ccode>Set\u003c/code> that discards it for the rest\nof the session, and the next one takes over. Meanwhile progress is reported with\n\u003ccode>lastStage\u003c/code>, \u003ccode>lastCurrent\u003c/code>, \u003ccode>lastTotal\u003c/code>, \u003ccode>lastPercentage\u003c/code> and \u003ccode>lastItem\u003c/code>, and\nthere is a corner indicator (\u003ccode>cornerProgressEnabled\u003c/code>) with its own dismiss timer.\u003c/p>\n\u003cdiv class=\"callout callout--tip\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Tip\u003c/p>\n  \u003cdiv class=\"callout__body\">Before calling any API a fourth \u003ccode>fetch\u003c/code> is attempted, to\n\u003ccode>void-translations-en.json\u003c/code> next to the HTML and with \u003ccode>cache: &#39;no-store&#39;\u003c/code>. That\nfile \u003cstrong>is not in the repository\u003c/strong>, and it is not needed: it is the way to\nreplace the automatic translation with a hand-made one. If it exists and can be\nread, it is used whole; if not, \u003ccode>&#39;JSON file not found&#39;\u003c/code> is thrown and the\ntranslator goes on its way.\u003c/div>\n\u003c/div>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Warning\u003c/p>\n  \u003cdiv class=\"callout__body\">With the automatic translation active, fragments of the game&#39;s text leave the\nbrowser towards three third-party services. It is the only external traffic in\nthe whole file, but it is worth knowing: it is not an offline game when played\nin English, and the \u003ccode>localStorage\u003c/code> cache means the second time nothing goes out\nat all.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"what-it-explains-about-the-warnings\">What it explains about the warnings\u003c/h2>\n\u003cp>Several things in \u003ca href=\"/Docs/void/faq/\">Warnings &amp; FAQ\u003c/a> stop being mysterious seen from\nhere. That the English version is unfinished is consistent with it being a\nruntime machine translation, with its three APIs and its per-request limits. That\nthe health warning comes out every time the game is opened in a new tab is\n\u003ccode>disclaimerShown\u003c/code> in \u003ccode>sessionStorage\u003c/code>. And that the CRT simulation can cause\nghost images does not depend on a resource that could be removed: it is drawn on\nevery frame.\u003c/p>\n\u003cp>To play it as it comes, the way is in\n\u003ca href=\"/Docs/void/install/\">Install &amp; play\u003c/a>; for the story on top of all this, in\n\u003ca href=\"/Docs/void/world/\">The VOID Corp world\u003c/a>.\u003c/p>\n\u003ch2 id=\"contributing-from-here\">Contributing from here\u003c/h2>\n\u003cp>The file to open is\n\u003ca href=\"https://github.com/jaime-gaming/VOID/blob/main/VOID%20mxks%20version/VOID%20mxks%20version%20%28code%29.html\" target=\"_blank\" rel=\"noopener noreferrer\">\u003ccode>VOID mxks version (code).html\u003c/code>\u003c/a>,\nand it is edited with an editor that can hold a million characters in a single\nfile. Two pieces of advice that come from reading it:\u003c/p>\n\u003cul>\n\u003cli>The 715 line comments are in both languages and explain intention, not syntax:\n&quot;Cámara 4 con interferencia extrema&quot; says more than the code that comes after\nit. Searching by them is the fastest way to get your bearings.\u003c/li>\n\u003cli>Almost all of the game&#39;s timing is the 233 \u003ccode>setTimeout\u003c/code>. When touching one it\nis worth looking for its cancellation partner, because in a file with no modules\nan orphaned delay keeps firing after changing scene.\u003c/li>\n\u003c/ul>\n","desc":"What is inside VOID's single file: the four layers, the fourteen audio elements, the cameras drawn with canvas, the session state and the automatic translator.","readtime":"7 min read","editHref":"https://github.com/jaime-gaming/VOID/blob/main/content/docs/void/engine.en.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#the-four-layers-of-a-single-file\">The four layers of a single file\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#fourteen-audio-elements-and-seven-videos\">Fourteen audio elements and seven videos\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#the-cameras-are-canvas-not-video\">The cameras are canvas, not video\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#eight-paths-to-find-the-mp4\">Eight paths to find the mp4\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#the-state-lives-in-the-session\">The state lives in the session\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#the-automatic-translator\">The automatic translator\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#what-it-explains-about-the-warnings\">What it explains about the warnings\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#contributing-from-here\">Contributing from here\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}}}</script>
+<script type="application/json" id="searchConfig">{"index":"/Docs/assets/data/search-index.json","scope":"void"}</script>
+<script src="/Docs/assets/js/i18n.js?v=9f6d93c1fd7c"></script>
+<script src="/Docs/assets/js/search.js?v=014a801e4757"></script>
+<script src="/Docs/assets/js/main.js?v=83aa4a0803d7"></script>
+</body>
+</html>

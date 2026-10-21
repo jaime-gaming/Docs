@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Referencia de tools — Docs de Jaime Gaming</title>
+<meta name="description" content="Tabla de herramientas del modelo, variables de entorno, arquitectura interna y modelo de seguridad." />
+<meta name="author" content="Jaime Gaming" />
+<meta name="theme-color" content="#10120f" />
+<meta name="robots" content="index, follow" />
+<meta name="docs:base" content="/Docs/" />
+<meta name="docs:project" content="jaigent" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Jaime Gaming Docs" />
+<meta property="og:title" content="Referencia de tools — Docs de Jaime Gaming" />
+<meta property="og:description" content="Tabla de herramientas del modelo, variables de entorno, arquitectura interna y modelo de seguridad." />
+<meta property="og:url" content="https://jaime-gaming.github.io/Docs/jaigent/reference/" />
+<meta property="og:image" content="https://jaime-gaming.github.io/assets/img/social-card.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@JaimeGamingPro" />
+<meta name="twitter:title" content="Referencia de tools — Docs de Jaime Gaming" />
+<meta name="twitter:description" content="Tabla de herramientas del modelo, variables de entorno, arquitectura interna y modelo de seguridad." />
+<link rel="canonical" href="https://jaime-gaming.github.io/Docs/jaigent/reference/" />
+<link rel="icon" href="/Docs/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/Docs/assets/css/style.css?v=d74cfec89052" />
+</head>
+<body data-icons="/Docs/assets/img/icons.svg?v=eea9c3fe56aa" data-page="docs" data-project="jaigent" data-path="/jaigent/reference/">
+
+<a class="skip-link" href="#top" data-i18n="aria.skipToContent">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/Docs/" class="nav__logo" aria-label="Jaime Gaming Docs — inicio" data-i18n-aria="aria.homeLogo">JG<span class="dot">.</span><span class="nav__logo-badge">docs</span></a>
+  <nav class="nav__links" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+    <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+    <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+    <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+    <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+    <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="search-trigger" id="searchTrigger" type="button" aria-label="Buscar" data-i18n-aria="nav.search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg>
+      <span class="search-trigger__label" data-i18n="search.button">Buscar</span>
+      <kbd class="search-trigger__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+    <button class="lang-switch" id="langSwitch" data-active="es" type="button" aria-label="Cambiar idioma" data-i18n-aria="aria.langSwitch">
+      <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="languageFlagEs" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#aa151b" d="M0 0h24v24H0z"/><path fill="#f1bf00" d="M0 6h24v12H0z"/></g>
+          </pattern>
+          <pattern id="languageFlagEn" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#012169" d="M0 0h24v24H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 24 24M24 0 0 24"/><path stroke="#c8102e" stroke-width="2" d="m0 0 24 24M24 0 0 24"/><path stroke="#fff" stroke-width="8" d="M12 0v24M0 12h24"/><path stroke="#c8102e" stroke-width="4" d="M12 0v24M0 12h24"/></g>
+          </pattern>
+          <radialGradient id="languageGloss" cx="34%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".42"/>
+            <stop offset="55%" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="flag flag-es" cx="12" cy="12" r="9.5" fill="url(#languageFlagEs)"/>
+        <circle class="flag flag-en" cx="12" cy="12" r="9.5" fill="url(#languageFlagEn)"/>
+        <circle class="language-globe__gloss" cx="12" cy="12" r="9.5" fill="url(#languageGloss)" aria-hidden="true"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#0d100d" stroke-opacity=".55" stroke-width="1.9" stroke-linecap="round"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width=".9" stroke-linecap="round"/>
+      </svg>
+      <span class="sr-only" id="languageName">Español</span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil" data-i18n-aria="aria.mainNav">
+  <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+  <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+  <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+  <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+  <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+</nav>
+
+<main id="top" class="layout--docs">
+<div class="docs docs--with-rails">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-panel"></use></svg>
+    </button>
+    <aside class="docs__sidebar" id="docsSidebar" aria-label="Índice de esta documentación" data-i18n-aria="aria.sidebar">
+    <nav class="side-nav">
+      <div class="side-nav__head">
+        <span class="side-nav__eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+        <a class="side-nav__project" href="/Docs/jaigent/">
+          <span class="side-nav__project-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg></span>
+          <span class="side-nav__project-name" data-i18n="proj.jaigent.name">jAIgent</span>
+        </a>
+      </div>
+      <p class="side-nav__group" data-i18n="docs.sidebarTitle">En esta documentación</p>
+      <ol class="side-nav__list">
+      <li><a class="side-nav__link" href="/Docs/jaigent/" data-i18n="page.jaigent.index"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-compass"></use></svg><span>Visión general</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/install/" data-i18n="page.jaigent.install"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-download"></use></svg><span>Instalación y claves</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/cli/" data-i18n="page.jaigent.cli"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-terminal"></use></svg><span>Uso en la terminal</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/models/" data-i18n="page.jaigent.models"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-cpu"></use></svg><span>Modelos y proveedores</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/mcp/" data-i18n="page.jaigent.mcp"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-plug"></use></svg><span>MCP y tu propia API</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/extend/" data-i18n="page.jaigent.extend"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-puzzle"></use></svg><span>Skills, plugins y horarios</span></a></li>
+      <li><a class="side-nav__link active" href="/Docs/jaigent/reference/" data-i18n="page.jaigent.reference"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-book"></use></svg><span>Referencia de tools</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/security/" data-i18n="page.jaigent.security"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-shield"></use></svg><span>Seguridad</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/dev/" data-i18n="page.jaigent.dev"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span>Desarrollo</span></a></li>
+      </ol>
+      <div class="side-nav__foot">
+        <a class="side-nav__all" href="/Docs/projects/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.allProjects">Todos los proyectos</span></a>
+        <div class="side-nav__switch">
+          <span class="side-nav__switch-label" data-i18n="docs.otherProjects">Otros proyectos</span>
+          <ul class="side-nav__switch-list">
+        <li><a class="side-nav__chip" href="/Docs/wave/" title="Wave"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg><span>Wave</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/hellbot/" title="hellbot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg><span>hellbot</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/rngdle-infinite/" title="RNGdle Infinite"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-dice"></use></svg><span>RNGdle Infinite</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/daily-diary/" title="Diario"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-notebook"></use></svg><span>Diario</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/void/" title="VOID"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg><span>VOID</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/website/" title="jaime-gaming.github.io"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg><span>jaime-gaming.github.io</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </aside>
+    <div class="docs__main">
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="/Docs/">Docs</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="/Docs/jaigent/" data-i18n="proj.jaigent.name">jAIgent</a>
+      <span class="breadcrumb__sep">/</span>
+      <span class="breadcrumb__current" data-i18n="page.jaigent.reference">Referencia de tools</span>
+    </nav>
+    <header class="doc-head reveal">
+      <p class="doc-head__kicker"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg><span data-i18n="proj.jaigent.name">jAIgent</span></p>
+      <h1 class="doc-head__title" data-i18n="page.jaigent.reference">Referencia de tools</h1>
+      <p class="doc-head__desc" data-content-key="desc">Tabla de herramientas del modelo, variables de entorno, arquitectura interna y modelo de seguridad.</p>
+      <div class="doc-head__meta">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-calendar"></use></svg><span data-i18n="docs.updated">Última revisión</span> <time datetime="2026-10-18" data-i18n-date>18 de octubre de 2026</time></span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-clock"></use></svg><span data-content-key="readtime">5 min de lectura</span></span>
+        <a class="doc-head__edit" href="https://github.com/jaime-gaming/jAIgent/blob/main/content/docs/jaigent/reference.md" data-content-key="editHref" data-content-attr="href" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span data-i18n="docs.editOnGithub">Editar esta página en GitHub</span></a>
+      </div>
+    </header>
+    <article class="doc-body reveal" lang="es" data-content-key="body" data-content-language>
+<p>Referencia de consulta rápida. Para el contexto de uso, ver <a href="/Docs/jaigent/cli/">Uso en la terminal</a>.</p>
+<h2 id="herramientas">Herramientas</h2>
+<p>El modelo elige cuáles llamar y en qué orden.</p>
+<div class="doc-table"><table><thead><tr>
+<th>Herramienta</th>
+<th>Para qué sirve</th>
+</tr>
+</thead><tbody><tr>
+<td><code>web_search</code></td>
+<td>Buscar en la web: títulos, URLs y fragmentos.</td>
+</tr>
+<tr>
+<td><code>fetch_page</code></td>
+<td>Descargar una página y reducirla a texto legible.</td>
+</tr>
+<tr>
+<td><code>list_files</code></td>
+<td>Listar el espacio de trabajo, opcionalmente con glob.</td>
+</tr>
+<tr>
+<td><code>read_file</code></td>
+<td>Leer un archivo UTF-8 con números de línea; paginado.</td>
+</tr>
+<tr>
+<td><code>write_file</code></td>
+<td>Crear o sobrescribir un archivo.</td>
+</tr>
+<tr>
+<td><code>edit_file</code></td>
+<td>Reemplazar un fragmento exacto.</td>
+</tr>
+<tr>
+<td><code>search_files</code></td>
+<td>Grep por subcadena o regex.</td>
+</tr>
+<tr>
+<td><code>delete_file</code></td>
+<td>Borrar un archivo o un directorio vacío.</td>
+</tr>
+<tr>
+<td><code>load_skill</code></td>
+<td>Recuperar el cuerpo de una skill (cuando hay skills).</td>
+</tr>
+<tr>
+<td><code>ask_user</code></td>
+<td>Hacer una pregunta de aclaración, con selector.</td>
+</tr>
+<tr>
+<td><code>write_todos</code></td>
+<td>Seguimiento de una tarea multipaso como checklist en vivo.</td>
+</tr>
+<tr>
+<td><code>remember</code> / <code>recall</code></td>
+<td>Memoria del proyecto (solo si <code>memory</code> está activada).</td>
+</tr>
+<tr>
+<td><code>run_command</code> ⚠</td>
+<td>Shell. <strong>Optativo</strong>, ver el modelo de seguridad.</td>
+</tr>
+</tbody></table></div>
+<p>Las herramientas de archivo <strong>rechazan</strong> <code>.env</code>, claves privadas, <code>*.pem</code>, <code>*.key</code> y cualquier cosa bajo <code>.git</code>. <code>.env.example</code> sigue siendo legible. Toda ruta pasa por <code>resolve_in_workspace()</code>.</p>
+<h2 id="variables-de-entorno">Variables de entorno</h2>
+<p>Las banderas del CLI sobrescriben las variables.</p>
+<h3 id="proveedor-y-modelo">Proveedor y modelo</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Variable</th>
+<th>Por defecto</th>
+<th>Significado</th>
+</tr>
+</thead><tbody><tr>
+<td><code>OPENAI_API_KEY</code> / <code>ANTHROPIC_API_KEY</code> / …</td>
+<td>—</td>
+<td>Clave del proveedor</td>
+</tr>
+<tr>
+<td><code>JAIGENT_API_KEY</code></td>
+<td>—</td>
+<td>Clave genérica; gana a las específicas de proveedor</td>
+</tr>
+<tr>
+<td><code>JAIGENT_PROVIDER</code></td>
+<td><code>openai</code></td>
+<td>openai, anthropic, gemini, openrouter, groq, deepseek, mistral, xai, together, ollama</td>
+</tr>
+<tr>
+<td><code>JAIGENT_MODEL</code></td>
+<td>El del proveedor</td>
+<td>Identificador de modelo, o <code>auto</code> / <code>free</code></td>
+</tr>
+<tr>
+<td><code>JAIGENT_BASE_URL</code></td>
+<td>El del proveedor</td>
+<td>Raíz de API para gateways compatibles</td>
+</tr>
+</tbody></table></div>
+<h3 id="ejecucion">Ejecución</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Variable</th>
+<th>Por defecto</th>
+<th>Significado</th>
+</tr>
+</thead><tbody><tr>
+<td><code>JAIGENT_WORKSPACE</code></td>
+<td>Carpeta actual</td>
+<td>Directorio al que se limitan las herramientas de archivo</td>
+</tr>
+<tr>
+<td><code>JAIGENT_MAX_STEPS</code></td>
+<td><code>12</code></td>
+<td>Presupuesto de llamadas a herramientas por turno</td>
+</tr>
+<tr>
+<td><code>JAIGENT_TEMPERATURE</code></td>
+<td><code>0.2</code></td>
+<td>Temperatura de muestreo</td>
+</tr>
+<tr>
+<td><code>JAIGENT_MAX_TOKENS</code></td>
+<td><code>2048</code></td>
+<td>Tokens por turno del asistente</td>
+</tr>
+<tr>
+<td><code>JAIGENT_TIMEOUT</code></td>
+<td><code>60</code></td>
+<td>Tiempo de espera HTTP en segundos</td>
+</tr>
+<tr>
+<td><code>JAIGENT_APPROVAL</code></td>
+<td>Según tty</td>
+<td><code>ask</code>, <code>auto</code> o <code>dry-run</code></td>
+</tr>
+<tr>
+<td><code>JAIGENT_STREAM</code></td>
+<td><code>1</code></td>
+<td>Emitir la respuesta en streaming</td>
+</tr>
+<tr>
+<td><code>JAIGENT_SHOW_COST</code></td>
+<td><code>1</code></td>
+<td>Imprimir la línea de tokens y coste</td>
+</tr>
+<tr>
+<td><code>JAIGENT_VERBOSE</code></td>
+<td><code>0</code></td>
+<td>Trazar las llamadas a herramientas</td>
+</tr>
+<tr>
+<td><code>JAIGENT_SESSION_DIR</code></td>
+<td><code>~/.jaigent/sessions</code></td>
+<td>Conversaciones guardadas</td>
+</tr>
+<tr>
+<td><code>JAIGENT_PRICES</code></td>
+<td>—</td>
+<td>JSON que sobrescribe la tabla de precios</td>
+</tr>
+</tbody></table></div>
+<h3 id="busqueda-y-red">Búsqueda y red</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Variable</th>
+<th>Por defecto</th>
+<th>Significado</th>
+</tr>
+</thead><tbody><tr>
+<td><code>JAIGENT_SEARCH_BACKEND</code></td>
+<td><code>duckduckgo</code></td>
+<td><code>duckduckgo</code> (sin clave) o <code>tavily</code></td>
+</tr>
+<tr>
+<td><code>TAVILY_API_KEY</code></td>
+<td>—</td>
+<td>Necesaria solo para Tavily</td>
+</tr>
+<tr>
+<td><code>JAIGENT_ALLOW_SHELL</code></td>
+<td><code>0</code></td>
+<td><code>1</code> activa <code>run_command</code></td>
+</tr>
+<tr>
+<td><code>JAIGENT_FAILOVER</code></td>
+<td><code>1</code></td>
+<td>Reintentar y después cambiar de proveedor</td>
+</tr>
+<tr>
+<td><code>JAIGENT_RETRIES</code></td>
+<td><code>3</code></td>
+<td>Intentos por proveedor. <code>1</code> desactiva el reintento</td>
+</tr>
+</tbody></table></div>
+<h3 id="extensiones-y-persistencia">Extensiones y persistencia</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Variable</th>
+<th>Por defecto</th>
+<th>Significado</th>
+</tr>
+</thead><tbody><tr>
+<td><code>JAIGENT_SKILLS</code></td>
+<td><code>1</code></td>
+<td>Cargar skills y ofrecer <code>load_skill</code></td>
+</tr>
+<tr>
+<td><code>JAIGENT_PLUGINS</code></td>
+<td><code>1</code></td>
+<td>Cargar plugins locales</td>
+</tr>
+<tr>
+<td><code>JAIGENT_CHECKPOINTS</code></td>
+<td><code>1</code></td>
+<td>Snapshot de archivos antes de cambiarlos</td>
+</tr>
+<tr>
+<td><code>JAIGENT_BUDGET</code></td>
+<td><code>0</code></td>
+<td>Tope duro en USD por ejecución. <code>0</code> lo desactiva</td>
+</tr>
+<tr>
+<td><code>JAIGENT_MEMORY</code></td>
+<td><code>0</code></td>
+<td><code>1</code> persiste notas en <code>.jaigent/memory.md</code></td>
+</tr>
+<tr>
+<td><code>JAIGENT_AUTO_COMPACT</code></td>
+<td><code>0</code></td>
+<td><code>1</code> pliega turnos viejos del chat</td>
+</tr>
+<tr>
+<td><code>JAIGENT_MCP_WRITE</code></td>
+<td><code>0</code></td>
+<td><code>1</code> expone herramientas de escritura en el MCP stdio local</td>
+</tr>
+<tr>
+<td><code>JAIGENT_HOME</code></td>
+<td><code>~/.jaigent</code></td>
+<td>Ajustes, skills, horarios y <code>secrets.env</code></td>
+</tr>
+<tr>
+<td><code>JAIGENT_SCHEDULE_FILE</code></td>
+<td><code>$JAIGENT_HOME/schedules.json</code></td>
+<td>Almacén de tareas programadas</td>
+</tr>
+<tr>
+<td><code>JAIGENT_KEYS_FILE</code></td>
+<td><code>$JAIGENT_HOME/keys.json</code></td>
+<td>Claves del gateway</td>
+</tr>
+<tr>
+<td><code>JAIGENT_NO_UPDATE_CHECK</code></td>
+<td>—</td>
+<td><code>1</code> no comprueba releases nunca</td>
+</tr>
+<tr>
+<td><code>JAIGENT_BETA</code></td>
+<td><code>0</code></td>
+<td><code>1</code> trae actualizaciones de la rama <code>beta</code></td>
+</tr>
+</tbody></table></div>
+<p>Las variables del puente de ChatGPT (<code>JAIGENT_PLUGIN_*</code>) están en <a href="/Docs/jaigent/mcp/">MCP y tu propia API</a>.</p>
+<h2 id="arquitectura-interna">Arquitectura interna</h2>
+<p>En una frase: <strong>un bucle de agente pide a un proveedor texto o llamadas a herramientas, ejecuta esas llamadas dentro de un sandbox y repite hasta que el modelo responde</strong>, con cada mutación snapshotada, aprobada y reversible.</p>
+<h3 id="el-bucle-agent-py">El bucle (<code>agent.py</code>)</h3>
+<p><code>Agent.run(prompt)</code> es el producto entero, en una función:</p>
+<ol>
+<li><strong>Ruta.</strong> <code>model=&quot;auto&quot;</code> elige un modelo para este prompt; <code>model=&quot;free&quot;</code> puede cambiar también de proveedor. Los modelos sin enrutado se saltan este paso.</li>
+<li><strong>Construye los mensajes</strong>: prompt del sistema, historial y prompt del usuario.</li>
+<li><strong>Llama al proveedor.</strong> La respuesta es texto plano (terminado) o llamadas a herramientas (continuar). Los fragmentos de streaming se reenvían por <code>on_text</code> conforme llegan.</li>
+<li><strong>Ejecuta cada llamada</strong> con <code>_execute</code>: snapshot → comprobación de aprobación → ejecución → añadir el resultado para el modelo.</li>
+<li><strong>Repite</strong> hasta que el modelo responde sin llamadas a herramientas, o hasta que se agota el presupuesto de pasos (<code>max_steps</code>, 12 por defecto). Entonces se hace <strong>una última llamada sin herramientas</strong>, forzando una respuesta.</li>
+</ol>
+<h3 id="capas">Capas</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Capa</th>
+<th>Archivo</th>
+<th>Responsabilidad</th>
+</tr>
+</thead><tbody><tr>
+<td>CLI</td>
+<td><code>cli.py</code></td>
+<td>Argumentos, terminal y callbacks de estado</td>
+</tr>
+<tr>
+<td>Agente</td>
+<td><code>agent.py</code></td>
+<td>El bucle: ruta, mensajes, ejecución, presupuesto</td>
+</tr>
+<tr>
+<td>Enrutado</td>
+<td><code>router.py</code></td>
+<td>Heurística de <code>auto</code> y <code>free</code>, sin llamada a LLM</td>
+</tr>
+<tr>
+<td>Proveedores</td>
+<td><code>llm/</code></td>
+<td>Adaptadores por proveedor y <code>FailoverProvider</code></td>
+</tr>
+<tr>
+<td>Herramientas</td>
+<td><code>tools/</code></td>
+<td>Archivos, web, shell, <code>ask_user</code> y plugins</td>
+</tr>
+<tr>
+<td>Registro</td>
+<td><code>ToolRegistry</code></td>
+<td>Una sola lista compartida por CLI, MCP y gateway</td>
+</tr>
+<tr>
+<td>MCP local</td>
+<td><code>mcp.py</code></td>
+<td>Expone el registro por stdio</td>
+</tr>
+<tr>
+<td>Puente ChatGPT</td>
+<td><code>chatgpt.py</code></td>
+<td>MCP remoto con OAuth, reutilizando registro y gateway</td>
+</tr>
+<tr>
+<td>Gateway</td>
+<td><code>serve</code></td>
+<td><code>/v1/chat/completions</code> y <code>/v1/models</code></td>
+</tr>
+</tbody></table></div>
+<p>Un solo <code>Agent</code>, un solo registro de herramientas y una sola implementación de aprobación y checkpoints.</p>
+<h2 id="modelo-de-seguridad">Modelo de seguridad</h2>
+<p>Los valores por defecto son deliberadamente conservadores.</p>
+<p><strong>Sistema de archivos.</strong> Toda ruta se resuelve y se comprueba contra el espacio de trabajo. Se rechazan los recorridos hacia arriba, las rutas absolutas y los enlaces simbólicos que escapan. Las lecturas se limitan a <strong>1 MB</strong>.</p>
+<p><strong>Shell.</strong> No existe salvo con <code>--allow-shell</code> o <code>JAIGENT_ALLOW_SHELL=1</code>. Está limitado en tiempo y tiene lista de bloqueo (<code>rm -rf /</code>, <code>sudo</code>, <code>format c:</code>, …).</p>
+<blockquote><p>[!DANGER]
+Un modelo que puede ejecutar shell <strong>puede esquivar un filtro de cadenas</strong>. Trata la bandera como «confío en este modelo con esta carpeta», no como una protección.</p>
+</blockquote>
+<p><strong>Undo.</strong> Todo cambio de archivo se snapshot antes. Ver <a href="/Docs/jaigent/cli/">Uso en la terminal</a>.</p>
+<p><strong>Red.</strong> <code>fetch_page</code> rechaza loopback, enlace local, rangos privados y metadatos de nube (<code>169.254.169.254</code>). Los nombres de host se resuelven y <strong>cada redirección se vuelve a comprobar</strong>. Las páginas descargadas siguen siendo entrada no confiable: no combines <code>--allow-shell</code> con sitios en los que no confíes.</p>
+<p><strong>Secretos.</strong> Las claves vienen del entorno, de <code>jaigent auth</code> / <code>~/.jaigent/secrets.env</code> o de un <code>.env</code> ignorado por Git, y <strong>nunca se imprimen completas</strong>. Las herramientas de archivo rechazan <code>.env</code>, claves privadas y archivos similares aunque estén dentro del espacio de trabajo.</p>
+<h3 id="recomendacion-de-uso">Recomendación de uso</h3>
+<p>Ejecuta en una carpeta dedicada, mantenla bajo control de versiones y empieza con <code>--verbose</code>.</p>
+
+    </article>
+    <nav class="pager reveal" aria-label="paginación">
+    <a class="pager__link" href="/Docs/jaigent/extend/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.prev">Anterior</span></span>
+      <span class="pager__title" data-i18n="page.jaigent.extend">Skills, plugins y horarios</span>
+    </a>
+    <a class="pager__link pager__link--next" href="/Docs/jaigent/security/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-right"></use></svg><span data-i18n="docs.next">Siguiente</span></span>
+      <span class="pager__title" data-i18n="page.jaigent.security">Seguridad</span>
+    </a>
+    </nav>
+    <p class="source-note reveal" data-i18n="docs.sourceNote">Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.</p>
+    </div>
+    <aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
+    <p class="toc__title" data-i18n="docs.tocTitle">En esta página</p>
+    <ol class="toc__list">
+      <li><a href="#herramientas">Herramientas</a></li>
+      <li><a href="#variables-de-entorno">Variables de entorno</a></li>
+      <li><a class="toc__h3" href="#proveedor-y-modelo">Proveedor y modelo</a></li>
+      <li><a class="toc__h3" href="#ejecucion">Ejecución</a></li>
+      <li><a class="toc__h3" href="#busqueda-y-red">Búsqueda y red</a></li>
+      <li><a class="toc__h3" href="#extensiones-y-persistencia">Extensiones y persistencia</a></li>
+      <li><a href="#arquitectura-interna">Arquitectura interna</a></li>
+      <li><a class="toc__h3" href="#el-bucle-agent-py">El bucle (agent.py)</a></li>
+      <li><a class="toc__h3" href="#capas">Capas</a></li>
+      <li><a href="#modelo-de-seguridad">Modelo de seguridad</a></li>
+      <li><a class="toc__h3" href="#recomendacion-de-uso">Recomendación de uso</a></li>
+    </ol>
+    <p class="toc__progress" aria-hidden="true"><span></span></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="https://jaime-gaming.github.io/" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-github"></use></svg></a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-youtube"></use></svg></a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-x"></use></svg></a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-discord"></use></svg></a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-mail"></use></svg></a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="/Docs/"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="/Docs/projects/"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="https://jaime-gaming.github.io/blog/"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="https://jaime-gaming.github.io/contact/"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="https://jaime-gaming.github.io/"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="/Docs/status/"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="https://jaime-gaming.github.io/terms/" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="https://jaime-gaming.github.io/privacy/" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-arrow"></use></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" hidden>
+  <div class="search-modal__backdrop" data-search-close></div>
+  <div class="search-modal__panel">
+    <h2 class="sr-only" id="searchModalTitle" data-i18n="search.dialogTitle">Buscar en la documentación</h2>
+    <div class="search-modal__head">
+      <span class="search-modal__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg></span>
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar en la documentación…" data-i18n-placeholder="search.placeholder" aria-describedby="searchModalHint" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-activedescendant="" />
+      <button class="search-modal__close" type="button" data-search-close aria-label="Cerrar búsqueda" data-i18n-aria="search.close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-close"></use></svg></button>
+    </div>
+    <div class="search-modal__hintrow">
+      <p class="search-modal__hint" id="searchModalHint" data-i18n="search.hint">Escribe para filtrar páginas y apartados</p>
+      <p class="search-modal__keys" id="searchKeys" aria-hidden="true">
+        <span class="keyhint"><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="search.kbdNavigate">navegar</span></span>
+        <span class="keyhint"><kbd>↵</kbd><span data-i18n="search.kbdOpen">abrir</span></span>
+        <span class="keyhint"><kbd>Esc</kbd><span data-i18n="search.kbdClose">cerrar</span></span>
+      </p>
+    </div>
+    <div class="search-modal__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" data-i18n-aria="search.resultsLabel"></div>
+  </div>
+</div>
+
+<script type="application/json" id="uiStrings">{"es":{"nav.home":"Inicio","nav.projects":"Proyectos","nav.search":"Buscar","nav.site":"Mi web","nav.blog":"Blog","nav.contact":"Contacto","nav.openMenu":"Abrir menú","nav.closeMenu":"Cerrar menú","aria.skipToContent":"Saltar al contenido","aria.homeLogo":"Jaime Gaming Docs — inicio","aria.mainNav":"Navegación principal","aria.backToTop":"Volver arriba","aria.langSwitch":"Español. Cambiar a inglés","aria.sidebar":"Índice de esta documentación","aria.toc":"En esta página","aria.openSidebar":"Abrir índice","aria.closeSidebar":"Cerrar índice","search.button":"Buscar","search.placeholder":"Buscar en la documentación…","search.hint":"Escribe para filtrar páginas y apartados","search.empty":"Sin resultados para","search.noQuery":"Prueba con «instalar», «comandos», «privacidad»…","search.results":"resultados","search.result":"resultado","search.close":"Cerrar búsqueda","search.scopeAll":"Toda la documentación","search.scopeProject":"Solo este proyecto","search.kbdNavigate":"navegar","search.kbdOpen":"abrir","search.kbdClose":"cerrar","search.dialogTitle":"Buscar en la documentación","search.resultsLabel":"Resultados de búsqueda","docs.eyebrow":"Documentación","docs.sidebarTitle":"En esta documentación","docs.tocTitle":"En esta página","docs.editOnGithub":"Editar esta página en GitHub","docs.sourceNote":"Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.","docs.updated":"Última revisión","docs.prev":"Anterior","docs.next":"Siguiente","docs.allProjects":"Todos los proyectos","docs.readTime":"min de lectura","docs.jumpTo":"Ir a","home.kicker":"DOCUMENTACIÓN","home.title":"Todos mis proyectos, \u003cspan class=\"hero__title-accent\">documentados\u003c/span>","home.subtitle":"Un solo sitio con la documentación de todo lo que construyo: reproductores, agentes, bots, juegos y webs. Guías de instalación, arquitectura, uso y referencia.","home.ctaPrimary":"Empezar a leer","home.ctaSecondary":"Ver todos los proyectos","home.stats.projects":"proyectos","home.stats.pages":"páginas","home.stats.languages":"idiomas","home.stats.updated":"actualizada","home.about.title":"Sobre esta documentación","home.about.sub":"Cómo está hecha y cómo se mantiene.","home.about.card.label":"CÓMO FUNCIONA","home.about.card.title":"Escrita a mano, generada con Node","home.about.card.text":"Cada página es un Markdown en content/docs/. El build las convierte en HTML estático con el mismo sistema, la misma paleta y las mismas animaciones que mi web principal.","home.about.card.stamp":"VER EL REPOSITORIO ↗","home.contribute.title":"¿Ves un error?","home.contribute.text":"Toda la documentación está en un repositorio público. Abre una issue o envía una pull request con la corrección.","home.contribute.issue":"Abrir una issue","home.contribute.pr":"Proponer un cambio","home.contribute.email":"Escribirme un correo","projects.title":"Proyectos","projects.sub":"Toda la documentación, proyecto por proyecto. Cada tarjeta enlaza a su guía completa.","projects.pages":"páginas","projects.openDocs":"Abrir documentación","projects.demo":"Probar","projects.code":"Código","projects.group.all":"Todos","callout.note":"Nota","callout.tip":"Consejo","callout.warning":"Aviso","callout.important":"Importante","callout.caution":"Precaución","code.copy":"Copiar","code.copied":"Copiado","footer.rights":"Todos los derechos reservados.","footer.mainSite":"Mi web","footer.tagline":"Juegos para navegador, aplicaciones web y vídeos.","footer.site":"Sitio","footer.siteAria":"Enlaces del sitio","footer.resources":"Recursos","footer.resourcesAria":"Recursos y enlaces externos","footer.status":"Estado del servicio","footer.email":"Correo","footer.terms":"Términos del servicio","footer.privacy":"Privacidad","footer.source":"Código fuente ↗","footer.legalAria":"Términos y privacidad","aria.socials":"Redes sociales","aria.footerLogo":"Jaime Gaming — inicio","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Correo electrónico","status.title":"Estado del servicio","status.sub":"Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.","status.note":"Datos del panel oficial de estado","status.open":"Abrir panel completo ↗","status.loading":"Consultando el estado…","status.unknown":"Estado no disponible","status.error":"No se pudo consultar el estado en directo. Puedes abrir el panel completo.","status.updated":"Actualizado el {date}","status.componentsAria":"Componentes del servicio","status.allOperational":"Todos los sistemas operativos","status.minorIssues":"Incidencias menores","status.majorIssues":"Incidencia grave","status.criticalIssues":"Incidencia crítica","status.maintenanceOverall":"Mantenimiento en curso","status.operational":"Operativo","status.degraded":"Rendimiento degradado","status.partial":"Interrupción parcial","status.major":"Interrupción grave","status.underMaintenance":"En mantenimiento","status.maintenanceTitle":"Mantenimiento programado","status.maintenanceBody":"Texto publicado en el panel de estado.","status.frameNotice":"El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.","status.loadFrame":"Cargar panel incrustado","status.frameTitle":"Panel de estado de Jaime Gaming","status.hint":"El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.","notFound.title":"Página no encontrada","notFound.sub":"Puede que el enlace esté roto o que esta guía se haya movido.","notFound.home":"Volver al inicio de la documentación","notFound.projects":"Ver todos los proyectos","home.guide.title":"Cómo están organizadas las guías","home.guide.sub":"Todas siguen la misma anatomía, para que sepas dónde buscar en cada proyecto.","home.guide.overview.num":"01","home.guide.overview.title":"Visión general","home.guide.overview.desc":"Qué es el proyecto, qué problema resuelve, en qué estado está y qué lo distingue. Es la puerta de entrada de cada guía.","home.guide.install.num":"02","home.guide.install.title":"Instalación","home.guide.install.desc":"Requisitos, comandos para ponerlo en marcha y la primera comprobación de que todo funciona.","home.guide.usage.num":"03","home.guide.usage.title":"Uso","home.guide.usage.desc":"El día a día: funciones, comandos, mecánicas o flujos de trabajo, con ejemplos concretos.","home.guide.deep.num":"04","home.guide.deep.title":"Cómo está hecho","home.guide.deep.desc":"Arquitectura, estructura de carpetas, decisiones técnicas y los límites conocidos del proyecto.","home.guide.reference.num":"05","home.guide.reference.title":"Referencia","home.guide.reference.desc":"Tablas de consulta: opciones, formatos de datos, modelos, plataformas o preguntas frecuentes.","home.about.text1":"Este sitio reúne en un mismo lugar la documentación de los siete proyectos que mantengo en GitHub. Cada guía está escrita a mano a partir del README y de los documentos del repositorio, y se revisa cuando el proyecto cambia.","home.about.text2":"Nada se genera automáticamente desde GitHub ni depende de servicios externos: el contenido vive en este repositorio como Markdown, se compila a HTML estático con Node y se publica en GitHub Pages. El buscador usa un índice que se crea en ese mismo build.","home.about.row.stack":"Generador","home.about.row.palette":"Paleta","home.about.row.fonts":"Tipografías","home.about.row.host":"Publicación","home.about.row.search":"Buscador","home.about.row.searchValue":"Índice estático, sin servicios externos","docs.otherProjects":"Otros proyectos","projects.empty":"No hay proyectos en esta categoría.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentación de todos los proyectos de Jaime Gaming: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID y su web personal.","meta.projects.title":"Proyectos — Docs de Jaime Gaming","meta.projects.description":"Índice de toda la documentación, agrupada por aplicaciones, juegos, bots y web.","proj.wave.name":"Wave","proj.wave.tagline":"Reproductor de música local-first para web, Android y Windows.","proj.wave.summary":"Un hogar para la música que ya tienes. Wave guarda tu colección en el dispositivo: sin cuenta, sin suscripción y sin subir audio a ningún servidor.","proj.wave.status":"0.1.0 · activa","page.wave.index":"Visión general","page.wave.install":"Instalación","page.wave.features":"Funciones y uso","page.wave.platforms":"Plataformas","page.wave.architecture":"Arquitectura","page.wave.privacy":"Privacidad y datos","page.wave.dev":"Desarrollo","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"Todos tus agentes de IA en un mismo sitio.","proj.jaigent.summary":"Un binario y diez proveedores. Los mismos tools en la terminal, en ChatGPT Web por MCP remoto, en Claude Desktop y en cualquier app que hable OpenAI. Con deshacer en cada escritura y tope de gasto.","proj.jaigent.status":"0.5.x · activa","page.jaigent.index":"Visión general","page.jaigent.install":"Instalación y claves","page.jaigent.cli":"Uso en la terminal","page.jaigent.models":"Modelos y proveedores","page.jaigent.mcp":"MCP y tu propia API","page.jaigent.extend":"Skills, plugins y horarios","page.jaigent.reference":"Referencia de tools","page.jaigent.security":"Seguridad","page.jaigent.dev":"Desarrollo","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.","proj.hellbot.summary":"Mantén al menos a una persona real en un canal de voz durante 160 horas seguidas. Si el canal se vacía y nadie vuelve en el periodo de gracia, la partida muere para siempre.","proj.hellbot.status":"producción · estable","page.hellbot.index":"Visión general","page.hellbot.rules":"Reglas del evento","page.hellbot.edge-cases":"Casos límite","page.hellbot.install":"Instalación y despliegue","page.hellbot.commands":"Comandos","page.hellbot.dashboard":"Dashboard en vivo","page.hellbot.architecture":"Arquitectura","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"Un número, infinitas posibilidades.","proj.rngdle-infinite.summary":"Tira un número entre 0 y 1.000.000 y descubre qué lo hace especial. Un incremental de navegador con EP, insignias, compañeros, skills, rebirth, prestige y rollback.","proj.rngdle-infinite.status":"jugable · activa","page.rngdle-infinite.index":"Visión general","page.rngdle-infinite.play":"Cómo se juega","page.rngdle-infinite.systems":"Sistemas y progresión","page.rngdle-infinite.save":"Partida y sincronización","page.rngdle-infinite.faq":"Preguntas frecuentes","page.rngdle-infinite.dev":"Desarrollo","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Tu espacio personal: un diario minimalista y 100 % local.","proj.daily-diary.summary":"Sin backend, sin cuentas, sin IA y sin APIs externas. Los resúmenes, estadísticas y tendencias se calculan en tu navegador con reglas y plantillas de texto.","proj.daily-diary.status":"completo · local","page.daily-diary.index":"Visión general","page.daily-diary.install":"Instalación y uso","page.daily-diary.areas":"Las cinco áreas","page.daily-diary.data":"Datos y privacidad","page.daily-diary.dev":"Estructura y desarrollo","proj.void.name":"VOID","proj.void.tagline":"Michael Burns desapareció el año pasado. ¿Quieres entrar?","proj.void.summary":"Un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece. Interfaz CRT de alto contraste, en español e inglés.","proj.void.status":"beta · en desarrollo","page.void.index":"Visión general","page.void.install":"Instalación y juego","page.void.world":"El mundo de VOID Corp","page.void.engine":"Las tripas del archivo","page.void.faq":"Avisos y preguntas","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"El sitio personal que da origen a esta documentación.","proj.website.summary":"Portfolio oscuro y bilingüe generado con Node: proyectos sincronizados desde GitHub, calendario de contribuciones, presencia de Discord y blog desde Markdown.","proj.website.status":"publicada · activa","page.website.index":"Visión general","page.website.build":"Build y preview","page.website.content":"Editar el contenido","page.website.i18n":"Los dos idiomas","page.website.architecture":"Arquitectura del sitio","group.apps.title":"Aplicaciones y herramientas","group.apps.sub":"Software que resuelve algo concreto: música, agentes y organización personal.","group.games.title":"Juegos","group.games.sub":"Del incremental de navegador al terror psicológico.","group.bots.title":"Bots y eventos","group.bots.sub":"Automatización en directo para comunidades.","group.web.title":"Web","group.web.sub":"Los sitios que publico, incluido el que estás leyendo."},"en":{"nav.home":"Home","nav.projects":"Projects","nav.search":"Search","nav.site":"My site","nav.blog":"Blog","nav.contact":"Contact","nav.openMenu":"Open menu","nav.closeMenu":"Close menu","aria.skipToContent":"Skip to content","aria.homeLogo":"Jaime Gaming Docs — home","aria.mainNav":"Main navigation","aria.backToTop":"Back to top","aria.langSwitch":"English. Switch to Spanish","aria.sidebar":"Index of this documentation","aria.toc":"On this page","aria.openSidebar":"Open index","aria.closeSidebar":"Close index","search.button":"Search","search.placeholder":"Search the docs…","search.hint":"Type to filter pages and sections","search.empty":"No results for","search.noQuery":"Try “install”, “commands”, “privacy”…","search.results":"results","search.result":"result","search.close":"Close search","search.scopeAll":"All documentation","search.scopeProject":"This project only","search.kbdNavigate":"navigate","search.kbdOpen":"open","search.kbdClose":"close","search.dialogTitle":"Search the documentation","search.resultsLabel":"Search results","docs.eyebrow":"Documentation","docs.sidebarTitle":"In this documentation","docs.tocTitle":"On this page","docs.editOnGithub":"Edit this page on GitHub","docs.sourceNote":"Documentation written by hand for this site, based on the repository's README and docs.","docs.updated":"Last reviewed","docs.prev":"Previous","docs.next":"Next","docs.allProjects":"All projects","docs.readTime":"min read","docs.jumpTo":"Go to","home.kicker":"DOCUMENTATION","home.title":"All my projects, \u003cspan class=\"hero__title-accent\">documented\u003c/span>","home.subtitle":"One single site with the documentation of everything I build: players, agents, bots, games and websites. Install guides, architecture, usage and reference.","home.ctaPrimary":"Start reading","home.ctaSecondary":"See all projects","home.stats.projects":"projects","home.stats.pages":"pages","home.stats.languages":"languages","home.stats.updated":"updated","home.about.title":"About these docs","home.about.sub":"How they are made and how they are kept up to date.","home.about.card.label":"HOW IT WORKS","home.about.card.title":"Written by hand, generated with Node","home.about.card.text":"Every page is a Markdown file in content/docs/. The build turns them into static HTML with the same system, the same palette and the same animations as my main website.","home.about.card.stamp":"SEE THE REPOSITORY ↗","home.contribute.title":"Found a mistake?","home.contribute.text":"All of this documentation lives in a public repository. Open an issue or send a pull request with the fix.","home.contribute.issue":"Open an issue","home.contribute.pr":"Propose a change","home.contribute.email":"Send me an email","projects.title":"Projects","projects.sub":"All the documentation, project by project. Each card links to its complete guide.","projects.pages":"pages","projects.openDocs":"Open documentation","projects.demo":"Try it","projects.code":"Code","projects.group.all":"All","callout.note":"Note","callout.tip":"Tip","callout.warning":"Warning","callout.important":"Important","callout.caution":"Caution","code.copy":"Copy","code.copied":"Copied","footer.rights":"All rights reserved.","footer.mainSite":"My site","footer.tagline":"Browser games, web applications and videos.","footer.site":"Site","footer.siteAria":"Site links","footer.resources":"Resources","footer.resourcesAria":"Resources and external links","footer.status":"Service status","footer.email":"Email","footer.terms":"Terms of Service","footer.privacy":"Privacy","footer.source":"Source code ↗","footer.legalAria":"Terms and privacy","aria.socials":"Social links","aria.footerLogo":"Jaime Gaming — home","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Email","status.title":"Service status","status.sub":"Live status of the website, documentation and projects, from the official incident.io panel.","status.note":"Data from the official status panel","status.open":"Open full status page ↗","status.loading":"Checking status…","status.unknown":"Status unavailable","status.error":"Couldn't fetch the live status. You can open the full status page.","status.updated":"Updated {date}","status.componentsAria":"Service components","status.allOperational":"All systems operational","status.minorIssues":"Minor issues","status.majorIssues":"Major incident","status.criticalIssues":"Critical incident","status.maintenanceOverall":"Maintenance in progress","status.operational":"Operational","status.degraded":"Degraded performance","status.partial":"Partial outage","status.major":"Major outage","status.underMaintenance":"Under maintenance","status.maintenanceTitle":"Scheduled maintenance","status.maintenanceBody":"Text published on the status page.","status.frameNotice":"The full panel belongs to incident.io and is only loaded if you ask for it. Once loaded, it may use its own cookies.","status.loadFrame":"Load embedded panel","status.frameTitle":"Jaime Gaming status page","status.hint":"The summary refreshes when you open this page. If the embedded panel doesn’t appear, open it with the button above.","notFound.title":"Page not found","notFound.sub":"The link may be broken or this guide may have moved.","notFound.home":"Back to the docs home","notFound.projects":"See all projects","home.guide.title":"How the guides are organised","home.guide.sub":"They all follow the same anatomy, so you know where to look in every project.","home.guide.overview.num":"01","home.guide.overview.title":"Overview","home.guide.overview.desc":"What the project is, which problem it solves, what state it is in and what sets it apart. It is the entry page of every guide.","home.guide.install.num":"02","home.guide.install.title":"Installation","home.guide.install.desc":"Requirements, the commands to get it running and the first check that everything works.","home.guide.usage.num":"03","home.guide.usage.title":"Usage","home.guide.usage.desc":"Day to day: features, commands, mechanics or workflows, with concrete examples.","home.guide.deep.num":"04","home.guide.deep.title":"How it is built","home.guide.deep.desc":"Architecture, folder structure, technical decisions and the project's known limits.","home.guide.reference.num":"05","home.guide.reference.title":"Reference","home.guide.reference.desc":"Lookup tables: options, data formats, models, platforms or frequently asked questions.","home.about.text1":"This site gathers, in one single place, the documentation of the seven projects I maintain on GitHub. Every guide is written by hand from the repository's README and docs, and reviewed when the project changes.","home.about.text2":"Nothing is generated automatically from GitHub and nothing depends on external services: the content lives in this repository as Markdown, it is compiled to static HTML with Node and published on GitHub Pages. Search uses an index created in that same build.","home.about.row.stack":"Generator","home.about.row.palette":"Palette","home.about.row.fonts":"Fonts","home.about.row.host":"Publishing","home.about.row.search":"Search","home.about.row.searchValue":"Static index, no external services","docs.otherProjects":"Other projects","projects.empty":"There are no projects in this category.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentation for all of Jaime Gaming's projects: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID and his personal website.","meta.projects.title":"Projects — Jaime Gaming Docs","meta.projects.description":"Index of all the documentation, grouped by apps, games, bots and web.","proj.wave.name":"Wave","proj.wave.tagline":"A local-first music player for web, Android and Windows.","proj.wave.summary":"A home for the music you already own. Wave keeps your collection on the device: no account, no subscription and no audio uploaded to any server.","proj.wave.status":"0.1.0 · active","page.wave.index":"Overview","page.wave.install":"Installation","page.wave.features":"Features & usage","page.wave.platforms":"Platforms","page.wave.architecture":"Architecture","page.wave.privacy":"Privacy & data","page.wave.dev":"Development","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"All your agents in one place.","proj.jaigent.summary":"One binary, ten providers. The same tools in the terminal, in ChatGPT Web over remote MCP, in Claude Desktop and in any app that speaks OpenAI. With undo on every write and a hard spend cap.","proj.jaigent.status":"0.5.x · active","page.jaigent.index":"Overview","page.jaigent.install":"Install & API keys","page.jaigent.cli":"Using the CLI","page.jaigent.models":"Models & providers","page.jaigent.mcp":"MCP & your own API","page.jaigent.extend":"Skills, plugins & schedules","page.jaigent.reference":"Tools reference","page.jaigent.security":"Security","page.jaigent.dev":"Development","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"The Discord bot that runs the Welcome to Hell endurance event.","proj.hellbot.summary":"Keep at least one real human in a single voice channel for 160 consecutive hours. If that channel empties and nobody returns within the grace period, the run is dead permanently.","proj.hellbot.status":"production · stable","page.hellbot.index":"Overview","page.hellbot.rules":"Event rules","page.hellbot.edge-cases":"Edge cases","page.hellbot.install":"Install & deploy","page.hellbot.commands":"Commands","page.hellbot.dashboard":"Live dashboard","page.hellbot.architecture":"Architecture","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"One number, infinite possibilities.","proj.rngdle-infinite.summary":"Roll a number from 0 to 1,000,000 and find out what makes it special. A browser incremental with EP, badges, companions, skills, rebirth, prestige and rollback.","proj.rngdle-infinite.status":"playable · active","page.rngdle-infinite.index":"Overview","page.rngdle-infinite.play":"How to play","page.rngdle-infinite.systems":"Systems & progression","page.rngdle-infinite.save":"Save & sync","page.rngdle-infinite.faq":"FAQ","page.rngdle-infinite.dev":"Development","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Your personal space: a minimalist, 100% local diary.","proj.daily-diary.summary":"No backend, no accounts, no AI and no external APIs. Summaries, statistics and trends are computed in your browser with rules and text templates.","proj.daily-diary.status":"complete · local","page.daily-diary.index":"Overview","page.daily-diary.install":"Install & run","page.daily-diary.areas":"The five areas","page.daily-diary.data":"Data & privacy","page.daily-diary.dev":"Structure & development","proj.void.name":"VOID","proj.void.tagline":"Michael Burns disappeared last year. Would you come in?","proj.void.summary":"A psychological game set in a mysterious corporation where everyone and everything disappears. High-contrast CRT interface, in Spanish and English.","proj.void.status":"beta · in development","page.void.index":"Overview","page.void.install":"Install & play","page.void.world":"The VOID Corp world","page.void.engine":"Inside the single file","page.void.faq":"Warnings & FAQ","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"The personal site this documentation is built from.","proj.website.summary":"Dark, bilingual portfolio generated with Node: projects synced from GitHub, contributions calendar, Discord presence and a Markdown blog.","proj.website.status":"published · active","page.website.index":"Overview","page.website.build":"Build & preview","page.website.content":"Editing content","page.website.i18n":"The two languages","page.website.architecture":"Site architecture","group.apps.title":"Apps & tools","group.apps.sub":"Software that solves something concrete: music, agents and personal organisation.","group.games.title":"Games","group.games.sub":"From the browser incremental to psychological horror.","group.bots.title":"Bots & events","group.bots.sub":"Live automation for communities.","group.web.title":"Web","group.web.sub":"The sites I publish, including the one you are reading."}}</script>
+<script type="application/json" id="pageTranslations">{"es":{"title":"Referencia de tools · jAIgent — Docs de Jaime Gaming","description":"Tabla de herramientas del modelo, variables de entorno, arquitectura interna y modelo de seguridad.","fields":{"body":"\u003cp>Referencia de consulta rápida. Para el contexto de uso, ver \u003ca href=\"/Docs/jaigent/cli/\">Uso en la terminal\u003c/a>.\u003c/p>\n\u003ch2 id=\"herramientas\">Herramientas\u003c/h2>\n\u003cp>El modelo elige cuáles llamar y en qué orden.\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Herramienta\u003c/th>\n\u003cth>Para qué sirve\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>web_search\u003c/code>\u003c/td>\n\u003ctd>Buscar en la web: títulos, URLs y fragmentos.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>fetch_page\u003c/code>\u003c/td>\n\u003ctd>Descargar una página y reducirla a texto legible.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>list_files\u003c/code>\u003c/td>\n\u003ctd>Listar el espacio de trabajo, opcionalmente con glob.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>read_file\u003c/code>\u003c/td>\n\u003ctd>Leer un archivo UTF-8 con números de línea; paginado.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>write_file\u003c/code>\u003c/td>\n\u003ctd>Crear o sobrescribir un archivo.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>edit_file\u003c/code>\u003c/td>\n\u003ctd>Reemplazar un fragmento exacto.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>search_files\u003c/code>\u003c/td>\n\u003ctd>Grep por subcadena o regex.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>delete_file\u003c/code>\u003c/td>\n\u003ctd>Borrar un archivo o un directorio vacío.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>load_skill\u003c/code>\u003c/td>\n\u003ctd>Recuperar el cuerpo de una skill (cuando hay skills).\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ask_user\u003c/code>\u003c/td>\n\u003ctd>Hacer una pregunta de aclaración, con selector.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>write_todos\u003c/code>\u003c/td>\n\u003ctd>Seguimiento de una tarea multipaso como checklist en vivo.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>remember\u003c/code> / \u003ccode>recall\u003c/code>\u003c/td>\n\u003ctd>Memoria del proyecto (solo si \u003ccode>memory\u003c/code> está activada).\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>run_command\u003c/code> ⚠\u003c/td>\n\u003ctd>Shell. \u003cstrong>Optativo\u003c/strong>, ver el modelo de seguridad.\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Las herramientas de archivo \u003cstrong>rechazan\u003c/strong> \u003ccode>.env\u003c/code>, claves privadas, \u003ccode>*.pem\u003c/code>, \u003ccode>*.key\u003c/code> y cualquier cosa bajo \u003ccode>.git\u003c/code>. \u003ccode>.env.example\u003c/code> sigue siendo legible. Toda ruta pasa por \u003ccode>resolve_in_workspace()\u003c/code>.\u003c/p>\n\u003ch2 id=\"variables-de-entorno\">Variables de entorno\u003c/h2>\n\u003cp>Las banderas del CLI sobrescriben las variables.\u003c/p>\n\u003ch3 id=\"proveedor-y-modelo\">Proveedor y modelo\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Por defecto\u003c/th>\n\u003cth>Significado\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>OPENAI_API_KEY\u003c/code> / \u003ccode>ANTHROPIC_API_KEY\u003c/code> / …\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Clave del proveedor\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_API_KEY\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Clave genérica; gana a las específicas de proveedor\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_PROVIDER\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>openai\u003c/code>\u003c/td>\n\u003ctd>openai, anthropic, gemini, openrouter, groq, deepseek, mistral, xai, together, ollama\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MODEL\u003c/code>\u003c/td>\n\u003ctd>El del proveedor\u003c/td>\n\u003ctd>Identificador de modelo, o \u003ccode>auto\u003c/code> / \u003ccode>free\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_BASE_URL\u003c/code>\u003c/td>\n\u003ctd>El del proveedor\u003c/td>\n\u003ctd>Raíz de API para gateways compatibles\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"ejecucion\">Ejecución\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Por defecto\u003c/th>\n\u003cth>Significado\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_WORKSPACE\u003c/code>\u003c/td>\n\u003ctd>Carpeta actual\u003c/td>\n\u003ctd>Directorio al que se limitan las herramientas de archivo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MAX_STEPS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>12\u003c/code>\u003c/td>\n\u003ctd>Presupuesto de llamadas a herramientas por turno\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_TEMPERATURE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0.2\u003c/code>\u003c/td>\n\u003ctd>Temperatura de muestreo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MAX_TOKENS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>2048\u003c/code>\u003c/td>\n\u003ctd>Tokens por turno del asistente\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_TIMEOUT\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>60\u003c/code>\u003c/td>\n\u003ctd>Tiempo de espera HTTP en segundos\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_APPROVAL\u003c/code>\u003c/td>\n\u003ctd>Según tty\u003c/td>\n\u003ctd>\u003ccode>ask\u003c/code>, \u003ccode>auto\u003c/code> o \u003ccode>dry-run\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_STREAM\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Emitir la respuesta en streaming\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SHOW_COST\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Imprimir la línea de tokens y coste\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_VERBOSE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>Trazar las llamadas a herramientas\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SESSION_DIR\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>~/.jaigent/sessions\u003c/code>\u003c/td>\n\u003ctd>Conversaciones guardadas\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_PRICES\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>JSON que sobrescribe la tabla de precios\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"busqueda-y-red\">Búsqueda y red\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Por defecto\u003c/th>\n\u003cth>Significado\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SEARCH_BACKEND\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>duckduckgo\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>duckduckgo\u003c/code> (sin clave) o \u003ccode>tavily\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>TAVILY_API_KEY\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Necesaria solo para Tavily\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_ALLOW_SHELL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> activa \u003ccode>run_command\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_FAILOVER\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Reintentar y después cambiar de proveedor\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_RETRIES\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>3\u003c/code>\u003c/td>\n\u003ctd>Intentos por proveedor. \u003ccode>1\u003c/code> desactiva el reintento\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"extensiones-y-persistencia\">Extensiones y persistencia\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Por defecto\u003c/th>\n\u003cth>Significado\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SKILLS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Cargar skills y ofrecer \u003ccode>load_skill\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_PLUGINS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Cargar plugins locales\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_CHECKPOINTS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Snapshot de archivos antes de cambiarlos\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_BUDGET\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>Tope duro en USD por ejecución. \u003ccode>0\u003c/code> lo desactiva\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MEMORY\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> persiste notas en \u003ccode>.jaigent/memory.md\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_AUTO_COMPACT\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> pliega turnos viejos del chat\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MCP_WRITE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> expone herramientas de escritura en el MCP stdio local\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_HOME\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>~/.jaigent\u003c/code>\u003c/td>\n\u003ctd>Ajustes, skills, horarios y \u003ccode>secrets.env\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SCHEDULE_FILE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>$JAIGENT_HOME/schedules.json\u003c/code>\u003c/td>\n\u003ctd>Almacén de tareas programadas\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_KEYS_FILE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>$JAIGENT_HOME/keys.json\u003c/code>\u003c/td>\n\u003ctd>Claves del gateway\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_NO_UPDATE_CHECK\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> no comprueba releases nunca\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_BETA\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> trae actualizaciones de la rama \u003ccode>beta\u003c/code>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Las variables del puente de ChatGPT (\u003ccode>JAIGENT_PLUGIN_*\u003c/code>) están en \u003ca href=\"/Docs/jaigent/mcp/\">MCP y tu propia API\u003c/a>.\u003c/p>\n\u003ch2 id=\"arquitectura-interna\">Arquitectura interna\u003c/h2>\n\u003cp>En una frase: \u003cstrong>un bucle de agente pide a un proveedor texto o llamadas a herramientas, ejecuta esas llamadas dentro de un sandbox y repite hasta que el modelo responde\u003c/strong>, con cada mutación snapshotada, aprobada y reversible.\u003c/p>\n\u003ch3 id=\"el-bucle-agent-py\">El bucle (\u003ccode>agent.py\u003c/code>)\u003c/h3>\n\u003cp>\u003ccode>Agent.run(prompt)\u003c/code> es el producto entero, en una función:\u003c/p>\n\u003col>\n\u003cli>\u003cstrong>Ruta.\u003c/strong> \u003ccode>model=&quot;auto&quot;\u003c/code> elige un modelo para este prompt; \u003ccode>model=&quot;free&quot;\u003c/code> puede cambiar también de proveedor. Los modelos sin enrutado se saltan este paso.\u003c/li>\n\u003cli>\u003cstrong>Construye los mensajes\u003c/strong>: prompt del sistema, historial y prompt del usuario.\u003c/li>\n\u003cli>\u003cstrong>Llama al proveedor.\u003c/strong> La respuesta es texto plano (terminado) o llamadas a herramientas (continuar). Los fragmentos de streaming se reenvían por \u003ccode>on_text\u003c/code> conforme llegan.\u003c/li>\n\u003cli>\u003cstrong>Ejecuta cada llamada\u003c/strong> con \u003ccode>_execute\u003c/code>: snapshot → comprobación de aprobación → ejecución → añadir el resultado para el modelo.\u003c/li>\n\u003cli>\u003cstrong>Repite\u003c/strong> hasta que el modelo responde sin llamadas a herramientas, o hasta que se agota el presupuesto de pasos (\u003ccode>max_steps\u003c/code>, 12 por defecto). Entonces se hace \u003cstrong>una última llamada sin herramientas\u003c/strong>, forzando una respuesta.\u003c/li>\n\u003c/ol>\n\u003ch3 id=\"capas\">Capas\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Capa\u003c/th>\n\u003cth>Archivo\u003c/th>\n\u003cth>Responsabilidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>CLI\u003c/td>\n\u003ctd>\u003ccode>cli.py\u003c/code>\u003c/td>\n\u003ctd>Argumentos, terminal y callbacks de estado\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Agente\u003c/td>\n\u003ctd>\u003ccode>agent.py\u003c/code>\u003c/td>\n\u003ctd>El bucle: ruta, mensajes, ejecución, presupuesto\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Enrutado\u003c/td>\n\u003ctd>\u003ccode>router.py\u003c/code>\u003c/td>\n\u003ctd>Heurística de \u003ccode>auto\u003c/code> y \u003ccode>free\u003c/code>, sin llamada a LLM\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Proveedores\u003c/td>\n\u003ctd>\u003ccode>llm/\u003c/code>\u003c/td>\n\u003ctd>Adaptadores por proveedor y \u003ccode>FailoverProvider\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Herramientas\u003c/td>\n\u003ctd>\u003ccode>tools/\u003c/code>\u003c/td>\n\u003ctd>Archivos, web, shell, \u003ccode>ask_user\u003c/code> y plugins\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Registro\u003c/td>\n\u003ctd>\u003ccode>ToolRegistry\u003c/code>\u003c/td>\n\u003ctd>Una sola lista compartida por CLI, MCP y gateway\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>MCP local\u003c/td>\n\u003ctd>\u003ccode>mcp.py\u003c/code>\u003c/td>\n\u003ctd>Expone el registro por stdio\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Puente ChatGPT\u003c/td>\n\u003ctd>\u003ccode>chatgpt.py\u003c/code>\u003c/td>\n\u003ctd>MCP remoto con OAuth, reutilizando registro y gateway\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Gateway\u003c/td>\n\u003ctd>\u003ccode>serve\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>/v1/chat/completions\u003c/code> y \u003ccode>/v1/models\u003c/code>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Un solo \u003ccode>Agent\u003c/code>, un solo registro de herramientas y una sola implementación de aprobación y checkpoints.\u003c/p>\n\u003ch2 id=\"modelo-de-seguridad\">Modelo de seguridad\u003c/h2>\n\u003cp>Los valores por defecto son deliberadamente conservadores.\u003c/p>\n\u003cp>\u003cstrong>Sistema de archivos.\u003c/strong> Toda ruta se resuelve y se comprueba contra el espacio de trabajo. Se rechazan los recorridos hacia arriba, las rutas absolutas y los enlaces simbólicos que escapan. Las lecturas se limitan a \u003cstrong>1 MB\u003c/strong>.\u003c/p>\n\u003cp>\u003cstrong>Shell.\u003c/strong> No existe salvo con \u003ccode>--allow-shell\u003c/code> o \u003ccode>JAIGENT_ALLOW_SHELL=1\u003c/code>. Está limitado en tiempo y tiene lista de bloqueo (\u003ccode>rm -rf /\u003c/code>, \u003ccode>sudo\u003c/code>, \u003ccode>format c:\u003c/code>, …).\u003c/p>\n\u003cblockquote>\u003cp>[!DANGER]\nUn modelo que puede ejecutar shell \u003cstrong>puede esquivar un filtro de cadenas\u003c/strong>. Trata la bandera como «confío en este modelo con esta carpeta», no como una protección.\u003c/p>\n\u003c/blockquote>\n\u003cp>\u003cstrong>Undo.\u003c/strong> Todo cambio de archivo se snapshot antes. Ver \u003ca href=\"/Docs/jaigent/cli/\">Uso en la terminal\u003c/a>.\u003c/p>\n\u003cp>\u003cstrong>Red.\u003c/strong> \u003ccode>fetch_page\u003c/code> rechaza loopback, enlace local, rangos privados y metadatos de nube (\u003ccode>169.254.169.254\u003c/code>). Los nombres de host se resuelven y \u003cstrong>cada redirección se vuelve a comprobar\u003c/strong>. Las páginas descargadas siguen siendo entrada no confiable: no combines \u003ccode>--allow-shell\u003c/code> con sitios en los que no confíes.\u003c/p>\n\u003cp>\u003cstrong>Secretos.\u003c/strong> Las claves vienen del entorno, de \u003ccode>jaigent auth\u003c/code> / \u003ccode>~/.jaigent/secrets.env\u003c/code> o de un \u003ccode>.env\u003c/code> ignorado por Git, y \u003cstrong>nunca se imprimen completas\u003c/strong>. Las herramientas de archivo rechazan \u003ccode>.env\u003c/code>, claves privadas y archivos similares aunque estén dentro del espacio de trabajo.\u003c/p>\n\u003ch3 id=\"recomendacion-de-uso\">Recomendación de uso\u003c/h3>\n\u003cp>Ejecuta en una carpeta dedicada, mantenla bajo control de versiones y empieza con \u003ccode>--verbose\u003c/code>.\u003c/p>\n","desc":"Tabla de herramientas del modelo, variables de entorno, arquitectura interna y modelo de seguridad.","readtime":"5 min de lectura","editHref":"https://github.com/jaime-gaming/jAIgent/blob/main/content/docs/jaigent/reference.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#herramientas\">Herramientas\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#variables-de-entorno\">Variables de entorno\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#proveedor-y-modelo\">Proveedor y modelo\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#ejecucion\">Ejecución\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#busqueda-y-red\">Búsqueda y red\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#extensiones-y-persistencia\">Extensiones y persistencia\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#arquitectura-interna\">Arquitectura interna\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#el-bucle-agent-py\">El bucle (agent.py)\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#capas\">Capas\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#modelo-de-seguridad\">Modelo de seguridad\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#recomendacion-de-uso\">Recomendación de uso\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}},"en":{"title":"Tools reference · jAIgent — Docs de Jaime Gaming","description":"Model tools table, environment variables, internal architecture and the safety model.","fields":{"body":"\u003cp>Quick lookup reference. For usage context, see \u003ca href=\"/Docs/jaigent/cli/\">Using the CLI\u003c/a>.\u003c/p>\n\u003ch2 id=\"tools\">Tools\u003c/h2>\n\u003cp>The model chooses which of these to call, and in what order.\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Tool\u003c/th>\n\u003cth>What it is for\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>web_search\u003c/code>\u003c/td>\n\u003ctd>Search the web: titles, URLs and snippets.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>fetch_page\u003c/code>\u003c/td>\n\u003ctd>Download a page and strip it to readable text.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>list_files\u003c/code>\u003c/td>\n\u003ctd>List the workspace, optionally by glob.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>read_file\u003c/code>\u003c/td>\n\u003ctd>Read a UTF-8 file with line numbers; paginated.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>write_file\u003c/code>\u003c/td>\n\u003ctd>Create or overwrite a file.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>edit_file\u003c/code>\u003c/td>\n\u003ctd>Replace an exact snippet.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>search_files\u003c/code>\u003c/td>\n\u003ctd>Grep by substring or regex.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>delete_file\u003c/code>\u003c/td>\n\u003ctd>Delete a file or an empty directory.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>load_skill\u003c/code>\u003c/td>\n\u003ctd>Fetch a skill body (when skills exist).\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ask_user\u003c/code>\u003c/td>\n\u003ctd>Ask a clarifying question, with a picker.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>write_todos\u003c/code>\u003c/td>\n\u003ctd>Track a multi-step task as a live checklist.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>remember\u003c/code> / \u003ccode>recall\u003c/code>\u003c/td>\n\u003ctd>Project memory (only if \u003ccode>memory\u003c/code> is on).\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>run_command\u003c/code> ⚠\u003c/td>\n\u003ctd>Shell. \u003cstrong>Opt-in\u003c/strong>, see the safety model.\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>File tools \u003cstrong>refuse\u003c/strong> \u003ccode>.env\u003c/code>, private keys, \u003ccode>*.pem\u003c/code>, \u003ccode>*.key\u003c/code> and anything under \u003ccode>.git\u003c/code>. \u003ccode>.env.example\u003c/code> stays readable. Every path goes through \u003ccode>resolve_in_workspace()\u003c/code>.\u003c/p>\n\u003ch2 id=\"environment-variables\">Environment variables\u003c/h2>\n\u003cp>CLI flags override variables.\u003c/p>\n\u003ch3 id=\"provider-and-model\">Provider and model\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Default\u003c/th>\n\u003cth>Meaning\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>OPENAI_API_KEY\u003c/code> / \u003ccode>ANTHROPIC_API_KEY\u003c/code> / …\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Provider key\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_API_KEY\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Generic key; wins over provider-specific ones\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_PROVIDER\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>openai\u003c/code>\u003c/td>\n\u003ctd>openai, anthropic, gemini, openrouter, groq, deepseek, mistral, xai, together, ollama\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MODEL\u003c/code>\u003c/td>\n\u003ctd>Provider default\u003c/td>\n\u003ctd>Model id, or \u003ccode>auto\u003c/code> / \u003ccode>free\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_BASE_URL\u003c/code>\u003c/td>\n\u003ctd>Provider default\u003c/td>\n\u003ctd>API root for compatible gateways\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"execution\">Execution\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Default\u003c/th>\n\u003cth>Meaning\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_WORKSPACE\u003c/code>\u003c/td>\n\u003ctd>Current directory\u003c/td>\n\u003ctd>Directory the file tools are locked to\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MAX_STEPS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>12\u003c/code>\u003c/td>\n\u003ctd>Tool-call budget per turn\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_TEMPERATURE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0.2\u003c/code>\u003c/td>\n\u003ctd>Sampling temperature\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MAX_TOKENS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>2048\u003c/code>\u003c/td>\n\u003ctd>Tokens per assistant turn\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_TIMEOUT\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>60\u003c/code>\u003c/td>\n\u003ctd>HTTP timeout in seconds\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_APPROVAL\u003c/code>\u003c/td>\n\u003ctd>tty-dependent\u003c/td>\n\u003ctd>\u003ccode>ask\u003c/code>, \u003ccode>auto\u003c/code> or \u003ccode>dry-run\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_STREAM\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Stream the answer\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SHOW_COST\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Print the token and cost line\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_VERBOSE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>Trace tool calls\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SESSION_DIR\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>~/.jaigent/sessions\u003c/code>\u003c/td>\n\u003ctd>Saved conversations\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_PRICES\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>JSON overriding the price table\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"search-and-network\">Search and network\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Default\u003c/th>\n\u003cth>Meaning\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SEARCH_BACKEND\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>duckduckgo\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>duckduckgo\u003c/code> (no key) or \u003ccode>tavily\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>TAVILY_API_KEY\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Required only for Tavily\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_ALLOW_SHELL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> enables \u003ccode>run_command\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_FAILOVER\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Retry, then fall back\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_RETRIES\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>3\u003c/code>\u003c/td>\n\u003ctd>Attempts per provider. \u003ccode>1\u003c/code> disables retrying\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"extensions-and-persistence\">Extensions and persistence\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Default\u003c/th>\n\u003cth>Meaning\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SKILLS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Load skills and offer \u003ccode>load_skill\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_PLUGINS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Load local plugins\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_CHECKPOINTS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Snapshot files before changing them\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_BUDGET\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>Hard USD cap for one run. \u003ccode>0\u003c/code> disables it\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MEMORY\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> persists notes in \u003ccode>.jaigent/memory.md\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_AUTO_COMPACT\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> collapses older chat turns\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_MCP_WRITE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> exposes write tools from the local stdio MCP server\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_HOME\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>~/.jaigent\u003c/code>\u003c/td>\n\u003ctd>Settings, skills, schedules and \u003ccode>secrets.env\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_SCHEDULE_FILE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>$JAIGENT_HOME/schedules.json\u003c/code>\u003c/td>\n\u003ctd>Scheduled task store\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_KEYS_FILE\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>$JAIGENT_HOME/keys.json\u003c/code>\u003c/td>\n\u003ctd>Gateway keys\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_NO_UPDATE_CHECK\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> never checks for releases\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>JAIGENT_BETA\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>0\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> pulls updates from the \u003ccode>beta\u003c/code> branch\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>The ChatGPT bridge variables (\u003ccode>JAIGENT_PLUGIN_*\u003c/code>) are in \u003ca href=\"/Docs/jaigent/mcp/\">MCP &amp; your own API\u003c/a>.\u003c/p>\n\u003ch2 id=\"internal-architecture\">Internal architecture\u003c/h2>\n\u003cp>In one sentence: \u003cstrong>an agent loop asks a provider for either text or tool calls, executes those calls inside a sandbox and repeats until the model answers\u003c/strong>, with every mutation snapshotted, approved and reversible.\u003c/p>\n\u003ch3 id=\"the-loop-agent-py\">The loop (\u003ccode>agent.py\u003c/code>)\u003c/h3>\n\u003cp>\u003ccode>Agent.run(prompt)\u003c/code> is the entire product, in one function:\u003c/p>\n\u003col>\n\u003cli>\u003cstrong>Route.\u003c/strong> \u003ccode>model=&quot;auto&quot;\u003c/code> picks a model for this prompt; \u003ccode>model=&quot;free&quot;\u003c/code> may also switch provider. Non-routing models skip this step.\u003c/li>\n\u003cli>\u003cstrong>Build the messages\u003c/strong>: system prompt, history and the user&#39;s prompt.\u003c/li>\n\u003cli>\u003cstrong>Call the provider.\u003c/strong> The reply is either plain text (done) or tool calls (continue). Streaming chunks are forwarded through \u003ccode>on_text\u003c/code> as they arrive.\u003c/li>\n\u003cli>\u003cstrong>Execute each call\u003c/strong> with \u003ccode>_execute\u003c/code>: snapshot → approval check → run → append the result for the model.\u003c/li>\n\u003cli>\u003cstrong>Repeat\u003c/strong> until the model answers without tool calls, or the step budget (\u003ccode>max_steps\u003c/code>, 12 by default) runs out. Then \u003cstrong>one final call is made without tools\u003c/strong>, forcing an answer.\u003c/li>\n\u003c/ol>\n\u003ch3 id=\"layers\">Layers\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Layer\u003c/th>\n\u003cth>File\u003c/th>\n\u003cth>Responsibility\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>CLI\u003c/td>\n\u003ctd>\u003ccode>cli.py\u003c/code>\u003c/td>\n\u003ctd>Arguments, terminal and status callbacks\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Agent\u003c/td>\n\u003ctd>\u003ccode>agent.py\u003c/code>\u003c/td>\n\u003ctd>The loop: route, messages, execution, budget\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Routing\u003c/td>\n\u003ctd>\u003ccode>router.py\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>auto\u003c/code> and \u003ccode>free\u003c/code> heuristic, no LLM call\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Providers\u003c/td>\n\u003ctd>\u003ccode>llm/\u003c/code>\u003c/td>\n\u003ctd>Per-provider adapters and \u003ccode>FailoverProvider\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Tools\u003c/td>\n\u003ctd>\u003ccode>tools/\u003c/code>\u003c/td>\n\u003ctd>Files, web, shell, \u003ccode>ask_user\u003c/code> and plugins\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Registry\u003c/td>\n\u003ctd>\u003ccode>ToolRegistry\u003c/code>\u003c/td>\n\u003ctd>One single list shared by CLI, MCP and gateway\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Local MCP\u003c/td>\n\u003ctd>\u003ccode>mcp.py\u003c/code>\u003c/td>\n\u003ctd>Exposes the registry over stdio\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>ChatGPT bridge\u003c/td>\n\u003ctd>\u003ccode>chatgpt.py\u003c/code>\u003c/td>\n\u003ctd>Remote MCP with OAuth, reusing registry and gateway\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Gateway\u003c/td>\n\u003ctd>\u003ccode>serve\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>/v1/chat/completions\u003c/code> and \u003ccode>/v1/models\u003c/code>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>One \u003ccode>Agent\u003c/code>, one tool registry and one approval and checkpoint implementation.\u003c/p>\n\u003ch2 id=\"safety-model\">Safety model\u003c/h2>\n\u003cp>The defaults are deliberately conservative.\u003c/p>\n\u003cp>\u003cstrong>Filesystem.\u003c/strong> Every path is resolved and checked against the workspace. Traversal, absolute paths and escaping symlinks are rejected. Reads are capped at \u003cstrong>1 MB\u003c/strong>.\u003c/p>\n\u003cp>\u003cstrong>Shell.\u003c/strong> Absent unless \u003ccode>--allow-shell\u003c/code> or \u003ccode>JAIGENT_ALLOW_SHELL=1\u003c/code>. Time-limited and blocklisted (\u003ccode>rm -rf /\u003c/code>, \u003ccode>sudo\u003c/code>, \u003ccode>format c:\u003c/code>, …).\u003c/p>\n\u003cblockquote>\u003cp>[!DANGER]\nA model that can run a shell \u003cstrong>can work around a string filter\u003c/strong>. Treat the flag as &quot;I trust this model with this directory&quot;, not as a protection.\u003c/p>\n\u003c/blockquote>\n\u003cp>\u003cstrong>Undo.\u003c/strong> Every file change is snapshotted first. See \u003ca href=\"/Docs/jaigent/cli/\">Using the CLI\u003c/a>.\u003c/p>\n\u003cp>\u003cstrong>Network.\u003c/strong> \u003ccode>fetch_page\u003c/code> refuses loopback, link-local, private ranges and cloud metadata (\u003ccode>169.254.169.254\u003c/code>). Hostnames are resolved and \u003cstrong>every redirect is re-checked\u003c/strong>. Fetched pages are still untrusted input: do not combine \u003ccode>--allow-shell\u003c/code> with sites you do not trust.\u003c/p>\n\u003cp>\u003cstrong>Secrets.\u003c/strong> Keys come from the environment, from \u003ccode>jaigent auth\u003c/code> / \u003ccode>~/.jaigent/secrets.env\u003c/code> or from a git-ignored \u003ccode>.env\u003c/code>, and are \u003cstrong>never printed in full\u003c/strong>. File tools refuse \u003ccode>.env\u003c/code>, private keys and similar files even inside the workspace.\u003c/p>\n\u003ch3 id=\"usage-recommendation\">Usage recommendation\u003c/h3>\n\u003cp>Run in a dedicated directory, keep it under version control and start with \u003ccode>--verbose\u003c/code>.\u003c/p>\n","desc":"Model tools table, environment variables, internal architecture and the safety model.","readtime":"4 min read","editHref":"https://github.com/jaime-gaming/jAIgent/blob/main/content/docs/jaigent/reference.en.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#tools\">Tools\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#environment-variables\">Environment variables\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#provider-and-model\">Provider and model\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#execution\">Execution\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#search-and-network\">Search and network\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#extensions-and-persistence\">Extensions and persistence\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#internal-architecture\">Internal architecture\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#the-loop-agent-py\">The loop (agent.py)\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#layers\">Layers\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#safety-model\">Safety model\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#usage-recommendation\">Usage recommendation\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}}}</script>
+<script type="application/json" id="searchConfig">{"index":"/Docs/assets/data/search-index.json","scope":"jaigent"}</script>
+<script src="/Docs/assets/js/i18n.js?v=9f6d93c1fd7c"></script>
+<script src="/Docs/assets/js/search.js?v=014a801e4757"></script>
+<script src="/Docs/assets/js/main.js?v=83aa4a0803d7"></script>
+</body>
+</html>

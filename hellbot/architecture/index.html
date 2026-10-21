@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arquitectura — Docs de Jaime Gaming</title>
+<meta name="description" content="Capas, invariantes, modelo de datos y pruebas de hellbot: por qué un evento de 160 horas no se puede perder." />
+<meta name="author" content="Jaime Gaming" />
+<meta name="theme-color" content="#10120f" />
+<meta name="robots" content="index, follow" />
+<meta name="docs:base" content="/Docs/" />
+<meta name="docs:project" content="hellbot" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Jaime Gaming Docs" />
+<meta property="og:title" content="Arquitectura — Docs de Jaime Gaming" />
+<meta property="og:description" content="Capas, invariantes, modelo de datos y pruebas de hellbot: por qué un evento de 160 horas no se puede perder." />
+<meta property="og:url" content="https://jaime-gaming.github.io/Docs/hellbot/architecture/" />
+<meta property="og:image" content="https://jaime-gaming.github.io/assets/img/social-card.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@JaimeGamingPro" />
+<meta name="twitter:title" content="Arquitectura — Docs de Jaime Gaming" />
+<meta name="twitter:description" content="Capas, invariantes, modelo de datos y pruebas de hellbot: por qué un evento de 160 horas no se puede perder." />
+<link rel="canonical" href="https://jaime-gaming.github.io/Docs/hellbot/architecture/" />
+<link rel="icon" href="/Docs/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/Docs/assets/css/style.css?v=d74cfec89052" />
+</head>
+<body data-icons="/Docs/assets/img/icons.svg?v=eea9c3fe56aa" data-page="docs" data-project="hellbot" data-path="/hellbot/architecture/">
+
+<a class="skip-link" href="#top" data-i18n="aria.skipToContent">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/Docs/" class="nav__logo" aria-label="Jaime Gaming Docs — inicio" data-i18n-aria="aria.homeLogo">JG<span class="dot">.</span><span class="nav__logo-badge">docs</span></a>
+  <nav class="nav__links" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+    <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+    <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+    <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+    <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+    <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="search-trigger" id="searchTrigger" type="button" aria-label="Buscar" data-i18n-aria="nav.search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg>
+      <span class="search-trigger__label" data-i18n="search.button">Buscar</span>
+      <kbd class="search-trigger__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+    <button class="lang-switch" id="langSwitch" data-active="es" type="button" aria-label="Cambiar idioma" data-i18n-aria="aria.langSwitch">
+      <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="languageFlagEs" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#aa151b" d="M0 0h24v24H0z"/><path fill="#f1bf00" d="M0 6h24v12H0z"/></g>
+          </pattern>
+          <pattern id="languageFlagEn" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#012169" d="M0 0h24v24H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 24 24M24 0 0 24"/><path stroke="#c8102e" stroke-width="2" d="m0 0 24 24M24 0 0 24"/><path stroke="#fff" stroke-width="8" d="M12 0v24M0 12h24"/><path stroke="#c8102e" stroke-width="4" d="M12 0v24M0 12h24"/></g>
+          </pattern>
+          <radialGradient id="languageGloss" cx="34%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".42"/>
+            <stop offset="55%" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="flag flag-es" cx="12" cy="12" r="9.5" fill="url(#languageFlagEs)"/>
+        <circle class="flag flag-en" cx="12" cy="12" r="9.5" fill="url(#languageFlagEn)"/>
+        <circle class="language-globe__gloss" cx="12" cy="12" r="9.5" fill="url(#languageGloss)" aria-hidden="true"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#0d100d" stroke-opacity=".55" stroke-width="1.9" stroke-linecap="round"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width=".9" stroke-linecap="round"/>
+      </svg>
+      <span class="sr-only" id="languageName">Español</span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil" data-i18n-aria="aria.mainNav">
+  <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+  <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+  <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+  <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+  <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+</nav>
+
+<main id="top" class="layout--docs">
+<div class="docs docs--with-rails">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-panel"></use></svg>
+    </button>
+    <aside class="docs__sidebar" id="docsSidebar" aria-label="Índice de esta documentación" data-i18n-aria="aria.sidebar">
+    <nav class="side-nav">
+      <div class="side-nav__head">
+        <span class="side-nav__eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+        <a class="side-nav__project" href="/Docs/hellbot/">
+          <span class="side-nav__project-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg></span>
+          <span class="side-nav__project-name" data-i18n="proj.hellbot.name">hellbot</span>
+        </a>
+      </div>
+      <p class="side-nav__group" data-i18n="docs.sidebarTitle">En esta documentación</p>
+      <ol class="side-nav__list">
+      <li><a class="side-nav__link" href="/Docs/hellbot/" data-i18n="page.hellbot.index"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-compass"></use></svg><span>Visión general</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/rules/" data-i18n="page.hellbot.rules"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-scroll"></use></svg><span>Reglas del evento</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/edge-cases/" data-i18n="page.hellbot.edge-cases"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert"></use></svg><span>Casos límite</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/install/" data-i18n="page.hellbot.install"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-download"></use></svg><span>Instalación y despliegue</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/commands/" data-i18n="page.hellbot.commands"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-terminal"></use></svg><span>Comandos</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/dashboard/" data-i18n="page.hellbot.dashboard"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-monitor"></use></svg><span>Dashboard en vivo</span></a></li>
+      <li><a class="side-nav__link active" href="/Docs/hellbot/architecture/" data-i18n="page.hellbot.architecture"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-boxes"></use></svg><span>Arquitectura</span></a></li>
+      </ol>
+      <div class="side-nav__foot">
+        <a class="side-nav__all" href="/Docs/projects/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.allProjects">Todos los proyectos</span></a>
+        <div class="side-nav__switch">
+          <span class="side-nav__switch-label" data-i18n="docs.otherProjects">Otros proyectos</span>
+          <ul class="side-nav__switch-list">
+        <li><a class="side-nav__chip" href="/Docs/wave/" title="Wave"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg><span>Wave</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/jaigent/" title="jAIgent"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg><span>jAIgent</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/rngdle-infinite/" title="RNGdle Infinite"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-dice"></use></svg><span>RNGdle Infinite</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/daily-diary/" title="Diario"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-notebook"></use></svg><span>Diario</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/void/" title="VOID"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg><span>VOID</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/website/" title="jaime-gaming.github.io"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg><span>jaime-gaming.github.io</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </aside>
+    <div class="docs__main">
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="/Docs/">Docs</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="/Docs/hellbot/" data-i18n="proj.hellbot.name">hellbot</a>
+      <span class="breadcrumb__sep">/</span>
+      <span class="breadcrumb__current" data-i18n="page.hellbot.architecture">Arquitectura</span>
+    </nav>
+    <header class="doc-head reveal">
+      <p class="doc-head__kicker"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg><span data-i18n="proj.hellbot.name">hellbot</span></p>
+      <h1 class="doc-head__title" data-i18n="page.hellbot.architecture">Arquitectura</h1>
+      <p class="doc-head__desc" data-content-key="desc">Capas, invariantes, modelo de datos y pruebas de hellbot: por qué un evento de 160 horas no se puede perder.</p>
+      <div class="doc-head__meta">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-calendar"></use></svg><span data-i18n="docs.updated">Última revisión</span> <time datetime="2026-10-18" data-i18n-date>18 de octubre de 2026</time></span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-clock"></use></svg><span data-content-key="readtime">14 min de lectura</span></span>
+        <a class="doc-head__edit" href="https://github.com/jaime-gaming/hellbot/blob/main/content/docs/hellbot/architecture.md" data-content-key="editHref" data-content-attr="href" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span data-i18n="docs.editOnGithub">Editar esta página en GitHub</span></a>
+      </div>
+    </header>
+    <article class="doc-body reveal" lang="es" data-content-key="body" data-content-language>
+<p>Si vas a cambiar <strong>comportamiento</strong>, empieza aquí. Si vas a cambiar <strong>texto</strong>, solo necesitas <code>Announcements.py</code>.</p>
+<h2 id="capas">Capas</h2>
+<pre data-lang="text"><code class="language-text">                     Announcements.py        ← todo el texto, recompensas y colores
+                            │
+                     hell/texts.py           ← lo carga, lo recarga en caliente, nunca falla por él
+                            │
+  ┌─────────────────────────┴───────────────────────────────────────────┐
+  │  NÚCLEO PURO — sin imports de Discord, testeable de forma unitaria   │
+  │                                                                      │
+  │  timeline.py    reloj global del evento         0 → 160h             │
+  │  tracking.py    relojes de sesión por usuario   0 → Xh cada uno      │
+  │  grace.py       ventana de gracia del canal     máquina de 15s       │
+  │  milestones.py  tabla de hitos y consultas                           │
+  │  leaderboard.py clasificación, empates, podio                        │
+  │  reports.py     fichas de estadísticas finales                       │
+  │  alivecheck.py  programación y resolución del pase de lista          │
+  │  engine.py      la máquina de estados que une todo lo anterior       │
+  │  storage.py     persistencia SQLite de todo ello                     │
+  └─────────────────────────┬───────────────────────────────────────────┘
+                            │  entra Observation · sale DomainEvent
+  ┌─────────────────────────┴───────────────────────────────────────────┐
+  │  BORDE DE DISCORD                                                    │
+  │                                                                      │
+  │  monitor.py     sondeo del canal a 1s, ediciones de progreso         │
+  │  embeds.py      cómo se ve cada mensaje                              │
+  │  announcer.py   cómo se entrega cada mensaje                         │
+  │  aliveio.py     pings, expulsiones y recuperación de respuestas      │
+  │  dm.py          entrega de las fichas de estadísticas                │
+  │  logsink.py     flujo de log en vivo a los MD del operador           │
+  │  cog.py + ui.py comandos de barra, confirmaciones, permisos          │
+  │  health.py      preflight de arranque (IDs, permisos, intents)       │
+  │  bot.py         cableado y ciclo de vida                             │
+  └──────────────────────────────────────────────────────────────────────┘</code></pre>
+<p><code>launcher/</code> es un front-end de escritorio separado (<code>envfile.py</code> para la E/S de configuración, <code>runtime.py</code> para el hilo supervisor, <code>gui.py</code> para la ventana Tk). <strong>Importa el bot; el bot nunca lo importa a él.</strong></p>
+<h2 id="mapa-de-modulos">Mapa de módulos</h2>
+<p>El paquete <code>hell/</code> son <strong>41 módulos</strong>. Están agrupados por lo que hacen, con la responsabilidad real de cada uno tal como la declara su propio docstring.</p>
+<div class="callout callout--note">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb"></use></svg>
+  <p class="callout__title">Nota</p>
+  <div class="callout__body">El <code>bot.py</code> de la raíz del repositorio son cinco líneas: importa <code>main</code> de <code>hell.bot</code> y lo ejecuta. Existe por comodidad, para poder escribir <code>python bot.py</code>; no contiene lógica.</div>
+</div>
+<h3 id="entrada-configuracion-y-arranque">Entrada, configuración y arranque</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Módulo</th>
+<th>Responsabilidad</th>
+</tr>
+</thead><tbody><tr>
+<td><code>hell/bot.py</code></td>
+<td>El punto de entrada real del bot</td>
+</tr>
+<tr>
+<td><code>hell/config.py</code></td>
+<td>Carga de la configuración, basada en entorno y <code>.env</code></td>
+</tr>
+<tr>
+<td><code>hell/paths.py</code></td>
+<td>Dónde vive cada cosa en disco</td>
+</tr>
+<tr>
+<td><code>hell/health.py</code></td>
+<td>Comprobaciones previas al arranque</td>
+</tr>
+<tr>
+<td><code>hell/single_instance.py</code></td>
+<td>Rechaza un segundo proceso vivo contra la misma base de datos</td>
+</tr>
+<tr>
+<td><code>hell/logging_setup.py</code></td>
+<td>Registro rotativo a archivo y a consola, seguro cuando no hay consola</td>
+</tr>
+</tbody></table></div>
+<h3 id="motor-tiempo-y-progresion">Motor, tiempo y progresión</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Módulo</th>
+<th>Responsabilidad</th>
+</tr>
+</thead><tbody><tr>
+<td><code>hell/engine.py</code></td>
+<td>La máquina de estados: tiempo por usuario y detección de hitos</td>
+</tr>
+<tr>
+<td><code>hell/timeline.py</code></td>
+<td><strong>Línea 1</strong>, la global del evento: 0 → 160 h</td>
+</tr>
+<tr>
+<td><code>hell/tracking.py</code></td>
+<td><strong>Línea 2</strong>, el tiempo de sesión por usuario: 0 → X h</td>
+</tr>
+<tr>
+<td><code>hell/timeutil.py</code></td>
+<td>Utilidades de tiempo</td>
+</tr>
+<tr>
+<td><code>hell/milestones.py</code></td>
+<td>La tabla de hitos. Solo la estructura: los textos viven en <code>Announcements.py</code></td>
+</tr>
+<tr>
+<td><code>hell/difficulty.py</code></td>
+<td>Dificultades: el reto se endurece en cada hito</td>
+</tr>
+<tr>
+<td><code>hell/grace.py</code></td>
+<td>El período de gracia del canal vacío: decide cuándo una partida está realmente muerta</td>
+</tr>
+<tr>
+<td><code>hell/continuation.py</code></td>
+<td>La votación «¿seguir en Hell?» al llegar a las 160 h</td>
+</tr>
+<tr>
+<td><code>hell/finale.py</code></td>
+<td>El subsistema del Final de 160 horas</td>
+</tr>
+<tr>
+<td><code>hell/tasks.py</code></td>
+<td>Helper de trabajo en segundo plano</td>
+</tr>
+</tbody></table></div>
+<p>Las dos líneas de tiempo están separadas a propósito: la del evento es absoluta y compartida, y la de cada usuario solo cuenta lo que se ha observado de verdad.</p>
+<h3 id="observacion-del-canal-de-voz">Observación del canal de voz</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Módulo</th>
+<th>Responsabilidad</th>
+</tr>
+</thead><tbody><tr>
+<td><code>hell/monitor.py</code></td>
+<td>La monitorización del canal de voz</td>
+</tr>
+<tr>
+<td><code>hell/alivecheck.py</code></td>
+<td>Los pases de lista y las comprobaciones de muerto</td>
+</tr>
+<tr>
+<td><code>hell/aliveio.py</code></td>
+<td>La implementación para Discord de la interfaz de pase de lista</td>
+</tr>
+</tbody></table></div>
+<h3 id="persistencia">Persistencia</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Módulo</th>
+<th>Responsabilidad</th>
+</tr>
+</thead><tbody><tr>
+<td><code>hell/storage.py</code></td>
+<td>SQLite en un único archivo, a prueba de fallos</td>
+</tr>
+<tr>
+<td><code>hell/models.py</code></td>
+<td>Modelos de datos planos, compartidos y sin imports de Discord</td>
+</tr>
+<tr>
+<td><code>hell/dbdump.py</code></td>
+<td>Exportación completa de la base de datos para el operador: el archivo para «repasarlo luego»</td>
+</tr>
+</tbody></table></div>
+<h3 id="comandos-mensajes-y-apariencia">Comandos, mensajes y apariencia</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Módulo</th>
+<th>Responsabilidad</th>
+</tr>
+</thead><tbody><tr>
+<td><code>hell/cog.py</code></td>
+<td>Los comandos: los slash <code>/hell</code> y los de prefijo <code>!</code> por MD y por chat</td>
+</tr>
+<tr>
+<td><code>hell/embeds.py</code></td>
+<td>El aspecto de cada mensaje</td>
+</tr>
+<tr>
+<td><code>hell/announcer.py</code></td>
+<td>La entrega: resolución del canal, envío y el mensaje de progreso en vivo</td>
+</tr>
+<tr>
+<td><code>hell/ui.py</code></td>
+<td>Widgets de interacción y comprobación de permisos para <code>/hell</code></td>
+</tr>
+<tr>
+<td><code>hell/assets.py</code></td>
+<td>Resolución de las imágenes de los embeds</td>
+</tr>
+<tr>
+<td><code>hell/texts.py</code></td>
+<td>El cargador de <code>Announcements.py</code></td>
+</tr>
+</tbody></table></div>
+<p><code>hell/cog.py</code> es con diferencia el módulo más grande del paquete (115 KB): concentra el manejo de comandos, que es donde más superficie de Discord se toca.</p>
+<h3 id="informes-clasificacion-y-comunicacion">Informes, clasificación y comunicación</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Módulo</th>
+<th>Responsabilidad</th>
+</tr>
+</thead><tbody><tr>
+<td><code>hell/reports.py</code></td>
+<td>Los informes por usuario al terminar el evento, las «tarjetas de estadísticas»</td>
+</tr>
+<tr>
+<td><code>hell/dm.py</code></td>
+<td>La entrega de esas tarjetas por mensaje directo</td>
+</tr>
+<tr>
+<td><code>hell/broadcast.py</code></td>
+<td>La difusión del anfitrión por MD: un mensaje markdown a cada concursante</td>
+</tr>
+<tr>
+<td><code>hell/leaderboard.py</code></td>
+<td>La clasificación: lógica pura, sin imports de Discord</td>
+</tr>
+<tr>
+<td><code>hell/gamble.py</code></td>
+<td>Las apuestas: parsearlas, persistir los límites y decidir si un tiro está permitido</td>
+</tr>
+</tbody></table></div>
+<h3 id="seguridad-y-robustez">Seguridad y robustez</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Módulo</th>
+<th>Responsabilidad</th>
+</tr>
+</thead><tbody><tr>
+<td><code>hell/security.py</code></td>
+<td>Sospecha y anomalías: antitrampas y autocuración del evento</td>
+</tr>
+<tr>
+<td><code>hell/errorcodes.py</code></td>
+<td>Códigos de error conocidos y documentados</td>
+</tr>
+<tr>
+<td><code>hell/neterrors.py</code></td>
+<td>Manejo uniforme de los fallos transitorios de «Discord no alcanzable»</td>
+</tr>
+</tbody></table></div>
+<h3 id="estado-publico">Estado público</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Módulo</th>
+<th>Responsabilidad</th>
+</tr>
+</thead><tbody><tr>
+<td><code>hell/web.py</code></td>
+<td>Un servidor aiohttp ligero que sirve los datos del evento en vivo por WebSocket</td>
+</tr>
+<tr>
+<td><code>hell/status_writer.py</code></td>
+<td>Escribe <code>docs/status.json</code> a partir del estado interno del bot</td>
+</tr>
+<tr>
+<td><code>hell/pages_sync.py</code></td>
+<td>Sube <code>docs/</code> a GitHub para que Pages esté al día</td>
+</tr>
+</tbody></table></div>
+<p>Los tres forman la cadena del panel público: el estado interno se escribe en <code>status.json</code>, se sirve en vivo por WebSocket y se publica en Pages.</p>
+<h3 id="los-textos">Los textos</h3>
+<p><code>Announcements.py</code>, en la raíz del repositorio y con 40 KB, es <strong>el único archivo que contiene todos los mensajes</strong> del bot. <code>hell/texts.py</code> se limita a cargarlo, y <code>hell/milestones.py</code> aporta la estructura sin los textos.</p>
+<div class="callout callout--important">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert"></use></svg>
+  <p class="callout__title">Importante</p>
+  <div class="callout__body">Por eso <code>Announcements.py</code> es obligatorio en cualquier despliegue: el bot lee todo su texto de ahí y <strong>se niega a arrancar sin él</strong>. El <code>Dockerfile</code> lo copia de forma explícita por la misma razón.</div>
+</div>
+<h3 id="salud-del-contenedor">Salud del contenedor</h3>
+<p><code>tools/healthcheck.py</code> responde a una pregunta concreta: <strong>¿está el bot vigilando de verdad el canal de voz?</strong> Sale con 0 si está sano y con 1 si no, que es lo que hace que Docker o systemd lo reinicien.</p>
+<p>Lo interesante es qué mira: <strong>el archivo de estado, no el proceso</strong>. Un proceso vivo cuyo bucle de monitorización se ha quedado atascado es peor que uno que ha fallado, porque el evento sigue corriendo mientras nadie observa el canal. Así que si hay un evento en marcha y la última observación es más antigua que el retraso permitido (<code>--max-lag</code>), el bot se declara no sano.</p>
+<h2 id="los-once-invariantes">Los once invariantes</h2>
+<ol>
+<li><strong>El tiempo es absoluto.</strong> Todo cálculo usa marcas POSIX; nada depende del tiempo de vida del proceso, así que un reinicio no puede desplazar ni resetear el cronómetro.</li>
+<li><strong>El reloj nunca pasa de 160 h.</strong> <code>EventTimeline.clamp()</code> se aplica antes de usar o guardar cualquier valor de tiempo transcurrido.</li>
+<li><strong>Un estado terminal es terminal salvo reanudación explícita.</strong> Una vez en FAILED, COMPLETED o CANCELLED, los ticks son inertes y la clasificación está congelada; solo <code>/hell reset</code> lo limpia, o <code>/hell resume</code> con MFA del operador para continuar una partida fallida.</li>
+<li><strong>Un hito se dispara exactamente una vez.</strong> <code>INSERT OR IGNORE</code> decide el ganador; <code>announced</code> solo se activa después de que Discord acepte el mensaje, así que un fallo entre ambos pasos lo vuelve a publicar en vez de perderlo.</li>
+<li><strong>Solo se acredita tiempo observado</strong>, con tope por tick (<code>MAX_TICK_CREDIT_SECONDS</code>), para que una caída nunca se pague en silencio. Con una excepción deliberada: una caída más corta que <code>DOWNTIME_CREDIT_SECONDS</code> se devuelve a los usuarios vistos en el canal <strong>antes y después</strong>, porque demostrablemente nunca se fueron.</li>
+<li><strong>Los bots y los <code>@clanker</code> no existen</strong> para el núcleo: el monitor los filtra antes de construir una <code>Observation</code>.</li>
+<li><strong>Un canal vacío abre una ventana de gracia, no un fallo inmediato</strong>, y el fallo se marca con la hora del momento en que el canal se vació, nunca más tarde. Si una comprobación de vida deja el canal vacío, se usa una gracia de recuperación de <strong>2 minutos</strong> en vez de la ventana normal de 15 segundos.</li>
+<li><strong>Nada en la ruta de mensajes puede romper el evento.</strong> Texto malo, placeholder ausente, envío fallido, MD cerrado: todo se registra, nada es fatal.</li>
+<li><strong>El trabajo en segundo plano nunca bloquea el bucle de un segundo.</strong> La E/S del pase de lista y la entrega de MD pasan por <code>hell/tasks.spawn()</code>, que además registra los fallos.</li>
+<li><strong>Orden seguro ante fallos: la base de datos nunca queda contradiciendo a Discord.</strong> Cada operación con estado escribe su fila <strong>antes</strong> de la llamada a la API de Discord que depende de ella, y limpia (o marca <code>pending</code>) si falla.</li>
+<li><strong>La pausa es un desfase, no una parada.</strong> <code>/hell pause</code> no cambia el estado del evento: registra <code>paused_ts</code> y acumula <code>paused_seconds</code> en la fila <code>event</code>. Cada lectura de hora se convierte con <code>_effective_now()</code> (<code>now − paused_seconds − pausa en curso</code>).</li>
+</ol>
+<h3 id="el-invariante-10-en-detalle">El invariante 10 en detalle</h3>
+<p>Es el que sostiene todo lo demás:</p>
+<ul>
+<li>La <strong>expiración de la gracia</strong> ejecuta <code>_terminate(FAILED)</code> —un único <code>save_state</code> que fija <code>status</code> y limpia <code>grace_started_ts</code>— antes de cualquier limpieza en memoria, así que un fallo nunca puede dejar el evento en RUNNING sin ventana.</li>
+<li>Una <strong>comprobación de vida</strong> se persiste en <code>alive_check</code> <strong>antes</strong> de llamar a <code>send_check</code>. Un envío fallido borra la fila tentativa (nunca «la BD dice activa, Discord dice que no existe») y un envío correcto va seguido de una segunda escritura con el <code>channel_id</code> y el <code>message_id</code> reales. Una <em>excepción</em> de <code>send_check</code> (error de red) limpia exactamente igual que un resultado <code>None</code>, así que ninguna comprobación fantasma puede expulsar después a gente que nunca vio un pase de lista.</li>
+<li>La <strong>resolución</strong> escribe <code>alive_check_history</code> y limpia la fila pendiente <strong>antes</strong> de expulsar a nadie, así que un fallo a mitad de la expulsión deja un historial resoluble y ninguna comprobación pendiente obsoleta.</li>
+<li>Cada <strong>MD de ficha</strong> se registra en <code>dm_log</code> como <code>pending</code> <strong>antes</strong> de la llamada y se actualiza a <code>sent</code>, <code>blocked</code> o <code>failed</code> después, así que un fallo a mitad de la entrega reintenta exactamente a los destinatarios correctos y nunca vuelve a escribir a nadie marcado como <code>sent</code>.</li>
+</ul>
+<h3 id="el-invariante-11-en-detalle">El invariante 11 en detalle</h3>
+<p>Mientras está pausado, las dos cronologías se detienen, los hitos, la gracia y el completado quedan inertes, y tras <code>/hell resume</code> los relojes continúan exactamente donde se pararon. Una ventana de gracia abierta se desplaza hacia delante por la pausa al reanudar, así que su cuenta atrás sigue con el tiempo que le quedaba. Un reinicio estando pausado vuelve pausado, y el healthcheck del contenedor trata un evento pausado como <strong>sano</strong>: un <code>last_tick_ts</code> congelado <em>no</em> es un monitor atascado.</p>
+<h2 id="modelo-de-datos-sqlite-esquema-v3">Modelo de datos (SQLite, esquema v3)</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Tabla</th>
+<th>Qué guarda</th>
+</tr>
+</thead><tbody><tr>
+<td><code>event</code></td>
+<td>Una fila: estado, marcas de inicio y fin, identificadores de canal y mensaje, ventana de gracia, <code>last_valid_observed_ts</code> y estado de pausa (<code>paused_ts</code>, <code>paused_seconds</code>, <code>pause_reason</code>)</td>
+</tr>
+<tr>
+<td><code>user_time</code></td>
+<td>Segundos acumulados por usuario (cronología 2)</td>
+</tr>
+<tr>
+<td><code>presence</code></td>
+<td>Quién está en el canal ahora mismo (se escribe solo cuando cambia)</td>
+</tr>
+<tr>
+<td><code>milestones</code> / <code>milestone_members</code></td>
+<td>Reclamaciones, marcas e instantáneas de elegibles</td>
+</tr>
+<tr>
+<td><code>final_leaderboard</code></td>
+<td>Clasificaciones congeladas</td>
+</tr>
+<tr>
+<td><code>alive_check</code> / <code>alive_check_history</code></td>
+<td>Pase de lista pendiente y resultados pasados</td>
+</tr>
+<tr>
+<td><code>dm_log</code></td>
+<td>Quién recibió ya su ficha (entrega reanudable)</td>
+</tr>
+<tr>
+<td><code>meta</code></td>
+<td>Versión del esquema, hora del próximo pase de lista y segundos no observados</td>
+</tr>
+</tbody></table></div>
+<p>Las migraciones son <strong>aditivas</strong> y se ejecutan al arrancar (<code>Store._migrate</code>).</p>
+<h3 id="campos-de-reconstruccion-tras-un-fallo">Campos de reconstrucción tras un fallo</h3>
+<p>Estos campos de la fila <code>event</code> bastan para reconstruir el estado completo del evento tras cualquier caída; todo lo demás es derivado:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Campo</th>
+<th>Guarda</th>
+</tr>
+</thead><tbody><tr>
+<td><code>start_ts</code></td>
+<td>Cuándo empezó el evento</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>IDLE, RUNNING, FAILED, COMPLETED o CANCELLED</td>
+</tr>
+<tr>
+<td><code>last_tick_ts</code></td>
+<td>Última observación fiable del canal (cualquier población)</td>
+</tr>
+<tr>
+<td><code>last_valid_observed_ts</code></td>
+<td>Última observación con al menos un humano válido</td>
+</tr>
+<tr>
+<td><code>grace_started_ts</code></td>
+<td>Cuándo empezó la ventana de gracia</td>
+</tr>
+<tr>
+<td><code>paused_ts</code> / <code>paused_seconds</code></td>
+<td>Si el evento está congelado y cuánto tiempo se ha acumulado como pausado</td>
+</tr>
+<tr>
+<td><code>end_ts</code></td>
+<td>Cuándo terminó, guardado como tiempo de evento ajustado por pausas</td>
+</tr>
+<tr>
+<td>tabla <code>milestones</code></td>
+<td>Qué hitos se alcanzaron y cuándo</td>
+</tr>
+<tr>
+<td>tabla <code>user_time</code></td>
+<td>Segundos acumulados por usuario</td>
+</tr>
+</tbody></table></div>
+<p>Con eso más el reloj de pared, <code>resume_after_restart()</code> puede seguir vigilando, reanudar una ventana de gracia, congelar la clasificación o reenviar anuncios perdidos <strong>sin adivinar nada</strong>. Los mismos invariantes los ejercitan las pruebas de inyección de fallos en <code>tests/test_resilience.py</code>.</p>
+<h2 id="casos-limite-cubiertos-por-pruebas">Casos límite cubiertos por pruebas</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Caso</th>
+<th>Comportamiento</th>
+</tr>
+</thead><tbody><tr>
+<td>Alguien entra exactamente en un hito</td>
+<td>Incluido en la instantánea de elegibles de ese hito</td>
+</tr>
+<tr>
+<td>Alguien sale exactamente en un hito</td>
+<td>Excluido de la instantánea</td>
+</tr>
+<tr>
+<td>Entra un bot en el canal</td>
+<td>Ignorado en todas partes; no puede mantener vivo el evento</td>
+</tr>
+<tr>
+<td>Entra un <code>@clanker</code></td>
+<td>Desconectado de inmediato, sin tiempo de clasificación, no mantiene vivo el evento</td>
+</tr>
+<tr>
+<td>Se va el último participante válido</td>
+<td>Ventana de gracia de 15 s y aviso sin pings; FAILED solo si nadie vuelve</td>
+</tr>
+<tr>
+<td>Alguien vuelve con 1 s de margen</td>
+<td>La ventana se cierra, aviso «SAVED», la partida sigue intacta</td>
+</tr>
+<tr>
+<td>El canal se vacía repetidamente</td>
+<td>Cada periodo vacío tiene su propia ventana; el tiempo sobrevivido nunca se infla</td>
+</tr>
+<tr>
+<td>Un hito cae con el canal vacío</td>
+<td>Se retiene y se concede a quien esté presente cuando el canal se recupere (o se pierde con la partida)</td>
+</tr>
+<tr>
+<td>Reinicio a mitad de la ventana</td>
+<td>La ventana se reanuda desde el <code>grace_started_ts</code> persistido</td>
+</tr>
+<tr>
+<td>El evento termina con MD sin enviar</td>
+<td><code>dm_log</code> reanuda la entrega en el siguiente arranque, sin duplicados</td>
+</tr>
+<tr>
+<td>Un concursante tiene los MD cerrados</td>
+<td>Se registra como bloqueado, se informa en el resumen y <code>/hell mystats</code> sigue funcionando</td>
+</tr>
+<tr>
+<td>API de Discord lenta durante un pase de lista</td>
+<td>Expulsiones y anuncios corren fuera del bucle de 1 s, así que la vigilancia del canal nunca se atasca</td>
+</tr>
+<tr>
+<td>Un hito editado con forma inválida</td>
+<td>Se rechaza con un motivo legible; la tabla anterior sigue en vivo</td>
+</tr>
+<tr>
+<td>Duración del evento editada en marcha</td>
+<td>Se rechaza y se registra: el reloj en marcha nunca se remodela</td>
+</tr>
+<tr>
+<td>Sin internet, token malo o intent ausente</td>
+<td>Error limpio de una línea, código de salida propio y traceback completo en <code>logs/</code></td>
+</tr>
+<tr>
+<td>Entradas y salidas rápidas</td>
+<td>El muestreo de 1 segundo mantiene correctos los totales por usuario</td>
+</tr>
+<tr>
+<td>Reinicio a mitad del evento</td>
+<td>Estado recargado desde SQLite; transcurrido = <code>now - start_ts</code>; nada se resetea</td>
+</tr>
+<tr>
+<td>Reinicio estando pausado</td>
+<td>El evento vuelve pausado: los dos relojes siguen congelados hasta <code>/hell resume</code></td>
+</tr>
+<tr>
+<td>Reinicio alrededor de un hito</td>
+<td>La reclamación atómica en BD evita duplicados; los anuncios no enviados se republican al arrancar</td>
+</tr>
+<tr>
+<td>Las 160 h llegan durante una actualización de 10 s</td>
+<td>El tick de 1 s lo ajusta todo a <code>start_ts + 160h</code>; el completado gana a un canal vacío en el límite</td>
+</tr>
+<tr>
+<td>Tiempos totales idénticos</td>
+<td>Puesto compartido y orden de visualización determinista</td>
+</tr>
+<tr>
+<td>250 personas en el canal en un hito</td>
+<td>Mensaje repartido entre campos del embed; nunca supera los límites de Discord</td>
+</tr>
+<tr>
+<td>Bot offline brevemente</td>
+<td>El cronómetro sigue y quien estaba antes <strong>y</strong> después recupera ese tiempo</td>
+</tr>
+<tr>
+<td>Bot offline mucho tiempo</td>
+<td>El cronómetro sigue, pero la ventana no observada <strong>no</strong> se acredita a nadie y se informa en el mensaje de progreso</td>
+</tr>
+<tr>
+<td>Pase de lista + reinicio</td>
+<td>El estado se persiste; las respuestas enviadas offline se recuperan y una comprobación expirada se cancela en vez de expulsar</td>
+</tr>
+<tr>
+<td>Todos ignoran el pase de lista</td>
+<td>Todos son desconectados, el canal se vacía y arranca una gracia de recuperación de 2 minutos</td>
+</tr>
+<tr>
+<td>Evento pausado durante un fallo</td>
+<td>Los dos relojes se congelan: sin hitos, sin pases de lista, sin expiración de gracia y sin fallo</td>
+</tr>
+<tr>
+<td>La pausa cruza la marca de 160 h</td>
+<td>El completado espera al tiempo <em>efectivo</em>: una partida pausada nunca puede completarse antes</td>
+</tr>
+<tr>
+<td>Alguien entra a mitad de una comprobación</td>
+<td>Sin ping, sin obligación de responder y nunca expulsado por ello</td>
+</tr>
+<tr>
+<td>Fallo de la API en un mensaje</td>
+<td>Se registra y se reintenta en el ciclo siguiente; el estado del evento intacto</td>
+</tr>
+</tbody></table></div>
+<p>Dos decisiones de política deliberadas que conviene conocer:</p>
+<ul>
+<li><strong>Una caída no hace fallar el evento</strong> (el bot no puede demostrar que el canal se vació mientras estaba ciego), pero nadie gana tiempo de clasificación por esa ventana y el hueco se muestra en la salida de progreso y estado.</li>
+<li>Si el canal está vacío <strong>en el mismo tick</strong> en que caería un hito, gana el fallo: no había nadie presente para reclamar la recompensa.</li>
+</ul>
+<h2 id="pruebas">Pruebas</h2>
+<p><code>tests/</code> replica las capas. Sin red, sin token de Discord y sin pantalla:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Archivo</th>
+<th>Cubre</th>
+</tr>
+</thead><tbody><tr>
+<td><code>test_engine</code>, <code>test_grace</code>, <code>test_properties</code></td>
+<td>La máquina de estados, la regla de gracia y ejecuciones de caos aleatorizadas que afirman los invariantes anteriores</td>
+</tr>
+<tr>
+<td><code>test_storage</code>, <code>test_reports</code>, <code>test_leaderboard_and_milestones</code></td>
+<td>Persistencia, fichas y clasificación</td>
+</tr>
+<tr>
+<td><code>test_alivecheck</code>, <code>test_health_and_aliveio</code></td>
+<td>Pases de lista de punta a punta y diagnóstico de preflight</td>
+</tr>
+<tr>
+<td><code>test_announcer</code>, <code>test_announcements_file</code></td>
+<td>Límites de embed y que <code>Announcements.py</code> de verdad gobierna cada mensaje</td>
+</tr>
+<tr>
+<td><code>test_integration</code>, <code>test_command_flows</code>, <code>test_bot</code>, <code>test_monitor</code></td>
+<td>El borde de Discord a través de dobles: monitor → motor → anunciador → canal, cada callback de comando y el enrutado de eventos</td>
+</tr>
+<tr>
+<td><code>test_gui</code>, <code>test_launcher</code>, <code>test_logging</code>, <code>test_logsink</code></td>
+<td>El lanzador de escritorio (sin ventana, vía <code>tests/faketk.py</code>) y el logging</td>
+</tr>
+<tr>
+<td><code>test_deployment</code>, <code>test_consistency</code></td>
+<td>Que el contenedor arranca de verdad desde los archivos que copia; configuración, comandos y documentación no pueden divergir</td>
+</tr>
+<tr>
+<td><code>test_resilience</code></td>
+<td>Las rutas de «Discord dijo que no»: canales prohibidos, límites de tasa, mensajes borrados, reinicios a mitad de un pase de lista, más <strong>inyección de fallos</strong> en cada frontera entre escritura en BD y llamada a la API</td>
+</tr>
+</tbody></table></div>
+<pre data-lang="bash"><code class="language-bash">pip install -r requirements-dev.txt
+
+./tools/check.sh          # compile + pyflakes + ruff + mypy + pruebas + simulaciones
+./tools/check.sh --fast   # lo mismo, sin las simulaciones
+python -m pytest          # solo pruebas: no hace falta conexión con Discord
+
+python tools/simulate.py              # imprime cada mensaje de una partida completa de 160 h, offline
+python tools/simulate.py --fail-at 40 # …de una partida que muere a las 40 horas</code></pre>
+<p><code>tools/simulate.py</code> conduce <strong>el motor real y los renderizadores de mensajes reales</strong> sin conexión: es la forma más rápida de revisar textos o verificar un cambio de regla de punta a punta. La configuración de las herramientas vive en <code>pyproject.toml</code>.</p>
+<p>Hay un workflow de GitHub Actions ya hecho (pruebas en Python 3.10–3.12, lint y las dos rutas de simulación) en <code>deploy/github-actions-ci.yml</code>: se copia a <code>.github/workflows/ci.yml</code> para activarlo.</p>
+<p><strong>Marca.</strong> <code>assets/hellbotlogo.png</code> es la obra maestra. Tras cambiarla, ejecuta <code>python tools/make_icon.py</code> para regenerar el icono de ventana, el logotipo de cabecera y el <code>.ico</code> mult tamaño de Windows que usa el ejecutable compilado.</p>
+
+    </article>
+    <nav class="pager reveal" aria-label="paginación">
+    <a class="pager__link" href="/Docs/hellbot/dashboard/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.prev">Anterior</span></span>
+      <span class="pager__title" data-i18n="page.hellbot.dashboard">Dashboard en vivo</span>
+    </a>
+    <span class="pager__spacer" aria-hidden="true"></span>
+    </nav>
+    <p class="source-note reveal" data-i18n="docs.sourceNote">Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.</p>
+    </div>
+    <aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
+    <p class="toc__title" data-i18n="docs.tocTitle">En esta página</p>
+    <ol class="toc__list">
+      <li><a href="#capas">Capas</a></li>
+      <li><a href="#mapa-de-modulos">Mapa de módulos</a></li>
+      <li><a class="toc__h3" href="#entrada-configuracion-y-arranque">Entrada, configuración y arranque</a></li>
+      <li><a class="toc__h3" href="#motor-tiempo-y-progresion">Motor, tiempo y progresión</a></li>
+      <li><a class="toc__h3" href="#observacion-del-canal-de-voz">Observación del canal de voz</a></li>
+      <li><a class="toc__h3" href="#persistencia">Persistencia</a></li>
+      <li><a class="toc__h3" href="#comandos-mensajes-y-apariencia">Comandos, mensajes y apariencia</a></li>
+      <li><a class="toc__h3" href="#informes-clasificacion-y-comunicacion">Informes, clasificación y comunicación</a></li>
+      <li><a class="toc__h3" href="#seguridad-y-robustez">Seguridad y robustez</a></li>
+      <li><a class="toc__h3" href="#estado-publico">Estado público</a></li>
+      <li><a class="toc__h3" href="#los-textos">Los textos</a></li>
+      <li><a class="toc__h3" href="#salud-del-contenedor">Salud del contenedor</a></li>
+      <li><a href="#los-once-invariantes">Los once invariantes</a></li>
+      <li><a class="toc__h3" href="#el-invariante-10-en-detalle">El invariante 10 en detalle</a></li>
+      <li><a class="toc__h3" href="#el-invariante-11-en-detalle">El invariante 11 en detalle</a></li>
+      <li><a href="#modelo-de-datos-sqlite-esquema-v3">Modelo de datos (SQLite, esquema v3)</a></li>
+      <li><a class="toc__h3" href="#campos-de-reconstruccion-tras-un-fallo">Campos de reconstrucción tras un fallo</a></li>
+      <li><a href="#casos-limite-cubiertos-por-pruebas">Casos límite cubiertos por pruebas</a></li>
+      <li><a href="#pruebas">Pruebas</a></li>
+    </ol>
+    <p class="toc__progress" aria-hidden="true"><span></span></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="https://jaime-gaming.github.io/" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-github"></use></svg></a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-youtube"></use></svg></a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-x"></use></svg></a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-discord"></use></svg></a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-mail"></use></svg></a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="/Docs/"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="/Docs/projects/"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="https://jaime-gaming.github.io/blog/"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="https://jaime-gaming.github.io/contact/"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="https://jaime-gaming.github.io/"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="/Docs/status/"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="https://jaime-gaming.github.io/terms/" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="https://jaime-gaming.github.io/privacy/" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-arrow"></use></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" hidden>
+  <div class="search-modal__backdrop" data-search-close></div>
+  <div class="search-modal__panel">
+    <h2 class="sr-only" id="searchModalTitle" data-i18n="search.dialogTitle">Buscar en la documentación</h2>
+    <div class="search-modal__head">
+      <span class="search-modal__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg></span>
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar en la documentación…" data-i18n-placeholder="search.placeholder" aria-describedby="searchModalHint" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-activedescendant="" />
+      <button class="search-modal__close" type="button" data-search-close aria-label="Cerrar búsqueda" data-i18n-aria="search.close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-close"></use></svg></button>
+    </div>
+    <div class="search-modal__hintrow">
+      <p class="search-modal__hint" id="searchModalHint" data-i18n="search.hint">Escribe para filtrar páginas y apartados</p>
+      <p class="search-modal__keys" id="searchKeys" aria-hidden="true">
+        <span class="keyhint"><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="search.kbdNavigate">navegar</span></span>
+        <span class="keyhint"><kbd>↵</kbd><span data-i18n="search.kbdOpen">abrir</span></span>
+        <span class="keyhint"><kbd>Esc</kbd><span data-i18n="search.kbdClose">cerrar</span></span>
+      </p>
+    </div>
+    <div class="search-modal__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" data-i18n-aria="search.resultsLabel"></div>
+  </div>
+</div>
+
+<script type="application/json" id="uiStrings">{"es":{"nav.home":"Inicio","nav.projects":"Proyectos","nav.search":"Buscar","nav.site":"Mi web","nav.blog":"Blog","nav.contact":"Contacto","nav.openMenu":"Abrir menú","nav.closeMenu":"Cerrar menú","aria.skipToContent":"Saltar al contenido","aria.homeLogo":"Jaime Gaming Docs — inicio","aria.mainNav":"Navegación principal","aria.backToTop":"Volver arriba","aria.langSwitch":"Español. Cambiar a inglés","aria.sidebar":"Índice de esta documentación","aria.toc":"En esta página","aria.openSidebar":"Abrir índice","aria.closeSidebar":"Cerrar índice","search.button":"Buscar","search.placeholder":"Buscar en la documentación…","search.hint":"Escribe para filtrar páginas y apartados","search.empty":"Sin resultados para","search.noQuery":"Prueba con «instalar», «comandos», «privacidad»…","search.results":"resultados","search.result":"resultado","search.close":"Cerrar búsqueda","search.scopeAll":"Toda la documentación","search.scopeProject":"Solo este proyecto","search.kbdNavigate":"navegar","search.kbdOpen":"abrir","search.kbdClose":"cerrar","search.dialogTitle":"Buscar en la documentación","search.resultsLabel":"Resultados de búsqueda","docs.eyebrow":"Documentación","docs.sidebarTitle":"En esta documentación","docs.tocTitle":"En esta página","docs.editOnGithub":"Editar esta página en GitHub","docs.sourceNote":"Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.","docs.updated":"Última revisión","docs.prev":"Anterior","docs.next":"Siguiente","docs.allProjects":"Todos los proyectos","docs.readTime":"min de lectura","docs.jumpTo":"Ir a","home.kicker":"DOCUMENTACIÓN","home.title":"Todos mis proyectos, \u003cspan class=\"hero__title-accent\">documentados\u003c/span>","home.subtitle":"Un solo sitio con la documentación de todo lo que construyo: reproductores, agentes, bots, juegos y webs. Guías de instalación, arquitectura, uso y referencia.","home.ctaPrimary":"Empezar a leer","home.ctaSecondary":"Ver todos los proyectos","home.stats.projects":"proyectos","home.stats.pages":"páginas","home.stats.languages":"idiomas","home.stats.updated":"actualizada","home.about.title":"Sobre esta documentación","home.about.sub":"Cómo está hecha y cómo se mantiene.","home.about.card.label":"CÓMO FUNCIONA","home.about.card.title":"Escrita a mano, generada con Node","home.about.card.text":"Cada página es un Markdown en content/docs/. El build las convierte en HTML estático con el mismo sistema, la misma paleta y las mismas animaciones que mi web principal.","home.about.card.stamp":"VER EL REPOSITORIO ↗","home.contribute.title":"¿Ves un error?","home.contribute.text":"Toda la documentación está en un repositorio público. Abre una issue o envía una pull request con la corrección.","home.contribute.issue":"Abrir una issue","home.contribute.pr":"Proponer un cambio","home.contribute.email":"Escribirme un correo","projects.title":"Proyectos","projects.sub":"Toda la documentación, proyecto por proyecto. Cada tarjeta enlaza a su guía completa.","projects.pages":"páginas","projects.openDocs":"Abrir documentación","projects.demo":"Probar","projects.code":"Código","projects.group.all":"Todos","callout.note":"Nota","callout.tip":"Consejo","callout.warning":"Aviso","callout.important":"Importante","callout.caution":"Precaución","code.copy":"Copiar","code.copied":"Copiado","footer.rights":"Todos los derechos reservados.","footer.mainSite":"Mi web","footer.tagline":"Juegos para navegador, aplicaciones web y vídeos.","footer.site":"Sitio","footer.siteAria":"Enlaces del sitio","footer.resources":"Recursos","footer.resourcesAria":"Recursos y enlaces externos","footer.status":"Estado del servicio","footer.email":"Correo","footer.terms":"Términos del servicio","footer.privacy":"Privacidad","footer.source":"Código fuente ↗","footer.legalAria":"Términos y privacidad","aria.socials":"Redes sociales","aria.footerLogo":"Jaime Gaming — inicio","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Correo electrónico","status.title":"Estado del servicio","status.sub":"Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.","status.note":"Datos del panel oficial de estado","status.open":"Abrir panel completo ↗","status.loading":"Consultando el estado…","status.unknown":"Estado no disponible","status.error":"No se pudo consultar el estado en directo. Puedes abrir el panel completo.","status.updated":"Actualizado el {date}","status.componentsAria":"Componentes del servicio","status.allOperational":"Todos los sistemas operativos","status.minorIssues":"Incidencias menores","status.majorIssues":"Incidencia grave","status.criticalIssues":"Incidencia crítica","status.maintenanceOverall":"Mantenimiento en curso","status.operational":"Operativo","status.degraded":"Rendimiento degradado","status.partial":"Interrupción parcial","status.major":"Interrupción grave","status.underMaintenance":"En mantenimiento","status.maintenanceTitle":"Mantenimiento programado","status.maintenanceBody":"Texto publicado en el panel de estado.","status.frameNotice":"El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.","status.loadFrame":"Cargar panel incrustado","status.frameTitle":"Panel de estado de Jaime Gaming","status.hint":"El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.","notFound.title":"Página no encontrada","notFound.sub":"Puede que el enlace esté roto o que esta guía se haya movido.","notFound.home":"Volver al inicio de la documentación","notFound.projects":"Ver todos los proyectos","home.guide.title":"Cómo están organizadas las guías","home.guide.sub":"Todas siguen la misma anatomía, para que sepas dónde buscar en cada proyecto.","home.guide.overview.num":"01","home.guide.overview.title":"Visión general","home.guide.overview.desc":"Qué es el proyecto, qué problema resuelve, en qué estado está y qué lo distingue. Es la puerta de entrada de cada guía.","home.guide.install.num":"02","home.guide.install.title":"Instalación","home.guide.install.desc":"Requisitos, comandos para ponerlo en marcha y la primera comprobación de que todo funciona.","home.guide.usage.num":"03","home.guide.usage.title":"Uso","home.guide.usage.desc":"El día a día: funciones, comandos, mecánicas o flujos de trabajo, con ejemplos concretos.","home.guide.deep.num":"04","home.guide.deep.title":"Cómo está hecho","home.guide.deep.desc":"Arquitectura, estructura de carpetas, decisiones técnicas y los límites conocidos del proyecto.","home.guide.reference.num":"05","home.guide.reference.title":"Referencia","home.guide.reference.desc":"Tablas de consulta: opciones, formatos de datos, modelos, plataformas o preguntas frecuentes.","home.about.text1":"Este sitio reúne en un mismo lugar la documentación de los siete proyectos que mantengo en GitHub. Cada guía está escrita a mano a partir del README y de los documentos del repositorio, y se revisa cuando el proyecto cambia.","home.about.text2":"Nada se genera automáticamente desde GitHub ni depende de servicios externos: el contenido vive en este repositorio como Markdown, se compila a HTML estático con Node y se publica en GitHub Pages. El buscador usa un índice que se crea en ese mismo build.","home.about.row.stack":"Generador","home.about.row.palette":"Paleta","home.about.row.fonts":"Tipografías","home.about.row.host":"Publicación","home.about.row.search":"Buscador","home.about.row.searchValue":"Índice estático, sin servicios externos","docs.otherProjects":"Otros proyectos","projects.empty":"No hay proyectos en esta categoría.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentación de todos los proyectos de Jaime Gaming: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID y su web personal.","meta.projects.title":"Proyectos — Docs de Jaime Gaming","meta.projects.description":"Índice de toda la documentación, agrupada por aplicaciones, juegos, bots y web.","proj.wave.name":"Wave","proj.wave.tagline":"Reproductor de música local-first para web, Android y Windows.","proj.wave.summary":"Un hogar para la música que ya tienes. Wave guarda tu colección en el dispositivo: sin cuenta, sin suscripción y sin subir audio a ningún servidor.","proj.wave.status":"0.1.0 · activa","page.wave.index":"Visión general","page.wave.install":"Instalación","page.wave.features":"Funciones y uso","page.wave.platforms":"Plataformas","page.wave.architecture":"Arquitectura","page.wave.privacy":"Privacidad y datos","page.wave.dev":"Desarrollo","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"Todos tus agentes de IA en un mismo sitio.","proj.jaigent.summary":"Un binario y diez proveedores. Los mismos tools en la terminal, en ChatGPT Web por MCP remoto, en Claude Desktop y en cualquier app que hable OpenAI. Con deshacer en cada escritura y tope de gasto.","proj.jaigent.status":"0.5.x · activa","page.jaigent.index":"Visión general","page.jaigent.install":"Instalación y claves","page.jaigent.cli":"Uso en la terminal","page.jaigent.models":"Modelos y proveedores","page.jaigent.mcp":"MCP y tu propia API","page.jaigent.extend":"Skills, plugins y horarios","page.jaigent.reference":"Referencia de tools","page.jaigent.security":"Seguridad","page.jaigent.dev":"Desarrollo","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.","proj.hellbot.summary":"Mantén al menos a una persona real en un canal de voz durante 160 horas seguidas. Si el canal se vacía y nadie vuelve en el periodo de gracia, la partida muere para siempre.","proj.hellbot.status":"producción · estable","page.hellbot.index":"Visión general","page.hellbot.rules":"Reglas del evento","page.hellbot.edge-cases":"Casos límite","page.hellbot.install":"Instalación y despliegue","page.hellbot.commands":"Comandos","page.hellbot.dashboard":"Dashboard en vivo","page.hellbot.architecture":"Arquitectura","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"Un número, infinitas posibilidades.","proj.rngdle-infinite.summary":"Tira un número entre 0 y 1.000.000 y descubre qué lo hace especial. Un incremental de navegador con EP, insignias, compañeros, skills, rebirth, prestige y rollback.","proj.rngdle-infinite.status":"jugable · activa","page.rngdle-infinite.index":"Visión general","page.rngdle-infinite.play":"Cómo se juega","page.rngdle-infinite.systems":"Sistemas y progresión","page.rngdle-infinite.save":"Partida y sincronización","page.rngdle-infinite.faq":"Preguntas frecuentes","page.rngdle-infinite.dev":"Desarrollo","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Tu espacio personal: un diario minimalista y 100 % local.","proj.daily-diary.summary":"Sin backend, sin cuentas, sin IA y sin APIs externas. Los resúmenes, estadísticas y tendencias se calculan en tu navegador con reglas y plantillas de texto.","proj.daily-diary.status":"completo · local","page.daily-diary.index":"Visión general","page.daily-diary.install":"Instalación y uso","page.daily-diary.areas":"Las cinco áreas","page.daily-diary.data":"Datos y privacidad","page.daily-diary.dev":"Estructura y desarrollo","proj.void.name":"VOID","proj.void.tagline":"Michael Burns desapareció el año pasado. ¿Quieres entrar?","proj.void.summary":"Un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece. Interfaz CRT de alto contraste, en español e inglés.","proj.void.status":"beta · en desarrollo","page.void.index":"Visión general","page.void.install":"Instalación y juego","page.void.world":"El mundo de VOID Corp","page.void.engine":"Las tripas del archivo","page.void.faq":"Avisos y preguntas","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"El sitio personal que da origen a esta documentación.","proj.website.summary":"Portfolio oscuro y bilingüe generado con Node: proyectos sincronizados desde GitHub, calendario de contribuciones, presencia de Discord y blog desde Markdown.","proj.website.status":"publicada · activa","page.website.index":"Visión general","page.website.build":"Build y preview","page.website.content":"Editar el contenido","page.website.i18n":"Los dos idiomas","page.website.architecture":"Arquitectura del sitio","group.apps.title":"Aplicaciones y herramientas","group.apps.sub":"Software que resuelve algo concreto: música, agentes y organización personal.","group.games.title":"Juegos","group.games.sub":"Del incremental de navegador al terror psicológico.","group.bots.title":"Bots y eventos","group.bots.sub":"Automatización en directo para comunidades.","group.web.title":"Web","group.web.sub":"Los sitios que publico, incluido el que estás leyendo."},"en":{"nav.home":"Home","nav.projects":"Projects","nav.search":"Search","nav.site":"My site","nav.blog":"Blog","nav.contact":"Contact","nav.openMenu":"Open menu","nav.closeMenu":"Close menu","aria.skipToContent":"Skip to content","aria.homeLogo":"Jaime Gaming Docs — home","aria.mainNav":"Main navigation","aria.backToTop":"Back to top","aria.langSwitch":"English. Switch to Spanish","aria.sidebar":"Index of this documentation","aria.toc":"On this page","aria.openSidebar":"Open index","aria.closeSidebar":"Close index","search.button":"Search","search.placeholder":"Search the docs…","search.hint":"Type to filter pages and sections","search.empty":"No results for","search.noQuery":"Try “install”, “commands”, “privacy”…","search.results":"results","search.result":"result","search.close":"Close search","search.scopeAll":"All documentation","search.scopeProject":"This project only","search.kbdNavigate":"navigate","search.kbdOpen":"open","search.kbdClose":"close","search.dialogTitle":"Search the documentation","search.resultsLabel":"Search results","docs.eyebrow":"Documentation","docs.sidebarTitle":"In this documentation","docs.tocTitle":"On this page","docs.editOnGithub":"Edit this page on GitHub","docs.sourceNote":"Documentation written by hand for this site, based on the repository's README and docs.","docs.updated":"Last reviewed","docs.prev":"Previous","docs.next":"Next","docs.allProjects":"All projects","docs.readTime":"min read","docs.jumpTo":"Go to","home.kicker":"DOCUMENTATION","home.title":"All my projects, \u003cspan class=\"hero__title-accent\">documented\u003c/span>","home.subtitle":"One single site with the documentation of everything I build: players, agents, bots, games and websites. Install guides, architecture, usage and reference.","home.ctaPrimary":"Start reading","home.ctaSecondary":"See all projects","home.stats.projects":"projects","home.stats.pages":"pages","home.stats.languages":"languages","home.stats.updated":"updated","home.about.title":"About these docs","home.about.sub":"How they are made and how they are kept up to date.","home.about.card.label":"HOW IT WORKS","home.about.card.title":"Written by hand, generated with Node","home.about.card.text":"Every page is a Markdown file in content/docs/. The build turns them into static HTML with the same system, the same palette and the same animations as my main website.","home.about.card.stamp":"SEE THE REPOSITORY ↗","home.contribute.title":"Found a mistake?","home.contribute.text":"All of this documentation lives in a public repository. Open an issue or send a pull request with the fix.","home.contribute.issue":"Open an issue","home.contribute.pr":"Propose a change","home.contribute.email":"Send me an email","projects.title":"Projects","projects.sub":"All the documentation, project by project. Each card links to its complete guide.","projects.pages":"pages","projects.openDocs":"Open documentation","projects.demo":"Try it","projects.code":"Code","projects.group.all":"All","callout.note":"Note","callout.tip":"Tip","callout.warning":"Warning","callout.important":"Important","callout.caution":"Caution","code.copy":"Copy","code.copied":"Copied","footer.rights":"All rights reserved.","footer.mainSite":"My site","footer.tagline":"Browser games, web applications and videos.","footer.site":"Site","footer.siteAria":"Site links","footer.resources":"Resources","footer.resourcesAria":"Resources and external links","footer.status":"Service status","footer.email":"Email","footer.terms":"Terms of Service","footer.privacy":"Privacy","footer.source":"Source code ↗","footer.legalAria":"Terms and privacy","aria.socials":"Social links","aria.footerLogo":"Jaime Gaming — home","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Email","status.title":"Service status","status.sub":"Live status of the website, documentation and projects, from the official incident.io panel.","status.note":"Data from the official status panel","status.open":"Open full status page ↗","status.loading":"Checking status…","status.unknown":"Status unavailable","status.error":"Couldn't fetch the live status. You can open the full status page.","status.updated":"Updated {date}","status.componentsAria":"Service components","status.allOperational":"All systems operational","status.minorIssues":"Minor issues","status.majorIssues":"Major incident","status.criticalIssues":"Critical incident","status.maintenanceOverall":"Maintenance in progress","status.operational":"Operational","status.degraded":"Degraded performance","status.partial":"Partial outage","status.major":"Major outage","status.underMaintenance":"Under maintenance","status.maintenanceTitle":"Scheduled maintenance","status.maintenanceBody":"Text published on the status page.","status.frameNotice":"The full panel belongs to incident.io and is only loaded if you ask for it. Once loaded, it may use its own cookies.","status.loadFrame":"Load embedded panel","status.frameTitle":"Jaime Gaming status page","status.hint":"The summary refreshes when you open this page. If the embedded panel doesn’t appear, open it with the button above.","notFound.title":"Page not found","notFound.sub":"The link may be broken or this guide may have moved.","notFound.home":"Back to the docs home","notFound.projects":"See all projects","home.guide.title":"How the guides are organised","home.guide.sub":"They all follow the same anatomy, so you know where to look in every project.","home.guide.overview.num":"01","home.guide.overview.title":"Overview","home.guide.overview.desc":"What the project is, which problem it solves, what state it is in and what sets it apart. It is the entry page of every guide.","home.guide.install.num":"02","home.guide.install.title":"Installation","home.guide.install.desc":"Requirements, the commands to get it running and the first check that everything works.","home.guide.usage.num":"03","home.guide.usage.title":"Usage","home.guide.usage.desc":"Day to day: features, commands, mechanics or workflows, with concrete examples.","home.guide.deep.num":"04","home.guide.deep.title":"How it is built","home.guide.deep.desc":"Architecture, folder structure, technical decisions and the project's known limits.","home.guide.reference.num":"05","home.guide.reference.title":"Reference","home.guide.reference.desc":"Lookup tables: options, data formats, models, platforms or frequently asked questions.","home.about.text1":"This site gathers, in one single place, the documentation of the seven projects I maintain on GitHub. Every guide is written by hand from the repository's README and docs, and reviewed when the project changes.","home.about.text2":"Nothing is generated automatically from GitHub and nothing depends on external services: the content lives in this repository as Markdown, it is compiled to static HTML with Node and published on GitHub Pages. Search uses an index created in that same build.","home.about.row.stack":"Generator","home.about.row.palette":"Palette","home.about.row.fonts":"Fonts","home.about.row.host":"Publishing","home.about.row.search":"Search","home.about.row.searchValue":"Static index, no external services","docs.otherProjects":"Other projects","projects.empty":"There are no projects in this category.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentation for all of Jaime Gaming's projects: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID and his personal website.","meta.projects.title":"Projects — Jaime Gaming Docs","meta.projects.description":"Index of all the documentation, grouped by apps, games, bots and web.","proj.wave.name":"Wave","proj.wave.tagline":"A local-first music player for web, Android and Windows.","proj.wave.summary":"A home for the music you already own. Wave keeps your collection on the device: no account, no subscription and no audio uploaded to any server.","proj.wave.status":"0.1.0 · active","page.wave.index":"Overview","page.wave.install":"Installation","page.wave.features":"Features & usage","page.wave.platforms":"Platforms","page.wave.architecture":"Architecture","page.wave.privacy":"Privacy & data","page.wave.dev":"Development","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"All your agents in one place.","proj.jaigent.summary":"One binary, ten providers. The same tools in the terminal, in ChatGPT Web over remote MCP, in Claude Desktop and in any app that speaks OpenAI. With undo on every write and a hard spend cap.","proj.jaigent.status":"0.5.x · active","page.jaigent.index":"Overview","page.jaigent.install":"Install & API keys","page.jaigent.cli":"Using the CLI","page.jaigent.models":"Models & providers","page.jaigent.mcp":"MCP & your own API","page.jaigent.extend":"Skills, plugins & schedules","page.jaigent.reference":"Tools reference","page.jaigent.security":"Security","page.jaigent.dev":"Development","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"The Discord bot that runs the Welcome to Hell endurance event.","proj.hellbot.summary":"Keep at least one real human in a single voice channel for 160 consecutive hours. If that channel empties and nobody returns within the grace period, the run is dead permanently.","proj.hellbot.status":"production · stable","page.hellbot.index":"Overview","page.hellbot.rules":"Event rules","page.hellbot.edge-cases":"Edge cases","page.hellbot.install":"Install & deploy","page.hellbot.commands":"Commands","page.hellbot.dashboard":"Live dashboard","page.hellbot.architecture":"Architecture","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"One number, infinite possibilities.","proj.rngdle-infinite.summary":"Roll a number from 0 to 1,000,000 and find out what makes it special. A browser incremental with EP, badges, companions, skills, rebirth, prestige and rollback.","proj.rngdle-infinite.status":"playable · active","page.rngdle-infinite.index":"Overview","page.rngdle-infinite.play":"How to play","page.rngdle-infinite.systems":"Systems & progression","page.rngdle-infinite.save":"Save & sync","page.rngdle-infinite.faq":"FAQ","page.rngdle-infinite.dev":"Development","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Your personal space: a minimalist, 100% local diary.","proj.daily-diary.summary":"No backend, no accounts, no AI and no external APIs. Summaries, statistics and trends are computed in your browser with rules and text templates.","proj.daily-diary.status":"complete · local","page.daily-diary.index":"Overview","page.daily-diary.install":"Install & run","page.daily-diary.areas":"The five areas","page.daily-diary.data":"Data & privacy","page.daily-diary.dev":"Structure & development","proj.void.name":"VOID","proj.void.tagline":"Michael Burns disappeared last year. Would you come in?","proj.void.summary":"A psychological game set in a mysterious corporation where everyone and everything disappears. High-contrast CRT interface, in Spanish and English.","proj.void.status":"beta · in development","page.void.index":"Overview","page.void.install":"Install & play","page.void.world":"The VOID Corp world","page.void.engine":"Inside the single file","page.void.faq":"Warnings & FAQ","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"The personal site this documentation is built from.","proj.website.summary":"Dark, bilingual portfolio generated with Node: projects synced from GitHub, contributions calendar, Discord presence and a Markdown blog.","proj.website.status":"published · active","page.website.index":"Overview","page.website.build":"Build & preview","page.website.content":"Editing content","page.website.i18n":"The two languages","page.website.architecture":"Site architecture","group.apps.title":"Apps & tools","group.apps.sub":"Software that solves something concrete: music, agents and personal organisation.","group.games.title":"Games","group.games.sub":"From the browser incremental to psychological horror.","group.bots.title":"Bots & events","group.bots.sub":"Live automation for communities.","group.web.title":"Web","group.web.sub":"The sites I publish, including the one you are reading."}}</script>
+<script type="application/json" id="pageTranslations">{"es":{"title":"Arquitectura · hellbot — Docs de Jaime Gaming","description":"Capas, invariantes, modelo de datos y pruebas de hellbot: por qué un evento de 160 horas no se puede perder.","fields":{"body":"\u003cp>Si vas a cambiar \u003cstrong>comportamiento\u003c/strong>, empieza aquí. Si vas a cambiar \u003cstrong>texto\u003c/strong>, solo necesitas \u003ccode>Announcements.py\u003c/code>.\u003c/p>\n\u003ch2 id=\"capas\">Capas\u003c/h2>\n\u003cpre data-lang=\"text\">\u003ccode class=\"language-text\">                     Announcements.py        ← todo el texto, recompensas y colores\n                            │\n                     hell/texts.py           ← lo carga, lo recarga en caliente, nunca falla por él\n                            │\n  ┌─────────────────────────┴───────────────────────────────────────────┐\n  │  NÚCLEO PURO — sin imports de Discord, testeable de forma unitaria   │\n  │                                                                      │\n  │  timeline.py    reloj global del evento         0 → 160h             │\n  │  tracking.py    relojes de sesión por usuario   0 → Xh cada uno      │\n  │  grace.py       ventana de gracia del canal     máquina de 15s       │\n  │  milestones.py  tabla de hitos y consultas                           │\n  │  leaderboard.py clasificación, empates, podio                        │\n  │  reports.py     fichas de estadísticas finales                       │\n  │  alivecheck.py  programación y resolución del pase de lista          │\n  │  engine.py      la máquina de estados que une todo lo anterior       │\n  │  storage.py     persistencia SQLite de todo ello                     │\n  └─────────────────────────┬───────────────────────────────────────────┘\n                            │  entra Observation · sale DomainEvent\n  ┌─────────────────────────┴───────────────────────────────────────────┐\n  │  BORDE DE DISCORD                                                    │\n  │                                                                      │\n  │  monitor.py     sondeo del canal a 1s, ediciones de progreso         │\n  │  embeds.py      cómo se ve cada mensaje                              │\n  │  announcer.py   cómo se entrega cada mensaje                         │\n  │  aliveio.py     pings, expulsiones y recuperación de respuestas      │\n  │  dm.py          entrega de las fichas de estadísticas                │\n  │  logsink.py     flujo de log en vivo a los MD del operador           │\n  │  cog.py + ui.py comandos de barra, confirmaciones, permisos          │\n  │  health.py      preflight de arranque (IDs, permisos, intents)       │\n  │  bot.py         cableado y ciclo de vida                             │\n  └──────────────────────────────────────────────────────────────────────┘\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>launcher/\u003c/code> es un front-end de escritorio separado (\u003ccode>envfile.py\u003c/code> para la E/S de configuración, \u003ccode>runtime.py\u003c/code> para el hilo supervisor, \u003ccode>gui.py\u003c/code> para la ventana Tk). \u003cstrong>Importa el bot; el bot nunca lo importa a él.\u003c/strong>\u003c/p>\n\u003ch2 id=\"mapa-de-modulos\">Mapa de módulos\u003c/h2>\n\u003cp>El paquete \u003ccode>hell/\u003c/code> son \u003cstrong>41 módulos\u003c/strong>. Están agrupados por lo que hacen, con la responsabilidad real de cada uno tal como la declara su propio docstring.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Nota\u003c/p>\n  \u003cdiv class=\"callout__body\">El \u003ccode>bot.py\u003c/code> de la raíz del repositorio son cinco líneas: importa \u003ccode>main\u003c/code> de \u003ccode>hell.bot\u003c/code> y lo ejecuta. Existe por comodidad, para poder escribir \u003ccode>python bot.py\u003c/code>; no contiene lógica.\u003c/div>\n\u003c/div>\n\u003ch3 id=\"entrada-configuracion-y-arranque\">Entrada, configuración y arranque\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Módulo\u003c/th>\n\u003cth>Responsabilidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/bot.py\u003c/code>\u003c/td>\n\u003ctd>El punto de entrada real del bot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/config.py\u003c/code>\u003c/td>\n\u003ctd>Carga de la configuración, basada en entorno y \u003ccode>.env\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/paths.py\u003c/code>\u003c/td>\n\u003ctd>Dónde vive cada cosa en disco\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/health.py\u003c/code>\u003c/td>\n\u003ctd>Comprobaciones previas al arranque\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/single_instance.py\u003c/code>\u003c/td>\n\u003ctd>Rechaza un segundo proceso vivo contra la misma base de datos\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/logging_setup.py\u003c/code>\u003c/td>\n\u003ctd>Registro rotativo a archivo y a consola, seguro cuando no hay consola\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"motor-tiempo-y-progresion\">Motor, tiempo y progresión\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Módulo\u003c/th>\n\u003cth>Responsabilidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/engine.py\u003c/code>\u003c/td>\n\u003ctd>La máquina de estados: tiempo por usuario y detección de hitos\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/timeline.py\u003c/code>\u003c/td>\n\u003ctd>\u003cstrong>Línea 1\u003c/strong>, la global del evento: 0 → 160 h\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/tracking.py\u003c/code>\u003c/td>\n\u003ctd>\u003cstrong>Línea 2\u003c/strong>, el tiempo de sesión por usuario: 0 → X h\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/timeutil.py\u003c/code>\u003c/td>\n\u003ctd>Utilidades de tiempo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/milestones.py\u003c/code>\u003c/td>\n\u003ctd>La tabla de hitos. Solo la estructura: los textos viven en \u003ccode>Announcements.py\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/difficulty.py\u003c/code>\u003c/td>\n\u003ctd>Dificultades: el reto se endurece en cada hito\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/grace.py\u003c/code>\u003c/td>\n\u003ctd>El período de gracia del canal vacío: decide cuándo una partida está realmente muerta\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/continuation.py\u003c/code>\u003c/td>\n\u003ctd>La votación «¿seguir en Hell?» al llegar a las 160 h\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/finale.py\u003c/code>\u003c/td>\n\u003ctd>El subsistema del Final de 160 horas\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/tasks.py\u003c/code>\u003c/td>\n\u003ctd>Helper de trabajo en segundo plano\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Las dos líneas de tiempo están separadas a propósito: la del evento es absoluta y compartida, y la de cada usuario solo cuenta lo que se ha observado de verdad.\u003c/p>\n\u003ch3 id=\"observacion-del-canal-de-voz\">Observación del canal de voz\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Módulo\u003c/th>\n\u003cth>Responsabilidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/monitor.py\u003c/code>\u003c/td>\n\u003ctd>La monitorización del canal de voz\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/alivecheck.py\u003c/code>\u003c/td>\n\u003ctd>Los pases de lista y las comprobaciones de muerto\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/aliveio.py\u003c/code>\u003c/td>\n\u003ctd>La implementación para Discord de la interfaz de pase de lista\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"persistencia\">Persistencia\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Módulo\u003c/th>\n\u003cth>Responsabilidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/storage.py\u003c/code>\u003c/td>\n\u003ctd>SQLite en un único archivo, a prueba de fallos\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/models.py\u003c/code>\u003c/td>\n\u003ctd>Modelos de datos planos, compartidos y sin imports de Discord\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/dbdump.py\u003c/code>\u003c/td>\n\u003ctd>Exportación completa de la base de datos para el operador: el archivo para «repasarlo luego»\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"comandos-mensajes-y-apariencia\">Comandos, mensajes y apariencia\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Módulo\u003c/th>\n\u003cth>Responsabilidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/cog.py\u003c/code>\u003c/td>\n\u003ctd>Los comandos: los slash \u003ccode>/hell\u003c/code> y los de prefijo \u003ccode>!\u003c/code> por MD y por chat\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/embeds.py\u003c/code>\u003c/td>\n\u003ctd>El aspecto de cada mensaje\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/announcer.py\u003c/code>\u003c/td>\n\u003ctd>La entrega: resolución del canal, envío y el mensaje de progreso en vivo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/ui.py\u003c/code>\u003c/td>\n\u003ctd>Widgets de interacción y comprobación de permisos para \u003ccode>/hell\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/assets.py\u003c/code>\u003c/td>\n\u003ctd>Resolución de las imágenes de los embeds\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/texts.py\u003c/code>\u003c/td>\n\u003ctd>El cargador de \u003ccode>Announcements.py\u003c/code>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>\u003ccode>hell/cog.py\u003c/code> es con diferencia el módulo más grande del paquete (115 KB): concentra el manejo de comandos, que es donde más superficie de Discord se toca.\u003c/p>\n\u003ch3 id=\"informes-clasificacion-y-comunicacion\">Informes, clasificación y comunicación\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Módulo\u003c/th>\n\u003cth>Responsabilidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/reports.py\u003c/code>\u003c/td>\n\u003ctd>Los informes por usuario al terminar el evento, las «tarjetas de estadísticas»\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/dm.py\u003c/code>\u003c/td>\n\u003ctd>La entrega de esas tarjetas por mensaje directo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/broadcast.py\u003c/code>\u003c/td>\n\u003ctd>La difusión del anfitrión por MD: un mensaje markdown a cada concursante\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/leaderboard.py\u003c/code>\u003c/td>\n\u003ctd>La clasificación: lógica pura, sin imports de Discord\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/gamble.py\u003c/code>\u003c/td>\n\u003ctd>Las apuestas: parsearlas, persistir los límites y decidir si un tiro está permitido\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"seguridad-y-robustez\">Seguridad y robustez\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Módulo\u003c/th>\n\u003cth>Responsabilidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/security.py\u003c/code>\u003c/td>\n\u003ctd>Sospecha y anomalías: antitrampas y autocuración del evento\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/errorcodes.py\u003c/code>\u003c/td>\n\u003ctd>Códigos de error conocidos y documentados\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/neterrors.py\u003c/code>\u003c/td>\n\u003ctd>Manejo uniforme de los fallos transitorios de «Discord no alcanzable»\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"estado-publico\">Estado público\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Módulo\u003c/th>\n\u003cth>Responsabilidad\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/web.py\u003c/code>\u003c/td>\n\u003ctd>Un servidor aiohttp ligero que sirve los datos del evento en vivo por WebSocket\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/status_writer.py\u003c/code>\u003c/td>\n\u003ctd>Escribe \u003ccode>docs/status.json\u003c/code> a partir del estado interno del bot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/pages_sync.py\u003c/code>\u003c/td>\n\u003ctd>Sube \u003ccode>docs/\u003c/code> a GitHub para que Pages esté al día\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Los tres forman la cadena del panel público: el estado interno se escribe en \u003ccode>status.json\u003c/code>, se sirve en vivo por WebSocket y se publica en Pages.\u003c/p>\n\u003ch3 id=\"los-textos\">Los textos\u003c/h3>\n\u003cp>\u003ccode>Announcements.py\u003c/code>, en la raíz del repositorio y con 40 KB, es \u003cstrong>el único archivo que contiene todos los mensajes\u003c/strong> del bot. \u003ccode>hell/texts.py\u003c/code> se limita a cargarlo, y \u003ccode>hell/milestones.py\u003c/code> aporta la estructura sin los textos.\u003c/p>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Importante\u003c/p>\n  \u003cdiv class=\"callout__body\">Por eso \u003ccode>Announcements.py\u003c/code> es obligatorio en cualquier despliegue: el bot lee todo su texto de ahí y \u003cstrong>se niega a arrancar sin él\u003c/strong>. El \u003ccode>Dockerfile\u003c/code> lo copia de forma explícita por la misma razón.\u003c/div>\n\u003c/div>\n\u003ch3 id=\"salud-del-contenedor\">Salud del contenedor\u003c/h3>\n\u003cp>\u003ccode>tools/healthcheck.py\u003c/code> responde a una pregunta concreta: \u003cstrong>¿está el bot vigilando de verdad el canal de voz?\u003c/strong> Sale con 0 si está sano y con 1 si no, que es lo que hace que Docker o systemd lo reinicien.\u003c/p>\n\u003cp>Lo interesante es qué mira: \u003cstrong>el archivo de estado, no el proceso\u003c/strong>. Un proceso vivo cuyo bucle de monitorización se ha quedado atascado es peor que uno que ha fallado, porque el evento sigue corriendo mientras nadie observa el canal. Así que si hay un evento en marcha y la última observación es más antigua que el retraso permitido (\u003ccode>--max-lag\u003c/code>), el bot se declara no sano.\u003c/p>\n\u003ch2 id=\"los-once-invariantes\">Los once invariantes\u003c/h2>\n\u003col>\n\u003cli>\u003cstrong>El tiempo es absoluto.\u003c/strong> Todo cálculo usa marcas POSIX; nada depende del tiempo de vida del proceso, así que un reinicio no puede desplazar ni resetear el cronómetro.\u003c/li>\n\u003cli>\u003cstrong>El reloj nunca pasa de 160 h.\u003c/strong> \u003ccode>EventTimeline.clamp()\u003c/code> se aplica antes de usar o guardar cualquier valor de tiempo transcurrido.\u003c/li>\n\u003cli>\u003cstrong>Un estado terminal es terminal salvo reanudación explícita.\u003c/strong> Una vez en FAILED, COMPLETED o CANCELLED, los ticks son inertes y la clasificación está congelada; solo \u003ccode>/hell reset\u003c/code> lo limpia, o \u003ccode>/hell resume\u003c/code> con MFA del operador para continuar una partida fallida.\u003c/li>\n\u003cli>\u003cstrong>Un hito se dispara exactamente una vez.\u003c/strong> \u003ccode>INSERT OR IGNORE\u003c/code> decide el ganador; \u003ccode>announced\u003c/code> solo se activa después de que Discord acepte el mensaje, así que un fallo entre ambos pasos lo vuelve a publicar en vez de perderlo.\u003c/li>\n\u003cli>\u003cstrong>Solo se acredita tiempo observado\u003c/strong>, con tope por tick (\u003ccode>MAX_TICK_CREDIT_SECONDS\u003c/code>), para que una caída nunca se pague en silencio. Con una excepción deliberada: una caída más corta que \u003ccode>DOWNTIME_CREDIT_SECONDS\u003c/code> se devuelve a los usuarios vistos en el canal \u003cstrong>antes y después\u003c/strong>, porque demostrablemente nunca se fueron.\u003c/li>\n\u003cli>\u003cstrong>Los bots y los \u003ccode>@clanker\u003c/code> no existen\u003c/strong> para el núcleo: el monitor los filtra antes de construir una \u003ccode>Observation\u003c/code>.\u003c/li>\n\u003cli>\u003cstrong>Un canal vacío abre una ventana de gracia, no un fallo inmediato\u003c/strong>, y el fallo se marca con la hora del momento en que el canal se vació, nunca más tarde. Si una comprobación de vida deja el canal vacío, se usa una gracia de recuperación de \u003cstrong>2 minutos\u003c/strong> en vez de la ventana normal de 15 segundos.\u003c/li>\n\u003cli>\u003cstrong>Nada en la ruta de mensajes puede romper el evento.\u003c/strong> Texto malo, placeholder ausente, envío fallido, MD cerrado: todo se registra, nada es fatal.\u003c/li>\n\u003cli>\u003cstrong>El trabajo en segundo plano nunca bloquea el bucle de un segundo.\u003c/strong> La E/S del pase de lista y la entrega de MD pasan por \u003ccode>hell/tasks.spawn()\u003c/code>, que además registra los fallos.\u003c/li>\n\u003cli>\u003cstrong>Orden seguro ante fallos: la base de datos nunca queda contradiciendo a Discord.\u003c/strong> Cada operación con estado escribe su fila \u003cstrong>antes\u003c/strong> de la llamada a la API de Discord que depende de ella, y limpia (o marca \u003ccode>pending\u003c/code>) si falla.\u003c/li>\n\u003cli>\u003cstrong>La pausa es un desfase, no una parada.\u003c/strong> \u003ccode>/hell pause\u003c/code> no cambia el estado del evento: registra \u003ccode>paused_ts\u003c/code> y acumula \u003ccode>paused_seconds\u003c/code> en la fila \u003ccode>event\u003c/code>. Cada lectura de hora se convierte con \u003ccode>_effective_now()\u003c/code> (\u003ccode>now − paused_seconds − pausa en curso\u003c/code>).\u003c/li>\n\u003c/ol>\n\u003ch3 id=\"el-invariante-10-en-detalle\">El invariante 10 en detalle\u003c/h3>\n\u003cp>Es el que sostiene todo lo demás:\u003c/p>\n\u003cul>\n\u003cli>La \u003cstrong>expiración de la gracia\u003c/strong> ejecuta \u003ccode>_terminate(FAILED)\u003c/code> —un único \u003ccode>save_state\u003c/code> que fija \u003ccode>status\u003c/code> y limpia \u003ccode>grace_started_ts\u003c/code>— antes de cualquier limpieza en memoria, así que un fallo nunca puede dejar el evento en RUNNING sin ventana.\u003c/li>\n\u003cli>Una \u003cstrong>comprobación de vida\u003c/strong> se persiste en \u003ccode>alive_check\u003c/code> \u003cstrong>antes\u003c/strong> de llamar a \u003ccode>send_check\u003c/code>. Un envío fallido borra la fila tentativa (nunca «la BD dice activa, Discord dice que no existe») y un envío correcto va seguido de una segunda escritura con el \u003ccode>channel_id\u003c/code> y el \u003ccode>message_id\u003c/code> reales. Una \u003cem>excepción\u003c/em> de \u003ccode>send_check\u003c/code> (error de red) limpia exactamente igual que un resultado \u003ccode>None\u003c/code>, así que ninguna comprobación fantasma puede expulsar después a gente que nunca vio un pase de lista.\u003c/li>\n\u003cli>La \u003cstrong>resolución\u003c/strong> escribe \u003ccode>alive_check_history\u003c/code> y limpia la fila pendiente \u003cstrong>antes\u003c/strong> de expulsar a nadie, así que un fallo a mitad de la expulsión deja un historial resoluble y ninguna comprobación pendiente obsoleta.\u003c/li>\n\u003cli>Cada \u003cstrong>MD de ficha\u003c/strong> se registra en \u003ccode>dm_log\u003c/code> como \u003ccode>pending\u003c/code> \u003cstrong>antes\u003c/strong> de la llamada y se actualiza a \u003ccode>sent\u003c/code>, \u003ccode>blocked\u003c/code> o \u003ccode>failed\u003c/code> después, así que un fallo a mitad de la entrega reintenta exactamente a los destinatarios correctos y nunca vuelve a escribir a nadie marcado como \u003ccode>sent\u003c/code>.\u003c/li>\n\u003c/ul>\n\u003ch3 id=\"el-invariante-11-en-detalle\">El invariante 11 en detalle\u003c/h3>\n\u003cp>Mientras está pausado, las dos cronologías se detienen, los hitos, la gracia y el completado quedan inertes, y tras \u003ccode>/hell resume\u003c/code> los relojes continúan exactamente donde se pararon. Una ventana de gracia abierta se desplaza hacia delante por la pausa al reanudar, así que su cuenta atrás sigue con el tiempo que le quedaba. Un reinicio estando pausado vuelve pausado, y el healthcheck del contenedor trata un evento pausado como \u003cstrong>sano\u003c/strong>: un \u003ccode>last_tick_ts\u003c/code> congelado \u003cem>no\u003c/em> es un monitor atascado.\u003c/p>\n\u003ch2 id=\"modelo-de-datos-sqlite-esquema-v3\">Modelo de datos (SQLite, esquema v3)\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Tabla\u003c/th>\n\u003cth>Qué guarda\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>event\u003c/code>\u003c/td>\n\u003ctd>Una fila: estado, marcas de inicio y fin, identificadores de canal y mensaje, ventana de gracia, \u003ccode>last_valid_observed_ts\u003c/code> y estado de pausa (\u003ccode>paused_ts\u003c/code>, \u003ccode>paused_seconds\u003c/code>, \u003ccode>pause_reason\u003c/code>)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>user_time\u003c/code>\u003c/td>\n\u003ctd>Segundos acumulados por usuario (cronología 2)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>presence\u003c/code>\u003c/td>\n\u003ctd>Quién está en el canal ahora mismo (se escribe solo cuando cambia)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>milestones\u003c/code> / \u003ccode>milestone_members\u003c/code>\u003c/td>\n\u003ctd>Reclamaciones, marcas e instantáneas de elegibles\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>final_leaderboard\u003c/code>\u003c/td>\n\u003ctd>Clasificaciones congeladas\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>alive_check\u003c/code> / \u003ccode>alive_check_history\u003c/code>\u003c/td>\n\u003ctd>Pase de lista pendiente y resultados pasados\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>dm_log\u003c/code>\u003c/td>\n\u003ctd>Quién recibió ya su ficha (entrega reanudable)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>meta\u003c/code>\u003c/td>\n\u003ctd>Versión del esquema, hora del próximo pase de lista y segundos no observados\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Las migraciones son \u003cstrong>aditivas\u003c/strong> y se ejecutan al arrancar (\u003ccode>Store._migrate\u003c/code>).\u003c/p>\n\u003ch3 id=\"campos-de-reconstruccion-tras-un-fallo\">Campos de reconstrucción tras un fallo\u003c/h3>\n\u003cp>Estos campos de la fila \u003ccode>event\u003c/code> bastan para reconstruir el estado completo del evento tras cualquier caída; todo lo demás es derivado:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Campo\u003c/th>\n\u003cth>Guarda\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>start_ts\u003c/code>\u003c/td>\n\u003ctd>Cuándo empezó el evento\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>status\u003c/code>\u003c/td>\n\u003ctd>IDLE, RUNNING, FAILED, COMPLETED o CANCELLED\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>last_tick_ts\u003c/code>\u003c/td>\n\u003ctd>Última observación fiable del canal (cualquier población)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>last_valid_observed_ts\u003c/code>\u003c/td>\n\u003ctd>Última observación con al menos un humano válido\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>grace_started_ts\u003c/code>\u003c/td>\n\u003ctd>Cuándo empezó la ventana de gracia\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>paused_ts\u003c/code> / \u003ccode>paused_seconds\u003c/code>\u003c/td>\n\u003ctd>Si el evento está congelado y cuánto tiempo se ha acumulado como pausado\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>end_ts\u003c/code>\u003c/td>\n\u003ctd>Cuándo terminó, guardado como tiempo de evento ajustado por pausas\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>tabla \u003ccode>milestones\u003c/code>\u003c/td>\n\u003ctd>Qué hitos se alcanzaron y cuándo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>tabla \u003ccode>user_time\u003c/code>\u003c/td>\n\u003ctd>Segundos acumulados por usuario\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Con eso más el reloj de pared, \u003ccode>resume_after_restart()\u003c/code> puede seguir vigilando, reanudar una ventana de gracia, congelar la clasificación o reenviar anuncios perdidos \u003cstrong>sin adivinar nada\u003c/strong>. Los mismos invariantes los ejercitan las pruebas de inyección de fallos en \u003ccode>tests/test_resilience.py\u003c/code>.\u003c/p>\n\u003ch2 id=\"casos-limite-cubiertos-por-pruebas\">Casos límite cubiertos por pruebas\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Caso\u003c/th>\n\u003cth>Comportamiento\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Alguien entra exactamente en un hito\u003c/td>\n\u003ctd>Incluido en la instantánea de elegibles de ese hito\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alguien sale exactamente en un hito\u003c/td>\n\u003ctd>Excluido de la instantánea\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Entra un bot en el canal\u003c/td>\n\u003ctd>Ignorado en todas partes; no puede mantener vivo el evento\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Entra un \u003ccode>@clanker\u003c/code>\u003c/td>\n\u003ctd>Desconectado de inmediato, sin tiempo de clasificación, no mantiene vivo el evento\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Se va el último participante válido\u003c/td>\n\u003ctd>Ventana de gracia de 15 s y aviso sin pings; FAILED solo si nadie vuelve\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alguien vuelve con 1 s de margen\u003c/td>\n\u003ctd>La ventana se cierra, aviso «SAVED», la partida sigue intacta\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>El canal se vacía repetidamente\u003c/td>\n\u003ctd>Cada periodo vacío tiene su propia ventana; el tiempo sobrevivido nunca se infla\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Un hito cae con el canal vacío\u003c/td>\n\u003ctd>Se retiene y se concede a quien esté presente cuando el canal se recupere (o se pierde con la partida)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Reinicio a mitad de la ventana\u003c/td>\n\u003ctd>La ventana se reanuda desde el \u003ccode>grace_started_ts\u003c/code> persistido\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>El evento termina con MD sin enviar\u003c/td>\n\u003ctd>\u003ccode>dm_log\u003c/code> reanuda la entrega en el siguiente arranque, sin duplicados\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Un concursante tiene los MD cerrados\u003c/td>\n\u003ctd>Se registra como bloqueado, se informa en el resumen y \u003ccode>/hell mystats\u003c/code> sigue funcionando\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>API de Discord lenta durante un pase de lista\u003c/td>\n\u003ctd>Expulsiones y anuncios corren fuera del bucle de 1 s, así que la vigilancia del canal nunca se atasca\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Un hito editado con forma inválida\u003c/td>\n\u003ctd>Se rechaza con un motivo legible; la tabla anterior sigue en vivo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Duración del evento editada en marcha\u003c/td>\n\u003ctd>Se rechaza y se registra: el reloj en marcha nunca se remodela\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Sin internet, token malo o intent ausente\u003c/td>\n\u003ctd>Error limpio de una línea, código de salida propio y traceback completo en \u003ccode>logs/\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Entradas y salidas rápidas\u003c/td>\n\u003ctd>El muestreo de 1 segundo mantiene correctos los totales por usuario\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Reinicio a mitad del evento\u003c/td>\n\u003ctd>Estado recargado desde SQLite; transcurrido = \u003ccode>now - start_ts\u003c/code>; nada se resetea\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Reinicio estando pausado\u003c/td>\n\u003ctd>El evento vuelve pausado: los dos relojes siguen congelados hasta \u003ccode>/hell resume\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Reinicio alrededor de un hito\u003c/td>\n\u003ctd>La reclamación atómica en BD evita duplicados; los anuncios no enviados se republican al arrancar\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Las 160 h llegan durante una actualización de 10 s\u003c/td>\n\u003ctd>El tick de 1 s lo ajusta todo a \u003ccode>start_ts + 160h\u003c/code>; el completado gana a un canal vacío en el límite\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Tiempos totales idénticos\u003c/td>\n\u003ctd>Puesto compartido y orden de visualización determinista\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>250 personas en el canal en un hito\u003c/td>\n\u003ctd>Mensaje repartido entre campos del embed; nunca supera los límites de Discord\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Bot offline brevemente\u003c/td>\n\u003ctd>El cronómetro sigue y quien estaba antes \u003cstrong>y\u003c/strong> después recupera ese tiempo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Bot offline mucho tiempo\u003c/td>\n\u003ctd>El cronómetro sigue, pero la ventana no observada \u003cstrong>no\u003c/strong> se acredita a nadie y se informa en el mensaje de progreso\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Pase de lista + reinicio\u003c/td>\n\u003ctd>El estado se persiste; las respuestas enviadas offline se recuperan y una comprobación expirada se cancela en vez de expulsar\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Todos ignoran el pase de lista\u003c/td>\n\u003ctd>Todos son desconectados, el canal se vacía y arranca una gracia de recuperación de 2 minutos\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Evento pausado durante un fallo\u003c/td>\n\u003ctd>Los dos relojes se congelan: sin hitos, sin pases de lista, sin expiración de gracia y sin fallo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>La pausa cruza la marca de 160 h\u003c/td>\n\u003ctd>El completado espera al tiempo \u003cem>efectivo\u003c/em>: una partida pausada nunca puede completarse antes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alguien entra a mitad de una comprobación\u003c/td>\n\u003ctd>Sin ping, sin obligación de responder y nunca expulsado por ello\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Fallo de la API en un mensaje\u003c/td>\n\u003ctd>Se registra y se reintenta en el ciclo siguiente; el estado del evento intacto\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Dos decisiones de política deliberadas que conviene conocer:\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>Una caída no hace fallar el evento\u003c/strong> (el bot no puede demostrar que el canal se vació mientras estaba ciego), pero nadie gana tiempo de clasificación por esa ventana y el hueco se muestra en la salida de progreso y estado.\u003c/li>\n\u003cli>Si el canal está vacío \u003cstrong>en el mismo tick\u003c/strong> en que caería un hito, gana el fallo: no había nadie presente para reclamar la recompensa.\u003c/li>\n\u003c/ul>\n\u003ch2 id=\"pruebas\">Pruebas\u003c/h2>\n\u003cp>\u003ccode>tests/\u003c/code> replica las capas. Sin red, sin token de Discord y sin pantalla:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Archivo\u003c/th>\n\u003cth>Cubre\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>test_engine\u003c/code>, \u003ccode>test_grace\u003c/code>, \u003ccode>test_properties\u003c/code>\u003c/td>\n\u003ctd>La máquina de estados, la regla de gracia y ejecuciones de caos aleatorizadas que afirman los invariantes anteriores\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_storage\u003c/code>, \u003ccode>test_reports\u003c/code>, \u003ccode>test_leaderboard_and_milestones\u003c/code>\u003c/td>\n\u003ctd>Persistencia, fichas y clasificación\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_alivecheck\u003c/code>, \u003ccode>test_health_and_aliveio\u003c/code>\u003c/td>\n\u003ctd>Pases de lista de punta a punta y diagnóstico de preflight\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_announcer\u003c/code>, \u003ccode>test_announcements_file\u003c/code>\u003c/td>\n\u003ctd>Límites de embed y que \u003ccode>Announcements.py\u003c/code> de verdad gobierna cada mensaje\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_integration\u003c/code>, \u003ccode>test_command_flows\u003c/code>, \u003ccode>test_bot\u003c/code>, \u003ccode>test_monitor\u003c/code>\u003c/td>\n\u003ctd>El borde de Discord a través de dobles: monitor → motor → anunciador → canal, cada callback de comando y el enrutado de eventos\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_gui\u003c/code>, \u003ccode>test_launcher\u003c/code>, \u003ccode>test_logging\u003c/code>, \u003ccode>test_logsink\u003c/code>\u003c/td>\n\u003ctd>El lanzador de escritorio (sin ventana, vía \u003ccode>tests/faketk.py\u003c/code>) y el logging\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_deployment\u003c/code>, \u003ccode>test_consistency\u003c/code>\u003c/td>\n\u003ctd>Que el contenedor arranca de verdad desde los archivos que copia; configuración, comandos y documentación no pueden divergir\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_resilience\u003c/code>\u003c/td>\n\u003ctd>Las rutas de «Discord dijo que no»: canales prohibidos, límites de tasa, mensajes borrados, reinicios a mitad de un pase de lista, más \u003cstrong>inyección de fallos\u003c/strong> en cada frontera entre escritura en BD y llamada a la API\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">pip install -r requirements-dev.txt\n\n./tools/check.sh          # compile + pyflakes + ruff + mypy + pruebas + simulaciones\n./tools/check.sh --fast   # lo mismo, sin las simulaciones\npython -m pytest          # solo pruebas: no hace falta conexión con Discord\n\npython tools/simulate.py              # imprime cada mensaje de una partida completa de 160 h, offline\npython tools/simulate.py --fail-at 40 # …de una partida que muere a las 40 horas\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>tools/simulate.py\u003c/code> conduce \u003cstrong>el motor real y los renderizadores de mensajes reales\u003c/strong> sin conexión: es la forma más rápida de revisar textos o verificar un cambio de regla de punta a punta. La configuración de las herramientas vive en \u003ccode>pyproject.toml\u003c/code>.\u003c/p>\n\u003cp>Hay un workflow de GitHub Actions ya hecho (pruebas en Python 3.10–3.12, lint y las dos rutas de simulación) en \u003ccode>deploy/github-actions-ci.yml\u003c/code>: se copia a \u003ccode>.github/workflows/ci.yml\u003c/code> para activarlo.\u003c/p>\n\u003cp>\u003cstrong>Marca.\u003c/strong> \u003ccode>assets/hellbotlogo.png\u003c/code> es la obra maestra. Tras cambiarla, ejecuta \u003ccode>python tools/make_icon.py\u003c/code> para regenerar el icono de ventana, el logotipo de cabecera y el \u003ccode>.ico\u003c/code> mult tamaño de Windows que usa el ejecutable compilado.\u003c/p>\n","desc":"Capas, invariantes, modelo de datos y pruebas de hellbot: por qué un evento de 160 horas no se puede perder.","readtime":"14 min de lectura","editHref":"https://github.com/jaime-gaming/hellbot/blob/main/content/docs/hellbot/architecture.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#capas\">Capas\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#mapa-de-modulos\">Mapa de módulos\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#entrada-configuracion-y-arranque\">Entrada, configuración y arranque\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#motor-tiempo-y-progresion\">Motor, tiempo y progresión\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#observacion-del-canal-de-voz\">Observación del canal de voz\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#persistencia\">Persistencia\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#comandos-mensajes-y-apariencia\">Comandos, mensajes y apariencia\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#informes-clasificacion-y-comunicacion\">Informes, clasificación y comunicación\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#seguridad-y-robustez\">Seguridad y robustez\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#estado-publico\">Estado público\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#los-textos\">Los textos\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#salud-del-contenedor\">Salud del contenedor\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#los-once-invariantes\">Los once invariantes\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#el-invariante-10-en-detalle\">El invariante 10 en detalle\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#el-invariante-11-en-detalle\">El invariante 11 en detalle\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#modelo-de-datos-sqlite-esquema-v3\">Modelo de datos (SQLite, esquema v3)\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#campos-de-reconstruccion-tras-un-fallo\">Campos de reconstrucción tras un fallo\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#casos-limite-cubiertos-por-pruebas\">Casos límite cubiertos por pruebas\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#pruebas\">Pruebas\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}},"en":{"title":"Architecture · hellbot — Docs de Jaime Gaming","description":"hellbot's layers, invariants, data model and tests: why a 160-hour event cannot be lost.","fields":{"body":"\u003cp>If you are changing \u003cstrong>behaviour\u003c/strong>, start here. If you are changing \u003cstrong>wording\u003c/strong>, you only need \u003ccode>Announcements.py\u003c/code>.\u003c/p>\n\u003ch2 id=\"layers\">Layers\u003c/h2>\n\u003cpre data-lang=\"text\">\u003ccode class=\"language-text\">                     Announcements.py        ← all wording, rewards and colours\n                            │\n                     hell/texts.py           ← loads it, hot-reloads it, never crashes on it\n                            │\n  ┌─────────────────────────┴───────────────────────────────────────────┐\n  │  PURE CORE — no Discord imports, fully unit-testable                 │\n  │                                                                      │\n  │  timeline.py    global event clock            0 → 160h               │\n  │  tracking.py    per-user session clocks       0 → Xh each            │\n  │  grace.py       empty-VC grace window         15s state machine      │\n  │  milestones.py  milestone table and lookups                          │\n  │  leaderboard.py ranking, ties, podium rendering                      │\n  │  reports.py     end-of-event stat cards                              │\n  │  alivecheck.py  roll-call scheduling and resolution                  │\n  │  engine.py      the state machine that ties the above together       │\n  │  storage.py     SQLite persistence for all of it                     │\n  └─────────────────────────┬───────────────────────────────────────────┘\n                            │  Observation in · DomainEvent out\n  ┌─────────────────────────┴───────────────────────────────────────────┐\n  │  DISCORD EDGE                                                        │\n  │                                                                      │\n  │  monitor.py     1s channel polling, timed progress edits             │\n  │  embeds.py      how every message looks                              │\n  │  announcer.py   how every message is delivered                       │\n  │  aliveio.py     roll-call pings, kicks and reply backfill            │\n  │  dm.py          stat-card delivery                                   │\n  │  logsink.py     live log stream to the operator's DMs                │\n  │  cog.py + ui.py slash commands, confirmations, permission checks     │\n  │  health.py      startup preflight (IDs, permissions, intents)        │\n  │  bot.py         wiring and lifecycle                                 │\n  └──────────────────────────────────────────────────────────────────────┘\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>launcher/\u003c/code> is a separate desktop front-end (\u003ccode>envfile.py\u003c/code> for config I/O, \u003ccode>runtime.py\u003c/code> for the supervisor thread, \u003ccode>gui.py\u003c/code> for the Tk window). \u003cstrong>It imports the bot; the bot never imports it.\u003c/strong>\u003c/p>\n\u003ch2 id=\"module-map\">Module map\u003c/h2>\n\u003cp>The \u003ccode>hell/\u003c/code> package is \u003cstrong>41 modules\u003c/strong>. They are grouped here by what they do, with each one&#39;s real responsibility as its own docstring states it.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Note\u003c/p>\n  \u003cdiv class=\"callout__body\">The \u003ccode>bot.py\u003c/code> at the root of the repository is five lines: it imports \u003ccode>main\u003c/code> from \u003ccode>hell.bot\u003c/code> and runs it. It exists for convenience, so you can type \u003ccode>python bot.py\u003c/code>; it holds no logic.\u003c/div>\n\u003c/div>\n\u003ch3 id=\"entrypoint-configuration-and-startup\">Entrypoint, configuration and startup\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Module\u003c/th>\n\u003cth>Responsibility\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/bot.py\u003c/code>\u003c/td>\n\u003ctd>The bot&#39;s real entrypoint\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/config.py\u003c/code>\u003c/td>\n\u003ctd>Configuration loading, based on the environment and \u003ccode>.env\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/paths.py\u003c/code>\u003c/td>\n\u003ctd>Where each thing lives on disk\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/health.py\u003c/code>\u003c/td>\n\u003ctd>Startup preflight checks\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/single_instance.py\u003c/code>\u003c/td>\n\u003ctd>Refuses a second live process against the same database\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/logging_setup.py\u003c/code>\u003c/td>\n\u003ctd>Rotating file and console logging, safe when there is no console\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"engine-time-and-progression\">Engine, time and progression\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Module\u003c/th>\n\u003cth>Responsibility\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/engine.py\u003c/code>\u003c/td>\n\u003ctd>The state machine: per-user time tracking and milestone detection\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/timeline.py\u003c/code>\u003c/td>\n\u003ctd>\u003cstrong>Timeline #1\u003c/strong>, the global event one: 0 → 160h\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/tracking.py\u003c/code>\u003c/td>\n\u003ctd>\u003cstrong>Timeline #2\u003c/strong>, per-user session time: 0 → Xh\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/timeutil.py\u003c/code>\u003c/td>\n\u003ctd>Time helpers\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/milestones.py\u003c/code>\u003c/td>\n\u003ctd>The milestone table. Structure only: the wording lives in \u003ccode>Announcements.py\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/difficulty.py\u003c/code>\u003c/td>\n\u003ctd>Difficulties: the challenge gets harder at each milestone\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/grace.py\u003c/code>\u003c/td>\n\u003ctd>The empty-VC grace period: decides when a run is really dead\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/continuation.py\u003c/code>\u003c/td>\n\u003ctd>The end-of-160h &quot;keep on Hell?&quot; vote\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/finale.py\u003c/code>\u003c/td>\n\u003ctd>The 160-Hour Finale subsystem\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/tasks.py\u003c/code>\u003c/td>\n\u003ctd>Background task helper\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>The two timelines are separate on purpose: the event one is absolute and shared, and each user&#39;s only counts what has actually been observed.\u003c/p>\n\u003ch3 id=\"voice-channel-observation\">Voice channel observation\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Module\u003c/th>\n\u003cth>Responsibility\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/monitor.py\u003c/code>\u003c/td>\n\u003ctd>Voice channel monitoring\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/alivecheck.py\u003c/code>\u003c/td>\n\u003ctd>Roll call (&quot;alive checks&quot;) and dead checks\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/aliveio.py\u003c/code>\u003c/td>\n\u003ctd>The Discord implementation of the alive-check interface\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"persistence\">Persistence\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Module\u003c/th>\n\u003cth>Responsibility\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/storage.py\u003c/code>\u003c/td>\n\u003ctd>SQLite in a single file, crash safe\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/models.py\u003c/code>\u003c/td>\n\u003ctd>Plain data models, shared and with no Discord imports\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/dbdump.py\u003c/code>\u003c/td>\n\u003ctd>Full database export for the operator: the &quot;recap it later&quot; file\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"commands-messages-and-looks\">Commands, messages and looks\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Module\u003c/th>\n\u003cth>Responsibility\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/cog.py\u003c/code>\u003c/td>\n\u003ctd>Commands: the \u003ccode>/hell\u003c/code> slash commands and the \u003ccode>!\u003c/code> prefix ones over DM and chat\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/embeds.py\u003c/code>\u003c/td>\n\u003ctd>How every message looks\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/announcer.py\u003c/code>\u003c/td>\n\u003ctd>Delivery: channel resolution, sending and the live progress message\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/ui.py\u003c/code>\u003c/td>\n\u003ctd>Interaction widgets and permission checks for \u003ccode>/hell\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/assets.py\u003c/code>\u003c/td>\n\u003ctd>Artwork resolution for embeds\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/texts.py\u003c/code>\u003c/td>\n\u003ctd>The loader for \u003ccode>Announcements.py\u003c/code>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>\u003ccode>hell/cog.py\u003c/code> is by far the largest module in the package (115 KB): it concentrates command handling, which is where the most Discord surface is touched.\u003c/p>\n\u003ch3 id=\"reports-leaderboard-and-communication\">Reports, leaderboard and communication\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Module\u003c/th>\n\u003cth>Responsibility\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/reports.py\u003c/code>\u003c/td>\n\u003ctd>Per-user end-of-event reports, the &quot;stat cards&quot;\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/dm.py\u003c/code>\u003c/td>\n\u003ctd>Delivery of those cards by direct message\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/broadcast.py\u003c/code>\u003c/td>\n\u003ctd>Host broadcast by DM: one markdown message to every contestant\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/leaderboard.py\u003c/code>\u003c/td>\n\u003ctd>The leaderboard: pure logic, no Discord imports\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/gamble.py\u003c/code>\u003c/td>\n\u003ctd>Gambling: parse bets, persist limits and decide whether a roll is allowed\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"security-and-robustness\">Security and robustness\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Module\u003c/th>\n\u003cth>Responsibility\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/security.py\u003c/code>\u003c/td>\n\u003ctd>Suspicion and anomaly tracking: anti-cheat and auto-heal for the event\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/errorcodes.py\u003c/code>\u003c/td>\n\u003ctd>Known, documented error codes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/neterrors.py\u003c/code>\u003c/td>\n\u003ctd>Uniform handling of transient &quot;Discord unreachable&quot; failures\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"public-status\">Public status\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Module\u003c/th>\n\u003cth>Responsibility\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>hell/web.py\u003c/code>\u003c/td>\n\u003ctd>A lightweight aiohttp server serving live event data over WebSocket\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/status_writer.py\u003c/code>\u003c/td>\n\u003ctd>Writes \u003ccode>docs/status.json\u003c/code> from the bot&#39;s internal state\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hell/pages_sync.py\u003c/code>\u003c/td>\n\u003ctd>Pushes \u003ccode>docs/\u003c/code> to GitHub so Pages stays current\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>The three form the public dashboard chain: internal state is written to \u003ccode>status.json\u003c/code>, served live over WebSocket and published to Pages.\u003c/p>\n\u003ch3 id=\"the-texts\">The texts\u003c/h3>\n\u003cp>\u003ccode>Announcements.py\u003c/code>, at the root of the repository and 40 KB in size, is \u003cstrong>the single file holding every message\u003c/strong> the bot sends. \u003ccode>hell/texts.py\u003c/code> only loads it, and \u003ccode>hell/milestones.py\u003c/code> provides the structure without the wording.\u003c/p>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Important\u003c/p>\n  \u003cdiv class=\"callout__body\">That is why \u003ccode>Announcements.py\u003c/code> is mandatory in any deployment: the bot reads all of its text from there and \u003cstrong>refuses to start without it\u003c/strong>. The \u003ccode>Dockerfile\u003c/code> copies it explicitly for the same reason.\u003c/div>\n\u003c/div>\n\u003ch3 id=\"container-health\">Container health\u003c/h3>\n\u003cp>\u003ccode>tools/healthcheck.py\u003c/code> answers one concrete question: \u003cstrong>is the bot actually watching the voice channel?\u003c/strong> It exits 0 when healthy and 1 when not, which is what makes Docker or systemd restart it.\u003c/p>\n\u003cp>The interesting part is what it looks at: \u003cstrong>the state file, not the process\u003c/strong>. A live process whose monitoring loop has stalled is worse than a crashed one, because the event keeps running while nobody is watching the channel. So if an event is RUNNING and the last observation is older than the allowed lag (\u003ccode>--max-lag\u003c/code>), the bot is declared unhealthy.\u003c/p>\n\u003ch2 id=\"the-eleven-invariants\">The eleven invariants\u003c/h2>\n\u003col>\n\u003cli>\u003cstrong>Time is absolute.\u003c/strong> Every calculation uses POSIX timestamps; nothing depends on process uptime, so a restart cannot shift or reset the timer.\u003c/li>\n\u003cli>\u003cstrong>The clock never passes 160 h.\u003c/strong> \u003ccode>EventTimeline.clamp()\u003c/code> is applied before any elapsed value is used or stored.\u003c/li>\n\u003cli>\u003cstrong>Terminal is terminal unless explicitly resumed.\u003c/strong> Once FAILED, COMPLETED or CANCELLED, ticks are inert and the leaderboard is frozen; only \u003ccode>/hell reset\u003c/code> clears it, or \u003ccode>/hell resume\u003c/code> with operator MFA to continue a failed run.\u003c/li>\n\u003cli>\u003cstrong>A milestone fires exactly once.\u003c/strong> \u003ccode>INSERT OR IGNORE\u003c/code> decides the winner; \u003ccode>announced\u003c/code> is only set after Discord accepts the message, so a crash between the two re-posts rather than loses it.\u003c/li>\n\u003cli>\u003cstrong>Credit is only granted for observed seconds\u003c/strong>, capped per tick (\u003ccode>MAX_TICK_CREDIT_SECONDS\u003c/code>), so downtime is never silently paid out. With one deliberate exception: an outage shorter than \u003ccode>DOWNTIME_CREDIT_SECONDS\u003c/code> is credited back to users seen in the channel \u003cstrong>before and after\u003c/strong> it, because they demonstrably never left.\u003c/li>\n\u003cli>\u003cstrong>Bots and \u003ccode>@clanker\u003c/code> do not exist\u003c/strong> as far as the core is concerned: the monitor filters them out before an \u003ccode>Observation\u003c/code> is built.\u003c/li>\n\u003cli>\u003cstrong>An empty channel opens a grace window, not an immediate failure\u003c/strong>, and failure is timestamped at the moment the channel emptied, never later. If an alive check leaves the channel empty, a \u003cstrong>2-minute\u003c/strong> recovery grace period is used instead of the normal 15-second window.\u003c/li>\n\u003cli>\u003cstrong>Nothing in the message path can break the event.\u003c/strong> Bad text, a missing placeholder, a failed send, a closed DM: all logged, none fatal.\u003c/li>\n\u003cli>\u003cstrong>Background work never blocks the one-second loop.\u003c/strong> Roll-call I/O and DM delivery run through \u003ccode>hell/tasks.spawn()\u003c/code>, which also logs failures.\u003c/li>\n\u003cli>\u003cstrong>Crash-safe ordering: the database is never left contradicting Discord.\u003c/strong> Every stateful operation writes its row \u003cstrong>before\u003c/strong> the Discord API call that depends on it, and cleans up (or marks \u003ccode>pending\u003c/code>) on failure.\u003c/li>\n\u003cli>\u003cstrong>Pause is an offset, not a stop.\u003c/strong> \u003ccode>/hell pause\u003c/code> does not change the event status: it records \u003ccode>paused_ts\u003c/code> and banks \u003ccode>paused_seconds\u003c/code> into the \u003ccode>event\u003c/code> row. Every time reading is converted with \u003ccode>_effective_now()\u003c/code> (\u003ccode>now − paused_seconds − in-progress pause\u003c/code>).\u003c/li>\n\u003c/ol>\n\u003ch3 id=\"invariant-10-in-detail\">Invariant 10 in detail\u003c/h3>\n\u003cp>It is the one holding everything else up:\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>Grace expiry\u003c/strong> runs \u003ccode>_terminate(FAILED)\u003c/code> — a single \u003ccode>save_state\u003c/code> that sets \u003ccode>status\u003c/code> and clears \u003ccode>grace_started_ts\u003c/code> — before any in-memory cleanup, so a crash can never leave the event RUNNING with no window.\u003c/li>\n\u003cli>An \u003cstrong>alive check\u003c/strong> is persisted to \u003ccode>alive_check\u003c/code> \u003cstrong>before\u003c/strong> \u003ccode>send_check\u003c/code> is called. A failed send deletes the tentative row (never &quot;DB says active, Discord says it does not exist&quot;) and a successful send is followed by a second write adding the real \u003ccode>channel_id\u003c/code> and \u003ccode>message_id\u003c/code>. An \u003cem>exception\u003c/em> from \u003ccode>send_check\u003c/code> (network error) cleans up exactly like a \u003ccode>None\u003c/code> result, so no phantom check can later kick people who never saw a roll call.\u003c/li>\n\u003cli>\u003cstrong>Resolution\u003c/strong> writes \u003ccode>alive_check_history\u003c/code> and clears the pending row \u003cstrong>before\u003c/strong> kicking anybody, so a crash mid-kick leaves a resolvable history and no stale pending check.\u003c/li>\n\u003cli>Each \u003cstrong>stat-card DM\u003c/strong> is recorded in \u003ccode>dm_log\u003c/code> as \u003ccode>pending\u003c/code> \u003cstrong>before\u003c/strong> the API call and updated to \u003ccode>sent\u003c/code>, \u003ccode>blocked\u003c/code> or \u003ccode>failed\u003c/code> after, so a crash mid-delivery retries exactly the right recipients and never double-messages anyone marked \u003ccode>sent\u003c/code>.\u003c/li>\n\u003c/ul>\n\u003ch3 id=\"invariant-11-in-detail\">Invariant 11 in detail\u003c/h3>\n\u003cp>While paused, both timelines stand still, milestones, grace and completion are inert, and after \u003ccode>/hell resume\u003c/code> the clocks continue exactly where they stopped. An open empty-channel grace window is shifted forward by the pause on resume, so its countdown resumes with the time it had left. A restart while paused comes back paused, and the container healthcheck treats a paused event as \u003cstrong>healthy\u003c/strong>: a frozen \u003ccode>last_tick_ts\u003c/code> is \u003cem>not\u003c/em> a stalled monitor.\u003c/p>\n\u003ch2 id=\"data-model-sqlite-schema-v3\">Data model (SQLite, schema v3)\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Table\u003c/th>\n\u003cth>What it holds\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>event\u003c/code>\u003c/td>\n\u003ctd>One row: status, start and end timestamps, channel and message IDs, grace window, \u003ccode>last_valid_observed_ts\u003c/code> and pause state (\u003ccode>paused_ts\u003c/code>, \u003ccode>paused_seconds\u003c/code>, \u003ccode>pause_reason\u003c/code>)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>user_time\u003c/code>\u003c/td>\n\u003ctd>Per-user accumulated seconds (timeline 2)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>presence\u003c/code>\u003c/td>\n\u003ctd>Who is in the channel right now (written only on change)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>milestones\u003c/code> / \u003ccode>milestone_members\u003c/code>\u003c/td>\n\u003ctd>Claims, timestamps and eligible snapshots\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>final_leaderboard\u003c/code>\u003c/td>\n\u003ctd>Frozen rankings\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>alive_check\u003c/code> / \u003ccode>alive_check_history\u003c/code>\u003c/td>\n\u003ctd>Pending roll call and past results\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>dm_log\u003c/code>\u003c/td>\n\u003ctd>Who already received a stat card (resumable delivery)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>meta\u003c/code>\u003c/td>\n\u003ctd>Schema version, next roll-call time and unobserved seconds\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Migrations are \u003cstrong>additive\u003c/strong> and run at startup (\u003ccode>Store._migrate\u003c/code>).\u003c/p>\n\u003ch3 id=\"crash-reconstruction-fields\">Crash reconstruction fields\u003c/h3>\n\u003cp>These fields on the \u003ccode>event\u003c/code> row are enough to reconstruct the full event state after any crash; everything else is derived:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Field\u003c/th>\n\u003cth>Stores\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>start_ts\u003c/code>\u003c/td>\n\u003ctd>When the event started\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>status\u003c/code>\u003c/td>\n\u003ctd>IDLE, RUNNING, FAILED, COMPLETED or CANCELLED\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>last_tick_ts\u003c/code>\u003c/td>\n\u003ctd>Last trusted channel observation (any population)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>last_valid_observed_ts\u003c/code>\u003c/td>\n\u003ctd>Last observation with at least one valid human\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>grace_started_ts\u003c/code>\u003c/td>\n\u003ctd>When the grace window began\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>paused_ts\u003c/code> / \u003ccode>paused_seconds\u003c/code>\u003c/td>\n\u003ctd>Whether the event is frozen and how much time has been banked as paused\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>end_ts\u003c/code>\u003c/td>\n\u003ctd>When it terminated, stored as pause-adjusted event time\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>milestones\u003c/code> table\u003c/td>\n\u003ctd>Which milestones were reached and when\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>user_time\u003c/code> table\u003c/td>\n\u003ctd>Per-user accumulated seconds\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Given those plus the wall clock, \u003ccode>resume_after_restart()\u003c/code> can continue watching, resume a grace window, freeze the leaderboard or re-send missed announcements \u003cstrong>without guessing anything\u003c/strong>. The same invariants are exercised by the crash-injection tests in \u003ccode>tests/test_resilience.py\u003c/code>.\u003c/p>\n\u003ch2 id=\"edge-cases-covered-by-tests\">Edge cases covered by tests\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Case\u003c/th>\n\u003cth>Behaviour\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>User joins exactly at a milestone\u003c/td>\n\u003ctd>Included in that milestone&#39;s eligible snapshot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>User leaves exactly at a milestone\u003c/td>\n\u003ctd>Excluded from the snapshot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>A bot joins the channel\u003c/td>\n\u003ctd>Ignored everywhere; cannot keep the event alive\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>A \u003ccode>@clanker\u003c/code> joins\u003c/td>\n\u003ctd>Disconnected immediately, no leaderboard time, cannot keep the event alive\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Last valid participant leaves\u003c/td>\n\u003ctd>15 s grace window and no-ping warning; FAILED only if nobody returns\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Someone rejoins with 1 s to spare\u003c/td>\n\u003ctd>Window closes, &quot;SAVED&quot; notice, run continues untouched\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Channel empties repeatedly\u003c/td>\n\u003ctd>Each empty period gets its own window; survived time is never inflated\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Milestone lands while the channel is empty\u003c/td>\n\u003ctd>Held back, then awarded to whoever is present when the channel recovers (or lost with the run)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Restart mid-grace-window\u003c/td>\n\u003ctd>Window resumes from the persisted \u003ccode>grace_started_ts\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Event ends while some DMs are unsent\u003c/td>\n\u003ctd>\u003ccode>dm_log\u003c/code> resumes delivery on the next start, without duplicates\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Contestant has DMs closed\u003c/td>\n\u003ctd>Recorded as blocked, reported in the summary, \u003ccode>/hell mystats\u003c/code> still works\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Slow Discord API during a roll call\u003c/td>\n\u003ctd>Kicks and announcements run off the 1-second loop, so channel monitoring never stalls\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>A milestone edited into a broken shape\u003c/td>\n\u003ctd>Rejected with a readable reason; the previous table stays live\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Event length edited mid-run\u003c/td>\n\u003ctd>Refused and logged: the running clock is never reshaped\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>No internet, bad token or missing intent\u003c/td>\n\u003ctd>Clean one-line error, distinct exit code and full traceback in \u003ccode>logs/\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Rapid join/leave churn\u003c/td>\n\u003ctd>1-second sampling keeps per-user totals correct\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Bot restarts mid-event\u003c/td>\n\u003ctd>State reloaded from SQLite; elapsed = \u003ccode>now - start_ts\u003c/code>; nothing resets\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Bot restarts while paused\u003c/td>\n\u003ctd>The event comes back paused: both clocks stay frozen until \u003ccode>/hell resume\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Bot restarts around a milestone\u003c/td>\n\u003ctd>Atomic DB claim prevents duplicates; unsent announcements are re-posted on boot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>160 h hits during a 10 s update\u003c/td>\n\u003ctd>The 1 s tick clamps everything to \u003ccode>start_ts + 160h\u003c/code>; completion wins over an empty channel at the deadline\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Identical total times\u003c/td>\n\u003ctd>Shared rank and deterministic display order\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>250 people in the channel at a milestone\u003c/td>\n\u003ctd>Message split across embed fields; never exceeds Discord&#39;s limits\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Bot offline briefly\u003c/td>\n\u003ctd>The timer keeps running and anyone in the channel before \u003cstrong>and\u003c/strong> after gets that time credited back\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Bot offline for a long time\u003c/td>\n\u003ctd>The timer still runs, but the unobserved window is \u003cstrong>not\u003c/strong> credited to anyone and is reported in the progress message\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alive check plus restart\u003c/td>\n\u003ctd>Check state is persisted; replies sent offline are recovered and an expired check is cancelled instead of kicking people\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alive check ignored by everyone\u003c/td>\n\u003ctd>Everyone is disconnected, the channel empties and a 2-minute recovery grace period starts\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Event paused during a bug\u003c/td>\n\u003ctd>Both clocks freeze: no milestones, no roll calls, no grace expiry and no failure\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Pause crosses the 160 h mark\u003c/td>\n\u003ctd>Completion waits for \u003cem>effective\u003c/em> time: a paused run can never complete early\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Someone joins mid-check\u003c/td>\n\u003ctd>Not pinged, not required to answer, never kicked for it\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>API hiccup on a message\u003c/td>\n\u003ctd>Logged and retried on the next cycle; event state untouched\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Two deliberate policy calls worth knowing:\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>Downtime does not fail the event\u003c/strong> (the bot cannot prove the channel emptied while it was blind), but nobody earns leaderboard time for that window and the gap is shown in the progress and status output.\u003c/li>\n\u003cli>If the channel is empty \u003cstrong>in the same tick\u003c/strong> a milestone would land, the failure wins: nobody was present to claim the reward.\u003c/li>\n\u003c/ul>\n\u003ch2 id=\"testing\">Testing\u003c/h2>\n\u003cp>\u003ccode>tests/\u003c/code> mirrors the layers. No network, no Discord token and no display needed:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>File\u003c/th>\n\u003cth>Covers\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>test_engine\u003c/code>, \u003ccode>test_grace\u003c/code>, \u003ccode>test_properties\u003c/code>\u003c/td>\n\u003ctd>The state machine, the grace rule and randomised chaos runs asserting the invariants above\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_storage\u003c/code>, \u003ccode>test_reports\u003c/code>, \u003ccode>test_leaderboard_and_milestones\u003c/code>\u003c/td>\n\u003ctd>Persistence, stat cards and ranking\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_alivecheck\u003c/code>, \u003ccode>test_health_and_aliveio\u003c/code>\u003c/td>\n\u003ctd>Roll calls end to end and preflight diagnostics\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_announcer\u003c/code>, \u003ccode>test_announcements_file\u003c/code>\u003c/td>\n\u003ctd>Embed limits, and that \u003ccode>Announcements.py\u003c/code> really drives every message\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_integration\u003c/code>, \u003ccode>test_command_flows\u003c/code>, \u003ccode>test_bot\u003c/code>, \u003ccode>test_monitor\u003c/code>\u003c/td>\n\u003ctd>The Discord edge through fakes: monitor → engine → announcer → channel, every slash command callback and event routing\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_gui\u003c/code>, \u003ccode>test_launcher\u003c/code>, \u003ccode>test_logging\u003c/code>, \u003ccode>test_logsink\u003c/code>\u003c/td>\n\u003ctd>The desktop launcher (headless via \u003ccode>tests/faketk.py\u003c/code>) and logging\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_deployment\u003c/code>, \u003ccode>test_consistency\u003c/code>\u003c/td>\n\u003ctd>That the container really starts from the files it copies; config, commands and docs cannot drift apart\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>test_resilience\u003c/code>\u003c/td>\n\u003ctd>The &quot;Discord said no&quot; paths: forbidden channels, rate limits, deleted messages, restarts mid-roll-call, plus \u003cstrong>crash injection\u003c/strong> at every DB-write to Discord-API boundary\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">pip install -r requirements-dev.txt\n\n./tools/check.sh          # compile + pyflakes + ruff + mypy + tests + simulations\n./tools/check.sh --fast   # same, without the simulations\npython -m pytest          # tests only — no Discord connection required\n\npython tools/simulate.py              # print every message of a full 160h run, offline\npython tools/simulate.py --fail-at 40 # …of a run that dies after 40 hours\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>tools/simulate.py\u003c/code> drives \u003cstrong>the real engine and the real message renderers\u003c/strong> offline: it is the fastest way to review wording or verify a rule change end to end. Tooling configuration lives in \u003ccode>pyproject.toml\u003c/code>.\u003c/p>\n\u003cp>There is a ready-made GitHub Actions workflow (tests on Python 3.10–3.12, lint and both simulation paths) in \u003ccode>deploy/github-actions-ci.yml\u003c/code>: copy it to \u003ccode>.github/workflows/ci.yml\u003c/code> to enable it.\u003c/p>\n\u003cp>\u003cstrong>Branding.\u003c/strong> \u003ccode>assets/hellbotlogo.png\u003c/code> is the master artwork. After changing it, run \u003ccode>python tools/make_icon.py\u003c/code> to regenerate the window icon, the header logo and the multi-size Windows \u003ccode>.ico\u003c/code> used by the built executable.\u003c/p>\n","desc":"hellbot's layers, invariants, data model and tests: why a 160-hour event cannot be lost.","readtime":"12 min read","editHref":"https://github.com/jaime-gaming/hellbot/blob/main/content/docs/hellbot/architecture.en.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#layers\">Layers\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#module-map\">Module map\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#entrypoint-configuration-and-startup\">Entrypoint, configuration and startup\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#engine-time-and-progression\">Engine, time and progression\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#voice-channel-observation\">Voice channel observation\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#persistence\">Persistence\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#commands-messages-and-looks\">Commands, messages and looks\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#reports-leaderboard-and-communication\">Reports, leaderboard and communication\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#security-and-robustness\">Security and robustness\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#public-status\">Public status\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#the-texts\">The texts\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#container-health\">Container health\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#the-eleven-invariants\">The eleven invariants\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#invariant-10-in-detail\">Invariant 10 in detail\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#invariant-11-in-detail\">Invariant 11 in detail\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#data-model-sqlite-schema-v3\">Data model (SQLite, schema v3)\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#crash-reconstruction-fields\">Crash reconstruction fields\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#edge-cases-covered-by-tests\">Edge cases covered by tests\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#testing\">Testing\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}}}</script>
+<script type="application/json" id="searchConfig">{"index":"/Docs/assets/data/search-index.json","scope":"hellbot"}</script>
+<script src="/Docs/assets/js/i18n.js?v=9f6d93c1fd7c"></script>
+<script src="/Docs/assets/js/search.js?v=014a801e4757"></script>
+<script src="/Docs/assets/js/main.js?v=83aa4a0803d7"></script>
+</body>
+</html>

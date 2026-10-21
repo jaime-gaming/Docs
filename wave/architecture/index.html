@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arquitectura — Docs de Jaime Gaming</title>
+<meta name="description" content="Capas, flujo de datos, estructura de carpetas y módulos internos del cliente web de Wave." />
+<meta name="author" content="Jaime Gaming" />
+<meta name="theme-color" content="#10120f" />
+<meta name="robots" content="index, follow" />
+<meta name="docs:base" content="/Docs/" />
+<meta name="docs:project" content="wave" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Jaime Gaming Docs" />
+<meta property="og:title" content="Arquitectura — Docs de Jaime Gaming" />
+<meta property="og:description" content="Capas, flujo de datos, estructura de carpetas y módulos internos del cliente web de Wave." />
+<meta property="og:url" content="https://jaime-gaming.github.io/Docs/wave/architecture/" />
+<meta property="og:image" content="https://jaime-gaming.github.io/assets/img/social-card.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@JaimeGamingPro" />
+<meta name="twitter:title" content="Arquitectura — Docs de Jaime Gaming" />
+<meta name="twitter:description" content="Capas, flujo de datos, estructura de carpetas y módulos internos del cliente web de Wave." />
+<link rel="canonical" href="https://jaime-gaming.github.io/Docs/wave/architecture/" />
+<link rel="icon" href="/Docs/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/Docs/assets/css/style.css?v=d74cfec89052" />
+</head>
+<body data-icons="/Docs/assets/img/icons.svg?v=eea9c3fe56aa" data-page="docs" data-project="wave" data-path="/wave/architecture/">
+
+<a class="skip-link" href="#top" data-i18n="aria.skipToContent">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/Docs/" class="nav__logo" aria-label="Jaime Gaming Docs — inicio" data-i18n-aria="aria.homeLogo">JG<span class="dot">.</span><span class="nav__logo-badge">docs</span></a>
+  <nav class="nav__links" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+    <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+    <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+    <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+    <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+    <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="search-trigger" id="searchTrigger" type="button" aria-label="Buscar" data-i18n-aria="nav.search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg>
+      <span class="search-trigger__label" data-i18n="search.button">Buscar</span>
+      <kbd class="search-trigger__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+    <button class="lang-switch" id="langSwitch" data-active="es" type="button" aria-label="Cambiar idioma" data-i18n-aria="aria.langSwitch">
+      <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="languageFlagEs" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#aa151b" d="M0 0h24v24H0z"/><path fill="#f1bf00" d="M0 6h24v12H0z"/></g>
+          </pattern>
+          <pattern id="languageFlagEn" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#012169" d="M0 0h24v24H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 24 24M24 0 0 24"/><path stroke="#c8102e" stroke-width="2" d="m0 0 24 24M24 0 0 24"/><path stroke="#fff" stroke-width="8" d="M12 0v24M0 12h24"/><path stroke="#c8102e" stroke-width="4" d="M12 0v24M0 12h24"/></g>
+          </pattern>
+          <radialGradient id="languageGloss" cx="34%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".42"/>
+            <stop offset="55%" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="flag flag-es" cx="12" cy="12" r="9.5" fill="url(#languageFlagEs)"/>
+        <circle class="flag flag-en" cx="12" cy="12" r="9.5" fill="url(#languageFlagEn)"/>
+        <circle class="language-globe__gloss" cx="12" cy="12" r="9.5" fill="url(#languageGloss)" aria-hidden="true"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#0d100d" stroke-opacity=".55" stroke-width="1.9" stroke-linecap="round"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width=".9" stroke-linecap="round"/>
+      </svg>
+      <span class="sr-only" id="languageName">Español</span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil" data-i18n-aria="aria.mainNav">
+  <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+  <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+  <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+  <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+  <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+</nav>
+
+<main id="top" class="layout--docs">
+<div class="docs docs--with-rails">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-panel"></use></svg>
+    </button>
+    <aside class="docs__sidebar" id="docsSidebar" aria-label="Índice de esta documentación" data-i18n-aria="aria.sidebar">
+    <nav class="side-nav">
+      <div class="side-nav__head">
+        <span class="side-nav__eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+        <a class="side-nav__project" href="/Docs/wave/">
+          <span class="side-nav__project-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg></span>
+          <span class="side-nav__project-name" data-i18n="proj.wave.name">Wave</span>
+        </a>
+      </div>
+      <p class="side-nav__group" data-i18n="docs.sidebarTitle">En esta documentación</p>
+      <ol class="side-nav__list">
+      <li><a class="side-nav__link" href="/Docs/wave/" data-i18n="page.wave.index"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-compass"></use></svg><span>Visión general</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/install/" data-i18n="page.wave.install"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-download"></use></svg><span>Instalación</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/features/" data-i18n="page.wave.features"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-layers"></use></svg><span>Funciones y uso</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/platforms/" data-i18n="page.wave.platforms"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-monitor"></use></svg><span>Plataformas</span></a></li>
+      <li><a class="side-nav__link active" href="/Docs/wave/architecture/" data-i18n="page.wave.architecture"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-boxes"></use></svg><span>Arquitectura</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/privacy/" data-i18n="page.wave.privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-shield"></use></svg><span>Privacidad y datos</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/dev/" data-i18n="page.wave.dev"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span>Desarrollo</span></a></li>
+      </ol>
+      <div class="side-nav__foot">
+        <a class="side-nav__all" href="/Docs/projects/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.allProjects">Todos los proyectos</span></a>
+        <div class="side-nav__switch">
+          <span class="side-nav__switch-label" data-i18n="docs.otherProjects">Otros proyectos</span>
+          <ul class="side-nav__switch-list">
+        <li><a class="side-nav__chip" href="/Docs/jaigent/" title="jAIgent"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg><span>jAIgent</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/hellbot/" title="hellbot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg><span>hellbot</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/rngdle-infinite/" title="RNGdle Infinite"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-dice"></use></svg><span>RNGdle Infinite</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/daily-diary/" title="Diario"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-notebook"></use></svg><span>Diario</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/void/" title="VOID"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg><span>VOID</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/website/" title="jaime-gaming.github.io"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg><span>jaime-gaming.github.io</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </aside>
+    <div class="docs__main">
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="/Docs/">Docs</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="/Docs/wave/" data-i18n="proj.wave.name">Wave</a>
+      <span class="breadcrumb__sep">/</span>
+      <span class="breadcrumb__current" data-i18n="page.wave.architecture">Arquitectura</span>
+    </nav>
+    <header class="doc-head reveal">
+      <p class="doc-head__kicker"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg><span data-i18n="proj.wave.name">Wave</span></p>
+      <h1 class="doc-head__title" data-i18n="page.wave.architecture">Arquitectura</h1>
+      <p class="doc-head__desc" data-content-key="desc">Capas, flujo de datos, estructura de carpetas y módulos internos del cliente web de Wave.</p>
+      <div class="doc-head__meta">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-calendar"></use></svg><span data-i18n="docs.updated">Última revisión</span> <time datetime="2026-10-18" data-i18n-date>18 de octubre de 2026</time></span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-clock"></use></svg><span data-content-key="readtime">5 min de lectura</span></span>
+        <a class="doc-head__edit" href="https://github.com/jaime-gaming/Wave/blob/main/content/docs/wave/architecture.md" data-content-key="editHref" data-content-attr="href" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span data-i18n="docs.editOnGithub">Editar esta página en GitHub</span></a>
+      </div>
+    </header>
+    <article class="doc-body reveal" lang="es" data-content-key="body" data-content-language>
+<p>Esta página describe el cliente web, que es la implementación de referencia. Wave no tiene API HTTP ni backend: los interfaces que se documentan aquí son <strong>internos</strong> y pueden cambiar durante el desarrollo <code>0.x</code>.</p>
+<h2 id="alcance-y-decision-de-plataforma">Alcance y decisión de plataforma</h2>
+<p>La primera implementación es una aplicación de navegador en <strong>React y TypeScript</strong>. Ahora la acompañan proyectos independientes de Kotlin/Compose para Android y de C#/WPF para Windows. PixelPlayer sigue siendo una referencia de organización de biblioteca local y de interacciones de reproducción, <strong>no una dependencia de implementación</strong>.</p>
+<p>El primer hito es un corte vertical que funcione de punta a punta: importar música local, persistirla, explorarla y buscarla, reproducirla, organizar listas y, opcionalmente, editar metadatos locales. Sin backend ni autenticación. Las letras automáticas opcionales consultan LRCLIB directamente desde el navegador; el audio permanece local.</p>
+<h2 id="capas-y-responsabilidades">Capas y responsabilidades</h2>
+<pre data-lang="text"><code class="language-text">Interfaz React
+    ├── App: vistas de biblioteca, filtros, diálogos, entrada de importación
+    └── components: carátulas, controles del reproductor, diálogos accesibles
+            │
+Hooks de aplicación
+    ├── useLibrary: carga, importación, favoritos, borrado, sobrescrituras
+    ├── usePlaylists: carga, membresía ordenada, CRUD, errores
+    └── usePlayer: ciclo de vida del audio, despacho de cola, Media Session
+            │
+Dominio                          Datos / adaptadores del navegador
+    ├── Modelos Track / Playlist      ├── Repositorio IndexedDB
+    ├── búsqueda / formateo           ├── importador de metadatos
+    ├── mutaciones puras de listas    ├── validación y recorte de carátulas
+    └── reducer puro de la cola       └── HTMLAudioElement</code></pre>
+<p>Tres reglas sostienen el diseño:</p>
+<ul>
+<li><strong>La capa de dominio no depende de React ni del almacenamiento.</strong> Son funciones y tipos puros.</li>
+<li><strong>Los módulos de datos no renderizan interfaz.</strong></li>
+<li><strong>Los hooks coordinan los efectos secundarios</strong> y exponen el estado a los componentes.</li>
+</ul>
+<p>En este primer hito la navegación entre pantallas y la agrupación viven en <code>App.tsx</code>. El enrutado y las pantallas por función se pueden extraer cuando la aplicación crezca.</p>
+<h2 id="estructura-de-carpetas">Estructura de carpetas</h2>
+<pre data-lang="text"><code class="language-text">src/
+├── components/
+│   ├── Artwork.tsx
+│   ├── ArtworkPicker.tsx
+│   ├── TrackEditor.tsx
+│   ├── PlaylistDialog.tsx
+│   ├── PlaylistCollection.tsx
+│   ├── AnimatedListItem.tsx
+│   ├── LibraryContent.tsx
+│   ├── Navigation.tsx
+│   ├── Modal.tsx
+│   └── PlayerBar.tsx
+├── data/
+│   ├── artwork.ts
+│   ├── import.ts
+│   └── library.ts
+├── domain/
+│   ├── playlists.ts
+│   ├── player.ts
+│   └── types.ts
+├── hooks/
+│   ├── usePlaylists.ts
+│   ├── useLibrary.ts
+│   └── usePlayer.ts
+├── ui/               # tokens y preferencias de movimiento compartidos
+├── test/
+├── App.tsx
+├── main.tsx
+└── styles.css</code></pre>
+<h2 id="flujo-de-datos">Flujo de datos</h2>
+<p>Ocho pasos, desde que eliges un archivo hasta que suena:</p>
+<ol>
+<li><strong>Selección explícita.</strong> El usuario elige o suelta archivos. El navegador no puede escanear en silencio las carpetas de música del dispositivo.</li>
+<li><strong>Validación.</strong> <code>useLibrary</code> comprueba extensión, tamaño e identidad duplicada.</li>
+<li><strong>Metadatos.</strong> El importador lee las etiquetas incrustadas en local y, si faltan, recurre a una inferencia conservadora de dos partes por guion espaciado, con artista y álbum desconocidos. Las etiquetas válidas tienen prioridad y la inferencia de artista desde el nombre debe coincidir con un título incrustado. Los prefijos explícitos de pista y disco se eliminan; los títulos numéricos genuinos, no.</li>
+<li><strong>Persistencia.</strong> Cada pista y su Blob de audio se guardan en IndexedDB <strong>antes</strong> de entrar en el estado de la interfaz.</li>
+<li><strong>Derivación.</strong> La interfaz deriva las pistas visibles desde la búsqueda, la vista, la agrupación y el orden.</li>
+<li><strong>Cola.</strong> Al seleccionar una pista se carga en el reducer de la cola una instantánea de los identificadores visibles.</li>
+<li><strong>Reproducción.</strong> <code>usePlayer</code> resuelve el identificador activo a una pista, crea URLs temporales de Blob y controla el motor decodificador nativo.</li>
+<li><strong>Eventos.</strong> Los eventos del navegador actualizan duración y posición o avanzan la cola. Los errores de audio pausan y muestran un mensaje accionable.</li>
+</ol>
+<h2 id="modelo-de-datos">Modelo de datos</h2>
+<p>Definido en <code>src/domain/types.ts</code>:</p>
+<pre data-lang="ts"><code class="language-ts">interface Track {
+  id: string;
+  title: string;
+  artist: string;
+  album: string;
+  duration: number;
+  fileName: string;
+  size: number;
+  addedAt: number;
+  favorite: boolean;
+  blob: Blob;
+  artwork?: string;
+  audioInfo?: AudioInfo;
+  contentHash?: string;
+  lyricsLookup?: LyricsLookup;
+  lyrics?: Lyrics;
+  trackNumber?: number;
+  discNumber?: number;
+  originalMetadata?: TrackMetadata;
+  editedAt?: number;
+}
+
+interface AudioInfo {
+  codec?: string;
+  sampleRate?: number;   // Hz
+  bitsPerSample?: number;
+  bitrate?: number;      // bits por segundo
+  lossless?: boolean;
+}
+
+type RepeatMode = 'off' | 'all' | 'one';
+type LibraryView = 'songs' | 'albums' | 'artists' | 'favorites' | 'playlists';</code></pre>
+<p>Convenciones de los campos:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Campo</th>
+<th>Unidad y significado</th>
+</tr>
+</thead><tbody><tr>
+<td><code>duration</code></td>
+<td>Segundos. Cero significa desconocida.</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>Bytes.</td>
+</tr>
+<tr>
+<td><code>addedAt</code></td>
+<td>Marca de tiempo Unix en milisegundos.</td>
+</tr>
+<tr>
+<td><code>artwork</code></td>
+<td>Data URL de una imagen generada en local. Opcional.</td>
+</tr>
+<tr>
+<td><code>blob</code></td>
+<td>El archivo de audio persistido.</td>
+</tr>
+<tr>
+<td><code>audioInfo</code></td>
+<td>Metadatos opcionales de la fuente importada. <strong>No</strong> describe ni garantiza la calidad de salida del dispositivo.</td>
+</tr>
+<tr>
+<td><code>originalMetadata</code></td>
+<td>Se captura una sola vez antes de la primera edición local y se elimina al restaurar.</td>
+</tr>
+<tr>
+<td><code>editedAt</code></td>
+<td>Milisegundos desde el epoch Unix.</td>
+</tr>
+</tbody></table></div>
+<p>Álbumes y artistas son <strong>grupos derivados</strong>, no entidades almacenadas de forma independiente. Ni editar ni restaurar cambia el Blob de audio persistido.</p>
+<div class="callout callout--note">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb"></use></svg>
+  <p class="callout__title">Nota</p>
+  <div class="callout__body">Los ejemplos anteriores en Kotlin para <code>MediaPlayerController</code>, <code>MusicLibrary</code>, listas y gestores de ajustes eran propuestas, no APIs funcionales. Su comportamiento relevante está representado ahora por los módulos TypeScript anteriores; lo que no está implementado sigue en la hoja de ruta del repositorio.</div>
+</div>
+<h2 id="decisiones-que-se-notan-al-usarlo">Decisiones que se notan al usarlo</h2>
+<p><strong>Deduplicación por hash del archivo completo.</strong> SHA-256 sobre los bytes, no sobre el nombre. Dos archivos idénticos con nombres o fechas distintos no ocupan dos veces, y los identificadores heredados y las referencias de las listas se preservan.</p>
+<p><strong>El audio se conserva una sola vez y a calidad original.</strong> No se recomprime. Las carátulas sí son JPEG compactos y las letras persisten el texto crudo una vez, reconstruyendo las líneas analizadas al cargar.</p>
+<p><strong>Sobrescrituras, no reescrituras.</strong> Las ediciones de metadatos y las carátulas personalizadas viven como sobrescrituras locales. Wave no toca las etiquetas de tus archivos ni las exporta.</p>
+<p><strong>Migración con poda atómica.</strong> La migración de biblioteca a versión 1 elimina de forma atómica las referencias de listas borradas, sin dejar punteros colgando.</p>
+<h2 id="pruebas-y-calidad">Pruebas y calidad</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Herramienta</th>
+<th>Qué cubre</th>
+</tr>
+</thead><tbody><tr>
+<td>Vitest</td>
+<td>Pruebas unitarias y de componentes</td>
+</tr>
+<tr>
+<td>Testing Library</td>
+<td>Interacción real con los componentes</td>
+</tr>
+<tr>
+<td>Playwright</td>
+<td>Integración en navegador</td>
+</tr>
+<tr>
+<td>fake-indexeddb</td>
+<td>IndexedDB en memoria para las pruebas</td>
+</tr>
+<tr>
+<td>ESLint + Prettier</td>
+<td>Estilo y errores comunes</td>
+</tr>
+<tr>
+<td><code>tsc -b</code></td>
+<td>Comprobación estricta de tipos en el build</td>
+</tr>
+</tbody></table></div>
+<p>Las pruebas de navegador generan archivos WAV pequeños en memoria; no descargan ni confirman música con derechos.</p>
+<h2 id="hoja-de-ruta-tecnica">Hoja de ruta técnica</h2>
+<p>El hito 1 (reproductor web local) está implementado. Antes de declararlo estable quedan cuatro validaciones: reproducción e importación en Firefox, Safari, Chromium y navegadores móviles actuales; perfilado de la importación de colecciones grandes y del uso de memoria; revisión de interacción por teclado, lectores de pantalla, contraste y áreas táctiles; y comportamiento real en segundo plano con interrupciones y teclas multimedia.</p>
+<p>Del hito 2 están hechas las listas personalizadas, las sobrescrituras de metadatos con restauración, el reemplazo de carátulas, las fotos de artista, la reordenación por botones y teclado, la migración de biblioteca y el recuerdo del volumen. Quedan pendientes la reordenación de la cola arrastrando, la copia de seguridad, la información de cuota, la importación en un worker, la importación de carpetas y la PWA instalable.</p>
+
+    </article>
+    <nav class="pager reveal" aria-label="paginación">
+    <a class="pager__link" href="/Docs/wave/platforms/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.prev">Anterior</span></span>
+      <span class="pager__title" data-i18n="page.wave.platforms">Plataformas</span>
+    </a>
+    <a class="pager__link pager__link--next" href="/Docs/wave/privacy/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-right"></use></svg><span data-i18n="docs.next">Siguiente</span></span>
+      <span class="pager__title" data-i18n="page.wave.privacy">Privacidad y datos</span>
+    </a>
+    </nav>
+    <p class="source-note reveal" data-i18n="docs.sourceNote">Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.</p>
+    </div>
+    <aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
+    <p class="toc__title" data-i18n="docs.tocTitle">En esta página</p>
+    <ol class="toc__list">
+      <li><a href="#alcance-y-decision-de-plataforma">Alcance y decisión de plataforma</a></li>
+      <li><a href="#capas-y-responsabilidades">Capas y responsabilidades</a></li>
+      <li><a href="#estructura-de-carpetas">Estructura de carpetas</a></li>
+      <li><a href="#flujo-de-datos">Flujo de datos</a></li>
+      <li><a href="#modelo-de-datos">Modelo de datos</a></li>
+      <li><a href="#decisiones-que-se-notan-al-usarlo">Decisiones que se notan al usarlo</a></li>
+      <li><a href="#pruebas-y-calidad">Pruebas y calidad</a></li>
+      <li><a href="#hoja-de-ruta-tecnica">Hoja de ruta técnica</a></li>
+    </ol>
+    <p class="toc__progress" aria-hidden="true"><span></span></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="https://jaime-gaming.github.io/" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-github"></use></svg></a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-youtube"></use></svg></a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-x"></use></svg></a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-discord"></use></svg></a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-mail"></use></svg></a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="/Docs/"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="/Docs/projects/"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="https://jaime-gaming.github.io/blog/"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="https://jaime-gaming.github.io/contact/"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="https://jaime-gaming.github.io/"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="/Docs/status/"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="https://jaime-gaming.github.io/terms/" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="https://jaime-gaming.github.io/privacy/" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-arrow"></use></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" hidden>
+  <div class="search-modal__backdrop" data-search-close></div>
+  <div class="search-modal__panel">
+    <h2 class="sr-only" id="searchModalTitle" data-i18n="search.dialogTitle">Buscar en la documentación</h2>
+    <div class="search-modal__head">
+      <span class="search-modal__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg></span>
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar en la documentación…" data-i18n-placeholder="search.placeholder" aria-describedby="searchModalHint" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-activedescendant="" />
+      <button class="search-modal__close" type="button" data-search-close aria-label="Cerrar búsqueda" data-i18n-aria="search.close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-close"></use></svg></button>
+    </div>
+    <div class="search-modal__hintrow">
+      <p class="search-modal__hint" id="searchModalHint" data-i18n="search.hint">Escribe para filtrar páginas y apartados</p>
+      <p class="search-modal__keys" id="searchKeys" aria-hidden="true">
+        <span class="keyhint"><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="search.kbdNavigate">navegar</span></span>
+        <span class="keyhint"><kbd>↵</kbd><span data-i18n="search.kbdOpen">abrir</span></span>
+        <span class="keyhint"><kbd>Esc</kbd><span data-i18n="search.kbdClose">cerrar</span></span>
+      </p>
+    </div>
+    <div class="search-modal__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" data-i18n-aria="search.resultsLabel"></div>
+  </div>
+</div>
+
+<script type="application/json" id="uiStrings">{"es":{"nav.home":"Inicio","nav.projects":"Proyectos","nav.search":"Buscar","nav.site":"Mi web","nav.blog":"Blog","nav.contact":"Contacto","nav.openMenu":"Abrir menú","nav.closeMenu":"Cerrar menú","aria.skipToContent":"Saltar al contenido","aria.homeLogo":"Jaime Gaming Docs — inicio","aria.mainNav":"Navegación principal","aria.backToTop":"Volver arriba","aria.langSwitch":"Español. Cambiar a inglés","aria.sidebar":"Índice de esta documentación","aria.toc":"En esta página","aria.openSidebar":"Abrir índice","aria.closeSidebar":"Cerrar índice","search.button":"Buscar","search.placeholder":"Buscar en la documentación…","search.hint":"Escribe para filtrar páginas y apartados","search.empty":"Sin resultados para","search.noQuery":"Prueba con «instalar», «comandos», «privacidad»…","search.results":"resultados","search.result":"resultado","search.close":"Cerrar búsqueda","search.scopeAll":"Toda la documentación","search.scopeProject":"Solo este proyecto","search.kbdNavigate":"navegar","search.kbdOpen":"abrir","search.kbdClose":"cerrar","search.dialogTitle":"Buscar en la documentación","search.resultsLabel":"Resultados de búsqueda","docs.eyebrow":"Documentación","docs.sidebarTitle":"En esta documentación","docs.tocTitle":"En esta página","docs.editOnGithub":"Editar esta página en GitHub","docs.sourceNote":"Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.","docs.updated":"Última revisión","docs.prev":"Anterior","docs.next":"Siguiente","docs.allProjects":"Todos los proyectos","docs.readTime":"min de lectura","docs.jumpTo":"Ir a","home.kicker":"DOCUMENTACIÓN","home.title":"Todos mis proyectos, \u003cspan class=\"hero__title-accent\">documentados\u003c/span>","home.subtitle":"Un solo sitio con la documentación de todo lo que construyo: reproductores, agentes, bots, juegos y webs. Guías de instalación, arquitectura, uso y referencia.","home.ctaPrimary":"Empezar a leer","home.ctaSecondary":"Ver todos los proyectos","home.stats.projects":"proyectos","home.stats.pages":"páginas","home.stats.languages":"idiomas","home.stats.updated":"actualizada","home.about.title":"Sobre esta documentación","home.about.sub":"Cómo está hecha y cómo se mantiene.","home.about.card.label":"CÓMO FUNCIONA","home.about.card.title":"Escrita a mano, generada con Node","home.about.card.text":"Cada página es un Markdown en content/docs/. El build las convierte en HTML estático con el mismo sistema, la misma paleta y las mismas animaciones que mi web principal.","home.about.card.stamp":"VER EL REPOSITORIO ↗","home.contribute.title":"¿Ves un error?","home.contribute.text":"Toda la documentación está en un repositorio público. Abre una issue o envía una pull request con la corrección.","home.contribute.issue":"Abrir una issue","home.contribute.pr":"Proponer un cambio","home.contribute.email":"Escribirme un correo","projects.title":"Proyectos","projects.sub":"Toda la documentación, proyecto por proyecto. Cada tarjeta enlaza a su guía completa.","projects.pages":"páginas","projects.openDocs":"Abrir documentación","projects.demo":"Probar","projects.code":"Código","projects.group.all":"Todos","callout.note":"Nota","callout.tip":"Consejo","callout.warning":"Aviso","callout.important":"Importante","callout.caution":"Precaución","code.copy":"Copiar","code.copied":"Copiado","footer.rights":"Todos los derechos reservados.","footer.mainSite":"Mi web","footer.tagline":"Juegos para navegador, aplicaciones web y vídeos.","footer.site":"Sitio","footer.siteAria":"Enlaces del sitio","footer.resources":"Recursos","footer.resourcesAria":"Recursos y enlaces externos","footer.status":"Estado del servicio","footer.email":"Correo","footer.terms":"Términos del servicio","footer.privacy":"Privacidad","footer.source":"Código fuente ↗","footer.legalAria":"Términos y privacidad","aria.socials":"Redes sociales","aria.footerLogo":"Jaime Gaming — inicio","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Correo electrónico","status.title":"Estado del servicio","status.sub":"Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.","status.note":"Datos del panel oficial de estado","status.open":"Abrir panel completo ↗","status.loading":"Consultando el estado…","status.unknown":"Estado no disponible","status.error":"No se pudo consultar el estado en directo. Puedes abrir el panel completo.","status.updated":"Actualizado el {date}","status.componentsAria":"Componentes del servicio","status.allOperational":"Todos los sistemas operativos","status.minorIssues":"Incidencias menores","status.majorIssues":"Incidencia grave","status.criticalIssues":"Incidencia crítica","status.maintenanceOverall":"Mantenimiento en curso","status.operational":"Operativo","status.degraded":"Rendimiento degradado","status.partial":"Interrupción parcial","status.major":"Interrupción grave","status.underMaintenance":"En mantenimiento","status.maintenanceTitle":"Mantenimiento programado","status.maintenanceBody":"Texto publicado en el panel de estado.","status.frameNotice":"El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.","status.loadFrame":"Cargar panel incrustado","status.frameTitle":"Panel de estado de Jaime Gaming","status.hint":"El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.","notFound.title":"Página no encontrada","notFound.sub":"Puede que el enlace esté roto o que esta guía se haya movido.","notFound.home":"Volver al inicio de la documentación","notFound.projects":"Ver todos los proyectos","home.guide.title":"Cómo están organizadas las guías","home.guide.sub":"Todas siguen la misma anatomía, para que sepas dónde buscar en cada proyecto.","home.guide.overview.num":"01","home.guide.overview.title":"Visión general","home.guide.overview.desc":"Qué es el proyecto, qué problema resuelve, en qué estado está y qué lo distingue. Es la puerta de entrada de cada guía.","home.guide.install.num":"02","home.guide.install.title":"Instalación","home.guide.install.desc":"Requisitos, comandos para ponerlo en marcha y la primera comprobación de que todo funciona.","home.guide.usage.num":"03","home.guide.usage.title":"Uso","home.guide.usage.desc":"El día a día: funciones, comandos, mecánicas o flujos de trabajo, con ejemplos concretos.","home.guide.deep.num":"04","home.guide.deep.title":"Cómo está hecho","home.guide.deep.desc":"Arquitectura, estructura de carpetas, decisiones técnicas y los límites conocidos del proyecto.","home.guide.reference.num":"05","home.guide.reference.title":"Referencia","home.guide.reference.desc":"Tablas de consulta: opciones, formatos de datos, modelos, plataformas o preguntas frecuentes.","home.about.text1":"Este sitio reúne en un mismo lugar la documentación de los siete proyectos que mantengo en GitHub. Cada guía está escrita a mano a partir del README y de los documentos del repositorio, y se revisa cuando el proyecto cambia.","home.about.text2":"Nada se genera automáticamente desde GitHub ni depende de servicios externos: el contenido vive en este repositorio como Markdown, se compila a HTML estático con Node y se publica en GitHub Pages. El buscador usa un índice que se crea en ese mismo build.","home.about.row.stack":"Generador","home.about.row.palette":"Paleta","home.about.row.fonts":"Tipografías","home.about.row.host":"Publicación","home.about.row.search":"Buscador","home.about.row.searchValue":"Índice estático, sin servicios externos","docs.otherProjects":"Otros proyectos","projects.empty":"No hay proyectos en esta categoría.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentación de todos los proyectos de Jaime Gaming: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID y su web personal.","meta.projects.title":"Proyectos — Docs de Jaime Gaming","meta.projects.description":"Índice de toda la documentación, agrupada por aplicaciones, juegos, bots y web.","proj.wave.name":"Wave","proj.wave.tagline":"Reproductor de música local-first para web, Android y Windows.","proj.wave.summary":"Un hogar para la música que ya tienes. Wave guarda tu colección en el dispositivo: sin cuenta, sin suscripción y sin subir audio a ningún servidor.","proj.wave.status":"0.1.0 · activa","page.wave.index":"Visión general","page.wave.install":"Instalación","page.wave.features":"Funciones y uso","page.wave.platforms":"Plataformas","page.wave.architecture":"Arquitectura","page.wave.privacy":"Privacidad y datos","page.wave.dev":"Desarrollo","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"Todos tus agentes de IA en un mismo sitio.","proj.jaigent.summary":"Un binario y diez proveedores. Los mismos tools en la terminal, en ChatGPT Web por MCP remoto, en Claude Desktop y en cualquier app que hable OpenAI. Con deshacer en cada escritura y tope de gasto.","proj.jaigent.status":"0.5.x · activa","page.jaigent.index":"Visión general","page.jaigent.install":"Instalación y claves","page.jaigent.cli":"Uso en la terminal","page.jaigent.models":"Modelos y proveedores","page.jaigent.mcp":"MCP y tu propia API","page.jaigent.extend":"Skills, plugins y horarios","page.jaigent.reference":"Referencia de tools","page.jaigent.security":"Seguridad","page.jaigent.dev":"Desarrollo","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.","proj.hellbot.summary":"Mantén al menos a una persona real en un canal de voz durante 160 horas seguidas. Si el canal se vacía y nadie vuelve en el periodo de gracia, la partida muere para siempre.","proj.hellbot.status":"producción · estable","page.hellbot.index":"Visión general","page.hellbot.rules":"Reglas del evento","page.hellbot.edge-cases":"Casos límite","page.hellbot.install":"Instalación y despliegue","page.hellbot.commands":"Comandos","page.hellbot.dashboard":"Dashboard en vivo","page.hellbot.architecture":"Arquitectura","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"Un número, infinitas posibilidades.","proj.rngdle-infinite.summary":"Tira un número entre 0 y 1.000.000 y descubre qué lo hace especial. Un incremental de navegador con EP, insignias, compañeros, skills, rebirth, prestige y rollback.","proj.rngdle-infinite.status":"jugable · activa","page.rngdle-infinite.index":"Visión general","page.rngdle-infinite.play":"Cómo se juega","page.rngdle-infinite.systems":"Sistemas y progresión","page.rngdle-infinite.save":"Partida y sincronización","page.rngdle-infinite.faq":"Preguntas frecuentes","page.rngdle-infinite.dev":"Desarrollo","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Tu espacio personal: un diario minimalista y 100 % local.","proj.daily-diary.summary":"Sin backend, sin cuentas, sin IA y sin APIs externas. Los resúmenes, estadísticas y tendencias se calculan en tu navegador con reglas y plantillas de texto.","proj.daily-diary.status":"completo · local","page.daily-diary.index":"Visión general","page.daily-diary.install":"Instalación y uso","page.daily-diary.areas":"Las cinco áreas","page.daily-diary.data":"Datos y privacidad","page.daily-diary.dev":"Estructura y desarrollo","proj.void.name":"VOID","proj.void.tagline":"Michael Burns desapareció el año pasado. ¿Quieres entrar?","proj.void.summary":"Un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece. Interfaz CRT de alto contraste, en español e inglés.","proj.void.status":"beta · en desarrollo","page.void.index":"Visión general","page.void.install":"Instalación y juego","page.void.world":"El mundo de VOID Corp","page.void.engine":"Las tripas del archivo","page.void.faq":"Avisos y preguntas","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"El sitio personal que da origen a esta documentación.","proj.website.summary":"Portfolio oscuro y bilingüe generado con Node: proyectos sincronizados desde GitHub, calendario de contribuciones, presencia de Discord y blog desde Markdown.","proj.website.status":"publicada · activa","page.website.index":"Visión general","page.website.build":"Build y preview","page.website.content":"Editar el contenido","page.website.i18n":"Los dos idiomas","page.website.architecture":"Arquitectura del sitio","group.apps.title":"Aplicaciones y herramientas","group.apps.sub":"Software que resuelve algo concreto: música, agentes y organización personal.","group.games.title":"Juegos","group.games.sub":"Del incremental de navegador al terror psicológico.","group.bots.title":"Bots y eventos","group.bots.sub":"Automatización en directo para comunidades.","group.web.title":"Web","group.web.sub":"Los sitios que publico, incluido el que estás leyendo."},"en":{"nav.home":"Home","nav.projects":"Projects","nav.search":"Search","nav.site":"My site","nav.blog":"Blog","nav.contact":"Contact","nav.openMenu":"Open menu","nav.closeMenu":"Close menu","aria.skipToContent":"Skip to content","aria.homeLogo":"Jaime Gaming Docs — home","aria.mainNav":"Main navigation","aria.backToTop":"Back to top","aria.langSwitch":"English. Switch to Spanish","aria.sidebar":"Index of this documentation","aria.toc":"On this page","aria.openSidebar":"Open index","aria.closeSidebar":"Close index","search.button":"Search","search.placeholder":"Search the docs…","search.hint":"Type to filter pages and sections","search.empty":"No results for","search.noQuery":"Try “install”, “commands”, “privacy”…","search.results":"results","search.result":"result","search.close":"Close search","search.scopeAll":"All documentation","search.scopeProject":"This project only","search.kbdNavigate":"navigate","search.kbdOpen":"open","search.kbdClose":"close","search.dialogTitle":"Search the documentation","search.resultsLabel":"Search results","docs.eyebrow":"Documentation","docs.sidebarTitle":"In this documentation","docs.tocTitle":"On this page","docs.editOnGithub":"Edit this page on GitHub","docs.sourceNote":"Documentation written by hand for this site, based on the repository's README and docs.","docs.updated":"Last reviewed","docs.prev":"Previous","docs.next":"Next","docs.allProjects":"All projects","docs.readTime":"min read","docs.jumpTo":"Go to","home.kicker":"DOCUMENTATION","home.title":"All my projects, \u003cspan class=\"hero__title-accent\">documented\u003c/span>","home.subtitle":"One single site with the documentation of everything I build: players, agents, bots, games and websites. Install guides, architecture, usage and reference.","home.ctaPrimary":"Start reading","home.ctaSecondary":"See all projects","home.stats.projects":"projects","home.stats.pages":"pages","home.stats.languages":"languages","home.stats.updated":"updated","home.about.title":"About these docs","home.about.sub":"How they are made and how they are kept up to date.","home.about.card.label":"HOW IT WORKS","home.about.card.title":"Written by hand, generated with Node","home.about.card.text":"Every page is a Markdown file in content/docs/. The build turns them into static HTML with the same system, the same palette and the same animations as my main website.","home.about.card.stamp":"SEE THE REPOSITORY ↗","home.contribute.title":"Found a mistake?","home.contribute.text":"All of this documentation lives in a public repository. Open an issue or send a pull request with the fix.","home.contribute.issue":"Open an issue","home.contribute.pr":"Propose a change","home.contribute.email":"Send me an email","projects.title":"Projects","projects.sub":"All the documentation, project by project. Each card links to its complete guide.","projects.pages":"pages","projects.openDocs":"Open documentation","projects.demo":"Try it","projects.code":"Code","projects.group.all":"All","callout.note":"Note","callout.tip":"Tip","callout.warning":"Warning","callout.important":"Important","callout.caution":"Caution","code.copy":"Copy","code.copied":"Copied","footer.rights":"All rights reserved.","footer.mainSite":"My site","footer.tagline":"Browser games, web applications and videos.","footer.site":"Site","footer.siteAria":"Site links","footer.resources":"Resources","footer.resourcesAria":"Resources and external links","footer.status":"Service status","footer.email":"Email","footer.terms":"Terms of Service","footer.privacy":"Privacy","footer.source":"Source code ↗","footer.legalAria":"Terms and privacy","aria.socials":"Social links","aria.footerLogo":"Jaime Gaming — home","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Email","status.title":"Service status","status.sub":"Live status of the website, documentation and projects, from the official incident.io panel.","status.note":"Data from the official status panel","status.open":"Open full status page ↗","status.loading":"Checking status…","status.unknown":"Status unavailable","status.error":"Couldn't fetch the live status. You can open the full status page.","status.updated":"Updated {date}","status.componentsAria":"Service components","status.allOperational":"All systems operational","status.minorIssues":"Minor issues","status.majorIssues":"Major incident","status.criticalIssues":"Critical incident","status.maintenanceOverall":"Maintenance in progress","status.operational":"Operational","status.degraded":"Degraded performance","status.partial":"Partial outage","status.major":"Major outage","status.underMaintenance":"Under maintenance","status.maintenanceTitle":"Scheduled maintenance","status.maintenanceBody":"Text published on the status page.","status.frameNotice":"The full panel belongs to incident.io and is only loaded if you ask for it. Once loaded, it may use its own cookies.","status.loadFrame":"Load embedded panel","status.frameTitle":"Jaime Gaming status page","status.hint":"The summary refreshes when you open this page. If the embedded panel doesn’t appear, open it with the button above.","notFound.title":"Page not found","notFound.sub":"The link may be broken or this guide may have moved.","notFound.home":"Back to the docs home","notFound.projects":"See all projects","home.guide.title":"How the guides are organised","home.guide.sub":"They all follow the same anatomy, so you know where to look in every project.","home.guide.overview.num":"01","home.guide.overview.title":"Overview","home.guide.overview.desc":"What the project is, which problem it solves, what state it is in and what sets it apart. It is the entry page of every guide.","home.guide.install.num":"02","home.guide.install.title":"Installation","home.guide.install.desc":"Requirements, the commands to get it running and the first check that everything works.","home.guide.usage.num":"03","home.guide.usage.title":"Usage","home.guide.usage.desc":"Day to day: features, commands, mechanics or workflows, with concrete examples.","home.guide.deep.num":"04","home.guide.deep.title":"How it is built","home.guide.deep.desc":"Architecture, folder structure, technical decisions and the project's known limits.","home.guide.reference.num":"05","home.guide.reference.title":"Reference","home.guide.reference.desc":"Lookup tables: options, data formats, models, platforms or frequently asked questions.","home.about.text1":"This site gathers, in one single place, the documentation of the seven projects I maintain on GitHub. Every guide is written by hand from the repository's README and docs, and reviewed when the project changes.","home.about.text2":"Nothing is generated automatically from GitHub and nothing depends on external services: the content lives in this repository as Markdown, it is compiled to static HTML with Node and published on GitHub Pages. Search uses an index created in that same build.","home.about.row.stack":"Generator","home.about.row.palette":"Palette","home.about.row.fonts":"Fonts","home.about.row.host":"Publishing","home.about.row.search":"Search","home.about.row.searchValue":"Static index, no external services","docs.otherProjects":"Other projects","projects.empty":"There are no projects in this category.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentation for all of Jaime Gaming's projects: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID and his personal website.","meta.projects.title":"Projects — Jaime Gaming Docs","meta.projects.description":"Index of all the documentation, grouped by apps, games, bots and web.","proj.wave.name":"Wave","proj.wave.tagline":"A local-first music player for web, Android and Windows.","proj.wave.summary":"A home for the music you already own. Wave keeps your collection on the device: no account, no subscription and no audio uploaded to any server.","proj.wave.status":"0.1.0 · active","page.wave.index":"Overview","page.wave.install":"Installation","page.wave.features":"Features & usage","page.wave.platforms":"Platforms","page.wave.architecture":"Architecture","page.wave.privacy":"Privacy & data","page.wave.dev":"Development","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"All your agents in one place.","proj.jaigent.summary":"One binary, ten providers. The same tools in the terminal, in ChatGPT Web over remote MCP, in Claude Desktop and in any app that speaks OpenAI. With undo on every write and a hard spend cap.","proj.jaigent.status":"0.5.x · active","page.jaigent.index":"Overview","page.jaigent.install":"Install & API keys","page.jaigent.cli":"Using the CLI","page.jaigent.models":"Models & providers","page.jaigent.mcp":"MCP & your own API","page.jaigent.extend":"Skills, plugins & schedules","page.jaigent.reference":"Tools reference","page.jaigent.security":"Security","page.jaigent.dev":"Development","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"The Discord bot that runs the Welcome to Hell endurance event.","proj.hellbot.summary":"Keep at least one real human in a single voice channel for 160 consecutive hours. If that channel empties and nobody returns within the grace period, the run is dead permanently.","proj.hellbot.status":"production · stable","page.hellbot.index":"Overview","page.hellbot.rules":"Event rules","page.hellbot.edge-cases":"Edge cases","page.hellbot.install":"Install & deploy","page.hellbot.commands":"Commands","page.hellbot.dashboard":"Live dashboard","page.hellbot.architecture":"Architecture","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"One number, infinite possibilities.","proj.rngdle-infinite.summary":"Roll a number from 0 to 1,000,000 and find out what makes it special. A browser incremental with EP, badges, companions, skills, rebirth, prestige and rollback.","proj.rngdle-infinite.status":"playable · active","page.rngdle-infinite.index":"Overview","page.rngdle-infinite.play":"How to play","page.rngdle-infinite.systems":"Systems & progression","page.rngdle-infinite.save":"Save & sync","page.rngdle-infinite.faq":"FAQ","page.rngdle-infinite.dev":"Development","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Your personal space: a minimalist, 100% local diary.","proj.daily-diary.summary":"No backend, no accounts, no AI and no external APIs. Summaries, statistics and trends are computed in your browser with rules and text templates.","proj.daily-diary.status":"complete · local","page.daily-diary.index":"Overview","page.daily-diary.install":"Install & run","page.daily-diary.areas":"The five areas","page.daily-diary.data":"Data & privacy","page.daily-diary.dev":"Structure & development","proj.void.name":"VOID","proj.void.tagline":"Michael Burns disappeared last year. Would you come in?","proj.void.summary":"A psychological game set in a mysterious corporation where everyone and everything disappears. High-contrast CRT interface, in Spanish and English.","proj.void.status":"beta · in development","page.void.index":"Overview","page.void.install":"Install & play","page.void.world":"The VOID Corp world","page.void.engine":"Inside the single file","page.void.faq":"Warnings & FAQ","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"The personal site this documentation is built from.","proj.website.summary":"Dark, bilingual portfolio generated with Node: projects synced from GitHub, contributions calendar, Discord presence and a Markdown blog.","proj.website.status":"published · active","page.website.index":"Overview","page.website.build":"Build & preview","page.website.content":"Editing content","page.website.i18n":"The two languages","page.website.architecture":"Site architecture","group.apps.title":"Apps & tools","group.apps.sub":"Software that solves something concrete: music, agents and personal organisation.","group.games.title":"Games","group.games.sub":"From the browser incremental to psychological horror.","group.bots.title":"Bots & events","group.bots.sub":"Live automation for communities.","group.web.title":"Web","group.web.sub":"The sites I publish, including the one you are reading."}}</script>
+<script type="application/json" id="pageTranslations">{"es":{"title":"Arquitectura · Wave — Docs de Jaime Gaming","description":"Capas, flujo de datos, estructura de carpetas y módulos internos del cliente web de Wave.","fields":{"body":"\u003cp>Esta página describe el cliente web, que es la implementación de referencia. Wave no tiene API HTTP ni backend: los interfaces que se documentan aquí son \u003cstrong>internos\u003c/strong> y pueden cambiar durante el desarrollo \u003ccode>0.x\u003c/code>.\u003c/p>\n\u003ch2 id=\"alcance-y-decision-de-plataforma\">Alcance y decisión de plataforma\u003c/h2>\n\u003cp>La primera implementación es una aplicación de navegador en \u003cstrong>React y TypeScript\u003c/strong>. Ahora la acompañan proyectos independientes de Kotlin/Compose para Android y de C#/WPF para Windows. PixelPlayer sigue siendo una referencia de organización de biblioteca local y de interacciones de reproducción, \u003cstrong>no una dependencia de implementación\u003c/strong>.\u003c/p>\n\u003cp>El primer hito es un corte vertical que funcione de punta a punta: importar música local, persistirla, explorarla y buscarla, reproducirla, organizar listas y, opcionalmente, editar metadatos locales. Sin backend ni autenticación. Las letras automáticas opcionales consultan LRCLIB directamente desde el navegador; el audio permanece local.\u003c/p>\n\u003ch2 id=\"capas-y-responsabilidades\">Capas y responsabilidades\u003c/h2>\n\u003cpre data-lang=\"text\">\u003ccode class=\"language-text\">Interfaz React\n    ├── App: vistas de biblioteca, filtros, diálogos, entrada de importación\n    └── components: carátulas, controles del reproductor, diálogos accesibles\n            │\nHooks de aplicación\n    ├── useLibrary: carga, importación, favoritos, borrado, sobrescrituras\n    ├── usePlaylists: carga, membresía ordenada, CRUD, errores\n    └── usePlayer: ciclo de vida del audio, despacho de cola, Media Session\n            │\nDominio                          Datos / adaptadores del navegador\n    ├── Modelos Track / Playlist      ├── Repositorio IndexedDB\n    ├── búsqueda / formateo           ├── importador de metadatos\n    ├── mutaciones puras de listas    ├── validación y recorte de carátulas\n    └── reducer puro de la cola       └── HTMLAudioElement\u003c/code>\u003c/pre>\n\u003cp>Tres reglas sostienen el diseño:\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>La capa de dominio no depende de React ni del almacenamiento.\u003c/strong> Son funciones y tipos puros.\u003c/li>\n\u003cli>\u003cstrong>Los módulos de datos no renderizan interfaz.\u003c/strong>\u003c/li>\n\u003cli>\u003cstrong>Los hooks coordinan los efectos secundarios\u003c/strong> y exponen el estado a los componentes.\u003c/li>\n\u003c/ul>\n\u003cp>En este primer hito la navegación entre pantallas y la agrupación viven en \u003ccode>App.tsx\u003c/code>. El enrutado y las pantallas por función se pueden extraer cuando la aplicación crezca.\u003c/p>\n\u003ch2 id=\"estructura-de-carpetas\">Estructura de carpetas\u003c/h2>\n\u003cpre data-lang=\"text\">\u003ccode class=\"language-text\">src/\n├── components/\n│   ├── Artwork.tsx\n│   ├── ArtworkPicker.tsx\n│   ├── TrackEditor.tsx\n│   ├── PlaylistDialog.tsx\n│   ├── PlaylistCollection.tsx\n│   ├── AnimatedListItem.tsx\n│   ├── LibraryContent.tsx\n│   ├── Navigation.tsx\n│   ├── Modal.tsx\n│   └── PlayerBar.tsx\n├── data/\n│   ├── artwork.ts\n│   ├── import.ts\n│   └── library.ts\n├── domain/\n│   ├── playlists.ts\n│   ├── player.ts\n│   └── types.ts\n├── hooks/\n│   ├── usePlaylists.ts\n│   ├── useLibrary.ts\n│   └── usePlayer.ts\n├── ui/               # tokens y preferencias de movimiento compartidos\n├── test/\n├── App.tsx\n├── main.tsx\n└── styles.css\u003c/code>\u003c/pre>\n\u003ch2 id=\"flujo-de-datos\">Flujo de datos\u003c/h2>\n\u003cp>Ocho pasos, desde que eliges un archivo hasta que suena:\u003c/p>\n\u003col>\n\u003cli>\u003cstrong>Selección explícita.\u003c/strong> El usuario elige o suelta archivos. El navegador no puede escanear en silencio las carpetas de música del dispositivo.\u003c/li>\n\u003cli>\u003cstrong>Validación.\u003c/strong> \u003ccode>useLibrary\u003c/code> comprueba extensión, tamaño e identidad duplicada.\u003c/li>\n\u003cli>\u003cstrong>Metadatos.\u003c/strong> El importador lee las etiquetas incrustadas en local y, si faltan, recurre a una inferencia conservadora de dos partes por guion espaciado, con artista y álbum desconocidos. Las etiquetas válidas tienen prioridad y la inferencia de artista desde el nombre debe coincidir con un título incrustado. Los prefijos explícitos de pista y disco se eliminan; los títulos numéricos genuinos, no.\u003c/li>\n\u003cli>\u003cstrong>Persistencia.\u003c/strong> Cada pista y su Blob de audio se guardan en IndexedDB \u003cstrong>antes\u003c/strong> de entrar en el estado de la interfaz.\u003c/li>\n\u003cli>\u003cstrong>Derivación.\u003c/strong> La interfaz deriva las pistas visibles desde la búsqueda, la vista, la agrupación y el orden.\u003c/li>\n\u003cli>\u003cstrong>Cola.\u003c/strong> Al seleccionar una pista se carga en el reducer de la cola una instantánea de los identificadores visibles.\u003c/li>\n\u003cli>\u003cstrong>Reproducción.\u003c/strong> \u003ccode>usePlayer\u003c/code> resuelve el identificador activo a una pista, crea URLs temporales de Blob y controla el motor decodificador nativo.\u003c/li>\n\u003cli>\u003cstrong>Eventos.\u003c/strong> Los eventos del navegador actualizan duración y posición o avanzan la cola. Los errores de audio pausan y muestran un mensaje accionable.\u003c/li>\n\u003c/ol>\n\u003ch2 id=\"modelo-de-datos\">Modelo de datos\u003c/h2>\n\u003cp>Definido en \u003ccode>src/domain/types.ts\u003c/code>:\u003c/p>\n\u003cpre data-lang=\"ts\">\u003ccode class=\"language-ts\">interface Track {\n  id: string;\n  title: string;\n  artist: string;\n  album: string;\n  duration: number;\n  fileName: string;\n  size: number;\n  addedAt: number;\n  favorite: boolean;\n  blob: Blob;\n  artwork?: string;\n  audioInfo?: AudioInfo;\n  contentHash?: string;\n  lyricsLookup?: LyricsLookup;\n  lyrics?: Lyrics;\n  trackNumber?: number;\n  discNumber?: number;\n  originalMetadata?: TrackMetadata;\n  editedAt?: number;\n}\n\ninterface AudioInfo {\n  codec?: string;\n  sampleRate?: number;   // Hz\n  bitsPerSample?: number;\n  bitrate?: number;      // bits por segundo\n  lossless?: boolean;\n}\n\ntype RepeatMode = 'off' | 'all' | 'one';\ntype LibraryView = 'songs' | 'albums' | 'artists' | 'favorites' | 'playlists';\u003c/code>\u003c/pre>\n\u003cp>Convenciones de los campos:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Campo\u003c/th>\n\u003cth>Unidad y significado\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>duration\u003c/code>\u003c/td>\n\u003ctd>Segundos. Cero significa desconocida.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>size\u003c/code>\u003c/td>\n\u003ctd>Bytes.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>addedAt\u003c/code>\u003c/td>\n\u003ctd>Marca de tiempo Unix en milisegundos.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>artwork\u003c/code>\u003c/td>\n\u003ctd>Data URL de una imagen generada en local. Opcional.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>blob\u003c/code>\u003c/td>\n\u003ctd>El archivo de audio persistido.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>audioInfo\u003c/code>\u003c/td>\n\u003ctd>Metadatos opcionales de la fuente importada. \u003cstrong>No\u003c/strong> describe ni garantiza la calidad de salida del dispositivo.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>originalMetadata\u003c/code>\u003c/td>\n\u003ctd>Se captura una sola vez antes de la primera edición local y se elimina al restaurar.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>editedAt\u003c/code>\u003c/td>\n\u003ctd>Milisegundos desde el epoch Unix.\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Álbumes y artistas son \u003cstrong>grupos derivados\u003c/strong>, no entidades almacenadas de forma independiente. Ni editar ni restaurar cambia el Blob de audio persistido.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Nota\u003c/p>\n  \u003cdiv class=\"callout__body\">Los ejemplos anteriores en Kotlin para \u003ccode>MediaPlayerController\u003c/code>, \u003ccode>MusicLibrary\u003c/code>, listas y gestores de ajustes eran propuestas, no APIs funcionales. Su comportamiento relevante está representado ahora por los módulos TypeScript anteriores; lo que no está implementado sigue en la hoja de ruta del repositorio.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"decisiones-que-se-notan-al-usarlo\">Decisiones que se notan al usarlo\u003c/h2>\n\u003cp>\u003cstrong>Deduplicación por hash del archivo completo.\u003c/strong> SHA-256 sobre los bytes, no sobre el nombre. Dos archivos idénticos con nombres o fechas distintos no ocupan dos veces, y los identificadores heredados y las referencias de las listas se preservan.\u003c/p>\n\u003cp>\u003cstrong>El audio se conserva una sola vez y a calidad original.\u003c/strong> No se recomprime. Las carátulas sí son JPEG compactos y las letras persisten el texto crudo una vez, reconstruyendo las líneas analizadas al cargar.\u003c/p>\n\u003cp>\u003cstrong>Sobrescrituras, no reescrituras.\u003c/strong> Las ediciones de metadatos y las carátulas personalizadas viven como sobrescrituras locales. Wave no toca las etiquetas de tus archivos ni las exporta.\u003c/p>\n\u003cp>\u003cstrong>Migración con poda atómica.\u003c/strong> La migración de biblioteca a versión 1 elimina de forma atómica las referencias de listas borradas, sin dejar punteros colgando.\u003c/p>\n\u003ch2 id=\"pruebas-y-calidad\">Pruebas y calidad\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Herramienta\u003c/th>\n\u003cth>Qué cubre\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Vitest\u003c/td>\n\u003ctd>Pruebas unitarias y de componentes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Testing Library\u003c/td>\n\u003ctd>Interacción real con los componentes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Playwright\u003c/td>\n\u003ctd>Integración en navegador\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>fake-indexeddb\u003c/td>\n\u003ctd>IndexedDB en memoria para las pruebas\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>ESLint + Prettier\u003c/td>\n\u003ctd>Estilo y errores comunes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>tsc -b\u003c/code>\u003c/td>\n\u003ctd>Comprobación estricta de tipos en el build\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Las pruebas de navegador generan archivos WAV pequeños en memoria; no descargan ni confirman música con derechos.\u003c/p>\n\u003ch2 id=\"hoja-de-ruta-tecnica\">Hoja de ruta técnica\u003c/h2>\n\u003cp>El hito 1 (reproductor web local) está implementado. Antes de declararlo estable quedan cuatro validaciones: reproducción e importación en Firefox, Safari, Chromium y navegadores móviles actuales; perfilado de la importación de colecciones grandes y del uso de memoria; revisión de interacción por teclado, lectores de pantalla, contraste y áreas táctiles; y comportamiento real en segundo plano con interrupciones y teclas multimedia.\u003c/p>\n\u003cp>Del hito 2 están hechas las listas personalizadas, las sobrescrituras de metadatos con restauración, el reemplazo de carátulas, las fotos de artista, la reordenación por botones y teclado, la migración de biblioteca y el recuerdo del volumen. Quedan pendientes la reordenación de la cola arrastrando, la copia de seguridad, la información de cuota, la importación en un worker, la importación de carpetas y la PWA instalable.\u003c/p>\n","desc":"Capas, flujo de datos, estructura de carpetas y módulos internos del cliente web de Wave.","readtime":"5 min de lectura","editHref":"https://github.com/jaime-gaming/Wave/blob/main/content/docs/wave/architecture.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#alcance-y-decision-de-plataforma\">Alcance y decisión de plataforma\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#capas-y-responsabilidades\">Capas y responsabilidades\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#estructura-de-carpetas\">Estructura de carpetas\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#flujo-de-datos\">Flujo de datos\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#modelo-de-datos\">Modelo de datos\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#decisiones-que-se-notan-al-usarlo\">Decisiones que se notan al usarlo\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#pruebas-y-calidad\">Pruebas y calidad\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#hoja-de-ruta-tecnica\">Hoja de ruta técnica\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}},"en":{"title":"Architecture · Wave — Docs de Jaime Gaming","description":"Layers, data flow, directory layout and internal modules of Wave's web client.","fields":{"body":"\u003cp>This page describes the web client, which is the reference implementation. Wave has no HTTP API and no backend: the interfaces documented here are \u003cstrong>internal\u003c/strong> and may change during \u003ccode>0.x\u003c/code> development.\u003c/p>\n\u003ch2 id=\"scope-and-platform-decision\">Scope and platform decision\u003c/h2>\n\u003cp>The first implementation is a browser application in \u003cstrong>React and TypeScript\u003c/strong>. It is now accompanied by independent Kotlin/Compose projects for Android and C#/WPF for Windows. PixelPlayer remains a reference for local library organisation and playback interactions, \u003cstrong>not an implementation dependency\u003c/strong>.\u003c/p>\n\u003cp>The first milestone is a working end-to-end vertical slice: import local music, persist it, browse and search it, play it, organise playlists and, optionally, edit local metadata. No backend, no authentication. Optional automatic lyrics query LRCLIB directly from the browser; the audio stays local.\u003c/p>\n\u003ch2 id=\"layers-and-responsibilities\">Layers and responsibilities\u003c/h2>\n\u003cpre data-lang=\"text\">\u003ccode class=\"language-text\">React interface\n    ├── App: library views, filters, dialogs, import entry points\n    └── components: artwork, player controls, accessible dialogs\n            │\nApplication hooks\n    ├── useLibrary: loading, import, favorites, removal, metadata overrides\n    ├── usePlaylists: loading, ordered membership, CRUD, errors\n    └── usePlayer: audio lifecycle, queue dispatch, Media Session\n            │\nDomain                        Data / browser adapters\n    ├── Track / Playlist models       ├── IndexedDB repository\n    ├── search / formatting           ├── metadata importer\n    ├── pure playlist mutations       ├── artwork validation / crop\n    └── pure queue reducer            └── HTMLAudioElement\u003c/code>\u003c/pre>\n\u003cp>Three rules hold the design up:\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>The domain layer has no React or storage dependencies.\u003c/strong> They are pure functions and types.\u003c/li>\n\u003cli>\u003cstrong>Data modules do not render interface elements.\u003c/strong>\u003c/li>\n\u003cli>\u003cstrong>Hooks coordinate side effects\u003c/strong> and expose state to components.\u003c/li>\n\u003c/ul>\n\u003cp>For this first milestone, screen navigation and grouping live in \u003ccode>App.tsx\u003c/code>. Routing and feature-specific screens can be extracted when the application grows.\u003c/p>\n\u003ch2 id=\"directory-layout\">Directory layout\u003c/h2>\n\u003cpre data-lang=\"text\">\u003ccode class=\"language-text\">src/\n├── components/\n│   ├── Artwork.tsx\n│   ├── ArtworkPicker.tsx\n│   ├── TrackEditor.tsx\n│   ├── PlaylistDialog.tsx\n│   ├── PlaylistCollection.tsx\n│   ├── AnimatedListItem.tsx\n│   ├── LibraryContent.tsx\n│   ├── Navigation.tsx\n│   ├── Modal.tsx\n│   └── PlayerBar.tsx\n├── data/\n│   ├── artwork.ts\n│   ├── import.ts\n│   └── library.ts\n├── domain/\n│   ├── playlists.ts\n│   ├── player.ts\n│   └── types.ts\n├── hooks/\n│   ├── usePlaylists.ts\n│   ├── useLibrary.ts\n│   └── usePlayer.ts\n├── ui/               # shared motion preferences and tokens\n├── test/\n├── App.tsx\n├── main.tsx\n└── styles.css\u003c/code>\u003c/pre>\n\u003ch2 id=\"data-flow\">Data flow\u003c/h2>\n\u003cp>Eight steps, from choosing a file to hearing it:\u003c/p>\n\u003col>\n\u003cli>\u003cstrong>Explicit selection.\u003c/strong> The user selects or drops files. The browser cannot silently scan the device&#39;s music folders.\u003c/li>\n\u003cli>\u003cstrong>Validation.\u003c/strong> \u003ccode>useLibrary\u003c/code> checks extension, size and duplicate identity.\u003c/li>\n\u003cli>\u003cstrong>Metadata.\u003c/strong> The importer reads embedded tags locally and, when they are missing, falls back to a conservative two-part spaced-dash inference with unknown artist and album. Valid embedded tags take precedence and filename artist inference must agree with an embedded title. Explicit track and disc prefixes are stripped; genuine numeric titles are not.\u003c/li>\n\u003cli>\u003cstrong>Persistence.\u003c/strong> Each track and its audio Blob are saved in IndexedDB \u003cstrong>before\u003c/strong> entering the interface state.\u003c/li>\n\u003cli>\u003cstrong>Derivation.\u003c/strong> The interface derives visible tracks from search, view, grouping and sorting settings.\u003c/li>\n\u003cli>\u003cstrong>Queue.\u003c/strong> Selecting a track loads a snapshot of the visible identifiers into the queue reducer.\u003c/li>\n\u003cli>\u003cstrong>Playback.\u003c/strong> \u003ccode>usePlayer\u003c/code> resolves the active ID to a track, creates temporary Blob URLs and controls the native decoder engine.\u003c/li>\n\u003cli>\u003cstrong>Events.\u003c/strong> Browser events update duration and position or advance the queue. Audio errors pause and show an actionable message.\u003c/li>\n\u003c/ol>\n\u003ch2 id=\"data-model\">Data model\u003c/h2>\n\u003cp>Defined in \u003ccode>src/domain/types.ts\u003c/code>:\u003c/p>\n\u003cpre data-lang=\"ts\">\u003ccode class=\"language-ts\">interface Track {\n  id: string;\n  title: string;\n  artist: string;\n  album: string;\n  duration: number;\n  fileName: string;\n  size: number;\n  addedAt: number;\n  favorite: boolean;\n  blob: Blob;\n  artwork?: string;\n  audioInfo?: AudioInfo;\n  contentHash?: string;\n  lyricsLookup?: LyricsLookup;\n  lyrics?: Lyrics;\n  trackNumber?: number;\n  discNumber?: number;\n  originalMetadata?: TrackMetadata;\n  editedAt?: number;\n}\n\ninterface AudioInfo {\n  codec?: string;\n  sampleRate?: number;   // Hz\n  bitsPerSample?: number;\n  bitrate?: number;      // bits per second\n  lossless?: boolean;\n}\n\ntype RepeatMode = 'off' | 'all' | 'one';\ntype LibraryView = 'songs' | 'albums' | 'artists' | 'favorites' | 'playlists';\u003c/code>\u003c/pre>\n\u003cp>Field conventions:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Field\u003c/th>\n\u003cth>Unit and meaning\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>duration\u003c/code>\u003c/td>\n\u003ctd>Seconds. Zero means unknown.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>size\u003c/code>\u003c/td>\n\u003ctd>Bytes.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>addedAt\u003c/code>\u003c/td>\n\u003ctd>Unix timestamp in milliseconds.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>artwork\u003c/code>\u003c/td>\n\u003ctd>Data URL of a locally generated image. Optional.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>blob\u003c/code>\u003c/td>\n\u003ctd>The persisted audio file.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>audioInfo\u003c/code>\u003c/td>\n\u003ctd>Optional imported source metadata. It does \u003cstrong>not\u003c/strong> describe or guarantee device output quality.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>originalMetadata\u003c/code>\u003c/td>\n\u003ctd>Captured once before the first local edit and removed on restoration.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>editedAt\u003c/code>\u003c/td>\n\u003ctd>Milliseconds since the Unix epoch.\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Albums and artists are \u003cstrong>derived groups\u003c/strong>, not independently stored entities. Neither editing nor restoring changes the persisted audio Blob.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Note\u003c/p>\n  \u003cdiv class=\"callout__body\">Earlier Kotlin examples for \u003ccode>MediaPlayerController\u003c/code>, \u003ccode>MusicLibrary\u003c/code>, playlists and settings managers were proposals, not working APIs. Their relevant behaviour is now represented by the TypeScript modules above; what is not implemented remains on the repository&#39;s roadmap.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"decisions-you-notice-while-using-it\">Decisions you notice while using it\u003c/h2>\n\u003cp>\u003cstrong>Deduplication by whole-file hash.\u003c/strong> SHA-256 over the bytes, not the name. Two identical files with different names or dates do not take up space twice, and legacy IDs and playlist references are preserved.\u003c/p>\n\u003cp>\u003cstrong>Audio is kept once, at original quality.\u003c/strong> It is not recompressed. Covers, on the other hand, are compact JPEGs, and lyrics persist the raw text once, reconstructing the parsed lines on load.\u003c/p>\n\u003cp>\u003cstrong>Overrides, not rewrites.\u003c/strong> Metadata edits and custom covers live as local overrides. Wave does not touch your files&#39; tags and does not export them.\u003c/p>\n\u003cp>\u003cstrong>Migration with atomic pruning.\u003c/strong> The version-1 library migration atomically removes references from deleted playlists, leaving no dangling pointers.\u003c/p>\n\u003ch2 id=\"testing-and-quality\">Testing and quality\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Tool\u003c/th>\n\u003cth>What it covers\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Vitest\u003c/td>\n\u003ctd>Unit and component tests\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Testing Library\u003c/td>\n\u003ctd>Real interaction with components\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Playwright\u003c/td>\n\u003ctd>Browser integration\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>fake-indexeddb\u003c/td>\n\u003ctd>In-memory IndexedDB for tests\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>ESLint + Prettier\u003c/td>\n\u003ctd>Style and common errors\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>tsc -b\u003c/code>\u003c/td>\n\u003ctd>Strict type checking in the build\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Browser tests generate small WAV files in memory; they do not download or commit copyrighted music.\u003c/p>\n\u003ch2 id=\"technical-roadmap\">Technical roadmap\u003c/h2>\n\u003cp>Milestone 1 (local web player) is implemented. Four validations remain before declaring it stable: playback and import across current Firefox, Safari, Chromium and mobile browsers; profiling large-collection imports and memory use; reviewing keyboard interaction, screen readers, contrast and touch targets; and real-device background behaviour with interruptions and media keys.\u003c/p>\n\u003cp>From milestone 2, custom playlists, metadata overrides with restoration, cover replacement, artist photos, button and keyboard reordering, library migration and volume memory are done. Still pending: drag-and-drop queue reordering, backup, quota information, importing in a worker, folder import and the installable PWA.\u003c/p>\n","desc":"Layers, data flow, directory layout and internal modules of Wave's web client.","readtime":"5 min read","editHref":"https://github.com/jaime-gaming/Wave/blob/main/content/docs/wave/architecture.en.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#scope-and-platform-decision\">Scope and platform decision\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#layers-and-responsibilities\">Layers and responsibilities\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#directory-layout\">Directory layout\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#data-flow\">Data flow\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#data-model\">Data model\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#decisions-you-notice-while-using-it\">Decisions you notice while using it\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#testing-and-quality\">Testing and quality\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#technical-roadmap\">Technical roadmap\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}}}</script>
+<script type="application/json" id="searchConfig">{"index":"/Docs/assets/data/search-index.json","scope":"wave"}</script>
+<script src="/Docs/assets/js/i18n.js?v=9f6d93c1fd7c"></script>
+<script src="/Docs/assets/js/search.js?v=014a801e4757"></script>
+<script src="/Docs/assets/js/main.js?v=83aa4a0803d7"></script>
+</body>
+</html>

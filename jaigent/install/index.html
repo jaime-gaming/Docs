@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Instalación y claves — Docs de Jaime Gaming</title>
+<meta name="description" content="Tres formas de instalar jAIgent y cómo conseguir una clave de proveedor sin pagar de más." />
+<meta name="author" content="Jaime Gaming" />
+<meta name="theme-color" content="#10120f" />
+<meta name="robots" content="index, follow" />
+<meta name="docs:base" content="/Docs/" />
+<meta name="docs:project" content="jaigent" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Jaime Gaming Docs" />
+<meta property="og:title" content="Instalación y claves — Docs de Jaime Gaming" />
+<meta property="og:description" content="Tres formas de instalar jAIgent y cómo conseguir una clave de proveedor sin pagar de más." />
+<meta property="og:url" content="https://jaime-gaming.github.io/Docs/jaigent/install/" />
+<meta property="og:image" content="https://jaime-gaming.github.io/assets/img/social-card.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@JaimeGamingPro" />
+<meta name="twitter:title" content="Instalación y claves — Docs de Jaime Gaming" />
+<meta name="twitter:description" content="Tres formas de instalar jAIgent y cómo conseguir una clave de proveedor sin pagar de más." />
+<link rel="canonical" href="https://jaime-gaming.github.io/Docs/jaigent/install/" />
+<link rel="icon" href="/Docs/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/Docs/assets/css/style.css?v=d74cfec89052" />
+</head>
+<body data-icons="/Docs/assets/img/icons.svg?v=eea9c3fe56aa" data-page="docs" data-project="jaigent" data-path="/jaigent/install/">
+
+<a class="skip-link" href="#top" data-i18n="aria.skipToContent">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/Docs/" class="nav__logo" aria-label="Jaime Gaming Docs — inicio" data-i18n-aria="aria.homeLogo">JG<span class="dot">.</span><span class="nav__logo-badge">docs</span></a>
+  <nav class="nav__links" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+    <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+    <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+    <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+    <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+    <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="search-trigger" id="searchTrigger" type="button" aria-label="Buscar" data-i18n-aria="nav.search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg>
+      <span class="search-trigger__label" data-i18n="search.button">Buscar</span>
+      <kbd class="search-trigger__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+    <button class="lang-switch" id="langSwitch" data-active="es" type="button" aria-label="Cambiar idioma" data-i18n-aria="aria.langSwitch">
+      <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="languageFlagEs" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#aa151b" d="M0 0h24v24H0z"/><path fill="#f1bf00" d="M0 6h24v12H0z"/></g>
+          </pattern>
+          <pattern id="languageFlagEn" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#012169" d="M0 0h24v24H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 24 24M24 0 0 24"/><path stroke="#c8102e" stroke-width="2" d="m0 0 24 24M24 0 0 24"/><path stroke="#fff" stroke-width="8" d="M12 0v24M0 12h24"/><path stroke="#c8102e" stroke-width="4" d="M12 0v24M0 12h24"/></g>
+          </pattern>
+          <radialGradient id="languageGloss" cx="34%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".42"/>
+            <stop offset="55%" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="flag flag-es" cx="12" cy="12" r="9.5" fill="url(#languageFlagEs)"/>
+        <circle class="flag flag-en" cx="12" cy="12" r="9.5" fill="url(#languageFlagEn)"/>
+        <circle class="language-globe__gloss" cx="12" cy="12" r="9.5" fill="url(#languageGloss)" aria-hidden="true"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#0d100d" stroke-opacity=".55" stroke-width="1.9" stroke-linecap="round"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width=".9" stroke-linecap="round"/>
+      </svg>
+      <span class="sr-only" id="languageName">Español</span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil" data-i18n-aria="aria.mainNav">
+  <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+  <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+  <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+  <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+  <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+</nav>
+
+<main id="top" class="layout--docs">
+<div class="docs docs--with-rails">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-panel"></use></svg>
+    </button>
+    <aside class="docs__sidebar" id="docsSidebar" aria-label="Índice de esta documentación" data-i18n-aria="aria.sidebar">
+    <nav class="side-nav">
+      <div class="side-nav__head">
+        <span class="side-nav__eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+        <a class="side-nav__project" href="/Docs/jaigent/">
+          <span class="side-nav__project-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg></span>
+          <span class="side-nav__project-name" data-i18n="proj.jaigent.name">jAIgent</span>
+        </a>
+      </div>
+      <p class="side-nav__group" data-i18n="docs.sidebarTitle">En esta documentación</p>
+      <ol class="side-nav__list">
+      <li><a class="side-nav__link" href="/Docs/jaigent/" data-i18n="page.jaigent.index"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-compass"></use></svg><span>Visión general</span></a></li>
+      <li><a class="side-nav__link active" href="/Docs/jaigent/install/" data-i18n="page.jaigent.install"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-download"></use></svg><span>Instalación y claves</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/cli/" data-i18n="page.jaigent.cli"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-terminal"></use></svg><span>Uso en la terminal</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/models/" data-i18n="page.jaigent.models"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-cpu"></use></svg><span>Modelos y proveedores</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/mcp/" data-i18n="page.jaigent.mcp"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-plug"></use></svg><span>MCP y tu propia API</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/extend/" data-i18n="page.jaigent.extend"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-puzzle"></use></svg><span>Skills, plugins y horarios</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/reference/" data-i18n="page.jaigent.reference"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-book"></use></svg><span>Referencia de tools</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/security/" data-i18n="page.jaigent.security"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-shield"></use></svg><span>Seguridad</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/jaigent/dev/" data-i18n="page.jaigent.dev"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span>Desarrollo</span></a></li>
+      </ol>
+      <div class="side-nav__foot">
+        <a class="side-nav__all" href="/Docs/projects/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.allProjects">Todos los proyectos</span></a>
+        <div class="side-nav__switch">
+          <span class="side-nav__switch-label" data-i18n="docs.otherProjects">Otros proyectos</span>
+          <ul class="side-nav__switch-list">
+        <li><a class="side-nav__chip" href="/Docs/wave/" title="Wave"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg><span>Wave</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/hellbot/" title="hellbot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg><span>hellbot</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/rngdle-infinite/" title="RNGdle Infinite"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-dice"></use></svg><span>RNGdle Infinite</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/daily-diary/" title="Diario"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-notebook"></use></svg><span>Diario</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/void/" title="VOID"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg><span>VOID</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/website/" title="jaime-gaming.github.io"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg><span>jaime-gaming.github.io</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </aside>
+    <div class="docs__main">
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="/Docs/">Docs</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="/Docs/jaigent/" data-i18n="proj.jaigent.name">jAIgent</a>
+      <span class="breadcrumb__sep">/</span>
+      <span class="breadcrumb__current" data-i18n="page.jaigent.install">Instalación y claves</span>
+    </nav>
+    <header class="doc-head reveal">
+      <p class="doc-head__kicker"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg><span data-i18n="proj.jaigent.name">jAIgent</span></p>
+      <h1 class="doc-head__title" data-i18n="page.jaigent.install">Instalación y claves</h1>
+      <p class="doc-head__desc" data-content-key="desc">Tres formas de instalar jAIgent y cómo conseguir una clave de proveedor sin pagar de más.</p>
+      <div class="doc-head__meta">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-calendar"></use></svg><span data-i18n="docs.updated">Última revisión</span> <time datetime="2026-10-18" data-i18n-date>18 de octubre de 2026</time></span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-clock"></use></svg><span data-content-key="readtime">3 min de lectura</span></span>
+        <a class="doc-head__edit" href="https://github.com/jaime-gaming/jAIgent/blob/main/content/docs/jaigent/install.md" data-content-key="editHref" data-content-attr="href" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span data-i18n="docs.editOnGithub">Editar esta página en GitHub</span></a>
+      </div>
+    </header>
+    <article class="doc-body reveal" lang="es" data-content-key="body" data-content-language>
+<p>jAIgent se instala de tres formas. Si no quieres Python, usa el binario; si ya trabajas con Python, usa PyPI.</p>
+<h2 id="binario-independiente">Binario independiente</h2>
+<p>No necesita Python instalado.</p>
+<p><strong>macOS y Linux</strong></p>
+<pre data-lang="bash"><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/jaime-gaming/jaigent/main/packaging/install.sh | sh</code></pre>
+<p><strong>Windows</strong> (PowerShell)</p>
+<pre data-lang="powershell"><code class="language-powershell">irm https://raw.githubusercontent.com/jaime-gaming/jaigent/main/packaging/install.ps1 | iex</code></pre>
+<p>Ambos scripts <strong>verifican la suma de comprobación SHA-256 publicada</strong> antes de instalar. También puedes descargar el archivo desde <a href="https://github.com/jaime-gaming/jaigent/releases" target="_blank" rel="noopener noreferrer">Releases</a>: Windows x64, macOS (Intel y Apple Silicon) y Linux (x64 y arm64).</p>
+<h2 id="desde-pypi">Desde PyPI</h2>
+<p>Es la vía recomendada si ya tienes Python:</p>
+<pre data-lang="bash"><code class="language-bash">pip install jaigent</code></pre>
+<p>Si el paquete todavía no está en PyPI en tu entorno:</p>
+<pre data-lang="bash"><code class="language-bash">pip install git+https://github.com/jaime-gaming/jaigent.git</code></pre>
+<h2 id="desde-el-codigo-fuente">Desde el código fuente</h2>
+<p>Requiere <strong>Python 3.10 a 3.13</strong>.</p>
+<pre data-lang="bash"><code class="language-bash">git clone https://github.com/jaime-gaming/jaigent.git
+cd jaigent
+python -m venv .venv &amp;&amp; source .venv/bin/activate    # Windows: .venv\Scripts\activate
+pip install -e .</code></pre>
+<h2 id="primera-comprobacion">Primera comprobación</h2>
+<pre data-lang="bash"><code class="language-bash">jaigent init          # elige proveedor, guarda una clave y la prueba
+jaigent doctor        # claves, almacenamiento y proveedores
+jaigent --logo        # el logotipo naranja jAI</code></pre>
+<p><code>jgt</code> es un alias más corto del mismo comando.</p>
+<p>El logotipo se adapta a la terminal: letras de bloque de seis filas cuando hay sitio, un wordmark de tres filas en ventanas estrechas y una sola línea por debajo de unas 28 columnas. El color desaparece con <code>--no-color</code> o cuando la salida va por tubería.</p>
+<h2 id="conseguir-una-clave-de-api">Conseguir una clave de API</h2>
+<p>jAIgent <strong>no tiene clave propia</strong>: tú aportas una. <code>jaigent providers</code> imprime la misma tabla.</p>
+<div class="doc-table"><table><thead><tr>
+<th>Proveedor</th>
+<th>Dónde conseguir la clave</th>
+<th>Variable de entorno</th>
+</tr>
+</thead><tbody><tr>
+<td>OpenAI (por defecto)</td>
+<td>platform.openai.com/api-keys</td>
+<td><code>OPENAI_API_KEY</code></td>
+</tr>
+<tr>
+<td>Anthropic</td>
+<td>console.anthropic.com/settings/keys</td>
+<td><code>ANTHROPIC_API_KEY</code></td>
+</tr>
+<tr>
+<td>Gemini</td>
+<td>aistudio.google.com/apikey</td>
+<td><code>GEMINI_API_KEY</code></td>
+</tr>
+<tr>
+<td>OpenRouter</td>
+<td>openrouter.ai/keys</td>
+<td><code>OPENROUTER_API_KEY</code></td>
+</tr>
+<tr>
+<td>Groq</td>
+<td>console.groq.com/keys</td>
+<td><code>GROQ_API_KEY</code></td>
+</tr>
+<tr>
+<td>Together</td>
+<td>api.together.xyz/settings/api-keys</td>
+<td><code>TOGETHER_API_KEY</code></td>
+</tr>
+<tr>
+<td>DeepSeek</td>
+<td>platform.deepseek.com/api_keys</td>
+<td><code>DEEPSEEK_API_KEY</code></td>
+</tr>
+<tr>
+<td>Mistral</td>
+<td>console.mistral.ai/api-keys</td>
+<td><code>MISTRAL_API_KEY</code></td>
+</tr>
+<tr>
+<td>xAI (Grok)</td>
+<td>console.x.ai</td>
+<td><code>XAI_API_KEY</code></td>
+</tr>
+<tr>
+<td>Ollama</td>
+<td>Ninguna: se ejecuta en local</td>
+<td>—</td>
+</tr>
+</tbody></table></div>
+<div class="callout callout--tip">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles"></use></svg>
+  <p class="callout__title">Consejo</p>
+  <div class="callout__body">¿No quieres pagar? Usa <strong>Ollama</strong>, que no necesita clave, o los modelos gratuitos de OpenRouter y Groq con <code>--model free</code>. La búsqueda web usa DuckDuckGo por defecto y <strong>no</strong> necesita una segunda clave.</div>
+</div>
+<h3 id="guardar-la-clave">Guardar la clave</h3>
+<p>Tres caminos equivalentes:</p>
+<pre data-lang="bash"><code class="language-bash">jaigent auth set openai sk-...     # se guarda en ~/.jaigent/secrets.env
+# o
+export OPENAI_API_KEY='sk-...'
+# o
+cp .env.example .env &amp;&amp; $EDITOR .env</code></pre>
+<p>Después:</p>
+<pre data-lang="bash"><code class="language-bash">jaigent config          # la clave se imprime como &lt;set&gt;, nunca completa</code></pre>
+<p><code>.env</code> está ignorado por Git. <strong>Las variables de entorno reales siempre ganan.</strong></p>
+<p><code>jaigent init</code> escribe la clave en <code>~/.jaigent/secrets.env</code> y solo escribe además un <code>.env</code> de proyecto cuando esa carpeta es escribible: se salta <code>System32</code> en Windows para que un instalador abierto con doble clic no falle al intentar crear ahí un archivo.</p>
+<div class="callout callout--warning">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn"></use></svg>
+  <p class="callout__title">Aviso</p>
+  <div class="callout__body"><code>jaigent settings set</code> <strong>rechaza</strong> claves de API a propósito. Las claves van por <code>jaigent auth</code>, por el entorno o por un <code>.env</code> ignorado, nunca por el archivo de ajustes.</div>
+</div>
+<h2 id="verificar-la-instalacion">Verificar la instalación</h2>
+<pre data-lang="bash"><code class="language-bash">jaigent doctor          # claves, almacenamiento, proveedores y cadena de fallo
+jaigent update --check  # solo informa, no actualiza</code></pre>
+<p><code>jaigent update</code> actualiza de verdad y también sincroniza un checkout de fuente. Con <code>JAIGENT_BETA=1</code> o <code>jaigent beta</code> las actualizaciones llegan desde la rama <code>beta</code>. Si prefieres que no se comprueben releases, <code>JAIGENT_NO_UPDATE_CHECK=1</code>.</p>
+<h2 id="solucion-de-problemas-de-instalacion">Solución de problemas de instalación</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Síntoma</th>
+<th>Qué hacer</th>
+</tr>
+</thead><tbody><tr>
+<td><code>jaigent: command not found</code> tras <code>pip install</code></td>
+<td>El directorio de scripts de Python no está en el <code>PATH</code>.</td>
+</tr>
+<tr>
+<td>El binario no arranca en Linux</td>
+<td>Falta <code>glibc</code> reciente o el archivo no tiene permiso de ejecución.</td>
+</tr>
+<tr>
+<td><code>doctor</code> no ve ninguna clave</td>
+<td>Las variables reales ganan: comprueba que no haya una variable vacía exportada.</td>
+</tr>
+<tr>
+<td>La instalación desde Git falla</td>
+<td>Versión de Python fuera del rango 3.10–3.13.</td>
+</tr>
+</tbody></table></div>
+
+    </article>
+    <nav class="pager reveal" aria-label="paginación">
+    <a class="pager__link" href="/Docs/jaigent/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.prev">Anterior</span></span>
+      <span class="pager__title" data-i18n="page.jaigent.index">Visión general</span>
+    </a>
+    <a class="pager__link pager__link--next" href="/Docs/jaigent/cli/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-right"></use></svg><span data-i18n="docs.next">Siguiente</span></span>
+      <span class="pager__title" data-i18n="page.jaigent.cli">Uso en la terminal</span>
+    </a>
+    </nav>
+    <p class="source-note reveal" data-i18n="docs.sourceNote">Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.</p>
+    </div>
+    <aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
+    <p class="toc__title" data-i18n="docs.tocTitle">En esta página</p>
+    <ol class="toc__list">
+      <li><a href="#binario-independiente">Binario independiente</a></li>
+      <li><a href="#desde-pypi">Desde PyPI</a></li>
+      <li><a href="#desde-el-codigo-fuente">Desde el código fuente</a></li>
+      <li><a href="#primera-comprobacion">Primera comprobación</a></li>
+      <li><a href="#conseguir-una-clave-de-api">Conseguir una clave de API</a></li>
+      <li><a class="toc__h3" href="#guardar-la-clave">Guardar la clave</a></li>
+      <li><a href="#verificar-la-instalacion">Verificar la instalación</a></li>
+      <li><a href="#solucion-de-problemas-de-instalacion">Solución de problemas de instalación</a></li>
+    </ol>
+    <p class="toc__progress" aria-hidden="true"><span></span></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="https://jaime-gaming.github.io/" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-github"></use></svg></a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-youtube"></use></svg></a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-x"></use></svg></a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-discord"></use></svg></a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-mail"></use></svg></a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="/Docs/"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="/Docs/projects/"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="https://jaime-gaming.github.io/blog/"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="https://jaime-gaming.github.io/contact/"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="https://jaime-gaming.github.io/"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="/Docs/status/"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="https://jaime-gaming.github.io/terms/" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="https://jaime-gaming.github.io/privacy/" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-arrow"></use></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" hidden>
+  <div class="search-modal__backdrop" data-search-close></div>
+  <div class="search-modal__panel">
+    <h2 class="sr-only" id="searchModalTitle" data-i18n="search.dialogTitle">Buscar en la documentación</h2>
+    <div class="search-modal__head">
+      <span class="search-modal__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg></span>
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar en la documentación…" data-i18n-placeholder="search.placeholder" aria-describedby="searchModalHint" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-activedescendant="" />
+      <button class="search-modal__close" type="button" data-search-close aria-label="Cerrar búsqueda" data-i18n-aria="search.close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-close"></use></svg></button>
+    </div>
+    <div class="search-modal__hintrow">
+      <p class="search-modal__hint" id="searchModalHint" data-i18n="search.hint">Escribe para filtrar páginas y apartados</p>
+      <p class="search-modal__keys" id="searchKeys" aria-hidden="true">
+        <span class="keyhint"><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="search.kbdNavigate">navegar</span></span>
+        <span class="keyhint"><kbd>↵</kbd><span data-i18n="search.kbdOpen">abrir</span></span>
+        <span class="keyhint"><kbd>Esc</kbd><span data-i18n="search.kbdClose">cerrar</span></span>
+      </p>
+    </div>
+    <div class="search-modal__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" data-i18n-aria="search.resultsLabel"></div>
+  </div>
+</div>
+
+<script type="application/json" id="uiStrings">{"es":{"nav.home":"Inicio","nav.projects":"Proyectos","nav.search":"Buscar","nav.site":"Mi web","nav.blog":"Blog","nav.contact":"Contacto","nav.openMenu":"Abrir menú","nav.closeMenu":"Cerrar menú","aria.skipToContent":"Saltar al contenido","aria.homeLogo":"Jaime Gaming Docs — inicio","aria.mainNav":"Navegación principal","aria.backToTop":"Volver arriba","aria.langSwitch":"Español. Cambiar a inglés","aria.sidebar":"Índice de esta documentación","aria.toc":"En esta página","aria.openSidebar":"Abrir índice","aria.closeSidebar":"Cerrar índice","search.button":"Buscar","search.placeholder":"Buscar en la documentación…","search.hint":"Escribe para filtrar páginas y apartados","search.empty":"Sin resultados para","search.noQuery":"Prueba con «instalar», «comandos», «privacidad»…","search.results":"resultados","search.result":"resultado","search.close":"Cerrar búsqueda","search.scopeAll":"Toda la documentación","search.scopeProject":"Solo este proyecto","search.kbdNavigate":"navegar","search.kbdOpen":"abrir","search.kbdClose":"cerrar","search.dialogTitle":"Buscar en la documentación","search.resultsLabel":"Resultados de búsqueda","docs.eyebrow":"Documentación","docs.sidebarTitle":"En esta documentación","docs.tocTitle":"En esta página","docs.editOnGithub":"Editar esta página en GitHub","docs.sourceNote":"Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.","docs.updated":"Última revisión","docs.prev":"Anterior","docs.next":"Siguiente","docs.allProjects":"Todos los proyectos","docs.readTime":"min de lectura","docs.jumpTo":"Ir a","home.kicker":"DOCUMENTACIÓN","home.title":"Todos mis proyectos, \u003cspan class=\"hero__title-accent\">documentados\u003c/span>","home.subtitle":"Un solo sitio con la documentación de todo lo que construyo: reproductores, agentes, bots, juegos y webs. Guías de instalación, arquitectura, uso y referencia.","home.ctaPrimary":"Empezar a leer","home.ctaSecondary":"Ver todos los proyectos","home.stats.projects":"proyectos","home.stats.pages":"páginas","home.stats.languages":"idiomas","home.stats.updated":"actualizada","home.about.title":"Sobre esta documentación","home.about.sub":"Cómo está hecha y cómo se mantiene.","home.about.card.label":"CÓMO FUNCIONA","home.about.card.title":"Escrita a mano, generada con Node","home.about.card.text":"Cada página es un Markdown en content/docs/. El build las convierte en HTML estático con el mismo sistema, la misma paleta y las mismas animaciones que mi web principal.","home.about.card.stamp":"VER EL REPOSITORIO ↗","home.contribute.title":"¿Ves un error?","home.contribute.text":"Toda la documentación está en un repositorio público. Abre una issue o envía una pull request con la corrección.","home.contribute.issue":"Abrir una issue","home.contribute.pr":"Proponer un cambio","home.contribute.email":"Escribirme un correo","projects.title":"Proyectos","projects.sub":"Toda la documentación, proyecto por proyecto. Cada tarjeta enlaza a su guía completa.","projects.pages":"páginas","projects.openDocs":"Abrir documentación","projects.demo":"Probar","projects.code":"Código","projects.group.all":"Todos","callout.note":"Nota","callout.tip":"Consejo","callout.warning":"Aviso","callout.important":"Importante","callout.caution":"Precaución","code.copy":"Copiar","code.copied":"Copiado","footer.rights":"Todos los derechos reservados.","footer.mainSite":"Mi web","footer.tagline":"Juegos para navegador, aplicaciones web y vídeos.","footer.site":"Sitio","footer.siteAria":"Enlaces del sitio","footer.resources":"Recursos","footer.resourcesAria":"Recursos y enlaces externos","footer.status":"Estado del servicio","footer.email":"Correo","footer.terms":"Términos del servicio","footer.privacy":"Privacidad","footer.source":"Código fuente ↗","footer.legalAria":"Términos y privacidad","aria.socials":"Redes sociales","aria.footerLogo":"Jaime Gaming — inicio","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Correo electrónico","status.title":"Estado del servicio","status.sub":"Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.","status.note":"Datos del panel oficial de estado","status.open":"Abrir panel completo ↗","status.loading":"Consultando el estado…","status.unknown":"Estado no disponible","status.error":"No se pudo consultar el estado en directo. Puedes abrir el panel completo.","status.updated":"Actualizado el {date}","status.componentsAria":"Componentes del servicio","status.allOperational":"Todos los sistemas operativos","status.minorIssues":"Incidencias menores","status.majorIssues":"Incidencia grave","status.criticalIssues":"Incidencia crítica","status.maintenanceOverall":"Mantenimiento en curso","status.operational":"Operativo","status.degraded":"Rendimiento degradado","status.partial":"Interrupción parcial","status.major":"Interrupción grave","status.underMaintenance":"En mantenimiento","status.maintenanceTitle":"Mantenimiento programado","status.maintenanceBody":"Texto publicado en el panel de estado.","status.frameNotice":"El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.","status.loadFrame":"Cargar panel incrustado","status.frameTitle":"Panel de estado de Jaime Gaming","status.hint":"El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.","notFound.title":"Página no encontrada","notFound.sub":"Puede que el enlace esté roto o que esta guía se haya movido.","notFound.home":"Volver al inicio de la documentación","notFound.projects":"Ver todos los proyectos","home.guide.title":"Cómo están organizadas las guías","home.guide.sub":"Todas siguen la misma anatomía, para que sepas dónde buscar en cada proyecto.","home.guide.overview.num":"01","home.guide.overview.title":"Visión general","home.guide.overview.desc":"Qué es el proyecto, qué problema resuelve, en qué estado está y qué lo distingue. Es la puerta de entrada de cada guía.","home.guide.install.num":"02","home.guide.install.title":"Instalación","home.guide.install.desc":"Requisitos, comandos para ponerlo en marcha y la primera comprobación de que todo funciona.","home.guide.usage.num":"03","home.guide.usage.title":"Uso","home.guide.usage.desc":"El día a día: funciones, comandos, mecánicas o flujos de trabajo, con ejemplos concretos.","home.guide.deep.num":"04","home.guide.deep.title":"Cómo está hecho","home.guide.deep.desc":"Arquitectura, estructura de carpetas, decisiones técnicas y los límites conocidos del proyecto.","home.guide.reference.num":"05","home.guide.reference.title":"Referencia","home.guide.reference.desc":"Tablas de consulta: opciones, formatos de datos, modelos, plataformas o preguntas frecuentes.","home.about.text1":"Este sitio reúne en un mismo lugar la documentación de los siete proyectos que mantengo en GitHub. Cada guía está escrita a mano a partir del README y de los documentos del repositorio, y se revisa cuando el proyecto cambia.","home.about.text2":"Nada se genera automáticamente desde GitHub ni depende de servicios externos: el contenido vive en este repositorio como Markdown, se compila a HTML estático con Node y se publica en GitHub Pages. El buscador usa un índice que se crea en ese mismo build.","home.about.row.stack":"Generador","home.about.row.palette":"Paleta","home.about.row.fonts":"Tipografías","home.about.row.host":"Publicación","home.about.row.search":"Buscador","home.about.row.searchValue":"Índice estático, sin servicios externos","docs.otherProjects":"Otros proyectos","projects.empty":"No hay proyectos en esta categoría.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentación de todos los proyectos de Jaime Gaming: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID y su web personal.","meta.projects.title":"Proyectos — Docs de Jaime Gaming","meta.projects.description":"Índice de toda la documentación, agrupada por aplicaciones, juegos, bots y web.","proj.wave.name":"Wave","proj.wave.tagline":"Reproductor de música local-first para web, Android y Windows.","proj.wave.summary":"Un hogar para la música que ya tienes. Wave guarda tu colección en el dispositivo: sin cuenta, sin suscripción y sin subir audio a ningún servidor.","proj.wave.status":"0.1.0 · activa","page.wave.index":"Visión general","page.wave.install":"Instalación","page.wave.features":"Funciones y uso","page.wave.platforms":"Plataformas","page.wave.architecture":"Arquitectura","page.wave.privacy":"Privacidad y datos","page.wave.dev":"Desarrollo","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"Todos tus agentes de IA en un mismo sitio.","proj.jaigent.summary":"Un binario y diez proveedores. Los mismos tools en la terminal, en ChatGPT Web por MCP remoto, en Claude Desktop y en cualquier app que hable OpenAI. Con deshacer en cada escritura y tope de gasto.","proj.jaigent.status":"0.5.x · activa","page.jaigent.index":"Visión general","page.jaigent.install":"Instalación y claves","page.jaigent.cli":"Uso en la terminal","page.jaigent.models":"Modelos y proveedores","page.jaigent.mcp":"MCP y tu propia API","page.jaigent.extend":"Skills, plugins y horarios","page.jaigent.reference":"Referencia de tools","page.jaigent.security":"Seguridad","page.jaigent.dev":"Desarrollo","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.","proj.hellbot.summary":"Mantén al menos a una persona real en un canal de voz durante 160 horas seguidas. Si el canal se vacía y nadie vuelve en el periodo de gracia, la partida muere para siempre.","proj.hellbot.status":"producción · estable","page.hellbot.index":"Visión general","page.hellbot.rules":"Reglas del evento","page.hellbot.edge-cases":"Casos límite","page.hellbot.install":"Instalación y despliegue","page.hellbot.commands":"Comandos","page.hellbot.dashboard":"Dashboard en vivo","page.hellbot.architecture":"Arquitectura","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"Un número, infinitas posibilidades.","proj.rngdle-infinite.summary":"Tira un número entre 0 y 1.000.000 y descubre qué lo hace especial. Un incremental de navegador con EP, insignias, compañeros, skills, rebirth, prestige y rollback.","proj.rngdle-infinite.status":"jugable · activa","page.rngdle-infinite.index":"Visión general","page.rngdle-infinite.play":"Cómo se juega","page.rngdle-infinite.systems":"Sistemas y progresión","page.rngdle-infinite.save":"Partida y sincronización","page.rngdle-infinite.faq":"Preguntas frecuentes","page.rngdle-infinite.dev":"Desarrollo","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Tu espacio personal: un diario minimalista y 100 % local.","proj.daily-diary.summary":"Sin backend, sin cuentas, sin IA y sin APIs externas. Los resúmenes, estadísticas y tendencias se calculan en tu navegador con reglas y plantillas de texto.","proj.daily-diary.status":"completo · local","page.daily-diary.index":"Visión general","page.daily-diary.install":"Instalación y uso","page.daily-diary.areas":"Las cinco áreas","page.daily-diary.data":"Datos y privacidad","page.daily-diary.dev":"Estructura y desarrollo","proj.void.name":"VOID","proj.void.tagline":"Michael Burns desapareció el año pasado. ¿Quieres entrar?","proj.void.summary":"Un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece. Interfaz CRT de alto contraste, en español e inglés.","proj.void.status":"beta · en desarrollo","page.void.index":"Visión general","page.void.install":"Instalación y juego","page.void.world":"El mundo de VOID Corp","page.void.engine":"Las tripas del archivo","page.void.faq":"Avisos y preguntas","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"El sitio personal que da origen a esta documentación.","proj.website.summary":"Portfolio oscuro y bilingüe generado con Node: proyectos sincronizados desde GitHub, calendario de contribuciones, presencia de Discord y blog desde Markdown.","proj.website.status":"publicada · activa","page.website.index":"Visión general","page.website.build":"Build y preview","page.website.content":"Editar el contenido","page.website.i18n":"Los dos idiomas","page.website.architecture":"Arquitectura del sitio","group.apps.title":"Aplicaciones y herramientas","group.apps.sub":"Software que resuelve algo concreto: música, agentes y organización personal.","group.games.title":"Juegos","group.games.sub":"Del incremental de navegador al terror psicológico.","group.bots.title":"Bots y eventos","group.bots.sub":"Automatización en directo para comunidades.","group.web.title":"Web","group.web.sub":"Los sitios que publico, incluido el que estás leyendo."},"en":{"nav.home":"Home","nav.projects":"Projects","nav.search":"Search","nav.site":"My site","nav.blog":"Blog","nav.contact":"Contact","nav.openMenu":"Open menu","nav.closeMenu":"Close menu","aria.skipToContent":"Skip to content","aria.homeLogo":"Jaime Gaming Docs — home","aria.mainNav":"Main navigation","aria.backToTop":"Back to top","aria.langSwitch":"English. Switch to Spanish","aria.sidebar":"Index of this documentation","aria.toc":"On this page","aria.openSidebar":"Open index","aria.closeSidebar":"Close index","search.button":"Search","search.placeholder":"Search the docs…","search.hint":"Type to filter pages and sections","search.empty":"No results for","search.noQuery":"Try “install”, “commands”, “privacy”…","search.results":"results","search.result":"result","search.close":"Close search","search.scopeAll":"All documentation","search.scopeProject":"This project only","search.kbdNavigate":"navigate","search.kbdOpen":"open","search.kbdClose":"close","search.dialogTitle":"Search the documentation","search.resultsLabel":"Search results","docs.eyebrow":"Documentation","docs.sidebarTitle":"In this documentation","docs.tocTitle":"On this page","docs.editOnGithub":"Edit this page on GitHub","docs.sourceNote":"Documentation written by hand for this site, based on the repository's README and docs.","docs.updated":"Last reviewed","docs.prev":"Previous","docs.next":"Next","docs.allProjects":"All projects","docs.readTime":"min read","docs.jumpTo":"Go to","home.kicker":"DOCUMENTATION","home.title":"All my projects, \u003cspan class=\"hero__title-accent\">documented\u003c/span>","home.subtitle":"One single site with the documentation of everything I build: players, agents, bots, games and websites. Install guides, architecture, usage and reference.","home.ctaPrimary":"Start reading","home.ctaSecondary":"See all projects","home.stats.projects":"projects","home.stats.pages":"pages","home.stats.languages":"languages","home.stats.updated":"updated","home.about.title":"About these docs","home.about.sub":"How they are made and how they are kept up to date.","home.about.card.label":"HOW IT WORKS","home.about.card.title":"Written by hand, generated with Node","home.about.card.text":"Every page is a Markdown file in content/docs/. The build turns them into static HTML with the same system, the same palette and the same animations as my main website.","home.about.card.stamp":"SEE THE REPOSITORY ↗","home.contribute.title":"Found a mistake?","home.contribute.text":"All of this documentation lives in a public repository. Open an issue or send a pull request with the fix.","home.contribute.issue":"Open an issue","home.contribute.pr":"Propose a change","home.contribute.email":"Send me an email","projects.title":"Projects","projects.sub":"All the documentation, project by project. Each card links to its complete guide.","projects.pages":"pages","projects.openDocs":"Open documentation","projects.demo":"Try it","projects.code":"Code","projects.group.all":"All","callout.note":"Note","callout.tip":"Tip","callout.warning":"Warning","callout.important":"Important","callout.caution":"Caution","code.copy":"Copy","code.copied":"Copied","footer.rights":"All rights reserved.","footer.mainSite":"My site","footer.tagline":"Browser games, web applications and videos.","footer.site":"Site","footer.siteAria":"Site links","footer.resources":"Resources","footer.resourcesAria":"Resources and external links","footer.status":"Service status","footer.email":"Email","footer.terms":"Terms of Service","footer.privacy":"Privacy","footer.source":"Source code ↗","footer.legalAria":"Terms and privacy","aria.socials":"Social links","aria.footerLogo":"Jaime Gaming — home","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Email","status.title":"Service status","status.sub":"Live status of the website, documentation and projects, from the official incident.io panel.","status.note":"Data from the official status panel","status.open":"Open full status page ↗","status.loading":"Checking status…","status.unknown":"Status unavailable","status.error":"Couldn't fetch the live status. You can open the full status page.","status.updated":"Updated {date}","status.componentsAria":"Service components","status.allOperational":"All systems operational","status.minorIssues":"Minor issues","status.majorIssues":"Major incident","status.criticalIssues":"Critical incident","status.maintenanceOverall":"Maintenance in progress","status.operational":"Operational","status.degraded":"Degraded performance","status.partial":"Partial outage","status.major":"Major outage","status.underMaintenance":"Under maintenance","status.maintenanceTitle":"Scheduled maintenance","status.maintenanceBody":"Text published on the status page.","status.frameNotice":"The full panel belongs to incident.io and is only loaded if you ask for it. Once loaded, it may use its own cookies.","status.loadFrame":"Load embedded panel","status.frameTitle":"Jaime Gaming status page","status.hint":"The summary refreshes when you open this page. If the embedded panel doesn’t appear, open it with the button above.","notFound.title":"Page not found","notFound.sub":"The link may be broken or this guide may have moved.","notFound.home":"Back to the docs home","notFound.projects":"See all projects","home.guide.title":"How the guides are organised","home.guide.sub":"They all follow the same anatomy, so you know where to look in every project.","home.guide.overview.num":"01","home.guide.overview.title":"Overview","home.guide.overview.desc":"What the project is, which problem it solves, what state it is in and what sets it apart. It is the entry page of every guide.","home.guide.install.num":"02","home.guide.install.title":"Installation","home.guide.install.desc":"Requirements, the commands to get it running and the first check that everything works.","home.guide.usage.num":"03","home.guide.usage.title":"Usage","home.guide.usage.desc":"Day to day: features, commands, mechanics or workflows, with concrete examples.","home.guide.deep.num":"04","home.guide.deep.title":"How it is built","home.guide.deep.desc":"Architecture, folder structure, technical decisions and the project's known limits.","home.guide.reference.num":"05","home.guide.reference.title":"Reference","home.guide.reference.desc":"Lookup tables: options, data formats, models, platforms or frequently asked questions.","home.about.text1":"This site gathers, in one single place, the documentation of the seven projects I maintain on GitHub. Every guide is written by hand from the repository's README and docs, and reviewed when the project changes.","home.about.text2":"Nothing is generated automatically from GitHub and nothing depends on external services: the content lives in this repository as Markdown, it is compiled to static HTML with Node and published on GitHub Pages. Search uses an index created in that same build.","home.about.row.stack":"Generator","home.about.row.palette":"Palette","home.about.row.fonts":"Fonts","home.about.row.host":"Publishing","home.about.row.search":"Search","home.about.row.searchValue":"Static index, no external services","docs.otherProjects":"Other projects","projects.empty":"There are no projects in this category.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentation for all of Jaime Gaming's projects: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID and his personal website.","meta.projects.title":"Projects — Jaime Gaming Docs","meta.projects.description":"Index of all the documentation, grouped by apps, games, bots and web.","proj.wave.name":"Wave","proj.wave.tagline":"A local-first music player for web, Android and Windows.","proj.wave.summary":"A home for the music you already own. Wave keeps your collection on the device: no account, no subscription and no audio uploaded to any server.","proj.wave.status":"0.1.0 · active","page.wave.index":"Overview","page.wave.install":"Installation","page.wave.features":"Features & usage","page.wave.platforms":"Platforms","page.wave.architecture":"Architecture","page.wave.privacy":"Privacy & data","page.wave.dev":"Development","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"All your agents in one place.","proj.jaigent.summary":"One binary, ten providers. The same tools in the terminal, in ChatGPT Web over remote MCP, in Claude Desktop and in any app that speaks OpenAI. With undo on every write and a hard spend cap.","proj.jaigent.status":"0.5.x · active","page.jaigent.index":"Overview","page.jaigent.install":"Install & API keys","page.jaigent.cli":"Using the CLI","page.jaigent.models":"Models & providers","page.jaigent.mcp":"MCP & your own API","page.jaigent.extend":"Skills, plugins & schedules","page.jaigent.reference":"Tools reference","page.jaigent.security":"Security","page.jaigent.dev":"Development","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"The Discord bot that runs the Welcome to Hell endurance event.","proj.hellbot.summary":"Keep at least one real human in a single voice channel for 160 consecutive hours. If that channel empties and nobody returns within the grace period, the run is dead permanently.","proj.hellbot.status":"production · stable","page.hellbot.index":"Overview","page.hellbot.rules":"Event rules","page.hellbot.edge-cases":"Edge cases","page.hellbot.install":"Install & deploy","page.hellbot.commands":"Commands","page.hellbot.dashboard":"Live dashboard","page.hellbot.architecture":"Architecture","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"One number, infinite possibilities.","proj.rngdle-infinite.summary":"Roll a number from 0 to 1,000,000 and find out what makes it special. A browser incremental with EP, badges, companions, skills, rebirth, prestige and rollback.","proj.rngdle-infinite.status":"playable · active","page.rngdle-infinite.index":"Overview","page.rngdle-infinite.play":"How to play","page.rngdle-infinite.systems":"Systems & progression","page.rngdle-infinite.save":"Save & sync","page.rngdle-infinite.faq":"FAQ","page.rngdle-infinite.dev":"Development","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Your personal space: a minimalist, 100% local diary.","proj.daily-diary.summary":"No backend, no accounts, no AI and no external APIs. Summaries, statistics and trends are computed in your browser with rules and text templates.","proj.daily-diary.status":"complete · local","page.daily-diary.index":"Overview","page.daily-diary.install":"Install & run","page.daily-diary.areas":"The five areas","page.daily-diary.data":"Data & privacy","page.daily-diary.dev":"Structure & development","proj.void.name":"VOID","proj.void.tagline":"Michael Burns disappeared last year. Would you come in?","proj.void.summary":"A psychological game set in a mysterious corporation where everyone and everything disappears. High-contrast CRT interface, in Spanish and English.","proj.void.status":"beta · in development","page.void.index":"Overview","page.void.install":"Install & play","page.void.world":"The VOID Corp world","page.void.engine":"Inside the single file","page.void.faq":"Warnings & FAQ","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"The personal site this documentation is built from.","proj.website.summary":"Dark, bilingual portfolio generated with Node: projects synced from GitHub, contributions calendar, Discord presence and a Markdown blog.","proj.website.status":"published · active","page.website.index":"Overview","page.website.build":"Build & preview","page.website.content":"Editing content","page.website.i18n":"The two languages","page.website.architecture":"Site architecture","group.apps.title":"Apps & tools","group.apps.sub":"Software that solves something concrete: music, agents and personal organisation.","group.games.title":"Games","group.games.sub":"From the browser incremental to psychological horror.","group.bots.title":"Bots & events","group.bots.sub":"Live automation for communities.","group.web.title":"Web","group.web.sub":"The sites I publish, including the one you are reading."}}</script>
+<script type="application/json" id="pageTranslations">{"es":{"title":"Instalación y claves · jAIgent — Docs de Jaime Gaming","description":"Tres formas de instalar jAIgent y cómo conseguir una clave de proveedor sin pagar de más.","fields":{"body":"\u003cp>jAIgent se instala de tres formas. Si no quieres Python, usa el binario; si ya trabajas con Python, usa PyPI.\u003c/p>\n\u003ch2 id=\"binario-independiente\">Binario independiente\u003c/h2>\n\u003cp>No necesita Python instalado.\u003c/p>\n\u003cp>\u003cstrong>macOS y Linux\u003c/strong>\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">curl -fsSL https://raw.githubusercontent.com/jaime-gaming/jaigent/main/packaging/install.sh | sh\u003c/code>\u003c/pre>\n\u003cp>\u003cstrong>Windows\u003c/strong> (PowerShell)\u003c/p>\n\u003cpre data-lang=\"powershell\">\u003ccode class=\"language-powershell\">irm https://raw.githubusercontent.com/jaime-gaming/jaigent/main/packaging/install.ps1 | iex\u003c/code>\u003c/pre>\n\u003cp>Ambos scripts \u003cstrong>verifican la suma de comprobación SHA-256 publicada\u003c/strong> antes de instalar. También puedes descargar el archivo desde \u003ca href=\"https://github.com/jaime-gaming/jaigent/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Releases\u003c/a>: Windows x64, macOS (Intel y Apple Silicon) y Linux (x64 y arm64).\u003c/p>\n\u003ch2 id=\"desde-pypi\">Desde PyPI\u003c/h2>\n\u003cp>Es la vía recomendada si ya tienes Python:\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">pip install jaigent\u003c/code>\u003c/pre>\n\u003cp>Si el paquete todavía no está en PyPI en tu entorno:\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">pip install git+https://github.com/jaime-gaming/jaigent.git\u003c/code>\u003c/pre>\n\u003ch2 id=\"desde-el-codigo-fuente\">Desde el código fuente\u003c/h2>\n\u003cp>Requiere \u003cstrong>Python 3.10 a 3.13\u003c/strong>.\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">git clone https://github.com/jaime-gaming/jaigent.git\ncd jaigent\npython -m venv .venv &amp;&amp; source .venv/bin/activate    # Windows: .venv\\Scripts\\activate\npip install -e .\u003c/code>\u003c/pre>\n\u003ch2 id=\"primera-comprobacion\">Primera comprobación\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">jaigent init          # elige proveedor, guarda una clave y la prueba\njaigent doctor        # claves, almacenamiento y proveedores\njaigent --logo        # el logotipo naranja jAI\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>jgt\u003c/code> es un alias más corto del mismo comando.\u003c/p>\n\u003cp>El logotipo se adapta a la terminal: letras de bloque de seis filas cuando hay sitio, un wordmark de tres filas en ventanas estrechas y una sola línea por debajo de unas 28 columnas. El color desaparece con \u003ccode>--no-color\u003c/code> o cuando la salida va por tubería.\u003c/p>\n\u003ch2 id=\"conseguir-una-clave-de-api\">Conseguir una clave de API\u003c/h2>\n\u003cp>jAIgent \u003cstrong>no tiene clave propia\u003c/strong>: tú aportas una. \u003ccode>jaigent providers\u003c/code> imprime la misma tabla.\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Proveedor\u003c/th>\n\u003cth>Dónde conseguir la clave\u003c/th>\n\u003cth>Variable de entorno\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>OpenAI (por defecto)\u003c/td>\n\u003ctd>platform.openai.com/api-keys\u003c/td>\n\u003ctd>\u003ccode>OPENAI_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Anthropic\u003c/td>\n\u003ctd>console.anthropic.com/settings/keys\u003c/td>\n\u003ctd>\u003ccode>ANTHROPIC_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Gemini\u003c/td>\n\u003ctd>aistudio.google.com/apikey\u003c/td>\n\u003ctd>\u003ccode>GEMINI_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>OpenRouter\u003c/td>\n\u003ctd>openrouter.ai/keys\u003c/td>\n\u003ctd>\u003ccode>OPENROUTER_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Groq\u003c/td>\n\u003ctd>console.groq.com/keys\u003c/td>\n\u003ctd>\u003ccode>GROQ_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Together\u003c/td>\n\u003ctd>api.together.xyz/settings/api-keys\u003c/td>\n\u003ctd>\u003ccode>TOGETHER_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>DeepSeek\u003c/td>\n\u003ctd>platform.deepseek.com/api_keys\u003c/td>\n\u003ctd>\u003ccode>DEEPSEEK_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Mistral\u003c/td>\n\u003ctd>console.mistral.ai/api-keys\u003c/td>\n\u003ctd>\u003ccode>MISTRAL_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>xAI (Grok)\u003c/td>\n\u003ctd>console.x.ai\u003c/td>\n\u003ctd>\u003ccode>XAI_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Ollama\u003c/td>\n\u003ctd>Ninguna: se ejecuta en local\u003c/td>\n\u003ctd>—\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cdiv class=\"callout callout--tip\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Consejo\u003c/p>\n  \u003cdiv class=\"callout__body\">¿No quieres pagar? Usa \u003cstrong>Ollama\u003c/strong>, que no necesita clave, o los modelos gratuitos de OpenRouter y Groq con \u003ccode>--model free\u003c/code>. La búsqueda web usa DuckDuckGo por defecto y \u003cstrong>no\u003c/strong> necesita una segunda clave.\u003c/div>\n\u003c/div>\n\u003ch3 id=\"guardar-la-clave\">Guardar la clave\u003c/h3>\n\u003cp>Tres caminos equivalentes:\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">jaigent auth set openai sk-...     # se guarda en ~/.jaigent/secrets.env\n# o\nexport OPENAI_API_KEY='sk-...'\n# o\ncp .env.example .env &amp;&amp; $EDITOR .env\u003c/code>\u003c/pre>\n\u003cp>Después:\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">jaigent config          # la clave se imprime como &lt;set&gt;, nunca completa\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>.env\u003c/code> está ignorado por Git. \u003cstrong>Las variables de entorno reales siempre ganan.\u003c/strong>\u003c/p>\n\u003cp>\u003ccode>jaigent init\u003c/code> escribe la clave en \u003ccode>~/.jaigent/secrets.env\u003c/code> y solo escribe además un \u003ccode>.env\u003c/code> de proyecto cuando esa carpeta es escribible: se salta \u003ccode>System32\u003c/code> en Windows para que un instalador abierto con doble clic no falle al intentar crear ahí un archivo.\u003c/p>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Aviso\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003ccode>jaigent settings set\u003c/code> \u003cstrong>rechaza\u003c/strong> claves de API a propósito. Las claves van por \u003ccode>jaigent auth\u003c/code>, por el entorno o por un \u003ccode>.env\u003c/code> ignorado, nunca por el archivo de ajustes.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"verificar-la-instalacion\">Verificar la instalación\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">jaigent doctor          # claves, almacenamiento, proveedores y cadena de fallo\njaigent update --check  # solo informa, no actualiza\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>jaigent update\u003c/code> actualiza de verdad y también sincroniza un checkout de fuente. Con \u003ccode>JAIGENT_BETA=1\u003c/code> o \u003ccode>jaigent beta\u003c/code> las actualizaciones llegan desde la rama \u003ccode>beta\u003c/code>. Si prefieres que no se comprueben releases, \u003ccode>JAIGENT_NO_UPDATE_CHECK=1\u003c/code>.\u003c/p>\n\u003ch2 id=\"solucion-de-problemas-de-instalacion\">Solución de problemas de instalación\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Síntoma\u003c/th>\n\u003cth>Qué hacer\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>jaigent: command not found\u003c/code> tras \u003ccode>pip install\u003c/code>\u003c/td>\n\u003ctd>El directorio de scripts de Python no está en el \u003ccode>PATH\u003c/code>.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>El binario no arranca en Linux\u003c/td>\n\u003ctd>Falta \u003ccode>glibc\u003c/code> reciente o el archivo no tiene permiso de ejecución.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>doctor\u003c/code> no ve ninguna clave\u003c/td>\n\u003ctd>Las variables reales ganan: comprueba que no haya una variable vacía exportada.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>La instalación desde Git falla\u003c/td>\n\u003ctd>Versión de Python fuera del rango 3.10–3.13.\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n","desc":"Tres formas de instalar jAIgent y cómo conseguir una clave de proveedor sin pagar de más.","readtime":"3 min de lectura","editHref":"https://github.com/jaime-gaming/jAIgent/blob/main/content/docs/jaigent/install.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#binario-independiente\">Binario independiente\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#desde-pypi\">Desde PyPI\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#desde-el-codigo-fuente\">Desde el código fuente\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#primera-comprobacion\">Primera comprobación\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#conseguir-una-clave-de-api\">Conseguir una clave de API\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#guardar-la-clave\">Guardar la clave\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#verificar-la-instalacion\">Verificar la instalación\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#solucion-de-problemas-de-instalacion\">Solución de problemas de instalación\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}},"en":{"title":"Install & API keys · jAIgent — Docs de Jaime Gaming","description":"Three ways to install jAIgent and how to get a provider key without overpaying.","fields":{"body":"\u003cp>jAIgent installs three ways. If you do not want Python, use the binary; if you already work with Python, use PyPI.\u003c/p>\n\u003ch2 id=\"standalone-binary\">Standalone binary\u003c/h2>\n\u003cp>No Python installation needed.\u003c/p>\n\u003cp>\u003cstrong>macOS and Linux\u003c/strong>\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">curl -fsSL https://raw.githubusercontent.com/jaime-gaming/jaigent/main/packaging/install.sh | sh\u003c/code>\u003c/pre>\n\u003cp>\u003cstrong>Windows\u003c/strong> (PowerShell)\u003c/p>\n\u003cpre data-lang=\"powershell\">\u003ccode class=\"language-powershell\">irm https://raw.githubusercontent.com/jaime-gaming/jaigent/main/packaging/install.ps1 | iex\u003c/code>\u003c/pre>\n\u003cp>Both scripts \u003cstrong>verify the published SHA-256 checksum\u003c/strong> before installing. You can also download the archive from \u003ca href=\"https://github.com/jaime-gaming/jaigent/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Releases\u003c/a>: Windows x64, macOS (Intel and Apple Silicon) and Linux (x64 and arm64).\u003c/p>\n\u003ch2 id=\"from-pypi\">From PyPI\u003c/h2>\n\u003cp>The recommended path if you already have Python:\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">pip install jaigent\u003c/code>\u003c/pre>\n\u003cp>If the package is not on PyPI yet in your environment:\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">pip install git+https://github.com/jaime-gaming/jaigent.git\u003c/code>\u003c/pre>\n\u003ch2 id=\"from-source\">From source\u003c/h2>\n\u003cp>Requires \u003cstrong>Python 3.10 to 3.13\u003c/strong>.\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">git clone https://github.com/jaime-gaming/jaigent.git\ncd jaigent\npython -m venv .venv &amp;&amp; source .venv/bin/activate    # Windows: .venv\\Scripts\\activate\npip install -e .\u003c/code>\u003c/pre>\n\u003ch2 id=\"first-check\">First check\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">jaigent init          # pick a provider, store a key and test it\njaigent doctor        # keys, storage and providers\njaigent --logo        # the orange jAI wordmark\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>jgt\u003c/code> is a shorter alias for the same command.\u003c/p>\n\u003cp>The logo adapts to the terminal: six-row block letters when there is room, a three-row wordmark in narrow windows and a single line below about 28 columns. Colour drops under \u003ccode>--no-color\u003c/code> or when the output is piped.\u003c/p>\n\u003ch2 id=\"getting-an-api-key\">Getting an API key\u003c/h2>\n\u003cp>jAIgent \u003cstrong>has no key of its own\u003c/strong>: you supply one. \u003ccode>jaigent providers\u003c/code> prints the same table.\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Provider\u003c/th>\n\u003cth>Where to get a key\u003c/th>\n\u003cth>Environment variable\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>OpenAI (default)\u003c/td>\n\u003ctd>platform.openai.com/api-keys\u003c/td>\n\u003ctd>\u003ccode>OPENAI_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Anthropic\u003c/td>\n\u003ctd>console.anthropic.com/settings/keys\u003c/td>\n\u003ctd>\u003ccode>ANTHROPIC_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Gemini\u003c/td>\n\u003ctd>aistudio.google.com/apikey\u003c/td>\n\u003ctd>\u003ccode>GEMINI_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>OpenRouter\u003c/td>\n\u003ctd>openrouter.ai/keys\u003c/td>\n\u003ctd>\u003ccode>OPENROUTER_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Groq\u003c/td>\n\u003ctd>console.groq.com/keys\u003c/td>\n\u003ctd>\u003ccode>GROQ_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Together\u003c/td>\n\u003ctd>api.together.xyz/settings/api-keys\u003c/td>\n\u003ctd>\u003ccode>TOGETHER_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>DeepSeek\u003c/td>\n\u003ctd>platform.deepseek.com/api_keys\u003c/td>\n\u003ctd>\u003ccode>DEEPSEEK_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Mistral\u003c/td>\n\u003ctd>console.mistral.ai/api-keys\u003c/td>\n\u003ctd>\u003ccode>MISTRAL_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>xAI (Grok)\u003c/td>\n\u003ctd>console.x.ai\u003c/td>\n\u003ctd>\u003ccode>XAI_API_KEY\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Ollama\u003c/td>\n\u003ctd>None — it runs locally\u003c/td>\n\u003ctd>—\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cdiv class=\"callout callout--tip\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Tip\u003c/p>\n  \u003cdiv class=\"callout__body\">Do not want to pay? Use \u003cstrong>Ollama\u003c/strong>, which needs no key, or the free models of OpenRouter and Groq with \u003ccode>--model free\u003c/code>. Web search uses DuckDuckGo by default and needs \u003cstrong>no\u003c/strong> second key.\u003c/div>\n\u003c/div>\n\u003ch3 id=\"storing-the-key\">Storing the key\u003c/h3>\n\u003cp>Three equivalent paths:\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">jaigent auth set openai sk-...     # stored in ~/.jaigent/secrets.env\n# or\nexport OPENAI_API_KEY='sk-...'\n# or\ncp .env.example .env &amp;&amp; $EDITOR .env\u003c/code>\u003c/pre>\n\u003cp>Then:\u003c/p>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">jaigent config          # the key is printed as &lt;set&gt;, never in full\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>.env\u003c/code> is git-ignored. \u003cstrong>Real environment variables always win.\u003c/strong>\u003c/p>\n\u003cp>\u003ccode>jaigent init\u003c/code> writes the key to \u003ccode>~/.jaigent/secrets.env\u003c/code> and only also writes a project \u003ccode>.env\u003c/code> when that folder is writable: it skips \u003ccode>System32\u003c/code> on Windows so a double-clicked installer cannot fail by trying to create a file there.\u003c/p>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Warning\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003ccode>jaigent settings set\u003c/code> \u003cstrong>refuses\u003c/strong> API keys on purpose. Keys go through \u003ccode>jaigent auth\u003c/code>, the environment or a git-ignored \u003ccode>.env\u003c/code>, never through the settings file.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"verifying-the-installation\">Verifying the installation\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">jaigent doctor          # keys, storage, providers and the failover chain\njaigent update --check  # only reports, does not update\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>jaigent update\u003c/code> really updates and also syncs a source checkout. With \u003ccode>JAIGENT_BETA=1\u003c/code> or \u003ccode>jaigent beta\u003c/code>, updates come from the \u003ccode>beta\u003c/code> branch. If you prefer no release checks at all, \u003ccode>JAIGENT_NO_UPDATE_CHECK=1\u003c/code>.\u003c/p>\n\u003ch2 id=\"installation-troubleshooting\">Installation troubleshooting\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Symptom\u003c/th>\n\u003cth>What to do\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>jaigent: command not found\u003c/code> after \u003ccode>pip install\u003c/code>\u003c/td>\n\u003ctd>Python&#39;s script directory is not on the \u003ccode>PATH\u003c/code>.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>The binary does not start on Linux\u003c/td>\n\u003ctd>Missing recent \u003ccode>glibc\u003c/code>, or the file lacks the executable permission.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>doctor\u003c/code> sees no keys\u003c/td>\n\u003ctd>Real variables win: check that no empty variable is exported.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Installing from Git fails\u003c/td>\n\u003ctd>Python version outside the 3.10–3.13 range.\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n","desc":"Three ways to install jAIgent and how to get a provider key without overpaying.","readtime":"2 min read","editHref":"https://github.com/jaime-gaming/jAIgent/blob/main/content/docs/jaigent/install.en.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#standalone-binary\">Standalone binary\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#from-pypi\">From PyPI\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#from-source\">From source\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#first-check\">First check\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#getting-an-api-key\">Getting an API key\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#storing-the-key\">Storing the key\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#verifying-the-installation\">Verifying the installation\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#installation-troubleshooting\">Installation troubleshooting\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}}}</script>
+<script type="application/json" id="searchConfig">{"index":"/Docs/assets/data/search-index.json","scope":"jaigent"}</script>
+<script src="/Docs/assets/js/i18n.js?v=9f6d93c1fd7c"></script>
+<script src="/Docs/assets/js/search.js?v=014a801e4757"></script>
+<script src="/Docs/assets/js/main.js?v=83aa4a0803d7"></script>
+</body>
+</html>

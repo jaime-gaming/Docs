@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Instalación y despliegue — Docs de Jaime Gaming</title>
+<meta name="description" content="Arrancar hellbot en Windows sin consola, desde consola en cualquier sistema o con Docker, y la lista de permisos de Discord." />
+<meta name="author" content="Jaime Gaming" />
+<meta name="theme-color" content="#10120f" />
+<meta name="robots" content="index, follow" />
+<meta name="docs:base" content="/Docs/" />
+<meta name="docs:project" content="hellbot" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Jaime Gaming Docs" />
+<meta property="og:title" content="Instalación y despliegue — Docs de Jaime Gaming" />
+<meta property="og:description" content="Arrancar hellbot en Windows sin consola, desde consola en cualquier sistema o con Docker, y la lista de permisos de Discord." />
+<meta property="og:url" content="https://jaime-gaming.github.io/Docs/hellbot/install/" />
+<meta property="og:image" content="https://jaime-gaming.github.io/assets/img/social-card.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@JaimeGamingPro" />
+<meta name="twitter:title" content="Instalación y despliegue — Docs de Jaime Gaming" />
+<meta name="twitter:description" content="Arrancar hellbot en Windows sin consola, desde consola en cualquier sistema o con Docker, y la lista de permisos de Discord." />
+<link rel="canonical" href="https://jaime-gaming.github.io/Docs/hellbot/install/" />
+<link rel="icon" href="/Docs/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/Docs/assets/css/style.css?v=d74cfec89052" />
+</head>
+<body data-icons="/Docs/assets/img/icons.svg?v=eea9c3fe56aa" data-page="docs" data-project="hellbot" data-path="/hellbot/install/">
+
+<a class="skip-link" href="#top" data-i18n="aria.skipToContent">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/Docs/" class="nav__logo" aria-label="Jaime Gaming Docs — inicio" data-i18n-aria="aria.homeLogo">JG<span class="dot">.</span><span class="nav__logo-badge">docs</span></a>
+  <nav class="nav__links" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+    <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+    <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+    <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+    <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+    <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="search-trigger" id="searchTrigger" type="button" aria-label="Buscar" data-i18n-aria="nav.search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg>
+      <span class="search-trigger__label" data-i18n="search.button">Buscar</span>
+      <kbd class="search-trigger__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+    <button class="lang-switch" id="langSwitch" data-active="es" type="button" aria-label="Cambiar idioma" data-i18n-aria="aria.langSwitch">
+      <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="languageFlagEs" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#aa151b" d="M0 0h24v24H0z"/><path fill="#f1bf00" d="M0 6h24v12H0z"/></g>
+          </pattern>
+          <pattern id="languageFlagEn" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#012169" d="M0 0h24v24H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 24 24M24 0 0 24"/><path stroke="#c8102e" stroke-width="2" d="m0 0 24 24M24 0 0 24"/><path stroke="#fff" stroke-width="8" d="M12 0v24M0 12h24"/><path stroke="#c8102e" stroke-width="4" d="M12 0v24M0 12h24"/></g>
+          </pattern>
+          <radialGradient id="languageGloss" cx="34%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".42"/>
+            <stop offset="55%" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="flag flag-es" cx="12" cy="12" r="9.5" fill="url(#languageFlagEs)"/>
+        <circle class="flag flag-en" cx="12" cy="12" r="9.5" fill="url(#languageFlagEn)"/>
+        <circle class="language-globe__gloss" cx="12" cy="12" r="9.5" fill="url(#languageGloss)" aria-hidden="true"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#0d100d" stroke-opacity=".55" stroke-width="1.9" stroke-linecap="round"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width=".9" stroke-linecap="round"/>
+      </svg>
+      <span class="sr-only" id="languageName">Español</span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil" data-i18n-aria="aria.mainNav">
+  <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+  <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+  <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+  <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+  <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+</nav>
+
+<main id="top" class="layout--docs">
+<div class="docs docs--with-rails">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-panel"></use></svg>
+    </button>
+    <aside class="docs__sidebar" id="docsSidebar" aria-label="Índice de esta documentación" data-i18n-aria="aria.sidebar">
+    <nav class="side-nav">
+      <div class="side-nav__head">
+        <span class="side-nav__eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+        <a class="side-nav__project" href="/Docs/hellbot/">
+          <span class="side-nav__project-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg></span>
+          <span class="side-nav__project-name" data-i18n="proj.hellbot.name">hellbot</span>
+        </a>
+      </div>
+      <p class="side-nav__group" data-i18n="docs.sidebarTitle">En esta documentación</p>
+      <ol class="side-nav__list">
+      <li><a class="side-nav__link" href="/Docs/hellbot/" data-i18n="page.hellbot.index"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-compass"></use></svg><span>Visión general</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/rules/" data-i18n="page.hellbot.rules"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-scroll"></use></svg><span>Reglas del evento</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/edge-cases/" data-i18n="page.hellbot.edge-cases"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert"></use></svg><span>Casos límite</span></a></li>
+      <li><a class="side-nav__link active" href="/Docs/hellbot/install/" data-i18n="page.hellbot.install"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-download"></use></svg><span>Instalación y despliegue</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/commands/" data-i18n="page.hellbot.commands"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-terminal"></use></svg><span>Comandos</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/dashboard/" data-i18n="page.hellbot.dashboard"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-monitor"></use></svg><span>Dashboard en vivo</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/architecture/" data-i18n="page.hellbot.architecture"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-boxes"></use></svg><span>Arquitectura</span></a></li>
+      </ol>
+      <div class="side-nav__foot">
+        <a class="side-nav__all" href="/Docs/projects/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.allProjects">Todos los proyectos</span></a>
+        <div class="side-nav__switch">
+          <span class="side-nav__switch-label" data-i18n="docs.otherProjects">Otros proyectos</span>
+          <ul class="side-nav__switch-list">
+        <li><a class="side-nav__chip" href="/Docs/wave/" title="Wave"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg><span>Wave</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/jaigent/" title="jAIgent"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg><span>jAIgent</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/rngdle-infinite/" title="RNGdle Infinite"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-dice"></use></svg><span>RNGdle Infinite</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/daily-diary/" title="Diario"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-notebook"></use></svg><span>Diario</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/void/" title="VOID"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg><span>VOID</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/website/" title="jaime-gaming.github.io"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg><span>jaime-gaming.github.io</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </aside>
+    <div class="docs__main">
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="/Docs/">Docs</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="/Docs/hellbot/" data-i18n="proj.hellbot.name">hellbot</a>
+      <span class="breadcrumb__sep">/</span>
+      <span class="breadcrumb__current" data-i18n="page.hellbot.install">Instalación y despliegue</span>
+    </nav>
+    <header class="doc-head reveal">
+      <p class="doc-head__kicker"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg><span data-i18n="proj.hellbot.name">hellbot</span></p>
+      <h1 class="doc-head__title" data-i18n="page.hellbot.install">Instalación y despliegue</h1>
+      <p class="doc-head__desc" data-content-key="desc">Arrancar hellbot en Windows sin consola, desde consola en cualquier sistema o con Docker, y la lista de permisos de Discord.</p>
+      <div class="doc-head__meta">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-calendar"></use></svg><span data-i18n="docs.updated">Última revisión</span> <time datetime="2026-10-18" data-i18n-date>18 de octubre de 2026</time></span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-clock"></use></svg><span data-content-key="readtime">6 min de lectura</span></span>
+        <a class="doc-head__edit" href="https://github.com/jaime-gaming/hellbot/blob/main/content/docs/hellbot/install.md" data-content-key="editHref" data-content-attr="href" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span data-i18n="docs.editOnGithub">Editar esta página en GitHub</span></a>
+      </div>
+    </header>
+    <article class="doc-body reveal" lang="es" data-content-key="body" data-content-language>
+<h2 id="windows-doble-clic-sin-consola">Windows: doble clic, sin consola</h2>
+<ol>
+<li>Descarga o clona la carpeta del proyecto.</li>
+<li>Doble clic en <strong><code>run_bot.bat</code></strong> (o <code>run_bot_silent.vbs</code> si no quieres que aparezca ni la ventana de instalación). La primera ejecución crea un entorno virtual e instala las dependencias automáticamente.</li>
+<li>Se abre el <strong>panel de control</strong>. Rellena la pestaña Settings → <strong>Save settings</strong> → <strong>Start bot</strong>.</li>
+</ol>
+<p>¿Prefieres un solo archivo para pasárselo a otra persona? Ejecuta <strong><code>build_exe.bat</code></strong> una vez y obtienes <code>dist\WelcomeToHellBot.exe</code>: sin Python en la máquina destino, sin ventana de consola, y conserva <code>.env</code>, <code>data\</code> y <code>logs\</code> a su lado.</p>
+<p>Para depurar con la salida visible está <strong><code>run_bot_console.bat</code></strong>.</p>
+<h2 id="cualquier-sistema-consola">Cualquier sistema: consola</h2>
+<pre data-lang="bash"><code class="language-bash">python -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env      # token, identificadores de canales y de roles
+python bot.py</code></pre>
+<h2 id="docker">Docker</h2>
+<pre data-lang="bash"><code class="language-bash">cp .env.example .env      # rellénalo
+docker compose up -d      # el estado vive en el volumen hell-data</code></pre>
+<p>Hay una unidad de systemd en <code>deploy/hellbot.service</code>.</p>
+<h3 id="que-hace-la-imagen">Qué hace la imagen</h3>
+<p>El <code>Dockerfile</code> parte de <code>python:3.12-slim</code> y toma cuatro decisiones que conviene conocer antes de operar el bot en un contenedor:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Decisión</th>
+<th>Detalle</th>
+<th>Por qué importa</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Estado en un volumen</strong></td>
+<td><code>VOLUME /data</code>, con <code>DATABASE_PATH=/data/hell.sqlite3</code></td>
+<td>Los reinicios <strong>y las reconstrucciones de la imagen</strong> no pierden el cronómetro, la clasificación ni el historial de hitos</td>
+</tr>
+<tr>
+<td><strong>Usuario sin privilegios</strong></td>
+<td><code>hellbot</code>, uid 10001, dueño de <code>/data</code> y <code>/app</code></td>
+<td>El bot no corre como root</td>
+</tr>
+<tr>
+<td><strong>Healthcheck real</strong></td>
+<td>cada 60 s, timeout 10 s, arranque 90 s, 3 reintentos</td>
+<td>Ejecuta <code>tools/healthcheck.py --max-lag 120</code>: si hay un evento en marcha y la última observación del canal es más antigua que eso, el contenedor se marca no sano y se reinicia</td>
+</tr>
+<tr>
+<td><strong>Solo lo que se usa en runtime</strong></td>
+<td>copia <code>hell/</code>, <code>tools/healthcheck.py</code>, <code>docs/</code>, <code>Announcements.py</code> y <code>bot.py</code></td>
+<td><code>Announcements.py</code> es obligatorio: el bot lee ahí todos sus textos y no arranca sin él</td>
+</tr>
+</tbody></table></div>
+<p>El <code>.dockerignore</code> deja fuera del contexto de build <code>.git/</code>, los entornos virtuales y las cachés, y —lo importante— <strong>todo lo que es estado o secreto</strong>: <code>.env</code>, <code>data/</code>, <code>logs/</code> y los <code>*.sqlite3</code> con sus <code>-wal</code> y <code>-shm</code>. Nunca se hornea una base de datos ni unas credenciales dentro de la imagen.</p>
+<div class="callout callout--tip">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles"></use></svg>
+  <p class="callout__title">Consejo</p>
+  <div class="callout__body">El healthcheck mira el <strong>archivo de estado, no el proceso</strong>. Un bot vivo pero con el bucle de monitorización atascado es peor que uno caído, porque el evento sigue corriendo mientras nadie observa el canal. Ese es exactamente el fallo que el healthcheck está diseñado para detectar.</div>
+</div>
+<p>El comando de arranque es <code>python bot.py</code>, que es el punto de entrada de cinco líneas que llama a <code>hell.bot.main</code>.</p>
+<div class="callout callout--warning">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn"></use></svg>
+  <p class="callout__title">Aviso</p>
+  <div class="callout__body"><strong>Puerto 8080 ya en uso</strong> (<code>Web dashboard NOT started: port 8080 is already in use</code>): el dashboard enlaza <code>WEB_PORT</code> (8080 por defecto) dentro del contenedor y docker-compose publica <em>el mismo</em> valor, así que se cambia en un solo sitio: <code>WEB_PORT=8090</code> en <code>.env</code> y otra vez <code>docker compose up -d</code>.</p>
+<p>Si el log dice que el puerto está en uso pero no hay nada más corriendo, busca una <strong>segunda instancia del bot</strong> (<code>docker ps | grep hell</code> o <code>ps aux | grep bot</code>): solo puede haber un proceso por <code>.env</code>. Dos instancias acreditan tiempo doble y se pelean por cada comando <code>/hell</code>. Como red de seguridad el bot se niega a arrancar una segunda instancia contra la misma base de datos (un <code>flock</code> sobre <code>&lt;data dir&gt;/hellbot.lock</code>), así que una copia duplicada sale de inmediato con un error claro en vez de causar estragos.</div>
+</div>
+<h2 id="el-panel-de-control">El panel de control</h2>
+<p><code>launcher_main.py</code> —lo que arrancan el <code>.bat</code> y el <code>.exe</code>— es una pequeña aplicación de escritorio en Tk:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Pestaña</th>
+<th>Qué ofrece</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Dashboard</strong></td>
+<td>Estado del bot, estado del evento, población del canal en vivo, próximo hito, barra de progreso de las 160 h y el resultado de las comprobaciones de configuración del lado de Discord.</td>
+</tr>
+<tr>
+<td><strong>Log</strong></td>
+<td>Las mismas líneas que van a <code>logs/hellbot.log</code>, en color y en vivo, con un botón para abrir la carpeta.</td>
+</tr>
+<tr>
+<td><strong>Settings</strong></td>
+<td>Cada valor de <code>.env</code> con ayuda en línea, el token enmascarado tras un interruptor de <em>mostrar</em>, validación antes de guardar y escritura atómica para que un fallo no pueda corromper el archivo.</td>
+</tr>
+</tbody></table></div>
+<p>El bot corre en su propio bucle asyncio en un hilo en segundo plano, así que la ventana nunca se congela; cerrarla pide confirmación y apaga el bot limpiamente. Los errores (token malo, intent que falta, sin red) aparecen como ventanas emergentes y en el Dashboard, en vez de desaparecer en una consola que nadie mira.</p>
+<h2 id="lista-de-configuracion-en-discord">Lista de configuración en Discord</h2>
+<p><strong>1. Developer Portal → Bot → Privileged Gateway Intents</strong>: activa <strong>Server Members Intent</strong> y <strong>Message Content Intent</strong>. El segundo es obligatorio para que el bot pueda leer las respuestas de las comprobaciones de vida: sin él <strong>nadie podrá responder nunca a un pase de lista</strong>.</p>
+<p><strong>2. Invita al bot con estos permisos:</strong></p>
+<div class="doc-table"><table><thead><tr>
+<th>Permiso</th>
+<th>Por qué</th>
+</tr>
+</thead><tbody><tr>
+<td>View Channel + Connect en el canal objetivo</td>
+<td>Para ver quién está dentro</td>
+</tr>
+<tr>
+<td><strong>Move Members</strong></td>
+<td>Para desconectar a los usuarios <code>@clanker</code></td>
+</tr>
+<tr>
+<td>Send Messages / Embed Links / Read Message History en el canal de anuncios</td>
+<td>Anuncios y edición del mensaje de progreso</td>
+</tr>
+<tr>
+<td><strong>Mention @everyone</strong></td>
+<td>Pings de hito, arranque, fallo y completado</td>
+</tr>
+<tr>
+<td>Manage Messages <em>(opcional)</em></td>
+<td>Permite al bot fijar el mensaje de progreso en vivo</td>
+</tr>
+</tbody></table></div>
+<p>El bot verifica todo esto al arrancar (<code>hell/health.py</code>) y te dice exactamente qué falta, en el log y en el Dashboard del lanzador.</p>
+<h2 id="variables-de-configuracion">Variables de configuración</h2>
+<h3 id="obligatorias">Obligatorias</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Variable</th>
+<th>Significado</th>
+</tr>
+</thead><tbody><tr>
+<td><code>DISCORD_TOKEN</code></td>
+<td>Token del bot</td>
+</tr>
+<tr>
+<td><code>GUILD_ID</code></td>
+<td>Identificador del servidor (los comandos de barra se sincronizan al instante con este servidor)</td>
+</tr>
+<tr>
+<td><code>VOICE_CHANNEL_ID</code></td>
+<td>El canal de Hell (por defecto <code>1539756705997652079</code>)</td>
+</tr>
+<tr>
+<td><code>ANNOUNCE_CHANNEL_ID</code></td>
+<td>Canal de texto para anuncios y el mensaje de progreso en vivo</td>
+</tr>
+<tr>
+<td><code>GAMENIGHT_HOST_ROLE_ID</code></td>
+<td><code>@gamenight host</code>: el único rol que puede arrancar, parar y reiniciar</td>
+</tr>
+<tr>
+<td><code>CLANKER_ROLE_ID</code></td>
+<td><code>@clanker</code>: se desconectan automáticamente y nunca ganan tiempo de clasificación</td>
+</tr>
+</tbody></table></div>
+<h3 id="opcionales">Opcionales</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Variable</th>
+<th>Por defecto</th>
+<th>Significado</th>
+</tr>
+</thead><tbody><tr>
+<td><code>HELL_ROLE_ID</code>, <code>HELLIST_ROLE_ID</code>, <code>HELL_MASTER_ROLE_ID</code>, <code>COOL_PEOPLE_ROLE_ID</code></td>
+<td>—</td>
+<td>Solo se usan para renderizar menciones reales de rol en los mensajes de recompensa</td>
+</tr>
+<tr>
+<td><code>DATABASE_PATH</code></td>
+<td><code>data/hell.sqlite3</code></td>
+<td>Ruta de la base de datos</td>
+</tr>
+<tr>
+<td><code>MONITOR_INTERVAL</code> / <code>PROGRESS_INTERVAL</code></td>
+<td><code>1</code> s / <code>20</code> s</td>
+<td>Frecuencia del monitor y del mensaje de progreso</td>
+</tr>
+<tr>
+<td><code>STARTUP_GRACE_SECONDS</code></td>
+<td><code>15</code></td>
+<td>Las lecturas del canal justo tras arrancar se observan pero no pueden hacer fallar el evento (guarda de caché fría)</td>
+</tr>
+<tr>
+<td><code>EMPTY_VC_GRACE_SECONDS</code></td>
+<td><code>15</code></td>
+<td>Cuánto puede estar vacío el canal antes de que la partida falle</td>
+</tr>
+<tr>
+<td><code>SEND_FINAL_DMS</code> / <code>DM_DELAY_SECONDS</code></td>
+<td><code>true</code> / <code>1</code></td>
+<td>Fichas de estadísticas al terminar</td>
+</tr>
+<tr>
+<td><code>LOG_DM_ENABLED</code></td>
+<td><code>true</code></td>
+<td>Flujo de log en vivo</td>
+</tr>
+<tr>
+<td><code>LOG_DM_USER_ID</code></td>
+<td><code>984083829767675965</code></td>
+<td>Quién lo recibe</td>
+</tr>
+<tr>
+<td><code>LOG_DM_LEVEL</code></td>
+<td><code>INFO</code></td>
+<td><code>DEBUG</code>, <code>INFO</code>, <code>WARNING</code> o <code>ERROR</code></td>
+</tr>
+<tr>
+<td><code>LOG_DM_FLUSH_SECONDS</code></td>
+<td><code>3</code></td>
+<td>Intervalo de agrupamiento</td>
+</tr>
+<tr>
+<td><code>LOG_DM_PING_LEVEL</code></td>
+<td><code>ERROR</code></td>
+<td>Las líneas de esta severidad o peor, más cualquier límite de tasa de Discord, hacen ping al operador por MD</td>
+</tr>
+<tr>
+<td><code>LOG_DM_PING_COOLDOWN_SECONDS</code></td>
+<td><code>300</code></td>
+<td>Segundos mínimos entre pings de alerta</td>
+</tr>
+<tr>
+<td><code>MAX_TICK_CREDIT_SECONDS</code></td>
+<td><code>5</code></td>
+<td>Tope de acreditación por comprobación, para que una caída nunca se acredite en silencio</td>
+</tr>
+<tr>
+<td><code>DOWNTIME_CREDIT_SECONDS</code></td>
+<td><code>300</code></td>
+<td>Una caída de hasta esta duración se devuelve a quien estaba en el canal antes <strong>y</strong> después</td>
+</tr>
+<tr>
+<td><code>HEARTBEAT_MINUTES</code></td>
+<td><code>15</code></td>
+<td>Línea de prueba de vida en el log</td>
+</tr>
+<tr>
+<td><code>ALIVE_CHECK_ENABLED</code></td>
+<td><code>true</code></td>
+<td>Activar las comprobaciones de vida</td>
+</tr>
+<tr>
+<td><code>ALIVE_CHECK_MIN_HOURS</code> / <code>ALIVE_CHECK_MAX_HOURS</code></td>
+<td><code>1</code> / <code>6</code></td>
+<td>La ventana aleatoria</td>
+</tr>
+<tr>
+<td><code>ALIVE_CHECK_TIMEOUT_MINUTES</code></td>
+<td><code>5</code></td>
+<td>Tiempo para responder</td>
+</tr>
+<tr>
+<td><code>ALIVE_CHECK_STRICT</code></td>
+<td><code>false</code></td>
+<td><code>true</code> acepta solo la cadena exacta <code>Yes</code></td>
+</tr>
+<tr>
+<td><code>ALIVE_CHECK_CHANNEL_ID</code></td>
+<td>—</td>
+<td>Dónde se publica el pase de lista; vacío = <strong>el propio chat de texto del canal</strong></td>
+</tr>
+<tr>
+<td><code>LOG_LEVEL</code></td>
+<td><code>INFO</code></td>
+<td>Nivel de log</td>
+</tr>
+<tr>
+<td><code>WEB_PORT</code></td>
+<td><code>8080</code></td>
+<td>Puerto del dashboard; <code>0</code> lo desactiva</td>
+</tr>
+</tbody></table></div>
+<div class="callout callout--important">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert"></use></svg>
+  <p class="callout__title">Importante</p>
+  <div class="callout__body"><strong>El requisito del canal de voz no es configurable.</strong> <code>/hell start</code> se niega a arrancar el evento mientras el canal objetivo no tenga ningún humano válido: un arranque con el canal vacío es imposible, diga lo que diga el <code>.env</code>. Es una regla dura, no un interruptor.</div>
+</div>
+<div class="callout callout--warning">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn"></use></svg>
+  <p class="callout__title">Aviso</p>
+  <div class="callout__body"><strong>Los booleanos se analizan de forma estricta.</strong> Se aceptan <code>true</code>/<code>yes</code>/<code>on</code>/<code>1</code> y <code>false</code>/<code>no</code>/<code>off</code>/<code>0</code>. Cualquier otra cosa —por ejemplo una errata como <code>ture</code> o <code>flase</code>— <strong>hace fallar el arranque</strong> con un error claro, en vez de desactivar en silencio la función que se quería encender.</div>
+</div>
+<h2 id="desarrollo">Desarrollo</h2>
+<pre data-lang="bash"><code class="language-bash">./tools/check.sh        # lint + tipos + pruebas
+python tools/simulate.py  # simulación offline, sin Discord</code></pre>
+<p>La suite cubre motor, persistencia, casos límite de Discord, GUI y despliegue, con ruff y mypy limpios y un 88 % de cobertura.</p>
+
+    </article>
+    <nav class="pager reveal" aria-label="paginación">
+    <a class="pager__link" href="/Docs/hellbot/edge-cases/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.prev">Anterior</span></span>
+      <span class="pager__title" data-i18n="page.hellbot.edge-cases">Casos límite</span>
+    </a>
+    <a class="pager__link pager__link--next" href="/Docs/hellbot/commands/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-right"></use></svg><span data-i18n="docs.next">Siguiente</span></span>
+      <span class="pager__title" data-i18n="page.hellbot.commands">Comandos</span>
+    </a>
+    </nav>
+    <p class="source-note reveal" data-i18n="docs.sourceNote">Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.</p>
+    </div>
+    <aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
+    <p class="toc__title" data-i18n="docs.tocTitle">En esta página</p>
+    <ol class="toc__list">
+      <li><a href="#windows-doble-clic-sin-consola">Windows: doble clic, sin consola</a></li>
+      <li><a href="#cualquier-sistema-consola">Cualquier sistema: consola</a></li>
+      <li><a href="#docker">Docker</a></li>
+      <li><a class="toc__h3" href="#que-hace-la-imagen">Qué hace la imagen</a></li>
+      <li><a href="#el-panel-de-control">El panel de control</a></li>
+      <li><a href="#lista-de-configuracion-en-discord">Lista de configuración en Discord</a></li>
+      <li><a href="#variables-de-configuracion">Variables de configuración</a></li>
+      <li><a class="toc__h3" href="#obligatorias">Obligatorias</a></li>
+      <li><a class="toc__h3" href="#opcionales">Opcionales</a></li>
+      <li><a href="#desarrollo">Desarrollo</a></li>
+    </ol>
+    <p class="toc__progress" aria-hidden="true"><span></span></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="https://jaime-gaming.github.io/" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-github"></use></svg></a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-youtube"></use></svg></a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-x"></use></svg></a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-discord"></use></svg></a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-mail"></use></svg></a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="/Docs/"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="/Docs/projects/"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="https://jaime-gaming.github.io/blog/"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="https://jaime-gaming.github.io/contact/"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="https://jaime-gaming.github.io/"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="/Docs/status/"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="https://jaime-gaming.github.io/terms/" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="https://jaime-gaming.github.io/privacy/" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-arrow"></use></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" hidden>
+  <div class="search-modal__backdrop" data-search-close></div>
+  <div class="search-modal__panel">
+    <h2 class="sr-only" id="searchModalTitle" data-i18n="search.dialogTitle">Buscar en la documentación</h2>
+    <div class="search-modal__head">
+      <span class="search-modal__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg></span>
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar en la documentación…" data-i18n-placeholder="search.placeholder" aria-describedby="searchModalHint" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-activedescendant="" />
+      <button class="search-modal__close" type="button" data-search-close aria-label="Cerrar búsqueda" data-i18n-aria="search.close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-close"></use></svg></button>
+    </div>
+    <div class="search-modal__hintrow">
+      <p class="search-modal__hint" id="searchModalHint" data-i18n="search.hint">Escribe para filtrar páginas y apartados</p>
+      <p class="search-modal__keys" id="searchKeys" aria-hidden="true">
+        <span class="keyhint"><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="search.kbdNavigate">navegar</span></span>
+        <span class="keyhint"><kbd>↵</kbd><span data-i18n="search.kbdOpen">abrir</span></span>
+        <span class="keyhint"><kbd>Esc</kbd><span data-i18n="search.kbdClose">cerrar</span></span>
+      </p>
+    </div>
+    <div class="search-modal__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" data-i18n-aria="search.resultsLabel"></div>
+  </div>
+</div>
+
+<script type="application/json" id="uiStrings">{"es":{"nav.home":"Inicio","nav.projects":"Proyectos","nav.search":"Buscar","nav.site":"Mi web","nav.blog":"Blog","nav.contact":"Contacto","nav.openMenu":"Abrir menú","nav.closeMenu":"Cerrar menú","aria.skipToContent":"Saltar al contenido","aria.homeLogo":"Jaime Gaming Docs — inicio","aria.mainNav":"Navegación principal","aria.backToTop":"Volver arriba","aria.langSwitch":"Español. Cambiar a inglés","aria.sidebar":"Índice de esta documentación","aria.toc":"En esta página","aria.openSidebar":"Abrir índice","aria.closeSidebar":"Cerrar índice","search.button":"Buscar","search.placeholder":"Buscar en la documentación…","search.hint":"Escribe para filtrar páginas y apartados","search.empty":"Sin resultados para","search.noQuery":"Prueba con «instalar», «comandos», «privacidad»…","search.results":"resultados","search.result":"resultado","search.close":"Cerrar búsqueda","search.scopeAll":"Toda la documentación","search.scopeProject":"Solo este proyecto","search.kbdNavigate":"navegar","search.kbdOpen":"abrir","search.kbdClose":"cerrar","search.dialogTitle":"Buscar en la documentación","search.resultsLabel":"Resultados de búsqueda","docs.eyebrow":"Documentación","docs.sidebarTitle":"En esta documentación","docs.tocTitle":"En esta página","docs.editOnGithub":"Editar esta página en GitHub","docs.sourceNote":"Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.","docs.updated":"Última revisión","docs.prev":"Anterior","docs.next":"Siguiente","docs.allProjects":"Todos los proyectos","docs.readTime":"min de lectura","docs.jumpTo":"Ir a","home.kicker":"DOCUMENTACIÓN","home.title":"Todos mis proyectos, \u003cspan class=\"hero__title-accent\">documentados\u003c/span>","home.subtitle":"Un solo sitio con la documentación de todo lo que construyo: reproductores, agentes, bots, juegos y webs. Guías de instalación, arquitectura, uso y referencia.","home.ctaPrimary":"Empezar a leer","home.ctaSecondary":"Ver todos los proyectos","home.stats.projects":"proyectos","home.stats.pages":"páginas","home.stats.languages":"idiomas","home.stats.updated":"actualizada","home.about.title":"Sobre esta documentación","home.about.sub":"Cómo está hecha y cómo se mantiene.","home.about.card.label":"CÓMO FUNCIONA","home.about.card.title":"Escrita a mano, generada con Node","home.about.card.text":"Cada página es un Markdown en content/docs/. El build las convierte en HTML estático con el mismo sistema, la misma paleta y las mismas animaciones que mi web principal.","home.about.card.stamp":"VER EL REPOSITORIO ↗","home.contribute.title":"¿Ves un error?","home.contribute.text":"Toda la documentación está en un repositorio público. Abre una issue o envía una pull request con la corrección.","home.contribute.issue":"Abrir una issue","home.contribute.pr":"Proponer un cambio","home.contribute.email":"Escribirme un correo","projects.title":"Proyectos","projects.sub":"Toda la documentación, proyecto por proyecto. Cada tarjeta enlaza a su guía completa.","projects.pages":"páginas","projects.openDocs":"Abrir documentación","projects.demo":"Probar","projects.code":"Código","projects.group.all":"Todos","callout.note":"Nota","callout.tip":"Consejo","callout.warning":"Aviso","callout.important":"Importante","callout.caution":"Precaución","code.copy":"Copiar","code.copied":"Copiado","footer.rights":"Todos los derechos reservados.","footer.mainSite":"Mi web","footer.tagline":"Juegos para navegador, aplicaciones web y vídeos.","footer.site":"Sitio","footer.siteAria":"Enlaces del sitio","footer.resources":"Recursos","footer.resourcesAria":"Recursos y enlaces externos","footer.status":"Estado del servicio","footer.email":"Correo","footer.terms":"Términos del servicio","footer.privacy":"Privacidad","footer.source":"Código fuente ↗","footer.legalAria":"Términos y privacidad","aria.socials":"Redes sociales","aria.footerLogo":"Jaime Gaming — inicio","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Correo electrónico","status.title":"Estado del servicio","status.sub":"Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.","status.note":"Datos del panel oficial de estado","status.open":"Abrir panel completo ↗","status.loading":"Consultando el estado…","status.unknown":"Estado no disponible","status.error":"No se pudo consultar el estado en directo. Puedes abrir el panel completo.","status.updated":"Actualizado el {date}","status.componentsAria":"Componentes del servicio","status.allOperational":"Todos los sistemas operativos","status.minorIssues":"Incidencias menores","status.majorIssues":"Incidencia grave","status.criticalIssues":"Incidencia crítica","status.maintenanceOverall":"Mantenimiento en curso","status.operational":"Operativo","status.degraded":"Rendimiento degradado","status.partial":"Interrupción parcial","status.major":"Interrupción grave","status.underMaintenance":"En mantenimiento","status.maintenanceTitle":"Mantenimiento programado","status.maintenanceBody":"Texto publicado en el panel de estado.","status.frameNotice":"El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.","status.loadFrame":"Cargar panel incrustado","status.frameTitle":"Panel de estado de Jaime Gaming","status.hint":"El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.","notFound.title":"Página no encontrada","notFound.sub":"Puede que el enlace esté roto o que esta guía se haya movido.","notFound.home":"Volver al inicio de la documentación","notFound.projects":"Ver todos los proyectos","home.guide.title":"Cómo están organizadas las guías","home.guide.sub":"Todas siguen la misma anatomía, para que sepas dónde buscar en cada proyecto.","home.guide.overview.num":"01","home.guide.overview.title":"Visión general","home.guide.overview.desc":"Qué es el proyecto, qué problema resuelve, en qué estado está y qué lo distingue. Es la puerta de entrada de cada guía.","home.guide.install.num":"02","home.guide.install.title":"Instalación","home.guide.install.desc":"Requisitos, comandos para ponerlo en marcha y la primera comprobación de que todo funciona.","home.guide.usage.num":"03","home.guide.usage.title":"Uso","home.guide.usage.desc":"El día a día: funciones, comandos, mecánicas o flujos de trabajo, con ejemplos concretos.","home.guide.deep.num":"04","home.guide.deep.title":"Cómo está hecho","home.guide.deep.desc":"Arquitectura, estructura de carpetas, decisiones técnicas y los límites conocidos del proyecto.","home.guide.reference.num":"05","home.guide.reference.title":"Referencia","home.guide.reference.desc":"Tablas de consulta: opciones, formatos de datos, modelos, plataformas o preguntas frecuentes.","home.about.text1":"Este sitio reúne en un mismo lugar la documentación de los siete proyectos que mantengo en GitHub. Cada guía está escrita a mano a partir del README y de los documentos del repositorio, y se revisa cuando el proyecto cambia.","home.about.text2":"Nada se genera automáticamente desde GitHub ni depende de servicios externos: el contenido vive en este repositorio como Markdown, se compila a HTML estático con Node y se publica en GitHub Pages. El buscador usa un índice que se crea en ese mismo build.","home.about.row.stack":"Generador","home.about.row.palette":"Paleta","home.about.row.fonts":"Tipografías","home.about.row.host":"Publicación","home.about.row.search":"Buscador","home.about.row.searchValue":"Índice estático, sin servicios externos","docs.otherProjects":"Otros proyectos","projects.empty":"No hay proyectos en esta categoría.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentación de todos los proyectos de Jaime Gaming: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID y su web personal.","meta.projects.title":"Proyectos — Docs de Jaime Gaming","meta.projects.description":"Índice de toda la documentación, agrupada por aplicaciones, juegos, bots y web.","proj.wave.name":"Wave","proj.wave.tagline":"Reproductor de música local-first para web, Android y Windows.","proj.wave.summary":"Un hogar para la música que ya tienes. Wave guarda tu colección en el dispositivo: sin cuenta, sin suscripción y sin subir audio a ningún servidor.","proj.wave.status":"0.1.0 · activa","page.wave.index":"Visión general","page.wave.install":"Instalación","page.wave.features":"Funciones y uso","page.wave.platforms":"Plataformas","page.wave.architecture":"Arquitectura","page.wave.privacy":"Privacidad y datos","page.wave.dev":"Desarrollo","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"Todos tus agentes de IA en un mismo sitio.","proj.jaigent.summary":"Un binario y diez proveedores. Los mismos tools en la terminal, en ChatGPT Web por MCP remoto, en Claude Desktop y en cualquier app que hable OpenAI. Con deshacer en cada escritura y tope de gasto.","proj.jaigent.status":"0.5.x · activa","page.jaigent.index":"Visión general","page.jaigent.install":"Instalación y claves","page.jaigent.cli":"Uso en la terminal","page.jaigent.models":"Modelos y proveedores","page.jaigent.mcp":"MCP y tu propia API","page.jaigent.extend":"Skills, plugins y horarios","page.jaigent.reference":"Referencia de tools","page.jaigent.security":"Seguridad","page.jaigent.dev":"Desarrollo","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.","proj.hellbot.summary":"Mantén al menos a una persona real en un canal de voz durante 160 horas seguidas. Si el canal se vacía y nadie vuelve en el periodo de gracia, la partida muere para siempre.","proj.hellbot.status":"producción · estable","page.hellbot.index":"Visión general","page.hellbot.rules":"Reglas del evento","page.hellbot.edge-cases":"Casos límite","page.hellbot.install":"Instalación y despliegue","page.hellbot.commands":"Comandos","page.hellbot.dashboard":"Dashboard en vivo","page.hellbot.architecture":"Arquitectura","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"Un número, infinitas posibilidades.","proj.rngdle-infinite.summary":"Tira un número entre 0 y 1.000.000 y descubre qué lo hace especial. Un incremental de navegador con EP, insignias, compañeros, skills, rebirth, prestige y rollback.","proj.rngdle-infinite.status":"jugable · activa","page.rngdle-infinite.index":"Visión general","page.rngdle-infinite.play":"Cómo se juega","page.rngdle-infinite.systems":"Sistemas y progresión","page.rngdle-infinite.save":"Partida y sincronización","page.rngdle-infinite.faq":"Preguntas frecuentes","page.rngdle-infinite.dev":"Desarrollo","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Tu espacio personal: un diario minimalista y 100 % local.","proj.daily-diary.summary":"Sin backend, sin cuentas, sin IA y sin APIs externas. Los resúmenes, estadísticas y tendencias se calculan en tu navegador con reglas y plantillas de texto.","proj.daily-diary.status":"completo · local","page.daily-diary.index":"Visión general","page.daily-diary.install":"Instalación y uso","page.daily-diary.areas":"Las cinco áreas","page.daily-diary.data":"Datos y privacidad","page.daily-diary.dev":"Estructura y desarrollo","proj.void.name":"VOID","proj.void.tagline":"Michael Burns desapareció el año pasado. ¿Quieres entrar?","proj.void.summary":"Un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece. Interfaz CRT de alto contraste, en español e inglés.","proj.void.status":"beta · en desarrollo","page.void.index":"Visión general","page.void.install":"Instalación y juego","page.void.world":"El mundo de VOID Corp","page.void.engine":"Las tripas del archivo","page.void.faq":"Avisos y preguntas","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"El sitio personal que da origen a esta documentación.","proj.website.summary":"Portfolio oscuro y bilingüe generado con Node: proyectos sincronizados desde GitHub, calendario de contribuciones, presencia de Discord y blog desde Markdown.","proj.website.status":"publicada · activa","page.website.index":"Visión general","page.website.build":"Build y preview","page.website.content":"Editar el contenido","page.website.i18n":"Los dos idiomas","page.website.architecture":"Arquitectura del sitio","group.apps.title":"Aplicaciones y herramientas","group.apps.sub":"Software que resuelve algo concreto: música, agentes y organización personal.","group.games.title":"Juegos","group.games.sub":"Del incremental de navegador al terror psicológico.","group.bots.title":"Bots y eventos","group.bots.sub":"Automatización en directo para comunidades.","group.web.title":"Web","group.web.sub":"Los sitios que publico, incluido el que estás leyendo."},"en":{"nav.home":"Home","nav.projects":"Projects","nav.search":"Search","nav.site":"My site","nav.blog":"Blog","nav.contact":"Contact","nav.openMenu":"Open menu","nav.closeMenu":"Close menu","aria.skipToContent":"Skip to content","aria.homeLogo":"Jaime Gaming Docs — home","aria.mainNav":"Main navigation","aria.backToTop":"Back to top","aria.langSwitch":"English. Switch to Spanish","aria.sidebar":"Index of this documentation","aria.toc":"On this page","aria.openSidebar":"Open index","aria.closeSidebar":"Close index","search.button":"Search","search.placeholder":"Search the docs…","search.hint":"Type to filter pages and sections","search.empty":"No results for","search.noQuery":"Try “install”, “commands”, “privacy”…","search.results":"results","search.result":"result","search.close":"Close search","search.scopeAll":"All documentation","search.scopeProject":"This project only","search.kbdNavigate":"navigate","search.kbdOpen":"open","search.kbdClose":"close","search.dialogTitle":"Search the documentation","search.resultsLabel":"Search results","docs.eyebrow":"Documentation","docs.sidebarTitle":"In this documentation","docs.tocTitle":"On this page","docs.editOnGithub":"Edit this page on GitHub","docs.sourceNote":"Documentation written by hand for this site, based on the repository's README and docs.","docs.updated":"Last reviewed","docs.prev":"Previous","docs.next":"Next","docs.allProjects":"All projects","docs.readTime":"min read","docs.jumpTo":"Go to","home.kicker":"DOCUMENTATION","home.title":"All my projects, \u003cspan class=\"hero__title-accent\">documented\u003c/span>","home.subtitle":"One single site with the documentation of everything I build: players, agents, bots, games and websites. Install guides, architecture, usage and reference.","home.ctaPrimary":"Start reading","home.ctaSecondary":"See all projects","home.stats.projects":"projects","home.stats.pages":"pages","home.stats.languages":"languages","home.stats.updated":"updated","home.about.title":"About these docs","home.about.sub":"How they are made and how they are kept up to date.","home.about.card.label":"HOW IT WORKS","home.about.card.title":"Written by hand, generated with Node","home.about.card.text":"Every page is a Markdown file in content/docs/. The build turns them into static HTML with the same system, the same palette and the same animations as my main website.","home.about.card.stamp":"SEE THE REPOSITORY ↗","home.contribute.title":"Found a mistake?","home.contribute.text":"All of this documentation lives in a public repository. Open an issue or send a pull request with the fix.","home.contribute.issue":"Open an issue","home.contribute.pr":"Propose a change","home.contribute.email":"Send me an email","projects.title":"Projects","projects.sub":"All the documentation, project by project. Each card links to its complete guide.","projects.pages":"pages","projects.openDocs":"Open documentation","projects.demo":"Try it","projects.code":"Code","projects.group.all":"All","callout.note":"Note","callout.tip":"Tip","callout.warning":"Warning","callout.important":"Important","callout.caution":"Caution","code.copy":"Copy","code.copied":"Copied","footer.rights":"All rights reserved.","footer.mainSite":"My site","footer.tagline":"Browser games, web applications and videos.","footer.site":"Site","footer.siteAria":"Site links","footer.resources":"Resources","footer.resourcesAria":"Resources and external links","footer.status":"Service status","footer.email":"Email","footer.terms":"Terms of Service","footer.privacy":"Privacy","footer.source":"Source code ↗","footer.legalAria":"Terms and privacy","aria.socials":"Social links","aria.footerLogo":"Jaime Gaming — home","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Email","status.title":"Service status","status.sub":"Live status of the website, documentation and projects, from the official incident.io panel.","status.note":"Data from the official status panel","status.open":"Open full status page ↗","status.loading":"Checking status…","status.unknown":"Status unavailable","status.error":"Couldn't fetch the live status. You can open the full status page.","status.updated":"Updated {date}","status.componentsAria":"Service components","status.allOperational":"All systems operational","status.minorIssues":"Minor issues","status.majorIssues":"Major incident","status.criticalIssues":"Critical incident","status.maintenanceOverall":"Maintenance in progress","status.operational":"Operational","status.degraded":"Degraded performance","status.partial":"Partial outage","status.major":"Major outage","status.underMaintenance":"Under maintenance","status.maintenanceTitle":"Scheduled maintenance","status.maintenanceBody":"Text published on the status page.","status.frameNotice":"The full panel belongs to incident.io and is only loaded if you ask for it. Once loaded, it may use its own cookies.","status.loadFrame":"Load embedded panel","status.frameTitle":"Jaime Gaming status page","status.hint":"The summary refreshes when you open this page. If the embedded panel doesn’t appear, open it with the button above.","notFound.title":"Page not found","notFound.sub":"The link may be broken or this guide may have moved.","notFound.home":"Back to the docs home","notFound.projects":"See all projects","home.guide.title":"How the guides are organised","home.guide.sub":"They all follow the same anatomy, so you know where to look in every project.","home.guide.overview.num":"01","home.guide.overview.title":"Overview","home.guide.overview.desc":"What the project is, which problem it solves, what state it is in and what sets it apart. It is the entry page of every guide.","home.guide.install.num":"02","home.guide.install.title":"Installation","home.guide.install.desc":"Requirements, the commands to get it running and the first check that everything works.","home.guide.usage.num":"03","home.guide.usage.title":"Usage","home.guide.usage.desc":"Day to day: features, commands, mechanics or workflows, with concrete examples.","home.guide.deep.num":"04","home.guide.deep.title":"How it is built","home.guide.deep.desc":"Architecture, folder structure, technical decisions and the project's known limits.","home.guide.reference.num":"05","home.guide.reference.title":"Reference","home.guide.reference.desc":"Lookup tables: options, data formats, models, platforms or frequently asked questions.","home.about.text1":"This site gathers, in one single place, the documentation of the seven projects I maintain on GitHub. Every guide is written by hand from the repository's README and docs, and reviewed when the project changes.","home.about.text2":"Nothing is generated automatically from GitHub and nothing depends on external services: the content lives in this repository as Markdown, it is compiled to static HTML with Node and published on GitHub Pages. Search uses an index created in that same build.","home.about.row.stack":"Generator","home.about.row.palette":"Palette","home.about.row.fonts":"Fonts","home.about.row.host":"Publishing","home.about.row.search":"Search","home.about.row.searchValue":"Static index, no external services","docs.otherProjects":"Other projects","projects.empty":"There are no projects in this category.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentation for all of Jaime Gaming's projects: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID and his personal website.","meta.projects.title":"Projects — Jaime Gaming Docs","meta.projects.description":"Index of all the documentation, grouped by apps, games, bots and web.","proj.wave.name":"Wave","proj.wave.tagline":"A local-first music player for web, Android and Windows.","proj.wave.summary":"A home for the music you already own. Wave keeps your collection on the device: no account, no subscription and no audio uploaded to any server.","proj.wave.status":"0.1.0 · active","page.wave.index":"Overview","page.wave.install":"Installation","page.wave.features":"Features & usage","page.wave.platforms":"Platforms","page.wave.architecture":"Architecture","page.wave.privacy":"Privacy & data","page.wave.dev":"Development","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"All your agents in one place.","proj.jaigent.summary":"One binary, ten providers. The same tools in the terminal, in ChatGPT Web over remote MCP, in Claude Desktop and in any app that speaks OpenAI. With undo on every write and a hard spend cap.","proj.jaigent.status":"0.5.x · active","page.jaigent.index":"Overview","page.jaigent.install":"Install & API keys","page.jaigent.cli":"Using the CLI","page.jaigent.models":"Models & providers","page.jaigent.mcp":"MCP & your own API","page.jaigent.extend":"Skills, plugins & schedules","page.jaigent.reference":"Tools reference","page.jaigent.security":"Security","page.jaigent.dev":"Development","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"The Discord bot that runs the Welcome to Hell endurance event.","proj.hellbot.summary":"Keep at least one real human in a single voice channel for 160 consecutive hours. If that channel empties and nobody returns within the grace period, the run is dead permanently.","proj.hellbot.status":"production · stable","page.hellbot.index":"Overview","page.hellbot.rules":"Event rules","page.hellbot.edge-cases":"Edge cases","page.hellbot.install":"Install & deploy","page.hellbot.commands":"Commands","page.hellbot.dashboard":"Live dashboard","page.hellbot.architecture":"Architecture","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"One number, infinite possibilities.","proj.rngdle-infinite.summary":"Roll a number from 0 to 1,000,000 and find out what makes it special. A browser incremental with EP, badges, companions, skills, rebirth, prestige and rollback.","proj.rngdle-infinite.status":"playable · active","page.rngdle-infinite.index":"Overview","page.rngdle-infinite.play":"How to play","page.rngdle-infinite.systems":"Systems & progression","page.rngdle-infinite.save":"Save & sync","page.rngdle-infinite.faq":"FAQ","page.rngdle-infinite.dev":"Development","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Your personal space: a minimalist, 100% local diary.","proj.daily-diary.summary":"No backend, no accounts, no AI and no external APIs. Summaries, statistics and trends are computed in your browser with rules and text templates.","proj.daily-diary.status":"complete · local","page.daily-diary.index":"Overview","page.daily-diary.install":"Install & run","page.daily-diary.areas":"The five areas","page.daily-diary.data":"Data & privacy","page.daily-diary.dev":"Structure & development","proj.void.name":"VOID","proj.void.tagline":"Michael Burns disappeared last year. Would you come in?","proj.void.summary":"A psychological game set in a mysterious corporation where everyone and everything disappears. High-contrast CRT interface, in Spanish and English.","proj.void.status":"beta · in development","page.void.index":"Overview","page.void.install":"Install & play","page.void.world":"The VOID Corp world","page.void.engine":"Inside the single file","page.void.faq":"Warnings & FAQ","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"The personal site this documentation is built from.","proj.website.summary":"Dark, bilingual portfolio generated with Node: projects synced from GitHub, contributions calendar, Discord presence and a Markdown blog.","proj.website.status":"published · active","page.website.index":"Overview","page.website.build":"Build & preview","page.website.content":"Editing content","page.website.i18n":"The two languages","page.website.architecture":"Site architecture","group.apps.title":"Apps & tools","group.apps.sub":"Software that solves something concrete: music, agents and personal organisation.","group.games.title":"Games","group.games.sub":"From the browser incremental to psychological horror.","group.bots.title":"Bots & events","group.bots.sub":"Live automation for communities.","group.web.title":"Web","group.web.sub":"The sites I publish, including the one you are reading."}}</script>
+<script type="application/json" id="pageTranslations">{"es":{"title":"Instalación y despliegue · hellbot — Docs de Jaime Gaming","description":"Arrancar hellbot en Windows sin consola, desde consola en cualquier sistema o con Docker, y la lista de permisos de Discord.","fields":{"body":"\u003ch2 id=\"windows-doble-clic-sin-consola\">Windows: doble clic, sin consola\u003c/h2>\n\u003col>\n\u003cli>Descarga o clona la carpeta del proyecto.\u003c/li>\n\u003cli>Doble clic en \u003cstrong>\u003ccode>run_bot.bat\u003c/code>\u003c/strong> (o \u003ccode>run_bot_silent.vbs\u003c/code> si no quieres que aparezca ni la ventana de instalación). La primera ejecución crea un entorno virtual e instala las dependencias automáticamente.\u003c/li>\n\u003cli>Se abre el \u003cstrong>panel de control\u003c/strong>. Rellena la pestaña Settings → \u003cstrong>Save settings\u003c/strong> → \u003cstrong>Start bot\u003c/strong>.\u003c/li>\n\u003c/ol>\n\u003cp>¿Prefieres un solo archivo para pasárselo a otra persona? Ejecuta \u003cstrong>\u003ccode>build_exe.bat\u003c/code>\u003c/strong> una vez y obtienes \u003ccode>dist\\WelcomeToHellBot.exe\u003c/code>: sin Python en la máquina destino, sin ventana de consola, y conserva \u003ccode>.env\u003c/code>, \u003ccode>data\\\u003c/code> y \u003ccode>logs\\\u003c/code> a su lado.\u003c/p>\n\u003cp>Para depurar con la salida visible está \u003cstrong>\u003ccode>run_bot_console.bat\u003c/code>\u003c/strong>.\u003c/p>\n\u003ch2 id=\"cualquier-sistema-consola\">Cualquier sistema: consola\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">python -m venv .venv &amp;&amp; source .venv/bin/activate\npip install -r requirements.txt\ncp .env.example .env      # token, identificadores de canales y de roles\npython bot.py\u003c/code>\u003c/pre>\n\u003ch2 id=\"docker\">Docker\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">cp .env.example .env      # rellénalo\ndocker compose up -d      # el estado vive en el volumen hell-data\u003c/code>\u003c/pre>\n\u003cp>Hay una unidad de systemd en \u003ccode>deploy/hellbot.service\u003c/code>.\u003c/p>\n\u003ch3 id=\"que-hace-la-imagen\">Qué hace la imagen\u003c/h3>\n\u003cp>El \u003ccode>Dockerfile\u003c/code> parte de \u003ccode>python:3.12-slim\u003c/code> y toma cuatro decisiones que conviene conocer antes de operar el bot en un contenedor:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Decisión\u003c/th>\n\u003cth>Detalle\u003c/th>\n\u003cth>Por qué importa\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003cstrong>Estado en un volumen\u003c/strong>\u003c/td>\n\u003ctd>\u003ccode>VOLUME /data\u003c/code>, con \u003ccode>DATABASE_PATH=/data/hell.sqlite3\u003c/code>\u003c/td>\n\u003ctd>Los reinicios \u003cstrong>y las reconstrucciones de la imagen\u003c/strong> no pierden el cronómetro, la clasificación ni el historial de hitos\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Usuario sin privilegios\u003c/strong>\u003c/td>\n\u003ctd>\u003ccode>hellbot\u003c/code>, uid 10001, dueño de \u003ccode>/data\u003c/code> y \u003ccode>/app\u003c/code>\u003c/td>\n\u003ctd>El bot no corre como root\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Healthcheck real\u003c/strong>\u003c/td>\n\u003ctd>cada 60 s, timeout 10 s, arranque 90 s, 3 reintentos\u003c/td>\n\u003ctd>Ejecuta \u003ccode>tools/healthcheck.py --max-lag 120\u003c/code>: si hay un evento en marcha y la última observación del canal es más antigua que eso, el contenedor se marca no sano y se reinicia\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Solo lo que se usa en runtime\u003c/strong>\u003c/td>\n\u003ctd>copia \u003ccode>hell/\u003c/code>, \u003ccode>tools/healthcheck.py\u003c/code>, \u003ccode>docs/\u003c/code>, \u003ccode>Announcements.py\u003c/code> y \u003ccode>bot.py\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>Announcements.py\u003c/code> es obligatorio: el bot lee ahí todos sus textos y no arranca sin él\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>El \u003ccode>.dockerignore\u003c/code> deja fuera del contexto de build \u003ccode>.git/\u003c/code>, los entornos virtuales y las cachés, y —lo importante— \u003cstrong>todo lo que es estado o secreto\u003c/strong>: \u003ccode>.env\u003c/code>, \u003ccode>data/\u003c/code>, \u003ccode>logs/\u003c/code> y los \u003ccode>*.sqlite3\u003c/code> con sus \u003ccode>-wal\u003c/code> y \u003ccode>-shm\u003c/code>. Nunca se hornea una base de datos ni unas credenciales dentro de la imagen.\u003c/p>\n\u003cdiv class=\"callout callout--tip\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Consejo\u003c/p>\n  \u003cdiv class=\"callout__body\">El healthcheck mira el \u003cstrong>archivo de estado, no el proceso\u003c/strong>. Un bot vivo pero con el bucle de monitorización atascado es peor que uno caído, porque el evento sigue corriendo mientras nadie observa el canal. Ese es exactamente el fallo que el healthcheck está diseñado para detectar.\u003c/div>\n\u003c/div>\n\u003cp>El comando de arranque es \u003ccode>python bot.py\u003c/code>, que es el punto de entrada de cinco líneas que llama a \u003ccode>hell.bot.main\u003c/code>.\u003c/p>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Aviso\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>Puerto 8080 ya en uso\u003c/strong> (\u003ccode>Web dashboard NOT started: port 8080 is already in use\u003c/code>): el dashboard enlaza \u003ccode>WEB_PORT\u003c/code> (8080 por defecto) dentro del contenedor y docker-compose publica \u003cem>el mismo\u003c/em> valor, así que se cambia en un solo sitio: \u003ccode>WEB_PORT=8090\u003c/code> en \u003ccode>.env\u003c/code> y otra vez \u003ccode>docker compose up -d\u003c/code>.\u003c/p>\n\u003cp>Si el log dice que el puerto está en uso pero no hay nada más corriendo, busca una \u003cstrong>segunda instancia del bot\u003c/strong> (\u003ccode>docker ps | grep hell\u003c/code> o \u003ccode>ps aux | grep bot\u003c/code>): solo puede haber un proceso por \u003ccode>.env\u003c/code>. Dos instancias acreditan tiempo doble y se pelean por cada comando \u003ccode>/hell\u003c/code>. Como red de seguridad el bot se niega a arrancar una segunda instancia contra la misma base de datos (un \u003ccode>flock\u003c/code> sobre \u003ccode>&lt;data dir&gt;/hellbot.lock\u003c/code>), así que una copia duplicada sale de inmediato con un error claro en vez de causar estragos.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"el-panel-de-control\">El panel de control\u003c/h2>\n\u003cp>\u003ccode>launcher_main.py\u003c/code> —lo que arrancan el \u003ccode>.bat\u003c/code> y el \u003ccode>.exe\u003c/code>— es una pequeña aplicación de escritorio en Tk:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Pestaña\u003c/th>\n\u003cth>Qué ofrece\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003cstrong>Dashboard\u003c/strong>\u003c/td>\n\u003ctd>Estado del bot, estado del evento, población del canal en vivo, próximo hito, barra de progreso de las 160 h y el resultado de las comprobaciones de configuración del lado de Discord.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Log\u003c/strong>\u003c/td>\n\u003ctd>Las mismas líneas que van a \u003ccode>logs/hellbot.log\u003c/code>, en color y en vivo, con un botón para abrir la carpeta.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Settings\u003c/strong>\u003c/td>\n\u003ctd>Cada valor de \u003ccode>.env\u003c/code> con ayuda en línea, el token enmascarado tras un interruptor de \u003cem>mostrar\u003c/em>, validación antes de guardar y escritura atómica para que un fallo no pueda corromper el archivo.\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>El bot corre en su propio bucle asyncio en un hilo en segundo plano, así que la ventana nunca se congela; cerrarla pide confirmación y apaga el bot limpiamente. Los errores (token malo, intent que falta, sin red) aparecen como ventanas emergentes y en el Dashboard, en vez de desaparecer en una consola que nadie mira.\u003c/p>\n\u003ch2 id=\"lista-de-configuracion-en-discord\">Lista de configuración en Discord\u003c/h2>\n\u003cp>\u003cstrong>1. Developer Portal → Bot → Privileged Gateway Intents\u003c/strong>: activa \u003cstrong>Server Members Intent\u003c/strong> y \u003cstrong>Message Content Intent\u003c/strong>. El segundo es obligatorio para que el bot pueda leer las respuestas de las comprobaciones de vida: sin él \u003cstrong>nadie podrá responder nunca a un pase de lista\u003c/strong>.\u003c/p>\n\u003cp>\u003cstrong>2. Invita al bot con estos permisos:\u003c/strong>\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Permiso\u003c/th>\n\u003cth>Por qué\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>View Channel + Connect en el canal objetivo\u003c/td>\n\u003ctd>Para ver quién está dentro\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Move Members\u003c/strong>\u003c/td>\n\u003ctd>Para desconectar a los usuarios \u003ccode>@clanker\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Send Messages / Embed Links / Read Message History en el canal de anuncios\u003c/td>\n\u003ctd>Anuncios y edición del mensaje de progreso\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Mention @everyone\u003c/strong>\u003c/td>\n\u003ctd>Pings de hito, arranque, fallo y completado\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Manage Messages \u003cem>(opcional)\u003c/em>\u003c/td>\n\u003ctd>Permite al bot fijar el mensaje de progreso en vivo\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>El bot verifica todo esto al arrancar (\u003ccode>hell/health.py\u003c/code>) y te dice exactamente qué falta, en el log y en el Dashboard del lanzador.\u003c/p>\n\u003ch2 id=\"variables-de-configuracion\">Variables de configuración\u003c/h2>\n\u003ch3 id=\"obligatorias\">Obligatorias\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Significado\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>DISCORD_TOKEN\u003c/code>\u003c/td>\n\u003ctd>Token del bot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>GUILD_ID\u003c/code>\u003c/td>\n\u003ctd>Identificador del servidor (los comandos de barra se sincronizan al instante con este servidor)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>VOICE_CHANNEL_ID\u003c/code>\u003c/td>\n\u003ctd>El canal de Hell (por defecto \u003ccode>1539756705997652079\u003c/code>)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ANNOUNCE_CHANNEL_ID\u003c/code>\u003c/td>\n\u003ctd>Canal de texto para anuncios y el mensaje de progreso en vivo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>GAMENIGHT_HOST_ROLE_ID\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>@gamenight host\u003c/code>: el único rol que puede arrancar, parar y reiniciar\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>CLANKER_ROLE_ID\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>@clanker\u003c/code>: se desconectan automáticamente y nunca ganan tiempo de clasificación\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"opcionales\">Opcionales\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Por defecto\u003c/th>\n\u003cth>Significado\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>HELL_ROLE_ID\u003c/code>, \u003ccode>HELLIST_ROLE_ID\u003c/code>, \u003ccode>HELL_MASTER_ROLE_ID\u003c/code>, \u003ccode>COOL_PEOPLE_ROLE_ID\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Solo se usan para renderizar menciones reales de rol en los mensajes de recompensa\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>DATABASE_PATH\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>data/hell.sqlite3\u003c/code>\u003c/td>\n\u003ctd>Ruta de la base de datos\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>MONITOR_INTERVAL\u003c/code> / \u003ccode>PROGRESS_INTERVAL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> s / \u003ccode>20\u003c/code> s\u003c/td>\n\u003ctd>Frecuencia del monitor y del mensaje de progreso\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>STARTUP_GRACE_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>15\u003c/code>\u003c/td>\n\u003ctd>Las lecturas del canal justo tras arrancar se observan pero no pueden hacer fallar el evento (guarda de caché fría)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>EMPTY_VC_GRACE_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>15\u003c/code>\u003c/td>\n\u003ctd>Cuánto puede estar vacío el canal antes de que la partida falle\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>SEND_FINAL_DMS\u003c/code> / \u003ccode>DM_DELAY_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>true\u003c/code> / \u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>Fichas de estadísticas al terminar\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_ENABLED\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>true\u003c/code>\u003c/td>\n\u003ctd>Flujo de log en vivo\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_USER_ID\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>984083829767675965\u003c/code>\u003c/td>\n\u003ctd>Quién lo recibe\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_LEVEL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>INFO\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>DEBUG\u003c/code>, \u003ccode>INFO\u003c/code>, \u003ccode>WARNING\u003c/code> o \u003ccode>ERROR\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_FLUSH_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>3\u003c/code>\u003c/td>\n\u003ctd>Intervalo de agrupamiento\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_PING_LEVEL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>ERROR\u003c/code>\u003c/td>\n\u003ctd>Las líneas de esta severidad o peor, más cualquier límite de tasa de Discord, hacen ping al operador por MD\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_PING_COOLDOWN_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>300\u003c/code>\u003c/td>\n\u003ctd>Segundos mínimos entre pings de alerta\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>MAX_TICK_CREDIT_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>5\u003c/code>\u003c/td>\n\u003ctd>Tope de acreditación por comprobación, para que una caída nunca se acredite en silencio\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>DOWNTIME_CREDIT_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>300\u003c/code>\u003c/td>\n\u003ctd>Una caída de hasta esta duración se devuelve a quien estaba en el canal antes \u003cstrong>y\u003c/strong> después\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>HEARTBEAT_MINUTES\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>15\u003c/code>\u003c/td>\n\u003ctd>Línea de prueba de vida en el log\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_ENABLED\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>true\u003c/code>\u003c/td>\n\u003ctd>Activar las comprobaciones de vida\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_MIN_HOURS\u003c/code> / \u003ccode>ALIVE_CHECK_MAX_HOURS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> / \u003ccode>6\u003c/code>\u003c/td>\n\u003ctd>La ventana aleatoria\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_TIMEOUT_MINUTES\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>5\u003c/code>\u003c/td>\n\u003ctd>Tiempo para responder\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_STRICT\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>false\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>true\u003c/code> acepta solo la cadena exacta \u003ccode>Yes\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_CHANNEL_ID\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Dónde se publica el pase de lista; vacío = \u003cstrong>el propio chat de texto del canal\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_LEVEL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>INFO\u003c/code>\u003c/td>\n\u003ctd>Nivel de log\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>WEB_PORT\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>8080\u003c/code>\u003c/td>\n\u003ctd>Puerto del dashboard; \u003ccode>0\u003c/code> lo desactiva\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Importante\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>El requisito del canal de voz no es configurable.\u003c/strong> \u003ccode>/hell start\u003c/code> se niega a arrancar el evento mientras el canal objetivo no tenga ningún humano válido: un arranque con el canal vacío es imposible, diga lo que diga el \u003ccode>.env\u003c/code>. Es una regla dura, no un interruptor.\u003c/div>\n\u003c/div>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Aviso\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>Los booleanos se analizan de forma estricta.\u003c/strong> Se aceptan \u003ccode>true\u003c/code>/\u003ccode>yes\u003c/code>/\u003ccode>on\u003c/code>/\u003ccode>1\u003c/code> y \u003ccode>false\u003c/code>/\u003ccode>no\u003c/code>/\u003ccode>off\u003c/code>/\u003ccode>0\u003c/code>. Cualquier otra cosa —por ejemplo una errata como \u003ccode>ture\u003c/code> o \u003ccode>flase\u003c/code>— \u003cstrong>hace fallar el arranque\u003c/strong> con un error claro, en vez de desactivar en silencio la función que se quería encender.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"desarrollo\">Desarrollo\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">./tools/check.sh        # lint + tipos + pruebas\npython tools/simulate.py  # simulación offline, sin Discord\u003c/code>\u003c/pre>\n\u003cp>La suite cubre motor, persistencia, casos límite de Discord, GUI y despliegue, con ruff y mypy limpios y un 88 % de cobertura.\u003c/p>\n","desc":"Arrancar hellbot en Windows sin consola, desde consola en cualquier sistema o con Docker, y la lista de permisos de Discord.","readtime":"6 min de lectura","editHref":"https://github.com/jaime-gaming/hellbot/blob/main/content/docs/hellbot/install.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#windows-doble-clic-sin-consola\">Windows: doble clic, sin consola\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#cualquier-sistema-consola\">Cualquier sistema: consola\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#docker\">Docker\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#que-hace-la-imagen\">Qué hace la imagen\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#el-panel-de-control\">El panel de control\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#lista-de-configuracion-en-discord\">Lista de configuración en Discord\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#variables-de-configuracion\">Variables de configuración\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#obligatorias\">Obligatorias\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#opcionales\">Opcionales\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#desarrollo\">Desarrollo\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}},"en":{"title":"Install & deploy · hellbot — Docs de Jaime Gaming","description":"Starting hellbot on Windows with no console, from the console on any system, or with Docker, plus the Discord permission checklist.","fields":{"body":"\u003ch2 id=\"windows-double-click-no-console\">Windows: double-click, no console\u003c/h2>\n\u003col>\n\u003cli>Download or clone the project folder.\u003c/li>\n\u003cli>Double-click \u003cstrong>\u003ccode>run_bot.bat\u003c/code>\u003c/strong> (or \u003ccode>run_bot_silent.vbs\u003c/code> if you do not even want the setup window to flash). The first run creates a virtual environment and installs the dependencies automatically.\u003c/li>\n\u003cli>The \u003cstrong>control panel\u003c/strong> opens. Fill in the Settings tab → \u003cstrong>Save settings\u003c/strong> → \u003cstrong>Start bot\u003c/strong>.\u003c/li>\n\u003c/ol>\n\u003cp>Prefer a single file to hand to somebody else? Run \u003cstrong>\u003ccode>build_exe.bat\u003c/code>\u003c/strong> once and you get \u003ccode>dist\\WelcomeToHellBot.exe\u003c/code>: no Python needed on the target machine, no console window, and it keeps \u003ccode>.env\u003c/code>, \u003ccode>data\\\u003c/code> and \u003ccode>logs\\\u003c/code> next to itself.\u003c/p>\n\u003cp>For debugging with visible output there is \u003cstrong>\u003ccode>run_bot_console.bat\u003c/code>\u003c/strong>.\u003c/p>\n\u003ch2 id=\"any-os-console\">Any OS: console\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">python -m venv .venv &amp;&amp; source .venv/bin/activate\npip install -r requirements.txt\ncp .env.example .env      # token, channel IDs and role IDs\npython bot.py\u003c/code>\u003c/pre>\n\u003ch2 id=\"docker\">Docker\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">cp .env.example .env      # fill it in\ndocker compose up -d      # state lives in the hell-data volume\u003c/code>\u003c/pre>\n\u003cp>There is a systemd unit in \u003ccode>deploy/hellbot.service\u003c/code>.\u003c/p>\n\u003ch3 id=\"what-the-image-does\">What the image does\u003c/h3>\n\u003cp>The \u003ccode>Dockerfile\u003c/code> starts from \u003ccode>python:3.12-slim\u003c/code> and makes four decisions worth knowing before running the bot in a container:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Decision\u003c/th>\n\u003cth>Detail\u003c/th>\n\u003cth>Why it matters\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003cstrong>State on a volume\u003c/strong>\u003c/td>\n\u003ctd>\u003ccode>VOLUME /data\u003c/code>, with \u003ccode>DATABASE_PATH=/data/hell.sqlite3\u003c/code>\u003c/td>\n\u003ctd>Restarts \u003cstrong>and image rebuilds\u003c/strong> never lose the timer, the leaderboard or the milestone history\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Unprivileged user\u003c/strong>\u003c/td>\n\u003ctd>\u003ccode>hellbot\u003c/code>, uid 10001, owning \u003ccode>/data\u003c/code> and \u003ccode>/app\u003c/code>\u003c/td>\n\u003ctd>The bot does not run as root\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>A real healthcheck\u003c/strong>\u003c/td>\n\u003ctd>every 60 s, 10 s timeout, 90 s start period, 3 retries\u003c/td>\n\u003ctd>It runs \u003ccode>tools/healthcheck.py --max-lag 120\u003c/code>: if an event is running and the last channel observation is older than that, the container is marked unhealthy and restarted\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Only what runtime uses\u003c/strong>\u003c/td>\n\u003ctd>it copies \u003ccode>hell/\u003c/code>, \u003ccode>tools/healthcheck.py\u003c/code>, \u003ccode>docs/\u003c/code>, \u003ccode>Announcements.py\u003c/code> and \u003ccode>bot.py\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>Announcements.py\u003c/code> is mandatory: the bot reads all of its text from there and will not start without it\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>The \u003ccode>.dockerignore\u003c/code> keeps \u003ccode>.git/\u003c/code>, virtual environments and caches out of the build context, and — the important part — \u003cstrong>everything that is state or secret\u003c/strong>: \u003ccode>.env\u003c/code>, \u003ccode>data/\u003c/code>, \u003ccode>logs/\u003c/code> and the \u003ccode>*.sqlite3\u003c/code> files with their \u003ccode>-wal\u003c/code> and \u003ccode>-shm\u003c/code>. A database or a set of credentials is never baked into the image.\u003c/p>\n\u003cdiv class=\"callout callout--tip\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Tip\u003c/p>\n  \u003cdiv class=\"callout__body\">The healthcheck looks at the \u003cstrong>state file, not the process\u003c/strong>. A bot that is alive but whose monitoring loop has stalled is worse than a crashed one, because the event keeps running while nobody is watching the channel. That is exactly the failure the healthcheck is designed to catch.\u003c/div>\n\u003c/div>\n\u003cp>The start command is \u003ccode>python bot.py\u003c/code>, which is the five-line entrypoint calling \u003ccode>hell.bot.main\u003c/code>.\u003c/p>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Warning\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>Port 8080 already in use\u003c/strong> (\u003ccode>Web dashboard NOT started: port 8080 is already in use\u003c/code>): the dashboard binds \u003ccode>WEB_PORT\u003c/code> (8080 by default) inside the container and docker-compose publishes the \u003cem>same\u003c/em> value, so change it in one place: \u003ccode>WEB_PORT=8090\u003c/code> in \u003ccode>.env\u003c/code> and \u003ccode>docker compose up -d\u003c/code> again.\u003c/p>\n\u003cp>If the log says the port is in use but nothing else is running, look for a \u003cstrong>second bot instance\u003c/strong> (\u003ccode>docker ps | grep hell\u003c/code> or \u003ccode>ps aux | grep bot\u003c/code>): only one process per \u003ccode>.env\u003c/code> may run. Two instances double-credit time and fight over every \u003ccode>/hell\u003c/code> command. As a safety net the bot refuses to start a second instance against the same database (a \u003ccode>flock\u003c/code> on \u003ccode>&lt;data dir&gt;/hellbot.lock\u003c/code>), so a duplicate copy exits immediately with a clear error instead of running amok.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"the-control-panel\">The control panel\u003c/h2>\n\u003cp>\u003ccode>launcher_main.py\u003c/code> — what the \u003ccode>.bat\u003c/code> and the \u003ccode>.exe\u003c/code> start — is a small Tk desktop app:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Tab\u003c/th>\n\u003cth>What it offers\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003cstrong>Dashboard\u003c/strong>\u003c/td>\n\u003ctd>Bot state, event state, live channel headcount, next milestone, progress bar for the 160 h and the result of the Discord-side configuration checks.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Log\u003c/strong>\u003c/td>\n\u003ctd>The same lines that go to \u003ccode>logs/hellbot.log\u003c/code>, colour-coded and live, with a button to open the folder.\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Settings\u003c/strong>\u003c/td>\n\u003ctd>Every \u003ccode>.env\u003c/code> value with inline help, the token masked behind a \u003cem>show\u003c/em> toggle, validation before saving and an atomic write so a crash cannot corrupt the file.\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>The bot runs on its own asyncio loop in a background thread, so the window never freezes; closing it asks for confirmation and shuts the bot down cleanly. Errors (bad token, missing intent, no network) appear as pop-ups and on the Dashboard instead of vanishing into a console nobody sees.\u003c/p>\n\u003ch2 id=\"discord-setup-checklist\">Discord setup checklist\u003c/h2>\n\u003cp>\u003cstrong>1. Developer Portal → Bot → Privileged Gateway Intents\u003c/strong>: enable \u003cstrong>Server Members Intent\u003c/strong> and \u003cstrong>Message Content Intent\u003c/strong>. The second one is required so the bot can read alive-check replies: without it \u003cstrong>nobody can ever answer a roll call\u003c/strong>.\u003c/p>\n\u003cp>\u003cstrong>2. Invite the bot with these permissions:\u003c/strong>\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Permission\u003c/th>\n\u003cth>Why\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>View Channel + Connect on the target channel\u003c/td>\n\u003ctd>To see who is inside\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Move Members\u003c/strong>\u003c/td>\n\u003ctd>To disconnect \u003ccode>@clanker\u003c/code> users\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Send Messages / Embed Links / Read Message History in the announcement channel\u003c/td>\n\u003ctd>Announcements and editing the progress message\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003cstrong>Mention @everyone\u003c/strong>\u003c/td>\n\u003ctd>Milestone, start, failure and completion pings\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Manage Messages \u003cem>(optional)\u003c/em>\u003c/td>\n\u003ctd>Lets the bot pin the live progress message\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>The bot verifies all of this on startup (\u003ccode>hell/health.py\u003c/code>) and tells you exactly what is missing, in the log and in the launcher&#39;s Dashboard.\u003c/p>\n\u003ch2 id=\"configuration-variables\">Configuration variables\u003c/h2>\n\u003ch3 id=\"required\">Required\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Meaning\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>DISCORD_TOKEN\u003c/code>\u003c/td>\n\u003ctd>Bot token\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>GUILD_ID\u003c/code>\u003c/td>\n\u003ctd>Server ID (slash commands sync instantly to this guild)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>VOICE_CHANNEL_ID\u003c/code>\u003c/td>\n\u003ctd>The Hell channel (default \u003ccode>1539756705997652079\u003c/code>)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ANNOUNCE_CHANNEL_ID\u003c/code>\u003c/td>\n\u003ctd>Text channel for announcements and the live progress message\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>GAMENIGHT_HOST_ROLE_ID\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>@gamenight host\u003c/code>: the only role allowed to start, stop and reset\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>CLANKER_ROLE_ID\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>@clanker\u003c/code>: auto-disconnected, never earns leaderboard time\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"optional\">Optional\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Variable\u003c/th>\n\u003cth>Default\u003c/th>\n\u003cth>Meaning\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>HELL_ROLE_ID\u003c/code>, \u003ccode>HELLIST_ROLE_ID\u003c/code>, \u003ccode>HELL_MASTER_ROLE_ID\u003c/code>, \u003ccode>COOL_PEOPLE_ROLE_ID\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Only used to render real role mentions in reward messages\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>DATABASE_PATH\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>data/hell.sqlite3\u003c/code>\u003c/td>\n\u003ctd>Database path\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>MONITOR_INTERVAL\u003c/code> / \u003ccode>PROGRESS_INTERVAL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> s / \u003ccode>20\u003c/code> s\u003c/td>\n\u003ctd>Monitor and progress-message frequency\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>STARTUP_GRACE_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>15\u003c/code>\u003c/td>\n\u003ctd>Channel reads right after boot are observed but cannot fail the event (cold-cache guard)\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>EMPTY_VC_GRACE_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>15\u003c/code>\u003c/td>\n\u003ctd>How long the channel may be empty before the run fails\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>SEND_FINAL_DMS\u003c/code> / \u003ccode>DM_DELAY_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>true\u003c/code> / \u003ccode>1\u003c/code>\u003c/td>\n\u003ctd>End-of-event stat cards\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_ENABLED\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>true\u003c/code>\u003c/td>\n\u003ctd>Live log stream\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_USER_ID\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>984083829767675965\u003c/code>\u003c/td>\n\u003ctd>Who receives it\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_LEVEL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>INFO\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>DEBUG\u003c/code>, \u003ccode>INFO\u003c/code>, \u003ccode>WARNING\u003c/code> or \u003ccode>ERROR\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_FLUSH_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>3\u003c/code>\u003c/td>\n\u003ctd>Batching interval\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_PING_LEVEL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>ERROR\u003c/code>\u003c/td>\n\u003ctd>Lines at this severity or worse, plus any Discord rate limit, @-ping the operator by DM\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_DM_PING_COOLDOWN_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>300\u003c/code>\u003c/td>\n\u003ctd>Minimum seconds between alert pings\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>MAX_TICK_CREDIT_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>5\u003c/code>\u003c/td>\n\u003ctd>Cap on credit per check, so downtime is never silently paid out\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>DOWNTIME_CREDIT_SECONDS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>300\u003c/code>\u003c/td>\n\u003ctd>An outage up to this long is credited back to whoever was in the channel before \u003cstrong>and\u003c/strong> after\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>HEARTBEAT_MINUTES\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>15\u003c/code>\u003c/td>\n\u003ctd>Proof-of-life line in the log\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_ENABLED\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>true\u003c/code>\u003c/td>\n\u003ctd>Enable alive checks\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_MIN_HOURS\u003c/code> / \u003ccode>ALIVE_CHECK_MAX_HOURS\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>1\u003c/code> / \u003ccode>6\u003c/code>\u003c/td>\n\u003ctd>The random window\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_TIMEOUT_MINUTES\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>5\u003c/code>\u003c/td>\n\u003ctd>Time to answer\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_STRICT\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>false\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>true\u003c/code> accepts only the exact string \u003ccode>Yes\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>ALIVE_CHECK_CHANNEL_ID\u003c/code>\u003c/td>\n\u003ctd>—\u003c/td>\n\u003ctd>Where the roll call is posted; empty = \u003cstrong>the channel&#39;s own text chat\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>LOG_LEVEL\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>INFO\u003c/code>\u003c/td>\n\u003ctd>Log level\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>WEB_PORT\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>8080\u003c/code>\u003c/td>\n\u003ctd>Dashboard port; \u003ccode>0\u003c/code> disables it\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Important\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>The voice-channel requirement is not configurable.\u003c/strong> \u003ccode>/hell start\u003c/code> refuses to start the event while the target channel has no valid human in it: an empty-channel start is impossible, whatever the \u003ccode>.env\u003c/code> says. It is a hard rule, not a toggle.\u003c/div>\n\u003c/div>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Warning\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>Booleans are parsed strictly.\u003c/strong> \u003ccode>true\u003c/code>/\u003ccode>yes\u003c/code>/\u003ccode>on\u003c/code>/\u003ccode>1\u003c/code> and \u003ccode>false\u003c/code>/\u003ccode>no\u003c/code>/\u003ccode>off\u003c/code>/\u003ccode>0\u003c/code> are accepted. Anything else — for example a typo like \u003ccode>ture\u003c/code> or \u003ccode>flase\u003c/code> — \u003cstrong>fails startup\u003c/strong> with a clear error, instead of silently disabling the feature it was meant to turn on.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"development\">Development\u003c/h2>\n\u003cpre data-lang=\"bash\">\u003ccode class=\"language-bash\">./tools/check.sh          # lint + types + tests\npython tools/simulate.py  # offline simulation, no Discord\u003c/code>\u003c/pre>\n\u003cp>The suite covers the engine, persistence, Discord edge cases, GUI and deployment, with ruff and mypy clean and 88% coverage.\u003c/p>\n","desc":"Starting hellbot on Windows with no console, from the console on any system, or with Docker, plus the Discord permission checklist.","readtime":"6 min read","editHref":"https://github.com/jaime-gaming/hellbot/blob/main/content/docs/hellbot/install.en.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#windows-double-click-no-console\">Windows: double-click, no console\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#any-os-console\">Any OS: console\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#docker\">Docker\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#what-the-image-does\">What the image does\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#the-control-panel\">The control panel\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#discord-setup-checklist\">Discord setup checklist\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#configuration-variables\">Configuration variables\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#required\">Required\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#optional\">Optional\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#development\">Development\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}}}</script>
+<script type="application/json" id="searchConfig">{"index":"/Docs/assets/data/search-index.json","scope":"hellbot"}</script>
+<script src="/Docs/assets/js/i18n.js?v=9f6d93c1fd7c"></script>
+<script src="/Docs/assets/js/search.js?v=014a801e4757"></script>
+<script src="/Docs/assets/js/main.js?v=83aa4a0803d7"></script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Plataformas — Docs de Jaime Gaming</title>
+<meta name="description" content="Comparación real entre los clientes web, Windows y Android: qué hay en cada uno y qué falta." />
+<meta name="author" content="Jaime Gaming" />
+<meta name="theme-color" content="#10120f" />
+<meta name="robots" content="index, follow" />
+<meta name="docs:base" content="/Docs/" />
+<meta name="docs:project" content="wave" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Jaime Gaming Docs" />
+<meta property="og:title" content="Plataformas — Docs de Jaime Gaming" />
+<meta property="og:description" content="Comparación real entre los clientes web, Windows y Android: qué hay en cada uno y qué falta." />
+<meta property="og:url" content="https://jaime-gaming.github.io/Docs/wave/platforms/" />
+<meta property="og:image" content="https://jaime-gaming.github.io/assets/img/social-card.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@JaimeGamingPro" />
+<meta name="twitter:title" content="Plataformas — Docs de Jaime Gaming" />
+<meta name="twitter:description" content="Comparación real entre los clientes web, Windows y Android: qué hay en cada uno y qué falta." />
+<link rel="canonical" href="https://jaime-gaming.github.io/Docs/wave/platforms/" />
+<link rel="icon" href="/Docs/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/Docs/assets/css/style.css?v=d74cfec89052" />
+</head>
+<body data-icons="/Docs/assets/img/icons.svg?v=eea9c3fe56aa" data-page="docs" data-project="wave" data-path="/wave/platforms/">
+
+<a class="skip-link" href="#top" data-i18n="aria.skipToContent">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/Docs/" class="nav__logo" aria-label="Jaime Gaming Docs — inicio" data-i18n-aria="aria.homeLogo">JG<span class="dot">.</span><span class="nav__logo-badge">docs</span></a>
+  <nav class="nav__links" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+    <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+    <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+    <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+    <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+    <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="search-trigger" id="searchTrigger" type="button" aria-label="Buscar" data-i18n-aria="nav.search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg>
+      <span class="search-trigger__label" data-i18n="search.button">Buscar</span>
+      <kbd class="search-trigger__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+    <button class="lang-switch" id="langSwitch" data-active="es" type="button" aria-label="Cambiar idioma" data-i18n-aria="aria.langSwitch">
+      <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="languageFlagEs" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#aa151b" d="M0 0h24v24H0z"/><path fill="#f1bf00" d="M0 6h24v12H0z"/></g>
+          </pattern>
+          <pattern id="languageFlagEn" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#012169" d="M0 0h24v24H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 24 24M24 0 0 24"/><path stroke="#c8102e" stroke-width="2" d="m0 0 24 24M24 0 0 24"/><path stroke="#fff" stroke-width="8" d="M12 0v24M0 12h24"/><path stroke="#c8102e" stroke-width="4" d="M12 0v24M0 12h24"/></g>
+          </pattern>
+          <radialGradient id="languageGloss" cx="34%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".42"/>
+            <stop offset="55%" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="flag flag-es" cx="12" cy="12" r="9.5" fill="url(#languageFlagEs)"/>
+        <circle class="flag flag-en" cx="12" cy="12" r="9.5" fill="url(#languageFlagEn)"/>
+        <circle class="language-globe__gloss" cx="12" cy="12" r="9.5" fill="url(#languageGloss)" aria-hidden="true"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#0d100d" stroke-opacity=".55" stroke-width="1.9" stroke-linecap="round"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width=".9" stroke-linecap="round"/>
+      </svg>
+      <span class="sr-only" id="languageName">Español</span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil" data-i18n-aria="aria.mainNav">
+  <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+  <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+  <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+  <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+  <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+</nav>
+
+<main id="top" class="layout--docs">
+<div class="docs docs--with-rails">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-panel"></use></svg>
+    </button>
+    <aside class="docs__sidebar" id="docsSidebar" aria-label="Índice de esta documentación" data-i18n-aria="aria.sidebar">
+    <nav class="side-nav">
+      <div class="side-nav__head">
+        <span class="side-nav__eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+        <a class="side-nav__project" href="/Docs/wave/">
+          <span class="side-nav__project-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg></span>
+          <span class="side-nav__project-name" data-i18n="proj.wave.name">Wave</span>
+        </a>
+      </div>
+      <p class="side-nav__group" data-i18n="docs.sidebarTitle">En esta documentación</p>
+      <ol class="side-nav__list">
+      <li><a class="side-nav__link" href="/Docs/wave/" data-i18n="page.wave.index"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-compass"></use></svg><span>Visión general</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/install/" data-i18n="page.wave.install"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-download"></use></svg><span>Instalación</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/features/" data-i18n="page.wave.features"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-layers"></use></svg><span>Funciones y uso</span></a></li>
+      <li><a class="side-nav__link active" href="/Docs/wave/platforms/" data-i18n="page.wave.platforms"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-monitor"></use></svg><span>Plataformas</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/architecture/" data-i18n="page.wave.architecture"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-boxes"></use></svg><span>Arquitectura</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/privacy/" data-i18n="page.wave.privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-shield"></use></svg><span>Privacidad y datos</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/wave/dev/" data-i18n="page.wave.dev"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span>Desarrollo</span></a></li>
+      </ol>
+      <div class="side-nav__foot">
+        <a class="side-nav__all" href="/Docs/projects/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.allProjects">Todos los proyectos</span></a>
+        <div class="side-nav__switch">
+          <span class="side-nav__switch-label" data-i18n="docs.otherProjects">Otros proyectos</span>
+          <ul class="side-nav__switch-list">
+        <li><a class="side-nav__chip" href="/Docs/jaigent/" title="jAIgent"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg><span>jAIgent</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/hellbot/" title="hellbot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg><span>hellbot</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/rngdle-infinite/" title="RNGdle Infinite"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-dice"></use></svg><span>RNGdle Infinite</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/daily-diary/" title="Diario"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-notebook"></use></svg><span>Diario</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/void/" title="VOID"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg><span>VOID</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/website/" title="jaime-gaming.github.io"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg><span>jaime-gaming.github.io</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </aside>
+    <div class="docs__main">
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="/Docs/">Docs</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="/Docs/wave/" data-i18n="proj.wave.name">Wave</a>
+      <span class="breadcrumb__sep">/</span>
+      <span class="breadcrumb__current" data-i18n="page.wave.platforms">Plataformas</span>
+    </nav>
+    <header class="doc-head reveal">
+      <p class="doc-head__kicker"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg><span data-i18n="proj.wave.name">Wave</span></p>
+      <h1 class="doc-head__title" data-i18n="page.wave.platforms">Plataformas</h1>
+      <p class="doc-head__desc" data-content-key="desc">Comparación real entre los clientes web, Windows y Android: qué hay en cada uno y qué falta.</p>
+      <div class="doc-head__meta">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-calendar"></use></svg><span data-i18n="docs.updated">Última revisión</span> <time datetime="2026-10-18" data-i18n-date>18 de octubre de 2026</time></span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-clock"></use></svg><span data-content-key="readtime">5 min de lectura</span></span>
+        <a class="doc-head__edit" href="https://github.com/jaime-gaming/Wave/blob/main/content/docs/wave/platforms.md" data-content-key="editHref" data-content-attr="href" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span data-i18n="docs.editOnGithub">Editar esta página en GitHub</span></a>
+      </div>
+    </header>
+    <article class="doc-body reveal" lang="es" data-content-key="body" data-content-language>
+<p>Wave tiene <strong>tres implementaciones independientes</strong>, no envoltorios WebView ni Electron alrededor de la misma web. El cliente web es el más completo; Windows sigue su estructura con controles nativos de C#/WPF y Android usa Kotlin/Compose.</p>
+<div class="callout callout--important">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert"></use></svg>
+  <p class="callout__title">Importante</p>
+  <div class="callout__body">Las bibliotecas de cada plataforma son separadas. Nunca se sincronizan ni se migran en silencio: lo que importas en el navegador no aparece en Windows ni en Android.</div>
+</div>
+<h2 id="comparacion-de-capacidades">Comparación de capacidades</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Capacidad</th>
+<th>Web</th>
+<th>Windows</th>
+<th>Android</th>
+</tr>
+</thead><tbody><tr>
+<td>Inicio, biblioteca local y favoritos</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Básico</td>
+</tr>
+<tr>
+<td>Búsqueda dedicada</td>
+<td>Sí</td>
+<td>Búsqueda de canciones</td>
+<td>Filtro de biblioteca</td>
+</tr>
+<tr>
+<td>Álbumes y artistas</td>
+<td>Perfiles y carátulas</td>
+<td>Vistas nativas de grupo y detalle</td>
+<td>Lista básica</td>
+</tr>
+<tr>
+<td>Mixes diarios navegables y guardados</td>
+<td>Etiquetas de género y artista</td>
+<td>Etiquetas de género y artista</td>
+<td>Todavía no</td>
+</tr>
+<tr>
+<td>Listas ordenadas</td>
+<td>Sí</td>
+<td>Crear, editar, miembros y orden</td>
+<td>Todavía no</td>
+</tr>
+<tr>
+<td>Edición de la cola</td>
+<td>Arrastrar, botones y teclado</td>
+<td>Diálogo nativo; mover y quitar</td>
+<td>Progresión básica</td>
+</tr>
+<tr>
+<td>Posición en pausa restaurada</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Todavía no</td>
+</tr>
+<tr>
+<td>Mix automático y Autoplay local</td>
+<td>Tiempos por pareja y variedad ponderada</td>
+<td>Duración acotada y variedad local</td>
+<td>Solo solapamiento manual</td>
+</tr>
+<tr>
+<td>Letras</td>
+<td>LRC mejorado, relleno y búsqueda opcional</td>
+<td>LRC por línea, relleno y búsqueda explícita</td>
+<td>LRC por línea y búsqueda</td>
+</tr>
+<tr>
+<td>Ajustes</td>
+<td>Seis menús</td>
+<td>Seis menús</td>
+<td>Página básica</td>
+</tr>
+<tr>
+<td>Apariencia</td>
+<td>Claro, oscuro y sistema; paletas de carátula</td>
+<td>Claro, oscuro, texto grande y movimiento</td>
+<td>Oscuro</td>
+</tr>
+<tr>
+<td>Edición de carátulas</td>
+<td>Canción, lista y artista</td>
+<td>Carátulas de canción</td>
+<td>Todavía no</td>
+</tr>
+<tr>
+<td>Controles del sistema y modo reposo</td>
+<td>Según navegador / sí</td>
+<td>Todavía no</td>
+<td>Sin servicio en primer plano</td>
+</tr>
+<tr>
+<td>Comprobaciones de build alojadas</td>
+<td>Superadas</td>
+<td>Superadas + contratos + smoke de WPF</td>
+<td>Superadas: unitarias, lint y build debug</td>
+</tr>
+</tbody></table></div>
+<h2 id="navegador-y-github-pages">Navegador y GitHub Pages</h2>
+<p>Node.js 22.12 o superior, o Node 24:</p>
+<pre data-lang="sh"><code class="language-sh">npm ci &amp;&amp; npm run dev     # desarrollo
+npm run build             # producción</code></pre>
+<p>Para una ruta de repositorio, <code>WAVE_BASE_PATH=/Wave/ npm run build</code> y servir bajo <code>/Wave/</code>.</p>
+<p>El despliegue sin workflow propio se hace en <strong>Settings → Pages → Deploy from a branch</strong>, con <strong>Branch: main</strong> y <strong>Folder: /docs</strong>. El sitio compilado está confirmado en <code>docs/index.html</code> y <code>docs/site-assets/</code>, y <code>.nojekyll</code> desactiva Jekyll.</p>
+<p>Hay que tener en cuenta dos cosas del navegador:</p>
+<ul>
+<li>Las bibliotecas son específicas <strong>del origen del sitio y del perfil</strong>. Una URL de preview distinta puede tener una biblioteca distinta.</li>
+<li>Hace falta <strong>HTTPS</strong> para Web Crypto y para la persistencia.</li>
+</ul>
+<p>No se necesita backend ni claves de API. Los pasos completos están en <a href="/Docs/wave/install/">Instalación</a>.</p>
+<h2 id="windows">Windows</h2>
+<p>Aplicación nativa real en <strong>C# y WPF</strong> con Windows Media Player y los selectores de archivo estándar del sistema.</p>
+<pre data-lang="powershell"><code class="language-powershell">dotnet build platforms/windows/Wave.Windows -c Release
+dotnet run --project platforms/windows/Wave.Windows
+dotnet publish platforms/windows/Wave.Windows -c Release -r win-x64 --self-contained false -o artifacts/windows</code></pre>
+<h3 id="donde-guarda-las-cosas">Dónde guarda las cosas</h3>
+<div class="doc-table"><table><thead><tr>
+<th>Qué</th>
+<th>Dónde</th>
+</tr>
+</thead><tbody><tr>
+<td>Audio original</td>
+<td><code>%LOCALAPPDATA%/Wave/audio</code></td>
+</tr>
+<tr>
+<td>Biblioteca, listas, preferencias y estado</td>
+<td>Archivos JSON sustituidos de forma atómica</td>
+</tr>
+<tr>
+<td>Carátulas</td>
+<td>Sobrescrituras locales separadas</td>
+</tr>
+</tbody></table></div>
+<p>Las bibliotecas y preferencias existentes siguen siendo legibles. La antigua preferencia de solapamiento, ya desactivada, se migra sin activar Mix en silencio.</p>
+<h3 id="como-es-la-aplicacion">Cómo es la aplicación</h3>
+<p>Inicio tiene atajos a las colecciones, mixes diarios y tarjetas de álbum. La búsqueda es su propio destino: título y carátula reproducen, artista y álbum abren su colección, y la información del reproductor compacto abre <strong>Reproduciendo ahora</strong>.</p>
+<p>Las listas se pueden crear, renombrar, poblar, ordenar y eliminar sin borrar audio. Las ediciones de la cola conservan la grabación activa. Las sesiones restauradas vuelven en pausa. Ajustes separa Apariencia, Reproducción, Letras, Biblioteca, Almacenamiento y Acerca de.</p>
+<h3 id="que-comprueba-ci">Qué comprueba CI</h3>
+<p>CI ejecuta un runner de contratos sin dependencias, compila y publica la aplicación, y lanza un modo smoke aislado de WPF que recorre Inicio, Búsqueda, mixes diarios, listas guardadas, las seis secciones de Ajustes y el diseño estrecho en tema claro. Captura PNG en <code>wave-windows-ui-smoke</code>.</p>
+<div class="callout callout--warning">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn"></use></svg>
+  <p class="callout__title">Aviso</p>
+  <div class="callout__body">Eso <strong>no</strong> es una matriz de dispositivos físicos ni de códecs y reproducción. La biblioteca de pruebas es temporal y no toca la biblioteca real de nadie.</div>
+</div>
+<h3 id="lo-que-falta-en-windows">Lo que falta en Windows</h3>
+<p>La lectura de metadatos sigue limitada a <strong>ID3 y WAV</strong>. Todavía no están: extracción automática de carátulas incrustadas, agrupación de búsqueda idéntica a la web, fotos de artista, ordenación de álbumes, LRC con marcas de tiempo, análisis de forma de onda, modo reposo inmersivo e integración con los controles del sistema.</p>
+<p>Los códecs del sistema operativo gobiernan la reproducción. <strong>No es paridad completa con la web.</strong></p>
+<p>Los ZIP de prueba están claramente etiquetados como sin firmar. Las licencias y avisos de .NET siguen incluidos; los futuros paquetes autocontenidos tendrán que inventariar su runtime pack exacto. Los detalles de sumas de comprobación, firma y límites de Defender están en <code>docs/WINDOWS_RELEASE.md</code> del repositorio.</p>
+<h2 id="android">Android</h2>
+<p>Proyecto nativo independiente en <strong>Kotlin y Jetpack Compose</strong>.</p>
+<div class="doc-table"><table><thead><tr>
+<th>Requisito</th>
+<th>Versión</th>
+</tr>
+</thead><tbody><tr>
+<td>JDK</td>
+<td>17</td>
+</tr>
+<tr>
+<td>SDK y build tools</td>
+<td>36</td>
+</tr>
+<tr>
+<td>Gradle</td>
+<td>8.13</td>
+</tr>
+<tr>
+<td>Android Studio</td>
+<td>Compatible con AGP 8.13</td>
+</tr>
+<tr>
+<td>API mínima</td>
+<td>26</td>
+</tr>
+</tbody></table></div>
+<pre data-lang="sh"><code class="language-sh">gradle -p platforms/android testDebugUnitTest lintDebug assembleDebug</code></pre>
+<p>Salida: <code>platforms/android/app/build/outputs/apk/debug/app-debug.apk</code>, un artefacto de prueba en debug. El runner de CI en Ubuntu proporciona el SDK. Las pruebas cubren los contratos de LRC y de ganancia; las comprobaciones alojadas de unitarias, lint y ensamblado han pasado.</p>
+<p>Quedan como puertas pendientes: importación y reproducción en dispositivo real, ciclo de vida seguro ante rotaciones, foco de audio, servicio en primer plano con sesión de medios y firma.</p>
+<div class="callout callout--important">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert"></use></svg>
+  <p class="callout__title">Importante</p>
+  <div class="callout__body">El selector de documentos copia los bytes originales al almacenamiento privado de la aplicación. <strong>Desinstalar elimina esa copia.</strong> No es un sustituto de tus archivos, y todavía no reemplaza a la edición web.</div>
+</div>
+<h2 id="trafico-con-el-servicio-de-letras">Tráfico con el servicio de letras</h2>
+<p>Los tres clientes mantienen <strong>LRCLIB como único proveedor de letras en línea</strong>.</p>
+<ul>
+<li><strong>Web</strong> usa una cola compartida de 500 ms, Web Locks del mismo origen cuando están disponibles, compartición de búsquedas concurrentes y cabeceras en lista blanca.</li>
+<li><strong>Windows</strong> serializa las peticiones por cliente con cancelación acotada y acepta plazos de reintento numéricos cortos y en formato de fecha HTTP.</li>
+<li><strong>Android</strong> conserva su cola sincronizada y los plazos de reintento de más de un día.</li>
+</ul>
+<p>Los dos clientes nativos espacian el inicio de las peticiones en 500 ms. <strong>Ninguna de estas medidas elimina los límites del proveedor ni los límites por IP.</strong> Se han añadido contratos de plazo de reintento nativos, pero la última validación local de la web no certifica un build nativo nuevo.</p>
+<h2 id="puertas-de-publicacion">Puertas de publicación</h2>
+<p>Antes de publicar una versión nativa hacen falta cinco cosas:</p>
+<ol>
+<li>Ejecutar las comprobaciones en la última revisión.</li>
+<li>Hacer pruebas reales de reproducción, accesibilidad y DPI en el dispositivo de destino.</li>
+<li>Declarar el alcance reducido del cliente nativo.</li>
+<li>Revisar los avisos de runtime exactos.</li>
+<li>Firmar con credenciales guardadas <strong>fuera</strong> del repositorio.</li>
+</ol>
+<p>En la fusión aprobada se etiqueta el commit fusionado real como <code>v0.1.0</code> y se crea la Release en GitHub. Nunca se incluyen claves de firma ni música personal.</p>
+
+    </article>
+    <nav class="pager reveal" aria-label="paginación">
+    <a class="pager__link" href="/Docs/wave/features/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.prev">Anterior</span></span>
+      <span class="pager__title" data-i18n="page.wave.features">Funciones y uso</span>
+    </a>
+    <a class="pager__link pager__link--next" href="/Docs/wave/architecture/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-right"></use></svg><span data-i18n="docs.next">Siguiente</span></span>
+      <span class="pager__title" data-i18n="page.wave.architecture">Arquitectura</span>
+    </a>
+    </nav>
+    <p class="source-note reveal" data-i18n="docs.sourceNote">Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.</p>
+    </div>
+    <aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
+    <p class="toc__title" data-i18n="docs.tocTitle">En esta página</p>
+    <ol class="toc__list">
+      <li><a href="#comparacion-de-capacidades">Comparación de capacidades</a></li>
+      <li><a href="#navegador-y-github-pages">Navegador y GitHub Pages</a></li>
+      <li><a href="#windows">Windows</a></li>
+      <li><a class="toc__h3" href="#donde-guarda-las-cosas">Dónde guarda las cosas</a></li>
+      <li><a class="toc__h3" href="#como-es-la-aplicacion">Cómo es la aplicación</a></li>
+      <li><a class="toc__h3" href="#que-comprueba-ci">Qué comprueba CI</a></li>
+      <li><a class="toc__h3" href="#lo-que-falta-en-windows">Lo que falta en Windows</a></li>
+      <li><a href="#android">Android</a></li>
+      <li><a href="#trafico-con-el-servicio-de-letras">Tráfico con el servicio de letras</a></li>
+      <li><a href="#puertas-de-publicacion">Puertas de publicación</a></li>
+    </ol>
+    <p class="toc__progress" aria-hidden="true"><span></span></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="https://jaime-gaming.github.io/" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-github"></use></svg></a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-youtube"></use></svg></a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-x"></use></svg></a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-discord"></use></svg></a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-mail"></use></svg></a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="/Docs/"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="/Docs/projects/"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="https://jaime-gaming.github.io/blog/"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="https://jaime-gaming.github.io/contact/"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="https://jaime-gaming.github.io/"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="/Docs/status/"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="https://jaime-gaming.github.io/terms/" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="https://jaime-gaming.github.io/privacy/" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-arrow"></use></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" hidden>
+  <div class="search-modal__backdrop" data-search-close></div>
+  <div class="search-modal__panel">
+    <h2 class="sr-only" id="searchModalTitle" data-i18n="search.dialogTitle">Buscar en la documentación</h2>
+    <div class="search-modal__head">
+      <span class="search-modal__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg></span>
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar en la documentación…" data-i18n-placeholder="search.placeholder" aria-describedby="searchModalHint" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-activedescendant="" />
+      <button class="search-modal__close" type="button" data-search-close aria-label="Cerrar búsqueda" data-i18n-aria="search.close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-close"></use></svg></button>
+    </div>
+    <div class="search-modal__hintrow">
+      <p class="search-modal__hint" id="searchModalHint" data-i18n="search.hint">Escribe para filtrar páginas y apartados</p>
+      <p class="search-modal__keys" id="searchKeys" aria-hidden="true">
+        <span class="keyhint"><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="search.kbdNavigate">navegar</span></span>
+        <span class="keyhint"><kbd>↵</kbd><span data-i18n="search.kbdOpen">abrir</span></span>
+        <span class="keyhint"><kbd>Esc</kbd><span data-i18n="search.kbdClose">cerrar</span></span>
+      </p>
+    </div>
+    <div class="search-modal__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" data-i18n-aria="search.resultsLabel"></div>
+  </div>
+</div>
+
+<script type="application/json" id="uiStrings">{"es":{"nav.home":"Inicio","nav.projects":"Proyectos","nav.search":"Buscar","nav.site":"Mi web","nav.blog":"Blog","nav.contact":"Contacto","nav.openMenu":"Abrir menú","nav.closeMenu":"Cerrar menú","aria.skipToContent":"Saltar al contenido","aria.homeLogo":"Jaime Gaming Docs — inicio","aria.mainNav":"Navegación principal","aria.backToTop":"Volver arriba","aria.langSwitch":"Español. Cambiar a inglés","aria.sidebar":"Índice de esta documentación","aria.toc":"En esta página","aria.openSidebar":"Abrir índice","aria.closeSidebar":"Cerrar índice","search.button":"Buscar","search.placeholder":"Buscar en la documentación…","search.hint":"Escribe para filtrar páginas y apartados","search.empty":"Sin resultados para","search.noQuery":"Prueba con «instalar», «comandos», «privacidad»…","search.results":"resultados","search.result":"resultado","search.close":"Cerrar búsqueda","search.scopeAll":"Toda la documentación","search.scopeProject":"Solo este proyecto","search.kbdNavigate":"navegar","search.kbdOpen":"abrir","search.kbdClose":"cerrar","search.dialogTitle":"Buscar en la documentación","search.resultsLabel":"Resultados de búsqueda","docs.eyebrow":"Documentación","docs.sidebarTitle":"En esta documentación","docs.tocTitle":"En esta página","docs.editOnGithub":"Editar esta página en GitHub","docs.sourceNote":"Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.","docs.updated":"Última revisión","docs.prev":"Anterior","docs.next":"Siguiente","docs.allProjects":"Todos los proyectos","docs.readTime":"min de lectura","docs.jumpTo":"Ir a","home.kicker":"DOCUMENTACIÓN","home.title":"Todos mis proyectos, \u003cspan class=\"hero__title-accent\">documentados\u003c/span>","home.subtitle":"Un solo sitio con la documentación de todo lo que construyo: reproductores, agentes, bots, juegos y webs. Guías de instalación, arquitectura, uso y referencia.","home.ctaPrimary":"Empezar a leer","home.ctaSecondary":"Ver todos los proyectos","home.stats.projects":"proyectos","home.stats.pages":"páginas","home.stats.languages":"idiomas","home.stats.updated":"actualizada","home.about.title":"Sobre esta documentación","home.about.sub":"Cómo está hecha y cómo se mantiene.","home.about.card.label":"CÓMO FUNCIONA","home.about.card.title":"Escrita a mano, generada con Node","home.about.card.text":"Cada página es un Markdown en content/docs/. El build las convierte en HTML estático con el mismo sistema, la misma paleta y las mismas animaciones que mi web principal.","home.about.card.stamp":"VER EL REPOSITORIO ↗","home.contribute.title":"¿Ves un error?","home.contribute.text":"Toda la documentación está en un repositorio público. Abre una issue o envía una pull request con la corrección.","home.contribute.issue":"Abrir una issue","home.contribute.pr":"Proponer un cambio","home.contribute.email":"Escribirme un correo","projects.title":"Proyectos","projects.sub":"Toda la documentación, proyecto por proyecto. Cada tarjeta enlaza a su guía completa.","projects.pages":"páginas","projects.openDocs":"Abrir documentación","projects.demo":"Probar","projects.code":"Código","projects.group.all":"Todos","callout.note":"Nota","callout.tip":"Consejo","callout.warning":"Aviso","callout.important":"Importante","callout.caution":"Precaución","code.copy":"Copiar","code.copied":"Copiado","footer.rights":"Todos los derechos reservados.","footer.mainSite":"Mi web","footer.tagline":"Juegos para navegador, aplicaciones web y vídeos.","footer.site":"Sitio","footer.siteAria":"Enlaces del sitio","footer.resources":"Recursos","footer.resourcesAria":"Recursos y enlaces externos","footer.status":"Estado del servicio","footer.email":"Correo","footer.terms":"Términos del servicio","footer.privacy":"Privacidad","footer.source":"Código fuente ↗","footer.legalAria":"Términos y privacidad","aria.socials":"Redes sociales","aria.footerLogo":"Jaime Gaming — inicio","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Correo electrónico","status.title":"Estado del servicio","status.sub":"Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.","status.note":"Datos del panel oficial de estado","status.open":"Abrir panel completo ↗","status.loading":"Consultando el estado…","status.unknown":"Estado no disponible","status.error":"No se pudo consultar el estado en directo. Puedes abrir el panel completo.","status.updated":"Actualizado el {date}","status.componentsAria":"Componentes del servicio","status.allOperational":"Todos los sistemas operativos","status.minorIssues":"Incidencias menores","status.majorIssues":"Incidencia grave","status.criticalIssues":"Incidencia crítica","status.maintenanceOverall":"Mantenimiento en curso","status.operational":"Operativo","status.degraded":"Rendimiento degradado","status.partial":"Interrupción parcial","status.major":"Interrupción grave","status.underMaintenance":"En mantenimiento","status.maintenanceTitle":"Mantenimiento programado","status.maintenanceBody":"Texto publicado en el panel de estado.","status.frameNotice":"El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.","status.loadFrame":"Cargar panel incrustado","status.frameTitle":"Panel de estado de Jaime Gaming","status.hint":"El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.","notFound.title":"Página no encontrada","notFound.sub":"Puede que el enlace esté roto o que esta guía se haya movido.","notFound.home":"Volver al inicio de la documentación","notFound.projects":"Ver todos los proyectos","home.guide.title":"Cómo están organizadas las guías","home.guide.sub":"Todas siguen la misma anatomía, para que sepas dónde buscar en cada proyecto.","home.guide.overview.num":"01","home.guide.overview.title":"Visión general","home.guide.overview.desc":"Qué es el proyecto, qué problema resuelve, en qué estado está y qué lo distingue. Es la puerta de entrada de cada guía.","home.guide.install.num":"02","home.guide.install.title":"Instalación","home.guide.install.desc":"Requisitos, comandos para ponerlo en marcha y la primera comprobación de que todo funciona.","home.guide.usage.num":"03","home.guide.usage.title":"Uso","home.guide.usage.desc":"El día a día: funciones, comandos, mecánicas o flujos de trabajo, con ejemplos concretos.","home.guide.deep.num":"04","home.guide.deep.title":"Cómo está hecho","home.guide.deep.desc":"Arquitectura, estructura de carpetas, decisiones técnicas y los límites conocidos del proyecto.","home.guide.reference.num":"05","home.guide.reference.title":"Referencia","home.guide.reference.desc":"Tablas de consulta: opciones, formatos de datos, modelos, plataformas o preguntas frecuentes.","home.about.text1":"Este sitio reúne en un mismo lugar la documentación de los siete proyectos que mantengo en GitHub. Cada guía está escrita a mano a partir del README y de los documentos del repositorio, y se revisa cuando el proyecto cambia.","home.about.text2":"Nada se genera automáticamente desde GitHub ni depende de servicios externos: el contenido vive en este repositorio como Markdown, se compila a HTML estático con Node y se publica en GitHub Pages. El buscador usa un índice que se crea en ese mismo build.","home.about.row.stack":"Generador","home.about.row.palette":"Paleta","home.about.row.fonts":"Tipografías","home.about.row.host":"Publicación","home.about.row.search":"Buscador","home.about.row.searchValue":"Índice estático, sin servicios externos","docs.otherProjects":"Otros proyectos","projects.empty":"No hay proyectos en esta categoría.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentación de todos los proyectos de Jaime Gaming: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID y su web personal.","meta.projects.title":"Proyectos — Docs de Jaime Gaming","meta.projects.description":"Índice de toda la documentación, agrupada por aplicaciones, juegos, bots y web.","proj.wave.name":"Wave","proj.wave.tagline":"Reproductor de música local-first para web, Android y Windows.","proj.wave.summary":"Un hogar para la música que ya tienes. Wave guarda tu colección en el dispositivo: sin cuenta, sin suscripción y sin subir audio a ningún servidor.","proj.wave.status":"0.1.0 · activa","page.wave.index":"Visión general","page.wave.install":"Instalación","page.wave.features":"Funciones y uso","page.wave.platforms":"Plataformas","page.wave.architecture":"Arquitectura","page.wave.privacy":"Privacidad y datos","page.wave.dev":"Desarrollo","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"Todos tus agentes de IA en un mismo sitio.","proj.jaigent.summary":"Un binario y diez proveedores. Los mismos tools en la terminal, en ChatGPT Web por MCP remoto, en Claude Desktop y en cualquier app que hable OpenAI. Con deshacer en cada escritura y tope de gasto.","proj.jaigent.status":"0.5.x · activa","page.jaigent.index":"Visión general","page.jaigent.install":"Instalación y claves","page.jaigent.cli":"Uso en la terminal","page.jaigent.models":"Modelos y proveedores","page.jaigent.mcp":"MCP y tu propia API","page.jaigent.extend":"Skills, plugins y horarios","page.jaigent.reference":"Referencia de tools","page.jaigent.security":"Seguridad","page.jaigent.dev":"Desarrollo","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.","proj.hellbot.summary":"Mantén al menos a una persona real en un canal de voz durante 160 horas seguidas. Si el canal se vacía y nadie vuelve en el periodo de gracia, la partida muere para siempre.","proj.hellbot.status":"producción · estable","page.hellbot.index":"Visión general","page.hellbot.rules":"Reglas del evento","page.hellbot.edge-cases":"Casos límite","page.hellbot.install":"Instalación y despliegue","page.hellbot.commands":"Comandos","page.hellbot.dashboard":"Dashboard en vivo","page.hellbot.architecture":"Arquitectura","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"Un número, infinitas posibilidades.","proj.rngdle-infinite.summary":"Tira un número entre 0 y 1.000.000 y descubre qué lo hace especial. Un incremental de navegador con EP, insignias, compañeros, skills, rebirth, prestige y rollback.","proj.rngdle-infinite.status":"jugable · activa","page.rngdle-infinite.index":"Visión general","page.rngdle-infinite.play":"Cómo se juega","page.rngdle-infinite.systems":"Sistemas y progresión","page.rngdle-infinite.save":"Partida y sincronización","page.rngdle-infinite.faq":"Preguntas frecuentes","page.rngdle-infinite.dev":"Desarrollo","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Tu espacio personal: un diario minimalista y 100 % local.","proj.daily-diary.summary":"Sin backend, sin cuentas, sin IA y sin APIs externas. Los resúmenes, estadísticas y tendencias se calculan en tu navegador con reglas y plantillas de texto.","proj.daily-diary.status":"completo · local","page.daily-diary.index":"Visión general","page.daily-diary.install":"Instalación y uso","page.daily-diary.areas":"Las cinco áreas","page.daily-diary.data":"Datos y privacidad","page.daily-diary.dev":"Estructura y desarrollo","proj.void.name":"VOID","proj.void.tagline":"Michael Burns desapareció el año pasado. ¿Quieres entrar?","proj.void.summary":"Un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece. Interfaz CRT de alto contraste, en español e inglés.","proj.void.status":"beta · en desarrollo","page.void.index":"Visión general","page.void.install":"Instalación y juego","page.void.world":"El mundo de VOID Corp","page.void.engine":"Las tripas del archivo","page.void.faq":"Avisos y preguntas","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"El sitio personal que da origen a esta documentación.","proj.website.summary":"Portfolio oscuro y bilingüe generado con Node: proyectos sincronizados desde GitHub, calendario de contribuciones, presencia de Discord y blog desde Markdown.","proj.website.status":"publicada · activa","page.website.index":"Visión general","page.website.build":"Build y preview","page.website.content":"Editar el contenido","page.website.i18n":"Los dos idiomas","page.website.architecture":"Arquitectura del sitio","group.apps.title":"Aplicaciones y herramientas","group.apps.sub":"Software que resuelve algo concreto: música, agentes y organización personal.","group.games.title":"Juegos","group.games.sub":"Del incremental de navegador al terror psicológico.","group.bots.title":"Bots y eventos","group.bots.sub":"Automatización en directo para comunidades.","group.web.title":"Web","group.web.sub":"Los sitios que publico, incluido el que estás leyendo."},"en":{"nav.home":"Home","nav.projects":"Projects","nav.search":"Search","nav.site":"My site","nav.blog":"Blog","nav.contact":"Contact","nav.openMenu":"Open menu","nav.closeMenu":"Close menu","aria.skipToContent":"Skip to content","aria.homeLogo":"Jaime Gaming Docs — home","aria.mainNav":"Main navigation","aria.backToTop":"Back to top","aria.langSwitch":"English. Switch to Spanish","aria.sidebar":"Index of this documentation","aria.toc":"On this page","aria.openSidebar":"Open index","aria.closeSidebar":"Close index","search.button":"Search","search.placeholder":"Search the docs…","search.hint":"Type to filter pages and sections","search.empty":"No results for","search.noQuery":"Try “install”, “commands”, “privacy”…","search.results":"results","search.result":"result","search.close":"Close search","search.scopeAll":"All documentation","search.scopeProject":"This project only","search.kbdNavigate":"navigate","search.kbdOpen":"open","search.kbdClose":"close","search.dialogTitle":"Search the documentation","search.resultsLabel":"Search results","docs.eyebrow":"Documentation","docs.sidebarTitle":"In this documentation","docs.tocTitle":"On this page","docs.editOnGithub":"Edit this page on GitHub","docs.sourceNote":"Documentation written by hand for this site, based on the repository's README and docs.","docs.updated":"Last reviewed","docs.prev":"Previous","docs.next":"Next","docs.allProjects":"All projects","docs.readTime":"min read","docs.jumpTo":"Go to","home.kicker":"DOCUMENTATION","home.title":"All my projects, \u003cspan class=\"hero__title-accent\">documented\u003c/span>","home.subtitle":"One single site with the documentation of everything I build: players, agents, bots, games and websites. Install guides, architecture, usage and reference.","home.ctaPrimary":"Start reading","home.ctaSecondary":"See all projects","home.stats.projects":"projects","home.stats.pages":"pages","home.stats.languages":"languages","home.stats.updated":"updated","home.about.title":"About these docs","home.about.sub":"How they are made and how they are kept up to date.","home.about.card.label":"HOW IT WORKS","home.about.card.title":"Written by hand, generated with Node","home.about.card.text":"Every page is a Markdown file in content/docs/. The build turns them into static HTML with the same system, the same palette and the same animations as my main website.","home.about.card.stamp":"SEE THE REPOSITORY ↗","home.contribute.title":"Found a mistake?","home.contribute.text":"All of this documentation lives in a public repository. Open an issue or send a pull request with the fix.","home.contribute.issue":"Open an issue","home.contribute.pr":"Propose a change","home.contribute.email":"Send me an email","projects.title":"Projects","projects.sub":"All the documentation, project by project. Each card links to its complete guide.","projects.pages":"pages","projects.openDocs":"Open documentation","projects.demo":"Try it","projects.code":"Code","projects.group.all":"All","callout.note":"Note","callout.tip":"Tip","callout.warning":"Warning","callout.important":"Important","callout.caution":"Caution","code.copy":"Copy","code.copied":"Copied","footer.rights":"All rights reserved.","footer.mainSite":"My site","footer.tagline":"Browser games, web applications and videos.","footer.site":"Site","footer.siteAria":"Site links","footer.resources":"Resources","footer.resourcesAria":"Resources and external links","footer.status":"Service status","footer.email":"Email","footer.terms":"Terms of Service","footer.privacy":"Privacy","footer.source":"Source code ↗","footer.legalAria":"Terms and privacy","aria.socials":"Social links","aria.footerLogo":"Jaime Gaming — home","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Email","status.title":"Service status","status.sub":"Live status of the website, documentation and projects, from the official incident.io panel.","status.note":"Data from the official status panel","status.open":"Open full status page ↗","status.loading":"Checking status…","status.unknown":"Status unavailable","status.error":"Couldn't fetch the live status. You can open the full status page.","status.updated":"Updated {date}","status.componentsAria":"Service components","status.allOperational":"All systems operational","status.minorIssues":"Minor issues","status.majorIssues":"Major incident","status.criticalIssues":"Critical incident","status.maintenanceOverall":"Maintenance in progress","status.operational":"Operational","status.degraded":"Degraded performance","status.partial":"Partial outage","status.major":"Major outage","status.underMaintenance":"Under maintenance","status.maintenanceTitle":"Scheduled maintenance","status.maintenanceBody":"Text published on the status page.","status.frameNotice":"The full panel belongs to incident.io and is only loaded if you ask for it. Once loaded, it may use its own cookies.","status.loadFrame":"Load embedded panel","status.frameTitle":"Jaime Gaming status page","status.hint":"The summary refreshes when you open this page. If the embedded panel doesn’t appear, open it with the button above.","notFound.title":"Page not found","notFound.sub":"The link may be broken or this guide may have moved.","notFound.home":"Back to the docs home","notFound.projects":"See all projects","home.guide.title":"How the guides are organised","home.guide.sub":"They all follow the same anatomy, so you know where to look in every project.","home.guide.overview.num":"01","home.guide.overview.title":"Overview","home.guide.overview.desc":"What the project is, which problem it solves, what state it is in and what sets it apart. It is the entry page of every guide.","home.guide.install.num":"02","home.guide.install.title":"Installation","home.guide.install.desc":"Requirements, the commands to get it running and the first check that everything works.","home.guide.usage.num":"03","home.guide.usage.title":"Usage","home.guide.usage.desc":"Day to day: features, commands, mechanics or workflows, with concrete examples.","home.guide.deep.num":"04","home.guide.deep.title":"How it is built","home.guide.deep.desc":"Architecture, folder structure, technical decisions and the project's known limits.","home.guide.reference.num":"05","home.guide.reference.title":"Reference","home.guide.reference.desc":"Lookup tables: options, data formats, models, platforms or frequently asked questions.","home.about.text1":"This site gathers, in one single place, the documentation of the seven projects I maintain on GitHub. Every guide is written by hand from the repository's README and docs, and reviewed when the project changes.","home.about.text2":"Nothing is generated automatically from GitHub and nothing depends on external services: the content lives in this repository as Markdown, it is compiled to static HTML with Node and published on GitHub Pages. Search uses an index created in that same build.","home.about.row.stack":"Generator","home.about.row.palette":"Palette","home.about.row.fonts":"Fonts","home.about.row.host":"Publishing","home.about.row.search":"Search","home.about.row.searchValue":"Static index, no external services","docs.otherProjects":"Other projects","projects.empty":"There are no projects in this category.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentation for all of Jaime Gaming's projects: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID and his personal website.","meta.projects.title":"Projects — Jaime Gaming Docs","meta.projects.description":"Index of all the documentation, grouped by apps, games, bots and web.","proj.wave.name":"Wave","proj.wave.tagline":"A local-first music player for web, Android and Windows.","proj.wave.summary":"A home for the music you already own. Wave keeps your collection on the device: no account, no subscription and no audio uploaded to any server.","proj.wave.status":"0.1.0 · active","page.wave.index":"Overview","page.wave.install":"Installation","page.wave.features":"Features & usage","page.wave.platforms":"Platforms","page.wave.architecture":"Architecture","page.wave.privacy":"Privacy & data","page.wave.dev":"Development","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"All your agents in one place.","proj.jaigent.summary":"One binary, ten providers. The same tools in the terminal, in ChatGPT Web over remote MCP, in Claude Desktop and in any app that speaks OpenAI. With undo on every write and a hard spend cap.","proj.jaigent.status":"0.5.x · active","page.jaigent.index":"Overview","page.jaigent.install":"Install & API keys","page.jaigent.cli":"Using the CLI","page.jaigent.models":"Models & providers","page.jaigent.mcp":"MCP & your own API","page.jaigent.extend":"Skills, plugins & schedules","page.jaigent.reference":"Tools reference","page.jaigent.security":"Security","page.jaigent.dev":"Development","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"The Discord bot that runs the Welcome to Hell endurance event.","proj.hellbot.summary":"Keep at least one real human in a single voice channel for 160 consecutive hours. If that channel empties and nobody returns within the grace period, the run is dead permanently.","proj.hellbot.status":"production · stable","page.hellbot.index":"Overview","page.hellbot.rules":"Event rules","page.hellbot.edge-cases":"Edge cases","page.hellbot.install":"Install & deploy","page.hellbot.commands":"Commands","page.hellbot.dashboard":"Live dashboard","page.hellbot.architecture":"Architecture","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"One number, infinite possibilities.","proj.rngdle-infinite.summary":"Roll a number from 0 to 1,000,000 and find out what makes it special. A browser incremental with EP, badges, companions, skills, rebirth, prestige and rollback.","proj.rngdle-infinite.status":"playable · active","page.rngdle-infinite.index":"Overview","page.rngdle-infinite.play":"How to play","page.rngdle-infinite.systems":"Systems & progression","page.rngdle-infinite.save":"Save & sync","page.rngdle-infinite.faq":"FAQ","page.rngdle-infinite.dev":"Development","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Your personal space: a minimalist, 100% local diary.","proj.daily-diary.summary":"No backend, no accounts, no AI and no external APIs. Summaries, statistics and trends are computed in your browser with rules and text templates.","proj.daily-diary.status":"complete · local","page.daily-diary.index":"Overview","page.daily-diary.install":"Install & run","page.daily-diary.areas":"The five areas","page.daily-diary.data":"Data & privacy","page.daily-diary.dev":"Structure & development","proj.void.name":"VOID","proj.void.tagline":"Michael Burns disappeared last year. Would you come in?","proj.void.summary":"A psychological game set in a mysterious corporation where everyone and everything disappears. High-contrast CRT interface, in Spanish and English.","proj.void.status":"beta · in development","page.void.index":"Overview","page.void.install":"Install & play","page.void.world":"The VOID Corp world","page.void.engine":"Inside the single file","page.void.faq":"Warnings & FAQ","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"The personal site this documentation is built from.","proj.website.summary":"Dark, bilingual portfolio generated with Node: projects synced from GitHub, contributions calendar, Discord presence and a Markdown blog.","proj.website.status":"published · active","page.website.index":"Overview","page.website.build":"Build & preview","page.website.content":"Editing content","page.website.i18n":"The two languages","page.website.architecture":"Site architecture","group.apps.title":"Apps & tools","group.apps.sub":"Software that solves something concrete: music, agents and personal organisation.","group.games.title":"Games","group.games.sub":"From the browser incremental to psychological horror.","group.bots.title":"Bots & events","group.bots.sub":"Live automation for communities.","group.web.title":"Web","group.web.sub":"The sites I publish, including the one you are reading."}}</script>
+<script type="application/json" id="pageTranslations">{"es":{"title":"Plataformas · Wave — Docs de Jaime Gaming","description":"Comparación real entre los clientes web, Windows y Android: qué hay en cada uno y qué falta.","fields":{"body":"\u003cp>Wave tiene \u003cstrong>tres implementaciones independientes\u003c/strong>, no envoltorios WebView ni Electron alrededor de la misma web. El cliente web es el más completo; Windows sigue su estructura con controles nativos de C#/WPF y Android usa Kotlin/Compose.\u003c/p>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Importante\u003c/p>\n  \u003cdiv class=\"callout__body\">Las bibliotecas de cada plataforma son separadas. Nunca se sincronizan ni se migran en silencio: lo que importas en el navegador no aparece en Windows ni en Android.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"comparacion-de-capacidades\">Comparación de capacidades\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Capacidad\u003c/th>\n\u003cth>Web\u003c/th>\n\u003cth>Windows\u003c/th>\n\u003cth>Android\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Inicio, biblioteca local y favoritos\u003c/td>\n\u003ctd>Sí\u003c/td>\n\u003ctd>Sí\u003c/td>\n\u003ctd>Básico\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Búsqueda dedicada\u003c/td>\n\u003ctd>Sí\u003c/td>\n\u003ctd>Búsqueda de canciones\u003c/td>\n\u003ctd>Filtro de biblioteca\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Álbumes y artistas\u003c/td>\n\u003ctd>Perfiles y carátulas\u003c/td>\n\u003ctd>Vistas nativas de grupo y detalle\u003c/td>\n\u003ctd>Lista básica\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Mixes diarios navegables y guardados\u003c/td>\n\u003ctd>Etiquetas de género y artista\u003c/td>\n\u003ctd>Etiquetas de género y artista\u003c/td>\n\u003ctd>Todavía no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Listas ordenadas\u003c/td>\n\u003ctd>Sí\u003c/td>\n\u003ctd>Crear, editar, miembros y orden\u003c/td>\n\u003ctd>Todavía no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Edición de la cola\u003c/td>\n\u003ctd>Arrastrar, botones y teclado\u003c/td>\n\u003ctd>Diálogo nativo; mover y quitar\u003c/td>\n\u003ctd>Progresión básica\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Posición en pausa restaurada\u003c/td>\n\u003ctd>Sí\u003c/td>\n\u003ctd>Sí\u003c/td>\n\u003ctd>Todavía no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Mix automático y Autoplay local\u003c/td>\n\u003ctd>Tiempos por pareja y variedad ponderada\u003c/td>\n\u003ctd>Duración acotada y variedad local\u003c/td>\n\u003ctd>Solo solapamiento manual\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Letras\u003c/td>\n\u003ctd>LRC mejorado, relleno y búsqueda opcional\u003c/td>\n\u003ctd>LRC por línea, relleno y búsqueda explícita\u003c/td>\n\u003ctd>LRC por línea y búsqueda\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Ajustes\u003c/td>\n\u003ctd>Seis menús\u003c/td>\n\u003ctd>Seis menús\u003c/td>\n\u003ctd>Página básica\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Apariencia\u003c/td>\n\u003ctd>Claro, oscuro y sistema; paletas de carátula\u003c/td>\n\u003ctd>Claro, oscuro, texto grande y movimiento\u003c/td>\n\u003ctd>Oscuro\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Edición de carátulas\u003c/td>\n\u003ctd>Canción, lista y artista\u003c/td>\n\u003ctd>Carátulas de canción\u003c/td>\n\u003ctd>Todavía no\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Controles del sistema y modo reposo\u003c/td>\n\u003ctd>Según navegador / sí\u003c/td>\n\u003ctd>Todavía no\u003c/td>\n\u003ctd>Sin servicio en primer plano\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Comprobaciones de build alojadas\u003c/td>\n\u003ctd>Superadas\u003c/td>\n\u003ctd>Superadas + contratos + smoke de WPF\u003c/td>\n\u003ctd>Superadas: unitarias, lint y build debug\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"navegador-y-github-pages\">Navegador y GitHub Pages\u003c/h2>\n\u003cp>Node.js 22.12 o superior, o Node 24:\u003c/p>\n\u003cpre data-lang=\"sh\">\u003ccode class=\"language-sh\">npm ci &amp;&amp; npm run dev     # desarrollo\nnpm run build             # producción\u003c/code>\u003c/pre>\n\u003cp>Para una ruta de repositorio, \u003ccode>WAVE_BASE_PATH=/Wave/ npm run build\u003c/code> y servir bajo \u003ccode>/Wave/\u003c/code>.\u003c/p>\n\u003cp>El despliegue sin workflow propio se hace en \u003cstrong>Settings → Pages → Deploy from a branch\u003c/strong>, con \u003cstrong>Branch: main\u003c/strong> y \u003cstrong>Folder: /docs\u003c/strong>. El sitio compilado está confirmado en \u003ccode>docs/index.html\u003c/code> y \u003ccode>docs/site-assets/\u003c/code>, y \u003ccode>.nojekyll\u003c/code> desactiva Jekyll.\u003c/p>\n\u003cp>Hay que tener en cuenta dos cosas del navegador:\u003c/p>\n\u003cul>\n\u003cli>Las bibliotecas son específicas \u003cstrong>del origen del sitio y del perfil\u003c/strong>. Una URL de preview distinta puede tener una biblioteca distinta.\u003c/li>\n\u003cli>Hace falta \u003cstrong>HTTPS\u003c/strong> para Web Crypto y para la persistencia.\u003c/li>\n\u003c/ul>\n\u003cp>No se necesita backend ni claves de API. Los pasos completos están en \u003ca href=\"/Docs/wave/install/\">Instalación\u003c/a>.\u003c/p>\n\u003ch2 id=\"windows\">Windows\u003c/h2>\n\u003cp>Aplicación nativa real en \u003cstrong>C# y WPF\u003c/strong> con Windows Media Player y los selectores de archivo estándar del sistema.\u003c/p>\n\u003cpre data-lang=\"powershell\">\u003ccode class=\"language-powershell\">dotnet build platforms/windows/Wave.Windows -c Release\ndotnet run --project platforms/windows/Wave.Windows\ndotnet publish platforms/windows/Wave.Windows -c Release -r win-x64 --self-contained false -o artifacts/windows\u003c/code>\u003c/pre>\n\u003ch3 id=\"donde-guarda-las-cosas\">Dónde guarda las cosas\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Qué\u003c/th>\n\u003cth>Dónde\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Audio original\u003c/td>\n\u003ctd>\u003ccode>%LOCALAPPDATA%/Wave/audio\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Biblioteca, listas, preferencias y estado\u003c/td>\n\u003ctd>Archivos JSON sustituidos de forma atómica\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Carátulas\u003c/td>\n\u003ctd>Sobrescrituras locales separadas\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Las bibliotecas y preferencias existentes siguen siendo legibles. La antigua preferencia de solapamiento, ya desactivada, se migra sin activar Mix en silencio.\u003c/p>\n\u003ch3 id=\"como-es-la-aplicacion\">Cómo es la aplicación\u003c/h3>\n\u003cp>Inicio tiene atajos a las colecciones, mixes diarios y tarjetas de álbum. La búsqueda es su propio destino: título y carátula reproducen, artista y álbum abren su colección, y la información del reproductor compacto abre \u003cstrong>Reproduciendo ahora\u003c/strong>.\u003c/p>\n\u003cp>Las listas se pueden crear, renombrar, poblar, ordenar y eliminar sin borrar audio. Las ediciones de la cola conservan la grabación activa. Las sesiones restauradas vuelven en pausa. Ajustes separa Apariencia, Reproducción, Letras, Biblioteca, Almacenamiento y Acerca de.\u003c/p>\n\u003ch3 id=\"que-comprueba-ci\">Qué comprueba CI\u003c/h3>\n\u003cp>CI ejecuta un runner de contratos sin dependencias, compila y publica la aplicación, y lanza un modo smoke aislado de WPF que recorre Inicio, Búsqueda, mixes diarios, listas guardadas, las seis secciones de Ajustes y el diseño estrecho en tema claro. Captura PNG en \u003ccode>wave-windows-ui-smoke\u003c/code>.\u003c/p>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Aviso\u003c/p>\n  \u003cdiv class=\"callout__body\">Eso \u003cstrong>no\u003c/strong> es una matriz de dispositivos físicos ni de códecs y reproducción. La biblioteca de pruebas es temporal y no toca la biblioteca real de nadie.\u003c/div>\n\u003c/div>\n\u003ch3 id=\"lo-que-falta-en-windows\">Lo que falta en Windows\u003c/h3>\n\u003cp>La lectura de metadatos sigue limitada a \u003cstrong>ID3 y WAV\u003c/strong>. Todavía no están: extracción automática de carátulas incrustadas, agrupación de búsqueda idéntica a la web, fotos de artista, ordenación de álbumes, LRC con marcas de tiempo, análisis de forma de onda, modo reposo inmersivo e integración con los controles del sistema.\u003c/p>\n\u003cp>Los códecs del sistema operativo gobiernan la reproducción. \u003cstrong>No es paridad completa con la web.\u003c/strong>\u003c/p>\n\u003cp>Los ZIP de prueba están claramente etiquetados como sin firmar. Las licencias y avisos de .NET siguen incluidos; los futuros paquetes autocontenidos tendrán que inventariar su runtime pack exacto. Los detalles de sumas de comprobación, firma y límites de Defender están en \u003ccode>docs/WINDOWS_RELEASE.md\u003c/code> del repositorio.\u003c/p>\n\u003ch2 id=\"android\">Android\u003c/h2>\n\u003cp>Proyecto nativo independiente en \u003cstrong>Kotlin y Jetpack Compose\u003c/strong>.\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Requisito\u003c/th>\n\u003cth>Versión\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>JDK\u003c/td>\n\u003ctd>17\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>SDK y build tools\u003c/td>\n\u003ctd>36\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Gradle\u003c/td>\n\u003ctd>8.13\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Android Studio\u003c/td>\n\u003ctd>Compatible con AGP 8.13\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>API mínima\u003c/td>\n\u003ctd>26\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cpre data-lang=\"sh\">\u003ccode class=\"language-sh\">gradle -p platforms/android testDebugUnitTest lintDebug assembleDebug\u003c/code>\u003c/pre>\n\u003cp>Salida: \u003ccode>platforms/android/app/build/outputs/apk/debug/app-debug.apk\u003c/code>, un artefacto de prueba en debug. El runner de CI en Ubuntu proporciona el SDK. Las pruebas cubren los contratos de LRC y de ganancia; las comprobaciones alojadas de unitarias, lint y ensamblado han pasado.\u003c/p>\n\u003cp>Quedan como puertas pendientes: importación y reproducción en dispositivo real, ciclo de vida seguro ante rotaciones, foco de audio, servicio en primer plano con sesión de medios y firma.\u003c/p>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Importante\u003c/p>\n  \u003cdiv class=\"callout__body\">El selector de documentos copia los bytes originales al almacenamiento privado de la aplicación. \u003cstrong>Desinstalar elimina esa copia.\u003c/strong> No es un sustituto de tus archivos, y todavía no reemplaza a la edición web.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"trafico-con-el-servicio-de-letras\">Tráfico con el servicio de letras\u003c/h2>\n\u003cp>Los tres clientes mantienen \u003cstrong>LRCLIB como único proveedor de letras en línea\u003c/strong>.\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>Web\u003c/strong> usa una cola compartida de 500 ms, Web Locks del mismo origen cuando están disponibles, compartición de búsquedas concurrentes y cabeceras en lista blanca.\u003c/li>\n\u003cli>\u003cstrong>Windows\u003c/strong> serializa las peticiones por cliente con cancelación acotada y acepta plazos de reintento numéricos cortos y en formato de fecha HTTP.\u003c/li>\n\u003cli>\u003cstrong>Android\u003c/strong> conserva su cola sincronizada y los plazos de reintento de más de un día.\u003c/li>\n\u003c/ul>\n\u003cp>Los dos clientes nativos espacian el inicio de las peticiones en 500 ms. \u003cstrong>Ninguna de estas medidas elimina los límites del proveedor ni los límites por IP.\u003c/strong> Se han añadido contratos de plazo de reintento nativos, pero la última validación local de la web no certifica un build nativo nuevo.\u003c/p>\n\u003ch2 id=\"puertas-de-publicacion\">Puertas de publicación\u003c/h2>\n\u003cp>Antes de publicar una versión nativa hacen falta cinco cosas:\u003c/p>\n\u003col>\n\u003cli>Ejecutar las comprobaciones en la última revisión.\u003c/li>\n\u003cli>Hacer pruebas reales de reproducción, accesibilidad y DPI en el dispositivo de destino.\u003c/li>\n\u003cli>Declarar el alcance reducido del cliente nativo.\u003c/li>\n\u003cli>Revisar los avisos de runtime exactos.\u003c/li>\n\u003cli>Firmar con credenciales guardadas \u003cstrong>fuera\u003c/strong> del repositorio.\u003c/li>\n\u003c/ol>\n\u003cp>En la fusión aprobada se etiqueta el commit fusionado real como \u003ccode>v0.1.0\u003c/code> y se crea la Release en GitHub. Nunca se incluyen claves de firma ni música personal.\u003c/p>\n","desc":"Comparación real entre los clientes web, Windows y Android: qué hay en cada uno y qué falta.","readtime":"5 min de lectura","editHref":"https://github.com/jaime-gaming/Wave/blob/main/content/docs/wave/platforms.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#comparacion-de-capacidades\">Comparación de capacidades\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#navegador-y-github-pages\">Navegador y GitHub Pages\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#windows\">Windows\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#donde-guarda-las-cosas\">Dónde guarda las cosas\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#como-es-la-aplicacion\">Cómo es la aplicación\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#que-comprueba-ci\">Qué comprueba CI\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#lo-que-falta-en-windows\">Lo que falta en Windows\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#android\">Android\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#trafico-con-el-servicio-de-letras\">Tráfico con el servicio de letras\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#puertas-de-publicacion\">Puertas de publicación\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}},"en":{"title":"Platforms · Wave — Docs de Jaime Gaming","description":"Real comparison between the web, Windows and Android clients: what exists in each and what is missing.","fields":{"body":"\u003cp>Wave has \u003cstrong>three independent implementations\u003c/strong>, not WebView or Electron wrappers around the same website. The web client is the most complete; Windows follows its structure with native C#/WPF controls and Android uses Kotlin/Compose.\u003c/p>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Important\u003c/p>\n  \u003cdiv class=\"callout__body\">Each platform&#39;s library is separate. They are never synchronised or silently migrated: what you import in the browser does not appear on Windows or Android.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"capability-comparison\">Capability comparison\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Capability\u003c/th>\n\u003cth>Web\u003c/th>\n\u003cth>Windows\u003c/th>\n\u003cth>Android\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Home, local library and favorites\u003c/td>\n\u003ctd>Yes\u003c/td>\n\u003ctd>Yes\u003c/td>\n\u003ctd>Basic\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Dedicated search\u003c/td>\n\u003ctd>Yes\u003c/td>\n\u003ctd>Song search\u003c/td>\n\u003ctd>Library filter\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Albums and artists\u003c/td>\n\u003ctd>Profiles and artwork\u003c/td>\n\u003ctd>Native group and detail views\u003c/td>\n\u003ctd>Basic list\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Browsable daily mixes and saved snapshots\u003c/td>\n\u003ctd>Genre and artist tags\u003c/td>\n\u003ctd>Genre and artist tags\u003c/td>\n\u003ctd>Not yet\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Ordered playlists\u003c/td>\n\u003ctd>Yes\u003c/td>\n\u003ctd>Create, edit, membership and order\u003c/td>\n\u003ctd>Not yet\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Queue editing\u003c/td>\n\u003ctd>Drag, buttons and keyboard\u003c/td>\n\u003ctd>Native dialog; move and remove\u003c/td>\n\u003ctd>Basic progression\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Restored paused position\u003c/td>\n\u003ctd>Yes\u003c/td>\n\u003ctd>Yes\u003c/td>\n\u003ctd>Not yet\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Automatic Mix and local Autoplay\u003c/td>\n\u003ctd>Pair timing and weighted variety\u003c/td>\n\u003ctd>Bounded duration and local variety\u003c/td>\n\u003ctd>Manual overlap only\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Lyrics\u003c/td>\n\u003ctd>Enhanced LRC, fill and optional lookup\u003c/td>\n\u003ctd>Line LRC, fill and explicit lookup\u003c/td>\n\u003ctd>Line LRC and lookup\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Settings\u003c/td>\n\u003ctd>Six menus\u003c/td>\n\u003ctd>Six menus\u003c/td>\n\u003ctd>Basic page\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Appearance\u003c/td>\n\u003ctd>Light, dark and system; artwork palettes\u003c/td>\n\u003ctd>Light, dark, larger text and motion\u003c/td>\n\u003ctd>Dark\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Cover editing\u003c/td>\n\u003ctd>Song, playlist and artist\u003c/td>\n\u003ctd>Song covers\u003c/td>\n\u003ctd>Not yet\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>System media controls and idle stage\u003c/td>\n\u003ctd>Browser-dependent / yes\u003c/td>\n\u003ctd>Not yet\u003c/td>\n\u003ctd>No foreground service yet\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Hosted build checks\u003c/td>\n\u003ctd>Passed\u003c/td>\n\u003ctd>Passed + contracts + WPF layout smoke\u003c/td>\n\u003ctd>Passed: unit, lint and debug build\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"browser-and-github-pages\">Browser and GitHub Pages\u003c/h2>\n\u003cp>Node.js 22.12 or later, or Node 24:\u003c/p>\n\u003cpre data-lang=\"sh\">\u003ccode class=\"language-sh\">npm ci &amp;&amp; npm run dev     # development\nnpm run build             # production\u003c/code>\u003c/pre>\n\u003cp>For a repository path, \u003ccode>WAVE_BASE_PATH=/Wave/ npm run build\u003c/code> and serve it under \u003ccode>/Wave/\u003c/code>.\u003c/p>\n\u003cp>Deployment without a custom workflow is done in \u003cstrong>Settings → Pages → Deploy from a branch\u003c/strong>, with \u003cstrong>Branch: main\u003c/strong> and \u003cstrong>Folder: /docs\u003c/strong>. The compiled site is committed in \u003ccode>docs/index.html\u003c/code> and \u003ccode>docs/site-assets/\u003c/code>, and \u003ccode>.nojekyll\u003c/code> disables Jekyll.\u003c/p>\n\u003cp>Two browser facts matter:\u003c/p>\n\u003cul>\n\u003cli>Libraries are specific to the \u003cstrong>site origin and the profile\u003c/strong>. A different preview URL can have a different library.\u003c/li>\n\u003cli>\u003cstrong>HTTPS\u003c/strong> is needed for Web Crypto and for persistence.\u003c/li>\n\u003c/ul>\n\u003cp>No backend or API keys are needed. The full steps are in \u003ca href=\"/Docs/wave/install/\">Installation\u003c/a>.\u003c/p>\n\u003ch2 id=\"windows\">Windows\u003c/h2>\n\u003cp>A real native application in \u003cstrong>C# and WPF\u003c/strong> with Windows Media Player and the standard system file pickers.\u003c/p>\n\u003cpre data-lang=\"powershell\">\u003ccode class=\"language-powershell\">dotnet build platforms/windows/Wave.Windows -c Release\ndotnet run --project platforms/windows/Wave.Windows\ndotnet publish platforms/windows/Wave.Windows -c Release -r win-x64 --self-contained false -o artifacts/windows\u003c/code>\u003c/pre>\n\u003ch3 id=\"where-it-stores-things\">Where it stores things\u003c/h3>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>What\u003c/th>\n\u003cth>Where\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Original audio\u003c/td>\n\u003ctd>\u003ccode>%LOCALAPPDATA%/Wave/audio\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Library, playlists, preferences and state\u003c/td>\n\u003ctd>Atomically replaced JSON files\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Covers\u003c/td>\n\u003ctd>Separate local overrides\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Existing libraries and preferences remain readable. The old, now disabled, overlap preference migrates without silently enabling Mix.\u003c/p>\n\u003ch3 id=\"what-the-application-is-like\">What the application is like\u003c/h3>\n\u003cp>Home has collection shortcuts, daily mixes and album cards. Search is its own destination: title and cover play, artist and album open their collection, and compact-player information opens \u003cstrong>Now Playing\u003c/strong>.\u003c/p>\n\u003cp>Playlists can be created, renamed, populated, ordered and deleted without deleting audio. Queue edits preserve the active recording. Restored sessions come back paused. Settings separates Appearance, Playback, Lyrics, Library, Storage and About.\u003c/p>\n\u003ch3 id=\"what-ci-checks\">What CI checks\u003c/h3>\n\u003cp>CI runs a dependency-free contract runner, compiles and publishes the application, and launches an isolated WPF smoke mode that walks Home, Search, daily mixes, saved playlists, the six Settings sections and narrow light-theme layout. It captures PNGs in \u003ccode>wave-windows-ui-smoke\u003c/code>.\u003c/p>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Warning\u003c/p>\n  \u003cdiv class=\"callout__body\">That is \u003cstrong>not\u003c/strong> a physical-device or codec and playback matrix. The test library is temporary and does not touch anybody&#39;s real library.\u003c/div>\n\u003c/div>\n\u003ch3 id=\"what-is-missing-on-windows\">What is missing on Windows\u003c/h3>\n\u003cp>Metadata reading remains limited to \u003cstrong>ID3 and WAV\u003c/strong>. Still not there: automatic extraction of embedded artwork, web-identical search grouping, artist photos, album ordering, word-stamped LRC, waveform analysis, immersive idle mode and system media integration.\u003c/p>\n\u003cp>Operating system codecs govern playback. \u003cstrong>This is not complete web parity.\u003c/strong>\u003c/p>\n\u003cp>Test ZIPs are clearly labelled unsigned. Upstream .NET licenses and notices remain bundled; future self-contained packages will have to inventory their exact runtime pack. Checksums, signing and Defender limits are in the repository&#39;s \u003ccode>docs/WINDOWS_RELEASE.md\u003c/code>.\u003c/p>\n\u003ch2 id=\"android\">Android\u003c/h2>\n\u003cp>Independent native project in \u003cstrong>Kotlin and Jetpack Compose\u003c/strong>.\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Requirement\u003c/th>\n\u003cth>Version\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>JDK\u003c/td>\n\u003ctd>17\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>SDK and build tools\u003c/td>\n\u003ctd>36\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Gradle\u003c/td>\n\u003ctd>8.13\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Android Studio\u003c/td>\n\u003ctd>Supporting AGP 8.13\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Minimum API\u003c/td>\n\u003ctd>26\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cpre data-lang=\"sh\">\u003ccode class=\"language-sh\">gradle -p platforms/android testDebugUnitTest lintDebug assembleDebug\u003c/code>\u003c/pre>\n\u003cp>Output: \u003ccode>platforms/android/app/build/outputs/apk/debug/app-debug.apk\u003c/code>, a debug test artifact. The Ubuntu CI runner provides the SDK. Tests cover the LRC and gain contracts; hosted unit, lint and assembly checks have passed.\u003c/p>\n\u003cp>Remaining gates: real-device import and playback, rotation-safe lifecycle, audio focus, foreground service with media session, and signing.\u003c/p>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Important\u003c/p>\n  \u003cdiv class=\"callout__body\">The document picker copies the original bytes into app-private storage. \u003cstrong>Uninstalling removes that copy.\u003c/strong> It is not a replacement for your files, and it does not yet replace the web edition.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"lyric-service-traffic\">Lyric-service traffic\u003c/h2>\n\u003cp>All three clients keep \u003cstrong>LRCLIB as the only online lyric provider\u003c/strong>.\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>Web\u003c/strong> uses a shared 500 ms queue, same-origin Web Locks when supported, concurrent lookup sharing and safelisted headers.\u003c/li>\n\u003cli>\u003cstrong>Windows\u003c/strong> serialises requests per client with bounded cancellation and accepts short numeric and HTTP-date retry deadlines.\u003c/li>\n\u003cli>\u003cstrong>Android\u003c/strong> keeps its synchronised queue and retry deadlines longer than one day.\u003c/li>\n\u003c/ul>\n\u003cp>Both native clients space request starts by 500 ms. \u003cstrong>None of these measures removes provider-side or IP limits.\u003c/strong> Native retry-deadline contracts have been added, but the latest local web validation does not certify a new native build.\u003c/p>\n\u003ch2 id=\"publication-gates\">Publication gates\u003c/h2>\n\u003cp>Five things are needed before publishing a native release:\u003c/p>\n\u003col>\n\u003cli>Run the checks at the latest revision.\u003c/li>\n\u003cli>Do real playback, accessibility and DPI checks on the target device.\u003c/li>\n\u003cli>State the reduced native scope.\u003c/li>\n\u003cli>Review the exact runtime notices.\u003c/li>\n\u003cli>Sign with credentials kept \u003cstrong>outside\u003c/strong> the repository.\u003c/li>\n\u003c/ol>\n\u003cp>At the approved merge, tag the actual merged commit as \u003ccode>v0.1.0\u003c/code> and create the GitHub Release. Never include signing keys or personal music.\u003c/p>\n","desc":"Real comparison between the web, Windows and Android clients: what exists in each and what is missing.","readtime":"4 min read","editHref":"https://github.com/jaime-gaming/Wave/blob/main/content/docs/wave/platforms.en.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#capability-comparison\">Capability comparison\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#browser-and-github-pages\">Browser and GitHub Pages\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#windows\">Windows\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#where-it-stores-things\">Where it stores things\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#what-the-application-is-like\">What the application is like\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#what-ci-checks\">What CI checks\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#what-is-missing-on-windows\">What is missing on Windows\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#android\">Android\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#lyric-service-traffic\">Lyric-service traffic\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#publication-gates\">Publication gates\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}}}</script>
+<script type="application/json" id="searchConfig">{"index":"/Docs/assets/data/search-index.json","scope":"wave"}</script>
+<script src="/Docs/assets/js/i18n.js?v=9f6d93c1fd7c"></script>
+<script src="/Docs/assets/js/search.js?v=014a801e4757"></script>
+<script src="/Docs/assets/js/main.js?v=83aa4a0803d7"></script>
+</body>
+</html>

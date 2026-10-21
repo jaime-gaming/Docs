@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Los dos idiomas — Docs de Jaime Gaming</title>
+<meta name="description" content="El sistema de dos idiomas de la web: el diccionario de 234 claves, los atributos que dirigen la sustitución, la detección, el conmutador y el retecleo." />
+<meta name="author" content="Jaime Gaming" />
+<meta name="theme-color" content="#10120f" />
+<meta name="robots" content="index, follow" />
+<meta name="docs:base" content="/Docs/" />
+<meta name="docs:project" content="website" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Jaime Gaming Docs" />
+<meta property="og:title" content="Los dos idiomas — Docs de Jaime Gaming" />
+<meta property="og:description" content="El sistema de dos idiomas de la web: el diccionario de 234 claves, los atributos que dirigen la sustitución, la detección, el conmutador y el retecleo." />
+<meta property="og:url" content="https://jaime-gaming.github.io/Docs/website/i18n/" />
+<meta property="og:image" content="https://jaime-gaming.github.io/assets/img/social-card.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@JaimeGamingPro" />
+<meta name="twitter:title" content="Los dos idiomas — Docs de Jaime Gaming" />
+<meta name="twitter:description" content="El sistema de dos idiomas de la web: el diccionario de 234 claves, los atributos que dirigen la sustitución, la detección, el conmutador y el retecleo." />
+<link rel="canonical" href="https://jaime-gaming.github.io/Docs/website/i18n/" />
+<link rel="icon" href="/Docs/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/Docs/assets/css/style.css?v=d74cfec89052" />
+</head>
+<body data-icons="/Docs/assets/img/icons.svg?v=eea9c3fe56aa" data-page="docs" data-project="website" data-path="/website/i18n/">
+
+<a class="skip-link" href="#top" data-i18n="aria.skipToContent">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/Docs/" class="nav__logo" aria-label="Jaime Gaming Docs — inicio" data-i18n-aria="aria.homeLogo">JG<span class="dot">.</span><span class="nav__logo-badge">docs</span></a>
+  <nav class="nav__links" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+    <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+    <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+    <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+    <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+    <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="search-trigger" id="searchTrigger" type="button" aria-label="Buscar" data-i18n-aria="nav.search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg>
+      <span class="search-trigger__label" data-i18n="search.button">Buscar</span>
+      <kbd class="search-trigger__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+    <button class="lang-switch" id="langSwitch" data-active="es" type="button" aria-label="Cambiar idioma" data-i18n-aria="aria.langSwitch">
+      <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="languageFlagEs" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#aa151b" d="M0 0h24v24H0z"/><path fill="#f1bf00" d="M0 6h24v12H0z"/></g>
+          </pattern>
+          <pattern id="languageFlagEn" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#012169" d="M0 0h24v24H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 24 24M24 0 0 24"/><path stroke="#c8102e" stroke-width="2" d="m0 0 24 24M24 0 0 24"/><path stroke="#fff" stroke-width="8" d="M12 0v24M0 12h24"/><path stroke="#c8102e" stroke-width="4" d="M12 0v24M0 12h24"/></g>
+          </pattern>
+          <radialGradient id="languageGloss" cx="34%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".42"/>
+            <stop offset="55%" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="flag flag-es" cx="12" cy="12" r="9.5" fill="url(#languageFlagEs)"/>
+        <circle class="flag flag-en" cx="12" cy="12" r="9.5" fill="url(#languageFlagEn)"/>
+        <circle class="language-globe__gloss" cx="12" cy="12" r="9.5" fill="url(#languageGloss)" aria-hidden="true"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#0d100d" stroke-opacity=".55" stroke-width="1.9" stroke-linecap="round"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width=".9" stroke-linecap="round"/>
+      </svg>
+      <span class="sr-only" id="languageName">Español</span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil" data-i18n-aria="aria.mainNav">
+  <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+  <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+  <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+  <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+  <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+</nav>
+
+<main id="top" class="layout--docs">
+<div class="docs docs--with-rails">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-panel"></use></svg>
+    </button>
+    <aside class="docs__sidebar" id="docsSidebar" aria-label="Índice de esta documentación" data-i18n-aria="aria.sidebar">
+    <nav class="side-nav">
+      <div class="side-nav__head">
+        <span class="side-nav__eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+        <a class="side-nav__project" href="/Docs/website/">
+          <span class="side-nav__project-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg></span>
+          <span class="side-nav__project-name" data-i18n="proj.website.name">jaime-gaming.github.io</span>
+        </a>
+      </div>
+      <p class="side-nav__group" data-i18n="docs.sidebarTitle">En esta documentación</p>
+      <ol class="side-nav__list">
+      <li><a class="side-nav__link" href="/Docs/website/" data-i18n="page.website.index"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-compass"></use></svg><span>Visión general</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/website/build/" data-i18n="page.website.build"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-hammer"></use></svg><span>Build y preview</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/website/content/" data-i18n="page.website.content"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-file"></use></svg><span>Editar el contenido</span></a></li>
+      <li><a class="side-nav__link active" href="/Docs/website/i18n/" data-i18n="page.website.i18n"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-lang"></use></svg><span>Los dos idiomas</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/website/architecture/" data-i18n="page.website.architecture"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-boxes"></use></svg><span>Arquitectura del sitio</span></a></li>
+      </ol>
+      <div class="side-nav__foot">
+        <a class="side-nav__all" href="/Docs/projects/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.allProjects">Todos los proyectos</span></a>
+        <div class="side-nav__switch">
+          <span class="side-nav__switch-label" data-i18n="docs.otherProjects">Otros proyectos</span>
+          <ul class="side-nav__switch-list">
+        <li><a class="side-nav__chip" href="/Docs/wave/" title="Wave"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg><span>Wave</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/jaigent/" title="jAIgent"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg><span>jAIgent</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/hellbot/" title="hellbot"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg><span>hellbot</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/rngdle-infinite/" title="RNGdle Infinite"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-dice"></use></svg><span>RNGdle Infinite</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/daily-diary/" title="Diario"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-notebook"></use></svg><span>Diario</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/void/" title="VOID"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg><span>VOID</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </aside>
+    <div class="docs__main">
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="/Docs/">Docs</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="/Docs/website/" data-i18n="proj.website.name">jaime-gaming.github.io</a>
+      <span class="breadcrumb__sep">/</span>
+      <span class="breadcrumb__current" data-i18n="page.website.i18n">Los dos idiomas</span>
+    </nav>
+    <header class="doc-head reveal">
+      <p class="doc-head__kicker"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg><span data-i18n="proj.website.name">jaime-gaming.github.io</span></p>
+      <h1 class="doc-head__title" data-i18n="page.website.i18n">Los dos idiomas</h1>
+      <p class="doc-head__desc" data-content-key="desc">El sistema de dos idiomas de la web: el diccionario de 234 claves, los atributos que dirigen la sustitución, la detección, el conmutador y el retecleo.</p>
+      <div class="doc-head__meta">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-calendar"></use></svg><span data-i18n="docs.updated">Última revisión</span> <time datetime="2026-10-20" data-i18n-date>20 de octubre de 2026</time></span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-clock"></use></svg><span data-content-key="readtime">9 min de lectura</span></span>
+        <a class="doc-head__edit" href="https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/content/docs/website/i18n.md" data-content-key="editHref" data-content-attr="href" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span data-i18n="docs.editOnGithub">Editar esta página en GitHub</span></a>
+      </div>
+    </header>
+    <article class="doc-body reveal" lang="es" data-content-key="body" data-content-language>
+<h1 id="los-dos-idiomas">Los dos idiomas</h1>
+<p>La web está entera en español y en inglés, y no son dos sitios ni dos rutas: es
+un solo HTML que se reescribe en el navegador. Esta página recorre el mecanismo
+de punta a punta —el diccionario, los atributos, la detección, el conmutador y la
+animación de retecleo— y termina en lo que esta documentación hereda de él.</p>
+<h2 id="un-html-dos-idiomas">Un HTML, dos idiomas</h2>
+<p>El HTML se sirve siempre en español. Los textos en inglés no viven en otra
+carpeta ni bajo un prefijo <code>/en/</code>: viajan dentro de la misma página y se aplican
+cuando alguien pulsa el conmutador.</p>
+<p>Dos sitios los transportan:</p>
+<ol>
+<li><strong><code>assets/js/i18n.js</code></strong> — 38.251 bytes y 674 líneas con el diccionario <code>dict</code>
+de toda la interfaz.</li>
+<li><strong><code>&lt;script type=&quot;application/json&quot; id=&quot;pageTranslations&quot;&gt;</code></strong> — los campos
+propios de cada página, que genera el build: título, descripción, cuerpo y
+fecha.</li>
+</ol>
+<p>La consecuencia práctica es que hay <strong>una sola URL por página</strong>, un solo
+<code>canonical</code> y un solo <code>sitemap.xml</code>. El idioma es un estado del navegador y no
+una dirección, así que no existe contenido duplicado que mantener ni enlaces que
+se crucen entre versiones.</p>
+<div class="callout callout--note">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb"></use></svg>
+  <p class="callout__title">Nota</p>
+  <div class="callout__body">El precio es que un rastreador que no ejecute JavaScript ve la versión en
+español. Se compensa reescribiendo los metadatos al cambiar de idioma y no
+declarando <code>hreflang</code>: no hay dos documentos que relacionar entre sí.</div>
+</div>
+<h2 id="el-diccionario-234-claves">El diccionario: 234 claves</h2>
+<p><code>dict</code> tiene dos ramas, <code>es</code> y <code>en</code>, con <strong>exactamente las mismas 234 claves</strong>.
+Se agrupan por prefijo, y los diez más poblados dicen dónde está el peso del
+sitio:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Prefijo</th>
+<th>Claves</th>
+<th>De qué son</th>
+</tr>
+</thead><tbody><tr>
+<td><code>github.*</code></td>
+<td>52</td>
+<td>Calendario de contribuciones, sincronización y sus errores</td>
+</tr>
+<tr>
+<td><code>contact.*</code></td>
+<td>27</td>
+<td>Acceso por correo, copiar al portapapeles y redes</td>
+</tr>
+<tr>
+<td><code>status.*</code></td>
+<td>25</td>
+<td>La página de estado y el panel de incident.io</td>
+</tr>
+<tr>
+<td><code>meta.*</code></td>
+<td>16</td>
+<td>Título y descripción de cada página, por ruta</td>
+</tr>
+<tr>
+<td><code>project.*</code></td>
+<td>14</td>
+<td>Ficha de proyecto: estrellas, forks, demo y fallos de carga</td>
+</tr>
+<tr>
+<td><code>footer.*</code></td>
+<td>12</td>
+<td>Pie, columnas de enlaces y aviso legal</td>
+</tr>
+<tr>
+<td><code>hero.*</code></td>
+<td>11</td>
+<td>Portada: titular, llamadas a la acción y línea de actividad</td>
+</tr>
+<tr>
+<td><code>about.*</code></td>
+<td>10</td>
+<td>Sección «sobre mí» y su tarjeta</td>
+</tr>
+<tr>
+<td><code>discord.*</code></td>
+<td>10</td>
+<td>Presencia en Discord y sus estados</td>
+</tr>
+<tr>
+<td><code>aria.*</code></td>
+<td>8</td>
+<td>Etiquetas accesibles sin texto visible</td>
+</tr>
+</tbody></table></div>
+<p>Los once prefijos restantes —<code>skills</code>, <code>nav</code>, <code>projects</code>, <code>social</code>, <code>blog</code>,
+<code>legal</code>, <code>profile</code>, <code>notFound</code>, <code>projectsPage</code>, <code>projectsTeaser</code> y <code>readme</code>—
+suman las otras 49 claves.</p>
+<h3 id="las-funciones-del-modulo">Las funciones del módulo</h3>
+<p>Ocho funciones declaradas más el bucle de animación, que vive dentro de una de
+ellas:</p>
+<ul>
+<li><code>applyLang(lang, { persist, animate })</code> — aplica un idioma a toda la página y
+avisa al resto del sitio.</li>
+<li><code>detectDefaultLang()</code> — decide con qué idioma se abre la página.</li>
+<li><code>storageGet(clave)</code> y <code>storageSet(clave, valor)</code> — <code>localStorage</code> envuelto en
+<code>try/catch</code>, porque en modo privado lanza.</li>
+<li><code>retypePage()</code> — la animación de retecleo.</li>
+<li><code>collectTypingBlocks()</code> — qué bloques se teclean y cuáles no.</li>
+<li><code>stopRetyping()</code> — cancela una animación en vuelo y limpia sus rastros.</li>
+<li><code>motionAllowed()</code> — consulta <code>prefers-reduced-motion</code>.</li>
+<li><code>frame(instante)</code> — el callback de <code>requestAnimationFrame</code>, declarado dentro
+de <code>retypePage</code>.</li>
+</ul>
+<p>Todo queda publicado en <code>window.i18n</code> para que <code>main.js</code> pueda pedir un cambio
+de idioma o volver a teclear la página después de pintar contenido nuevo.</p>
+<h2 id="los-atributos-que-dirigen-la-sustitucion">Los atributos que dirigen la sustitución</h2>
+<p>Cinco atributos y una consulta más. Los cuatro primeros miran al diccionario; el
+quinto mira al bloque JSON de la propia página:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Atributo</th>
+<th>Qué sustituye</th>
+<th>Detalle</th>
+</tr>
+</thead><tbody><tr>
+<td><code>data-i18n=&quot;clave&quot;</code></td>
+<td>el <code>innerHTML</code></td>
+<td>Los valores pueden llevar marcado: <code>&lt;span&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;br&gt;</code></td>
+</tr>
+<tr>
+<td><code>data-i18n-aria=&quot;clave&quot;</code></td>
+<td>el <code>aria-label</code></td>
+<td>Para iconos y botones sin texto visible</td>
+</tr>
+<tr>
+<td><code>data-i18n-title=&quot;clave&quot;</code></td>
+<td>el <code>title</code></td>
+<td>El tooltip sigue al idioma elegido</td>
+</tr>
+<tr>
+<td><code>data-i18n-date</code></td>
+<td>el texto de un <code>&lt;time&gt;</code></td>
+<td>El <code>datetime</code> se queda en ISO y no se toca</td>
+</tr>
+<tr>
+<td><code>data-content-key=&quot;campo&quot;</code></td>
+<td>desde <code>pageTranslations</code></td>
+<td>El cuerpo de la página, no el diccionario</td>
+</tr>
+</tbody></table></div>
+<h3 id="data-content-key-y-data-content-language">data-content-key y data-content-language</h3>
+<p>La interfaz cabe en un diccionario; el cuerpo de un post o el texto de una página
+legal, no. Esos campos van en <code>pageTranslations</code> y se aplican por
+<code>data-content-key</code>. Cuando además el elemento lleva <code>data-content-language</code>, el
+contenido se trata como HTML y se ajusta el atributo <code>lang</code> del elemento, para
+que un lector de pantalla pronuncie el inglés como inglés aunque el documento
+declare <code>lang=&quot;es&quot;</code>.</p>
+<h3 id="data-i18n-date">data-i18n-date</h3>
+<p>Las fechas no se traducen: se formatean. <code>data-i18n-date</code> sobre un
+<code>&lt;time datetime=&quot;2026-03-14&quot;&gt;</code> pasa por <code>Intl.DateTimeFormat</code> con la locale
+<code>es-ES</code> o <code>en-US</code> según el idioma activo, y el <code>datetime</code> —el que leen los
+buscadores y las hojas de estilo— no cambia nunca.</p>
+<h2 id="deteccion-persistencia-y-varias-pestanas">Detección, persistencia y varias pestañas</h2>
+<pre data-lang="js"><code class="language-js">function detectDefaultLang() {
+  const saved = storageGet(&quot;lang&quot;);
+  if (saved &amp;&amp; dict[saved]) return saved;
+  const browserLang = (navigator.language || &quot;es&quot;).slice(0, 2).toLowerCase();
+  return dict[browserLang] ? browserLang : &quot;en&quot;;
+}</code></pre>
+<p>El orden es preferencia guardada, idioma del navegador e inglés como caída. La
+preferencia se guarda en <code>localStorage</code> con la clave <code>lang</code>, y un listener del
+evento <code>storage</code> hace que <strong>varias pestañas abiertas cambien a la vez</strong>: elegir
+inglés en una reescribe las demás sin recargarlas.</p>
+<p>Esa clave es la misma que usa esta documentación, y no es casualidad: el idioma
+elegido en la web se mantiene al entrar en <code>/Docs/</code> y al revés.</p>
+<h2 id="el-conmutador">El conmutador</h2>
+<h3 id="la-bandera-y-su-gesto">La bandera y su gesto</h3>
+<p>El botón <code>#langSwitch</code> lleva dibujadas una bandera española y una británica como
+patrones SVG, con su degradado, sus tres círculos y dos <code>&lt;use&gt;</code>, y muestra una u
+otra según <code>data-active</code>. Su <code>aria-label</code> viene de <code>aria.langSwitch</code> y anuncia el
+<strong>destino</strong>, no el estado: «Cambiar a inglés» cuando se está en español. Al lado,
+<code>#languageName</code> dice «Español» o «English» en texto.</p>
+<p>Al pulsarlo se añade la clase <code>is-switching</code> durante 760 ms, que dispara
+<code>@keyframes globe-spin</code> —el globo da una vuelta— y <code>globe-ring</code> —su anillo se
+expande y se apaga—. La clase se quita, se fuerza el reflujo leyendo
+<code>offsetWidth</code> y se vuelve a poner: sin ese paso, dos pulsaciones seguidas no
+reproducirían la animación.</p>
+<h3 id="el-retecleo">El retecleo</h3>
+<p>Cambiar de idioma no sustituye los textos en seco: los borra y los vuelve a
+teclear. Es la animación más característica del sitio y tiene sus propias
+cifras:</p>
+<ul>
+<li>Cada bloque empieza <strong>15 ms</strong> después del anterior, con un tope de <strong>380 ms</strong>
+para que una página con cien textos no tarde en arrancar.</li>
+<li>La velocidad va de <strong>3 a 13 ms por carácter</strong>, calculada como <code>900 / total</code> y
+acotada, así que un texto corto se lee como un tecleo y uno largo no se
+eterniza.</li>
+<li>Solo se teclean bloques de entre <strong>2 y 320 caracteres</strong>: menos de 2 no se nota
+y más de 320 tardaría segundos.</li>
+<li>Antes de vaciar un bloque se mide su altura y se reserva con <code>min-height</code>; si
+no, la página entera se encoge y vuelve a crecer mientras se teclea y quien
+leía pierde el sitio.</li>
+<li>Mientras dura, el bloque lleva <code>aria-busy=&quot;true&quot;</code>, que es lo que necesita un
+lector de pantalla para no leerlo a medias.</li>
+</ul>
+<div class="callout callout--important">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert"></use></svg>
+  <p class="callout__title">Importante</p>
+  <div class="callout__body">Tres guardas la desactivan: la primera aplicación de idioma nunca se anima,
+<code>prefers-reduced-motion: reduce</code> la apaga entera y una pestaña en segundo plano
+no teclea. Quedan fuera además <code>#typedRole</code>, que ya tiene su propio tecleo,
+<code>[data-content-language]</code>, <code>[aria-live]</code> —reteclear una región viva le grita
+cada carácter a quien escucha—, <code>.jg-loader</code>, <code>pre</code>, <code>code</code> y <code>textarea</code>.</div>
+</div>
+<h2 id="traducir-contenido-no-solo-interfaz">Traducir contenido, no solo interfaz</h2>
+<h3 id="el-blog">El blog</h3>
+<p>Cada post son dos archivos, <code>content/blog/&lt;slug&gt;.md</code> y <code>&lt;slug&gt;.en.md</code>, y el build
+no perdona que falte uno ni que se hayan separado:</p>
+<pre data-lang="js"><code class="language-js">if (![&quot;es&quot;, &quot;en&quot;].includes(post.lang)) throw new Error(`Unsupported blog language: ${post.lang}`);
+if (translations.es.date !== translations.en.date) throw new Error(`Translation dates differ: ${slug}`);</code></pre>
+<p>La segunda comprobación es la interesante: dos traducciones con fechas distintas
+producirían dos entradas en la lista del blog para el mismo post, y es un error
+que nadie vería mirando la página.</p>
+<h3 id="las-paginas-legales">Las páginas legales</h3>
+<p>Los textos legales son HTML completo y versionado en los dos idiomas:
+<code>terms.es.html</code> (13.216 bytes) con <code>terms.en.html</code> (12.288), y <code>privacy.es.html</code>
+(11.479) con <code>privacy.en.html</code> (10.760). Están narrados enteros en cada idioma en
+vez de traducidos frase a frase, y se aplican a todos los proyectos sin nombrar
+ninguno.</p>
+<h2 id="metadatos-y-buscadores">Metadatos y buscadores</h2>
+<p>Un cambio de idioma reescribe también lo que no se ve:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Qué</th>
+<th>De dónde sale</th>
+</tr>
+</thead><tbody><tr>
+<td><code>document.title</code></td>
+<td><code>meta.&lt;ruta&gt;.title</code></td>
+</tr>
+<tr>
+<td><code>description</code>, <code>og:description</code>, <code>twitter:description</code></td>
+<td><code>meta.&lt;ruta&gt;.description</code></td>
+</tr>
+<tr>
+<td><code>og:title</code> y <code>twitter:title</code></td>
+<td>el mismo título</td>
+</tr>
+<tr>
+<td><code>og:locale</code></td>
+<td><code>es_ES</code> o <code>en_US</code></td>
+</tr>
+<tr>
+<td>JSON-LD <code>person.description</code> e <code>person.inLanguage</code></td>
+<td>el bloque <code>#personStructuredData</code></td>
+</tr>
+</tbody></table></div>
+<p>Reescribir el dato estructurado es lo que hace que un resultado enriquecido
+coincida con lo que la página muestra después de cambiar de idioma.</p>
+<h2 id="lo-que-hereda-esta-documentacion">Lo que hereda esta documentación</h2>
+<p>El modelo se copió entero, con dos adaptaciones que vienen de ser un sitio de
+documentación y no un portfolio:</p>
+<div class="doc-table"><table><thead><tr>
+<th>Pieza</th>
+<th>En la web</th>
+<th>En esta documentación</th>
+</tr>
+</thead><tbody><tr>
+<td>Diccionario</td>
+<td>Dentro de <code>i18n.js</code>, 234 claves</td>
+<td>Un bloque <code>#uiStrings</code> por página, con claves derivadas del registro</td>
+</tr>
+<tr>
+<td>Cuerpo de la página</td>
+<td><code>pageTranslations</code></td>
+<td>Igual, más índice lateral, tiempo de lectura y enlace de edición</td>
+</tr>
+<tr>
+<td>Atributos</td>
+<td><code>data-i18n-title</code></td>
+<td><code>data-i18n-placeholder</code>, para el campo del buscador</td>
+</tr>
+<tr>
+<td>Clave guardada</td>
+<td><code>localStorage[&quot;lang&quot;]</code></td>
+<td>La misma, compartida entre los dos sitios</td>
+</tr>
+<tr>
+<td>Retecleo</td>
+<td>Sí</td>
+<td>Sí, portado con sus cifras</td>
+</tr>
+<tr>
+<td>Conmutador</td>
+<td>Globo con dos banderas</td>
+<td>El mismo globo y los mismos 760 ms</td>
+</tr>
+</tbody></table></div>
+<p>Esa última columna merece un matiz. El bloque no lleva solo los textos escritos a
+mano: <code>scripts/dict.mjs</code> une las 157 claves de <code>content/ui.mjs</code> con las que
+derivan del registro —el nombre, el lema, el resumen y el estado de cada
+proyecto, el título de cada guía y el título y la descripción de cada grupo—, y
+el bloque suma 237 claves. Así el índice lateral, las tarjetas y los filtros se
+escriben una sola vez en HTML y se traducen en el navegador como cualquier otro
+texto.</p>
+<p>La tercera fila es la única diferencia real de contrato: aquí ningún elemento
+necesita un <code>title</code> traducido —los seis que hay son nombres propios de proyecto—
+y en cambio el buscador necesita traducir su <code>placeholder</code>.</p>
+<p>Para editar los textos de la interfaz, el camino está en
+<a href="/Docs/website/content/">Editar el contenido</a>; para ver de dónde salen los datos que
+se traducen, en <a href="/Docs/website/architecture/">Arquitectura del sitio</a>.</p>
+<h2 id="las-pruebas-que-lo-vigilan">Las pruebas que lo vigilan</h2>
+<p>Ocho de las 35 pruebas de <code>tests/site.test.mjs</code> tratan solo de idiomas:</p>
+<ul>
+<li>Que el globo alterna el estado de la bandera con una etiqueta de destino
+accesible y persiste la elección.</li>
+<li>Que todas las etiquetas y metadatos generados tienen traducción en los dos
+idiomas.</li>
+<li>Que el perfil y los repositorios públicos se pintan de verdad <strong>y sobreviven al
+cambio de idioma</strong>.</li>
+<li>Que el blog traduce el artículo completo, las fechas, las descripciones de
+imagen y el SEO sin duplicar posts.</li>
+<li>Que los textos legales están narrados enteros y reflejados en los dos idiomas.</li>
+<li>Que las etiquetas accesibles de un README siguen el idioma elegido <strong>sin
+modificar el documento original</strong>.</li>
+<li>Que cambiar de idioma reteclea la página y respeta <code>prefers-reduced-motion</code>.</li>
+<li>Que el payload localizado de una página <strong>no puede cerrar su propio elemento
+<code>&lt;script&gt;</code> de JSON</strong>, que es la vía por la que un texto traducido rompería la
+página.</li>
+</ul>
+<div class="callout callout--tip">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles"></use></svg>
+  <p class="callout__title">Consejo</p>
+  <div class="callout__body">La última es la que conviene no olvidar al añadir claves: cualquier valor del
+diccionario acaba serializado dentro de un <code>&lt;script type=&quot;application/json&quot;&gt;</code>,
+así que una secuencia <code>&lt;/script&gt;</code> en un texto —aunque venga de un README—
+cerraría el bloque antes de tiempo.</div>
+</div>
+<p>Esta documentación aplica el mismo patrón y lo comprueba igual: sus pruebas
+cargan una página generada en <code>jsdom</code> con sus propios scripts y pulsan el
+conmutador de verdad. El recorrido completo del sitio está en
+<a href="/Docs/website/">Visión general</a>.</p>
+
+    </article>
+    <nav class="pager reveal" aria-label="paginación">
+    <a class="pager__link" href="/Docs/website/content/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.prev">Anterior</span></span>
+      <span class="pager__title" data-i18n="page.website.content">Editar el contenido</span>
+    </a>
+    <a class="pager__link pager__link--next" href="/Docs/website/architecture/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-right"></use></svg><span data-i18n="docs.next">Siguiente</span></span>
+      <span class="pager__title" data-i18n="page.website.architecture">Arquitectura del sitio</span>
+    </a>
+    </nav>
+    <p class="source-note reveal" data-i18n="docs.sourceNote">Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.</p>
+    </div>
+    <aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
+    <p class="toc__title" data-i18n="docs.tocTitle">En esta página</p>
+    <ol class="toc__list">
+      <li><a href="#un-html-dos-idiomas">Un HTML, dos idiomas</a></li>
+      <li><a href="#el-diccionario-234-claves">El diccionario: 234 claves</a></li>
+      <li><a class="toc__h3" href="#las-funciones-del-modulo">Las funciones del módulo</a></li>
+      <li><a href="#los-atributos-que-dirigen-la-sustitucion">Los atributos que dirigen la sustitución</a></li>
+      <li><a class="toc__h3" href="#data-content-key-y-data-content-language">data-content-key y data-content-language</a></li>
+      <li><a class="toc__h3" href="#data-i18n-date">data-i18n-date</a></li>
+      <li><a href="#deteccion-persistencia-y-varias-pestanas">Detección, persistencia y varias pestañas</a></li>
+      <li><a href="#el-conmutador">El conmutador</a></li>
+      <li><a class="toc__h3" href="#la-bandera-y-su-gesto">La bandera y su gesto</a></li>
+      <li><a class="toc__h3" href="#el-retecleo">El retecleo</a></li>
+      <li><a href="#traducir-contenido-no-solo-interfaz">Traducir contenido, no solo interfaz</a></li>
+      <li><a class="toc__h3" href="#el-blog">El blog</a></li>
+      <li><a class="toc__h3" href="#las-paginas-legales">Las páginas legales</a></li>
+      <li><a href="#metadatos-y-buscadores">Metadatos y buscadores</a></li>
+      <li><a href="#lo-que-hereda-esta-documentacion">Lo que hereda esta documentación</a></li>
+      <li><a href="#las-pruebas-que-lo-vigilan">Las pruebas que lo vigilan</a></li>
+    </ol>
+    <p class="toc__progress" aria-hidden="true"><span></span></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="https://jaime-gaming.github.io/" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-github"></use></svg></a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-youtube"></use></svg></a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-x"></use></svg></a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-discord"></use></svg></a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-mail"></use></svg></a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="/Docs/"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="/Docs/projects/"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="https://jaime-gaming.github.io/blog/"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="https://jaime-gaming.github.io/contact/"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="https://jaime-gaming.github.io/"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="/Docs/status/"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="https://jaime-gaming.github.io/terms/" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="https://jaime-gaming.github.io/privacy/" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-arrow"></use></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" hidden>
+  <div class="search-modal__backdrop" data-search-close></div>
+  <div class="search-modal__panel">
+    <h2 class="sr-only" id="searchModalTitle" data-i18n="search.dialogTitle">Buscar en la documentación</h2>
+    <div class="search-modal__head">
+      <span class="search-modal__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg></span>
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar en la documentación…" data-i18n-placeholder="search.placeholder" aria-describedby="searchModalHint" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-activedescendant="" />
+      <button class="search-modal__close" type="button" data-search-close aria-label="Cerrar búsqueda" data-i18n-aria="search.close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-close"></use></svg></button>
+    </div>
+    <div class="search-modal__hintrow">
+      <p class="search-modal__hint" id="searchModalHint" data-i18n="search.hint">Escribe para filtrar páginas y apartados</p>
+      <p class="search-modal__keys" id="searchKeys" aria-hidden="true">
+        <span class="keyhint"><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="search.kbdNavigate">navegar</span></span>
+        <span class="keyhint"><kbd>↵</kbd><span data-i18n="search.kbdOpen">abrir</span></span>
+        <span class="keyhint"><kbd>Esc</kbd><span data-i18n="search.kbdClose">cerrar</span></span>
+      </p>
+    </div>
+    <div class="search-modal__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" data-i18n-aria="search.resultsLabel"></div>
+  </div>
+</div>
+
+<script type="application/json" id="uiStrings">{"es":{"nav.home":"Inicio","nav.projects":"Proyectos","nav.search":"Buscar","nav.site":"Mi web","nav.blog":"Blog","nav.contact":"Contacto","nav.openMenu":"Abrir menú","nav.closeMenu":"Cerrar menú","aria.skipToContent":"Saltar al contenido","aria.homeLogo":"Jaime Gaming Docs — inicio","aria.mainNav":"Navegación principal","aria.backToTop":"Volver arriba","aria.langSwitch":"Español. Cambiar a inglés","aria.sidebar":"Índice de esta documentación","aria.toc":"En esta página","aria.openSidebar":"Abrir índice","aria.closeSidebar":"Cerrar índice","search.button":"Buscar","search.placeholder":"Buscar en la documentación…","search.hint":"Escribe para filtrar páginas y apartados","search.empty":"Sin resultados para","search.noQuery":"Prueba con «instalar», «comandos», «privacidad»…","search.results":"resultados","search.result":"resultado","search.close":"Cerrar búsqueda","search.scopeAll":"Toda la documentación","search.scopeProject":"Solo este proyecto","search.kbdNavigate":"navegar","search.kbdOpen":"abrir","search.kbdClose":"cerrar","search.dialogTitle":"Buscar en la documentación","search.resultsLabel":"Resultados de búsqueda","docs.eyebrow":"Documentación","docs.sidebarTitle":"En esta documentación","docs.tocTitle":"En esta página","docs.editOnGithub":"Editar esta página en GitHub","docs.sourceNote":"Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.","docs.updated":"Última revisión","docs.prev":"Anterior","docs.next":"Siguiente","docs.allProjects":"Todos los proyectos","docs.readTime":"min de lectura","docs.jumpTo":"Ir a","home.kicker":"DOCUMENTACIÓN","home.title":"Todos mis proyectos, \u003cspan class=\"hero__title-accent\">documentados\u003c/span>","home.subtitle":"Un solo sitio con la documentación de todo lo que construyo: reproductores, agentes, bots, juegos y webs. Guías de instalación, arquitectura, uso y referencia.","home.ctaPrimary":"Empezar a leer","home.ctaSecondary":"Ver todos los proyectos","home.stats.projects":"proyectos","home.stats.pages":"páginas","home.stats.languages":"idiomas","home.stats.updated":"actualizada","home.about.title":"Sobre esta documentación","home.about.sub":"Cómo está hecha y cómo se mantiene.","home.about.card.label":"CÓMO FUNCIONA","home.about.card.title":"Escrita a mano, generada con Node","home.about.card.text":"Cada página es un Markdown en content/docs/. El build las convierte en HTML estático con el mismo sistema, la misma paleta y las mismas animaciones que mi web principal.","home.about.card.stamp":"VER EL REPOSITORIO ↗","home.contribute.title":"¿Ves un error?","home.contribute.text":"Toda la documentación está en un repositorio público. Abre una issue o envía una pull request con la corrección.","home.contribute.issue":"Abrir una issue","home.contribute.pr":"Proponer un cambio","home.contribute.email":"Escribirme un correo","projects.title":"Proyectos","projects.sub":"Toda la documentación, proyecto por proyecto. Cada tarjeta enlaza a su guía completa.","projects.pages":"páginas","projects.openDocs":"Abrir documentación","projects.demo":"Probar","projects.code":"Código","projects.group.all":"Todos","callout.note":"Nota","callout.tip":"Consejo","callout.warning":"Aviso","callout.important":"Importante","callout.caution":"Precaución","code.copy":"Copiar","code.copied":"Copiado","footer.rights":"Todos los derechos reservados.","footer.mainSite":"Mi web","footer.tagline":"Juegos para navegador, aplicaciones web y vídeos.","footer.site":"Sitio","footer.siteAria":"Enlaces del sitio","footer.resources":"Recursos","footer.resourcesAria":"Recursos y enlaces externos","footer.status":"Estado del servicio","footer.email":"Correo","footer.terms":"Términos del servicio","footer.privacy":"Privacidad","footer.source":"Código fuente ↗","footer.legalAria":"Términos y privacidad","aria.socials":"Redes sociales","aria.footerLogo":"Jaime Gaming — inicio","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Correo electrónico","status.title":"Estado del servicio","status.sub":"Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.","status.note":"Datos del panel oficial de estado","status.open":"Abrir panel completo ↗","status.loading":"Consultando el estado…","status.unknown":"Estado no disponible","status.error":"No se pudo consultar el estado en directo. Puedes abrir el panel completo.","status.updated":"Actualizado el {date}","status.componentsAria":"Componentes del servicio","status.allOperational":"Todos los sistemas operativos","status.minorIssues":"Incidencias menores","status.majorIssues":"Incidencia grave","status.criticalIssues":"Incidencia crítica","status.maintenanceOverall":"Mantenimiento en curso","status.operational":"Operativo","status.degraded":"Rendimiento degradado","status.partial":"Interrupción parcial","status.major":"Interrupción grave","status.underMaintenance":"En mantenimiento","status.maintenanceTitle":"Mantenimiento programado","status.maintenanceBody":"Texto publicado en el panel de estado.","status.frameNotice":"El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.","status.loadFrame":"Cargar panel incrustado","status.frameTitle":"Panel de estado de Jaime Gaming","status.hint":"El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.","notFound.title":"Página no encontrada","notFound.sub":"Puede que el enlace esté roto o que esta guía se haya movido.","notFound.home":"Volver al inicio de la documentación","notFound.projects":"Ver todos los proyectos","home.guide.title":"Cómo están organizadas las guías","home.guide.sub":"Todas siguen la misma anatomía, para que sepas dónde buscar en cada proyecto.","home.guide.overview.num":"01","home.guide.overview.title":"Visión general","home.guide.overview.desc":"Qué es el proyecto, qué problema resuelve, en qué estado está y qué lo distingue. Es la puerta de entrada de cada guía.","home.guide.install.num":"02","home.guide.install.title":"Instalación","home.guide.install.desc":"Requisitos, comandos para ponerlo en marcha y la primera comprobación de que todo funciona.","home.guide.usage.num":"03","home.guide.usage.title":"Uso","home.guide.usage.desc":"El día a día: funciones, comandos, mecánicas o flujos de trabajo, con ejemplos concretos.","home.guide.deep.num":"04","home.guide.deep.title":"Cómo está hecho","home.guide.deep.desc":"Arquitectura, estructura de carpetas, decisiones técnicas y los límites conocidos del proyecto.","home.guide.reference.num":"05","home.guide.reference.title":"Referencia","home.guide.reference.desc":"Tablas de consulta: opciones, formatos de datos, modelos, plataformas o preguntas frecuentes.","home.about.text1":"Este sitio reúne en un mismo lugar la documentación de los siete proyectos que mantengo en GitHub. Cada guía está escrita a mano a partir del README y de los documentos del repositorio, y se revisa cuando el proyecto cambia.","home.about.text2":"Nada se genera automáticamente desde GitHub ni depende de servicios externos: el contenido vive en este repositorio como Markdown, se compila a HTML estático con Node y se publica en GitHub Pages. El buscador usa un índice que se crea en ese mismo build.","home.about.row.stack":"Generador","home.about.row.palette":"Paleta","home.about.row.fonts":"Tipografías","home.about.row.host":"Publicación","home.about.row.search":"Buscador","home.about.row.searchValue":"Índice estático, sin servicios externos","docs.otherProjects":"Otros proyectos","projects.empty":"No hay proyectos en esta categoría.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentación de todos los proyectos de Jaime Gaming: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID y su web personal.","meta.projects.title":"Proyectos — Docs de Jaime Gaming","meta.projects.description":"Índice de toda la documentación, agrupada por aplicaciones, juegos, bots y web.","proj.wave.name":"Wave","proj.wave.tagline":"Reproductor de música local-first para web, Android y Windows.","proj.wave.summary":"Un hogar para la música que ya tienes. Wave guarda tu colección en el dispositivo: sin cuenta, sin suscripción y sin subir audio a ningún servidor.","proj.wave.status":"0.1.0 · activa","page.wave.index":"Visión general","page.wave.install":"Instalación","page.wave.features":"Funciones y uso","page.wave.platforms":"Plataformas","page.wave.architecture":"Arquitectura","page.wave.privacy":"Privacidad y datos","page.wave.dev":"Desarrollo","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"Todos tus agentes de IA en un mismo sitio.","proj.jaigent.summary":"Un binario y diez proveedores. Los mismos tools en la terminal, en ChatGPT Web por MCP remoto, en Claude Desktop y en cualquier app que hable OpenAI. Con deshacer en cada escritura y tope de gasto.","proj.jaigent.status":"0.5.x · activa","page.jaigent.index":"Visión general","page.jaigent.install":"Instalación y claves","page.jaigent.cli":"Uso en la terminal","page.jaigent.models":"Modelos y proveedores","page.jaigent.mcp":"MCP y tu propia API","page.jaigent.extend":"Skills, plugins y horarios","page.jaigent.reference":"Referencia de tools","page.jaigent.security":"Seguridad","page.jaigent.dev":"Desarrollo","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.","proj.hellbot.summary":"Mantén al menos a una persona real en un canal de voz durante 160 horas seguidas. Si el canal se vacía y nadie vuelve en el periodo de gracia, la partida muere para siempre.","proj.hellbot.status":"producción · estable","page.hellbot.index":"Visión general","page.hellbot.rules":"Reglas del evento","page.hellbot.edge-cases":"Casos límite","page.hellbot.install":"Instalación y despliegue","page.hellbot.commands":"Comandos","page.hellbot.dashboard":"Dashboard en vivo","page.hellbot.architecture":"Arquitectura","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"Un número, infinitas posibilidades.","proj.rngdle-infinite.summary":"Tira un número entre 0 y 1.000.000 y descubre qué lo hace especial. Un incremental de navegador con EP, insignias, compañeros, skills, rebirth, prestige y rollback.","proj.rngdle-infinite.status":"jugable · activa","page.rngdle-infinite.index":"Visión general","page.rngdle-infinite.play":"Cómo se juega","page.rngdle-infinite.systems":"Sistemas y progresión","page.rngdle-infinite.save":"Partida y sincronización","page.rngdle-infinite.faq":"Preguntas frecuentes","page.rngdle-infinite.dev":"Desarrollo","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Tu espacio personal: un diario minimalista y 100 % local.","proj.daily-diary.summary":"Sin backend, sin cuentas, sin IA y sin APIs externas. Los resúmenes, estadísticas y tendencias se calculan en tu navegador con reglas y plantillas de texto.","proj.daily-diary.status":"completo · local","page.daily-diary.index":"Visión general","page.daily-diary.install":"Instalación y uso","page.daily-diary.areas":"Las cinco áreas","page.daily-diary.data":"Datos y privacidad","page.daily-diary.dev":"Estructura y desarrollo","proj.void.name":"VOID","proj.void.tagline":"Michael Burns desapareció el año pasado. ¿Quieres entrar?","proj.void.summary":"Un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece. Interfaz CRT de alto contraste, en español e inglés.","proj.void.status":"beta · en desarrollo","page.void.index":"Visión general","page.void.install":"Instalación y juego","page.void.world":"El mundo de VOID Corp","page.void.engine":"Las tripas del archivo","page.void.faq":"Avisos y preguntas","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"El sitio personal que da origen a esta documentación.","proj.website.summary":"Portfolio oscuro y bilingüe generado con Node: proyectos sincronizados desde GitHub, calendario de contribuciones, presencia de Discord y blog desde Markdown.","proj.website.status":"publicada · activa","page.website.index":"Visión general","page.website.build":"Build y preview","page.website.content":"Editar el contenido","page.website.i18n":"Los dos idiomas","page.website.architecture":"Arquitectura del sitio","group.apps.title":"Aplicaciones y herramientas","group.apps.sub":"Software que resuelve algo concreto: música, agentes y organización personal.","group.games.title":"Juegos","group.games.sub":"Del incremental de navegador al terror psicológico.","group.bots.title":"Bots y eventos","group.bots.sub":"Automatización en directo para comunidades.","group.web.title":"Web","group.web.sub":"Los sitios que publico, incluido el que estás leyendo."},"en":{"nav.home":"Home","nav.projects":"Projects","nav.search":"Search","nav.site":"My site","nav.blog":"Blog","nav.contact":"Contact","nav.openMenu":"Open menu","nav.closeMenu":"Close menu","aria.skipToContent":"Skip to content","aria.homeLogo":"Jaime Gaming Docs — home","aria.mainNav":"Main navigation","aria.backToTop":"Back to top","aria.langSwitch":"English. Switch to Spanish","aria.sidebar":"Index of this documentation","aria.toc":"On this page","aria.openSidebar":"Open index","aria.closeSidebar":"Close index","search.button":"Search","search.placeholder":"Search the docs…","search.hint":"Type to filter pages and sections","search.empty":"No results for","search.noQuery":"Try “install”, “commands”, “privacy”…","search.results":"results","search.result":"result","search.close":"Close search","search.scopeAll":"All documentation","search.scopeProject":"This project only","search.kbdNavigate":"navigate","search.kbdOpen":"open","search.kbdClose":"close","search.dialogTitle":"Search the documentation","search.resultsLabel":"Search results","docs.eyebrow":"Documentation","docs.sidebarTitle":"In this documentation","docs.tocTitle":"On this page","docs.editOnGithub":"Edit this page on GitHub","docs.sourceNote":"Documentation written by hand for this site, based on the repository's README and docs.","docs.updated":"Last reviewed","docs.prev":"Previous","docs.next":"Next","docs.allProjects":"All projects","docs.readTime":"min read","docs.jumpTo":"Go to","home.kicker":"DOCUMENTATION","home.title":"All my projects, \u003cspan class=\"hero__title-accent\">documented\u003c/span>","home.subtitle":"One single site with the documentation of everything I build: players, agents, bots, games and websites. Install guides, architecture, usage and reference.","home.ctaPrimary":"Start reading","home.ctaSecondary":"See all projects","home.stats.projects":"projects","home.stats.pages":"pages","home.stats.languages":"languages","home.stats.updated":"updated","home.about.title":"About these docs","home.about.sub":"How they are made and how they are kept up to date.","home.about.card.label":"HOW IT WORKS","home.about.card.title":"Written by hand, generated with Node","home.about.card.text":"Every page is a Markdown file in content/docs/. The build turns them into static HTML with the same system, the same palette and the same animations as my main website.","home.about.card.stamp":"SEE THE REPOSITORY ↗","home.contribute.title":"Found a mistake?","home.contribute.text":"All of this documentation lives in a public repository. Open an issue or send a pull request with the fix.","home.contribute.issue":"Open an issue","home.contribute.pr":"Propose a change","home.contribute.email":"Send me an email","projects.title":"Projects","projects.sub":"All the documentation, project by project. Each card links to its complete guide.","projects.pages":"pages","projects.openDocs":"Open documentation","projects.demo":"Try it","projects.code":"Code","projects.group.all":"All","callout.note":"Note","callout.tip":"Tip","callout.warning":"Warning","callout.important":"Important","callout.caution":"Caution","code.copy":"Copy","code.copied":"Copied","footer.rights":"All rights reserved.","footer.mainSite":"My site","footer.tagline":"Browser games, web applications and videos.","footer.site":"Site","footer.siteAria":"Site links","footer.resources":"Resources","footer.resourcesAria":"Resources and external links","footer.status":"Service status","footer.email":"Email","footer.terms":"Terms of Service","footer.privacy":"Privacy","footer.source":"Source code ↗","footer.legalAria":"Terms and privacy","aria.socials":"Social links","aria.footerLogo":"Jaime Gaming — home","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Email","status.title":"Service status","status.sub":"Live status of the website, documentation and projects, from the official incident.io panel.","status.note":"Data from the official status panel","status.open":"Open full status page ↗","status.loading":"Checking status…","status.unknown":"Status unavailable","status.error":"Couldn't fetch the live status. You can open the full status page.","status.updated":"Updated {date}","status.componentsAria":"Service components","status.allOperational":"All systems operational","status.minorIssues":"Minor issues","status.majorIssues":"Major incident","status.criticalIssues":"Critical incident","status.maintenanceOverall":"Maintenance in progress","status.operational":"Operational","status.degraded":"Degraded performance","status.partial":"Partial outage","status.major":"Major outage","status.underMaintenance":"Under maintenance","status.maintenanceTitle":"Scheduled maintenance","status.maintenanceBody":"Text published on the status page.","status.frameNotice":"The full panel belongs to incident.io and is only loaded if you ask for it. Once loaded, it may use its own cookies.","status.loadFrame":"Load embedded panel","status.frameTitle":"Jaime Gaming status page","status.hint":"The summary refreshes when you open this page. If the embedded panel doesn’t appear, open it with the button above.","notFound.title":"Page not found","notFound.sub":"The link may be broken or this guide may have moved.","notFound.home":"Back to the docs home","notFound.projects":"See all projects","home.guide.title":"How the guides are organised","home.guide.sub":"They all follow the same anatomy, so you know where to look in every project.","home.guide.overview.num":"01","home.guide.overview.title":"Overview","home.guide.overview.desc":"What the project is, which problem it solves, what state it is in and what sets it apart. It is the entry page of every guide.","home.guide.install.num":"02","home.guide.install.title":"Installation","home.guide.install.desc":"Requirements, the commands to get it running and the first check that everything works.","home.guide.usage.num":"03","home.guide.usage.title":"Usage","home.guide.usage.desc":"Day to day: features, commands, mechanics or workflows, with concrete examples.","home.guide.deep.num":"04","home.guide.deep.title":"How it is built","home.guide.deep.desc":"Architecture, folder structure, technical decisions and the project's known limits.","home.guide.reference.num":"05","home.guide.reference.title":"Reference","home.guide.reference.desc":"Lookup tables: options, data formats, models, platforms or frequently asked questions.","home.about.text1":"This site gathers, in one single place, the documentation of the seven projects I maintain on GitHub. Every guide is written by hand from the repository's README and docs, and reviewed when the project changes.","home.about.text2":"Nothing is generated automatically from GitHub and nothing depends on external services: the content lives in this repository as Markdown, it is compiled to static HTML with Node and published on GitHub Pages. Search uses an index created in that same build.","home.about.row.stack":"Generator","home.about.row.palette":"Palette","home.about.row.fonts":"Fonts","home.about.row.host":"Publishing","home.about.row.search":"Search","home.about.row.searchValue":"Static index, no external services","docs.otherProjects":"Other projects","projects.empty":"There are no projects in this category.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentation for all of Jaime Gaming's projects: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID and his personal website.","meta.projects.title":"Projects — Jaime Gaming Docs","meta.projects.description":"Index of all the documentation, grouped by apps, games, bots and web.","proj.wave.name":"Wave","proj.wave.tagline":"A local-first music player for web, Android and Windows.","proj.wave.summary":"A home for the music you already own. Wave keeps your collection on the device: no account, no subscription and no audio uploaded to any server.","proj.wave.status":"0.1.0 · active","page.wave.index":"Overview","page.wave.install":"Installation","page.wave.features":"Features & usage","page.wave.platforms":"Platforms","page.wave.architecture":"Architecture","page.wave.privacy":"Privacy & data","page.wave.dev":"Development","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"All your agents in one place.","proj.jaigent.summary":"One binary, ten providers. The same tools in the terminal, in ChatGPT Web over remote MCP, in Claude Desktop and in any app that speaks OpenAI. With undo on every write and a hard spend cap.","proj.jaigent.status":"0.5.x · active","page.jaigent.index":"Overview","page.jaigent.install":"Install & API keys","page.jaigent.cli":"Using the CLI","page.jaigent.models":"Models & providers","page.jaigent.mcp":"MCP & your own API","page.jaigent.extend":"Skills, plugins & schedules","page.jaigent.reference":"Tools reference","page.jaigent.security":"Security","page.jaigent.dev":"Development","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"The Discord bot that runs the Welcome to Hell endurance event.","proj.hellbot.summary":"Keep at least one real human in a single voice channel for 160 consecutive hours. If that channel empties and nobody returns within the grace period, the run is dead permanently.","proj.hellbot.status":"production · stable","page.hellbot.index":"Overview","page.hellbot.rules":"Event rules","page.hellbot.edge-cases":"Edge cases","page.hellbot.install":"Install & deploy","page.hellbot.commands":"Commands","page.hellbot.dashboard":"Live dashboard","page.hellbot.architecture":"Architecture","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"One number, infinite possibilities.","proj.rngdle-infinite.summary":"Roll a number from 0 to 1,000,000 and find out what makes it special. A browser incremental with EP, badges, companions, skills, rebirth, prestige and rollback.","proj.rngdle-infinite.status":"playable · active","page.rngdle-infinite.index":"Overview","page.rngdle-infinite.play":"How to play","page.rngdle-infinite.systems":"Systems & progression","page.rngdle-infinite.save":"Save & sync","page.rngdle-infinite.faq":"FAQ","page.rngdle-infinite.dev":"Development","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Your personal space: a minimalist, 100% local diary.","proj.daily-diary.summary":"No backend, no accounts, no AI and no external APIs. Summaries, statistics and trends are computed in your browser with rules and text templates.","proj.daily-diary.status":"complete · local","page.daily-diary.index":"Overview","page.daily-diary.install":"Install & run","page.daily-diary.areas":"The five areas","page.daily-diary.data":"Data & privacy","page.daily-diary.dev":"Structure & development","proj.void.name":"VOID","proj.void.tagline":"Michael Burns disappeared last year. Would you come in?","proj.void.summary":"A psychological game set in a mysterious corporation where everyone and everything disappears. High-contrast CRT interface, in Spanish and English.","proj.void.status":"beta · in development","page.void.index":"Overview","page.void.install":"Install & play","page.void.world":"The VOID Corp world","page.void.engine":"Inside the single file","page.void.faq":"Warnings & FAQ","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"The personal site this documentation is built from.","proj.website.summary":"Dark, bilingual portfolio generated with Node: projects synced from GitHub, contributions calendar, Discord presence and a Markdown blog.","proj.website.status":"published · active","page.website.index":"Overview","page.website.build":"Build & preview","page.website.content":"Editing content","page.website.i18n":"The two languages","page.website.architecture":"Site architecture","group.apps.title":"Apps & tools","group.apps.sub":"Software that solves something concrete: music, agents and personal organisation.","group.games.title":"Games","group.games.sub":"From the browser incremental to psychological horror.","group.bots.title":"Bots & events","group.bots.sub":"Live automation for communities.","group.web.title":"Web","group.web.sub":"The sites I publish, including the one you are reading."}}</script>
+<script type="application/json" id="pageTranslations">{"es":{"title":"Los dos idiomas · jaime-gaming.github.io — Docs de Jaime Gaming","description":"El sistema de dos idiomas de la web: el diccionario de 234 claves, los atributos que dirigen la sustitución, la detección, el conmutador y el retecleo.","fields":{"body":"\u003ch1 id=\"los-dos-idiomas\">Los dos idiomas\u003c/h1>\n\u003cp>La web está entera en español y en inglés, y no son dos sitios ni dos rutas: es\nun solo HTML que se reescribe en el navegador. Esta página recorre el mecanismo\nde punta a punta —el diccionario, los atributos, la detección, el conmutador y la\nanimación de retecleo— y termina en lo que esta documentación hereda de él.\u003c/p>\n\u003ch2 id=\"un-html-dos-idiomas\">Un HTML, dos idiomas\u003c/h2>\n\u003cp>El HTML se sirve siempre en español. Los textos en inglés no viven en otra\ncarpeta ni bajo un prefijo \u003ccode>/en/\u003c/code>: viajan dentro de la misma página y se aplican\ncuando alguien pulsa el conmutador.\u003c/p>\n\u003cp>Dos sitios los transportan:\u003c/p>\n\u003col>\n\u003cli>\u003cstrong>\u003ccode>assets/js/i18n.js\u003c/code>\u003c/strong> — 38.251 bytes y 674 líneas con el diccionario \u003ccode>dict\u003c/code>\nde toda la interfaz.\u003c/li>\n\u003cli>\u003cstrong>\u003ccode>&lt;script type=&quot;application/json&quot; id=&quot;pageTranslations&quot;&gt;\u003c/code>\u003c/strong> — los campos\npropios de cada página, que genera el build: título, descripción, cuerpo y\nfecha.\u003c/li>\n\u003c/ol>\n\u003cp>La consecuencia práctica es que hay \u003cstrong>una sola URL por página\u003c/strong>, un solo\n\u003ccode>canonical\u003c/code> y un solo \u003ccode>sitemap.xml\u003c/code>. El idioma es un estado del navegador y no\nuna dirección, así que no existe contenido duplicado que mantener ni enlaces que\nse crucen entre versiones.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Nota\u003c/p>\n  \u003cdiv class=\"callout__body\">El precio es que un rastreador que no ejecute JavaScript ve la versión en\nespañol. Se compensa reescribiendo los metadatos al cambiar de idioma y no\ndeclarando \u003ccode>hreflang\u003c/code>: no hay dos documentos que relacionar entre sí.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"el-diccionario-234-claves\">El diccionario: 234 claves\u003c/h2>\n\u003cp>\u003ccode>dict\u003c/code> tiene dos ramas, \u003ccode>es\u003c/code> y \u003ccode>en\u003c/code>, con \u003cstrong>exactamente las mismas 234 claves\u003c/strong>.\nSe agrupan por prefijo, y los diez más poblados dicen dónde está el peso del\nsitio:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Prefijo\u003c/th>\n\u003cth>Claves\u003c/th>\n\u003cth>De qué son\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>github.*\u003c/code>\u003c/td>\n\u003ctd>52\u003c/td>\n\u003ctd>Calendario de contribuciones, sincronización y sus errores\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>contact.*\u003c/code>\u003c/td>\n\u003ctd>27\u003c/td>\n\u003ctd>Acceso por correo, copiar al portapapeles y redes\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>status.*\u003c/code>\u003c/td>\n\u003ctd>25\u003c/td>\n\u003ctd>La página de estado y el panel de incident.io\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>meta.*\u003c/code>\u003c/td>\n\u003ctd>16\u003c/td>\n\u003ctd>Título y descripción de cada página, por ruta\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>project.*\u003c/code>\u003c/td>\n\u003ctd>14\u003c/td>\n\u003ctd>Ficha de proyecto: estrellas, forks, demo y fallos de carga\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>footer.*\u003c/code>\u003c/td>\n\u003ctd>12\u003c/td>\n\u003ctd>Pie, columnas de enlaces y aviso legal\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hero.*\u003c/code>\u003c/td>\n\u003ctd>11\u003c/td>\n\u003ctd>Portada: titular, llamadas a la acción y línea de actividad\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>about.*\u003c/code>\u003c/td>\n\u003ctd>10\u003c/td>\n\u003ctd>Sección «sobre mí» y su tarjeta\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>discord.*\u003c/code>\u003c/td>\n\u003ctd>10\u003c/td>\n\u003ctd>Presencia en Discord y sus estados\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>aria.*\u003c/code>\u003c/td>\n\u003ctd>8\u003c/td>\n\u003ctd>Etiquetas accesibles sin texto visible\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Los once prefijos restantes —\u003ccode>skills\u003c/code>, \u003ccode>nav\u003c/code>, \u003ccode>projects\u003c/code>, \u003ccode>social\u003c/code>, \u003ccode>blog\u003c/code>,\n\u003ccode>legal\u003c/code>, \u003ccode>profile\u003c/code>, \u003ccode>notFound\u003c/code>, \u003ccode>projectsPage\u003c/code>, \u003ccode>projectsTeaser\u003c/code> y \u003ccode>readme\u003c/code>—\nsuman las otras 49 claves.\u003c/p>\n\u003ch3 id=\"las-funciones-del-modulo\">Las funciones del módulo\u003c/h3>\n\u003cp>Ocho funciones declaradas más el bucle de animación, que vive dentro de una de\nellas:\u003c/p>\n\u003cul>\n\u003cli>\u003ccode>applyLang(lang, { persist, animate })\u003c/code> — aplica un idioma a toda la página y\navisa al resto del sitio.\u003c/li>\n\u003cli>\u003ccode>detectDefaultLang()\u003c/code> — decide con qué idioma se abre la página.\u003c/li>\n\u003cli>\u003ccode>storageGet(clave)\u003c/code> y \u003ccode>storageSet(clave, valor)\u003c/code> — \u003ccode>localStorage\u003c/code> envuelto en\n\u003ccode>try/catch\u003c/code>, porque en modo privado lanza.\u003c/li>\n\u003cli>\u003ccode>retypePage()\u003c/code> — la animación de retecleo.\u003c/li>\n\u003cli>\u003ccode>collectTypingBlocks()\u003c/code> — qué bloques se teclean y cuáles no.\u003c/li>\n\u003cli>\u003ccode>stopRetyping()\u003c/code> — cancela una animación en vuelo y limpia sus rastros.\u003c/li>\n\u003cli>\u003ccode>motionAllowed()\u003c/code> — consulta \u003ccode>prefers-reduced-motion\u003c/code>.\u003c/li>\n\u003cli>\u003ccode>frame(instante)\u003c/code> — el callback de \u003ccode>requestAnimationFrame\u003c/code>, declarado dentro\nde \u003ccode>retypePage\u003c/code>.\u003c/li>\n\u003c/ul>\n\u003cp>Todo queda publicado en \u003ccode>window.i18n\u003c/code> para que \u003ccode>main.js\u003c/code> pueda pedir un cambio\nde idioma o volver a teclear la página después de pintar contenido nuevo.\u003c/p>\n\u003ch2 id=\"los-atributos-que-dirigen-la-sustitucion\">Los atributos que dirigen la sustitución\u003c/h2>\n\u003cp>Cinco atributos y una consulta más. Los cuatro primeros miran al diccionario; el\nquinto mira al bloque JSON de la propia página:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Atributo\u003c/th>\n\u003cth>Qué sustituye\u003c/th>\n\u003cth>Detalle\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>data-i18n=&quot;clave&quot;\u003c/code>\u003c/td>\n\u003ctd>el \u003ccode>innerHTML\u003c/code>\u003c/td>\n\u003ctd>Los valores pueden llevar marcado: \u003ccode>&lt;span&gt;\u003c/code>, \u003ccode>&lt;strong&gt;\u003c/code>, \u003ccode>&lt;br&gt;\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>data-i18n-aria=&quot;clave&quot;\u003c/code>\u003c/td>\n\u003ctd>el \u003ccode>aria-label\u003c/code>\u003c/td>\n\u003ctd>Para iconos y botones sin texto visible\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>data-i18n-title=&quot;clave&quot;\u003c/code>\u003c/td>\n\u003ctd>el \u003ccode>title\u003c/code>\u003c/td>\n\u003ctd>El tooltip sigue al idioma elegido\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>data-i18n-date\u003c/code>\u003c/td>\n\u003ctd>el texto de un \u003ccode>&lt;time&gt;\u003c/code>\u003c/td>\n\u003ctd>El \u003ccode>datetime\u003c/code> se queda en ISO y no se toca\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>data-content-key=&quot;campo&quot;\u003c/code>\u003c/td>\n\u003ctd>desde \u003ccode>pageTranslations\u003c/code>\u003c/td>\n\u003ctd>El cuerpo de la página, no el diccionario\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"data-content-key-y-data-content-language\">data-content-key y data-content-language\u003c/h3>\n\u003cp>La interfaz cabe en un diccionario; el cuerpo de un post o el texto de una página\nlegal, no. Esos campos van en \u003ccode>pageTranslations\u003c/code> y se aplican por\n\u003ccode>data-content-key\u003c/code>. Cuando además el elemento lleva \u003ccode>data-content-language\u003c/code>, el\ncontenido se trata como HTML y se ajusta el atributo \u003ccode>lang\u003c/code> del elemento, para\nque un lector de pantalla pronuncie el inglés como inglés aunque el documento\ndeclare \u003ccode>lang=&quot;es&quot;\u003c/code>.\u003c/p>\n\u003ch3 id=\"data-i18n-date\">data-i18n-date\u003c/h3>\n\u003cp>Las fechas no se traducen: se formatean. \u003ccode>data-i18n-date\u003c/code> sobre un\n\u003ccode>&lt;time datetime=&quot;2026-03-14&quot;&gt;\u003c/code> pasa por \u003ccode>Intl.DateTimeFormat\u003c/code> con la locale\n\u003ccode>es-ES\u003c/code> o \u003ccode>en-US\u003c/code> según el idioma activo, y el \u003ccode>datetime\u003c/code> —el que leen los\nbuscadores y las hojas de estilo— no cambia nunca.\u003c/p>\n\u003ch2 id=\"deteccion-persistencia-y-varias-pestanas\">Detección, persistencia y varias pestañas\u003c/h2>\n\u003cpre data-lang=\"js\">\u003ccode class=\"language-js\">function detectDefaultLang() {\n  const saved = storageGet(&quot;lang&quot;);\n  if (saved &amp;&amp; dict[saved]) return saved;\n  const browserLang = (navigator.language || &quot;es&quot;).slice(0, 2).toLowerCase();\n  return dict[browserLang] ? browserLang : &quot;en&quot;;\n}\u003c/code>\u003c/pre>\n\u003cp>El orden es preferencia guardada, idioma del navegador e inglés como caída. La\npreferencia se guarda en \u003ccode>localStorage\u003c/code> con la clave \u003ccode>lang\u003c/code>, y un listener del\nevento \u003ccode>storage\u003c/code> hace que \u003cstrong>varias pestañas abiertas cambien a la vez\u003c/strong>: elegir\ninglés en una reescribe las demás sin recargarlas.\u003c/p>\n\u003cp>Esa clave es la misma que usa esta documentación, y no es casualidad: el idioma\nelegido en la web se mantiene al entrar en \u003ccode>/Docs/\u003c/code> y al revés.\u003c/p>\n\u003ch2 id=\"el-conmutador\">El conmutador\u003c/h2>\n\u003ch3 id=\"la-bandera-y-su-gesto\">La bandera y su gesto\u003c/h3>\n\u003cp>El botón \u003ccode>#langSwitch\u003c/code> lleva dibujadas una bandera española y una británica como\npatrones SVG, con su degradado, sus tres círculos y dos \u003ccode>&lt;use&gt;\u003c/code>, y muestra una u\notra según \u003ccode>data-active\u003c/code>. Su \u003ccode>aria-label\u003c/code> viene de \u003ccode>aria.langSwitch\u003c/code> y anuncia el\n\u003cstrong>destino\u003c/strong>, no el estado: «Cambiar a inglés» cuando se está en español. Al lado,\n\u003ccode>#languageName\u003c/code> dice «Español» o «English» en texto.\u003c/p>\n\u003cp>Al pulsarlo se añade la clase \u003ccode>is-switching\u003c/code> durante 760 ms, que dispara\n\u003ccode>@keyframes globe-spin\u003c/code> —el globo da una vuelta— y \u003ccode>globe-ring\u003c/code> —su anillo se\nexpande y se apaga—. La clase se quita, se fuerza el reflujo leyendo\n\u003ccode>offsetWidth\u003c/code> y se vuelve a poner: sin ese paso, dos pulsaciones seguidas no\nreproducirían la animación.\u003c/p>\n\u003ch3 id=\"el-retecleo\">El retecleo\u003c/h3>\n\u003cp>Cambiar de idioma no sustituye los textos en seco: los borra y los vuelve a\nteclear. Es la animación más característica del sitio y tiene sus propias\ncifras:\u003c/p>\n\u003cul>\n\u003cli>Cada bloque empieza \u003cstrong>15 ms\u003c/strong> después del anterior, con un tope de \u003cstrong>380 ms\u003c/strong>\npara que una página con cien textos no tarde en arrancar.\u003c/li>\n\u003cli>La velocidad va de \u003cstrong>3 a 13 ms por carácter\u003c/strong>, calculada como \u003ccode>900 / total\u003c/code> y\nacotada, así que un texto corto se lee como un tecleo y uno largo no se\neterniza.\u003c/li>\n\u003cli>Solo se teclean bloques de entre \u003cstrong>2 y 320 caracteres\u003c/strong>: menos de 2 no se nota\ny más de 320 tardaría segundos.\u003c/li>\n\u003cli>Antes de vaciar un bloque se mide su altura y se reserva con \u003ccode>min-height\u003c/code>; si\nno, la página entera se encoge y vuelve a crecer mientras se teclea y quien\nleía pierde el sitio.\u003c/li>\n\u003cli>Mientras dura, el bloque lleva \u003ccode>aria-busy=&quot;true&quot;\u003c/code>, que es lo que necesita un\nlector de pantalla para no leerlo a medias.\u003c/li>\n\u003c/ul>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Importante\u003c/p>\n  \u003cdiv class=\"callout__body\">Tres guardas la desactivan: la primera aplicación de idioma nunca se anima,\n\u003ccode>prefers-reduced-motion: reduce\u003c/code> la apaga entera y una pestaña en segundo plano\nno teclea. Quedan fuera además \u003ccode>#typedRole\u003c/code>, que ya tiene su propio tecleo,\n\u003ccode>[data-content-language]\u003c/code>, \u003ccode>[aria-live]\u003c/code> —reteclear una región viva le grita\ncada carácter a quien escucha—, \u003ccode>.jg-loader\u003c/code>, \u003ccode>pre\u003c/code>, \u003ccode>code\u003c/code> y \u003ccode>textarea\u003c/code>.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"traducir-contenido-no-solo-interfaz\">Traducir contenido, no solo interfaz\u003c/h2>\n\u003ch3 id=\"el-blog\">El blog\u003c/h3>\n\u003cp>Cada post son dos archivos, \u003ccode>content/blog/&lt;slug&gt;.md\u003c/code> y \u003ccode>&lt;slug&gt;.en.md\u003c/code>, y el build\nno perdona que falte uno ni que se hayan separado:\u003c/p>\n\u003cpre data-lang=\"js\">\u003ccode class=\"language-js\">if (![&quot;es&quot;, &quot;en&quot;].includes(post.lang)) throw new Error(`Unsupported blog language: ${post.lang}`);\nif (translations.es.date !== translations.en.date) throw new Error(`Translation dates differ: ${slug}`);\u003c/code>\u003c/pre>\n\u003cp>La segunda comprobación es la interesante: dos traducciones con fechas distintas\nproducirían dos entradas en la lista del blog para el mismo post, y es un error\nque nadie vería mirando la página.\u003c/p>\n\u003ch3 id=\"las-paginas-legales\">Las páginas legales\u003c/h3>\n\u003cp>Los textos legales son HTML completo y versionado en los dos idiomas:\n\u003ccode>terms.es.html\u003c/code> (13.216 bytes) con \u003ccode>terms.en.html\u003c/code> (12.288), y \u003ccode>privacy.es.html\u003c/code>\n(11.479) con \u003ccode>privacy.en.html\u003c/code> (10.760). Están narrados enteros en cada idioma en\nvez de traducidos frase a frase, y se aplican a todos los proyectos sin nombrar\nninguno.\u003c/p>\n\u003ch2 id=\"metadatos-y-buscadores\">Metadatos y buscadores\u003c/h2>\n\u003cp>Un cambio de idioma reescribe también lo que no se ve:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Qué\u003c/th>\n\u003cth>De dónde sale\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>document.title\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>meta.&lt;ruta&gt;.title\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>description\u003c/code>, \u003ccode>og:description\u003c/code>, \u003ccode>twitter:description\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>meta.&lt;ruta&gt;.description\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>og:title\u003c/code> y \u003ccode>twitter:title\u003c/code>\u003c/td>\n\u003ctd>el mismo título\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>og:locale\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>es_ES\u003c/code> o \u003ccode>en_US\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>JSON-LD \u003ccode>person.description\u003c/code> e \u003ccode>person.inLanguage\u003c/code>\u003c/td>\n\u003ctd>el bloque \u003ccode>#personStructuredData\u003c/code>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Reescribir el dato estructurado es lo que hace que un resultado enriquecido\ncoincida con lo que la página muestra después de cambiar de idioma.\u003c/p>\n\u003ch2 id=\"lo-que-hereda-esta-documentacion\">Lo que hereda esta documentación\u003c/h2>\n\u003cp>El modelo se copió entero, con dos adaptaciones que vienen de ser un sitio de\ndocumentación y no un portfolio:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Pieza\u003c/th>\n\u003cth>En la web\u003c/th>\n\u003cth>En esta documentación\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Diccionario\u003c/td>\n\u003ctd>Dentro de \u003ccode>i18n.js\u003c/code>, 234 claves\u003c/td>\n\u003ctd>Un bloque \u003ccode>#uiStrings\u003c/code> por página, con claves derivadas del registro\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Cuerpo de la página\u003c/td>\n\u003ctd>\u003ccode>pageTranslations\u003c/code>\u003c/td>\n\u003ctd>Igual, más índice lateral, tiempo de lectura y enlace de edición\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Atributos\u003c/td>\n\u003ctd>\u003ccode>data-i18n-title\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>data-i18n-placeholder\u003c/code>, para el campo del buscador\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Clave guardada\u003c/td>\n\u003ctd>\u003ccode>localStorage[&quot;lang&quot;]\u003c/code>\u003c/td>\n\u003ctd>La misma, compartida entre los dos sitios\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Retecleo\u003c/td>\n\u003ctd>Sí\u003c/td>\n\u003ctd>Sí, portado con sus cifras\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Conmutador\u003c/td>\n\u003ctd>Globo con dos banderas\u003c/td>\n\u003ctd>El mismo globo y los mismos 760 ms\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Esa última columna merece un matiz. El bloque no lleva solo los textos escritos a\nmano: \u003ccode>scripts/dict.mjs\u003c/code> une las 157 claves de \u003ccode>content/ui.mjs\u003c/code> con las que\nderivan del registro —el nombre, el lema, el resumen y el estado de cada\nproyecto, el título de cada guía y el título y la descripción de cada grupo—, y\nel bloque suma 237 claves. Así el índice lateral, las tarjetas y los filtros se\nescriben una sola vez en HTML y se traducen en el navegador como cualquier otro\ntexto.\u003c/p>\n\u003cp>La tercera fila es la única diferencia real de contrato: aquí ningún elemento\nnecesita un \u003ccode>title\u003c/code> traducido —los seis que hay son nombres propios de proyecto—\ny en cambio el buscador necesita traducir su \u003ccode>placeholder\u003c/code>.\u003c/p>\n\u003cp>Para editar los textos de la interfaz, el camino está en\n\u003ca href=\"/Docs/website/content/\">Editar el contenido\u003c/a>; para ver de dónde salen los datos que\nse traducen, en \u003ca href=\"/Docs/website/architecture/\">Arquitectura del sitio\u003c/a>.\u003c/p>\n\u003ch2 id=\"las-pruebas-que-lo-vigilan\">Las pruebas que lo vigilan\u003c/h2>\n\u003cp>Ocho de las 35 pruebas de \u003ccode>tests/site.test.mjs\u003c/code> tratan solo de idiomas:\u003c/p>\n\u003cul>\n\u003cli>Que el globo alterna el estado de la bandera con una etiqueta de destino\naccesible y persiste la elección.\u003c/li>\n\u003cli>Que todas las etiquetas y metadatos generados tienen traducción en los dos\nidiomas.\u003c/li>\n\u003cli>Que el perfil y los repositorios públicos se pintan de verdad \u003cstrong>y sobreviven al\ncambio de idioma\u003c/strong>.\u003c/li>\n\u003cli>Que el blog traduce el artículo completo, las fechas, las descripciones de\nimagen y el SEO sin duplicar posts.\u003c/li>\n\u003cli>Que los textos legales están narrados enteros y reflejados en los dos idiomas.\u003c/li>\n\u003cli>Que las etiquetas accesibles de un README siguen el idioma elegido \u003cstrong>sin\nmodificar el documento original\u003c/strong>.\u003c/li>\n\u003cli>Que cambiar de idioma reteclea la página y respeta \u003ccode>prefers-reduced-motion\u003c/code>.\u003c/li>\n\u003cli>Que el payload localizado de una página \u003cstrong>no puede cerrar su propio elemento\n\u003ccode>&lt;script&gt;\u003c/code> de JSON\u003c/strong>, que es la vía por la que un texto traducido rompería la\npágina.\u003c/li>\n\u003c/ul>\n\u003cdiv class=\"callout callout--tip\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Consejo\u003c/p>\n  \u003cdiv class=\"callout__body\">La última es la que conviene no olvidar al añadir claves: cualquier valor del\ndiccionario acaba serializado dentro de un \u003ccode>&lt;script type=&quot;application/json&quot;&gt;\u003c/code>,\nasí que una secuencia \u003ccode>&lt;/script&gt;\u003c/code> en un texto —aunque venga de un README—\ncerraría el bloque antes de tiempo.\u003c/div>\n\u003c/div>\n\u003cp>Esta documentación aplica el mismo patrón y lo comprueba igual: sus pruebas\ncargan una página generada en \u003ccode>jsdom\u003c/code> con sus propios scripts y pulsan el\nconmutador de verdad. El recorrido completo del sitio está en\n\u003ca href=\"/Docs/website/\">Visión general\u003c/a>.\u003c/p>\n","desc":"El sistema de dos idiomas de la web: el diccionario de 234 claves, los atributos que dirigen la sustitución, la detección, el conmutador y el retecleo.","readtime":"9 min de lectura","editHref":"https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/content/docs/website/i18n.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#un-html-dos-idiomas\">Un HTML, dos idiomas\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#el-diccionario-234-claves\">El diccionario: 234 claves\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#las-funciones-del-modulo\">Las funciones del módulo\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#los-atributos-que-dirigen-la-sustitucion\">Los atributos que dirigen la sustitución\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#data-content-key-y-data-content-language\">data-content-key y data-content-language\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#data-i18n-date\">data-i18n-date\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#deteccion-persistencia-y-varias-pestanas\">Detección, persistencia y varias pestañas\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#el-conmutador\">El conmutador\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#la-bandera-y-su-gesto\">La bandera y su gesto\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#el-retecleo\">El retecleo\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#traducir-contenido-no-solo-interfaz\">Traducir contenido, no solo interfaz\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#el-blog\">El blog\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#las-paginas-legales\">Las páginas legales\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#metadatos-y-buscadores\">Metadatos y buscadores\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#lo-que-hereda-esta-documentacion\">Lo que hereda esta documentación\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#las-pruebas-que-lo-vigilan\">Las pruebas que lo vigilan\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}},"en":{"title":"The two languages · jaime-gaming.github.io — Docs de Jaime Gaming","description":"The website's two-language system: the 234-key dictionary, the attributes that drive the substitution, detection, the switch and the retyping animation.","fields":{"body":"\u003ch1 id=\"the-two-languages\">The two languages\u003c/h1>\n\u003cp>The whole website exists in Spanish and in English, and they are not two sites\nnor two routes: it is a single HTML document that rewrites itself in the browser.\nThis page walks the mechanism end to end —the dictionary, the attributes,\ndetection, the switch and the retyping animation— and ends with what this\ndocumentation inherits from it.\u003c/p>\n\u003ch2 id=\"one-html-two-languages\">One HTML, two languages\u003c/h2>\n\u003cp>The HTML is always served in Spanish. The English texts do not live in another\nfolder or under an \u003ccode>/en/\u003c/code> prefix: they travel inside the same page and are applied\nwhen somebody presses the switch.\u003c/p>\n\u003cp>Two places carry them:\u003c/p>\n\u003col>\n\u003cli>\u003cstrong>\u003ccode>assets/js/i18n.js\u003c/code>\u003c/strong> — 38,251 bytes and 674 lines holding the \u003ccode>dict\u003c/code>\ndictionary for the whole interface.\u003c/li>\n\u003cli>\u003cstrong>\u003ccode>&lt;script type=&quot;application/json&quot; id=&quot;pageTranslations&quot;&gt;\u003c/code>\u003c/strong> — the fields\nbelonging to each page, generated by the build: title, description, body and\ndate.\u003c/li>\n\u003c/ol>\n\u003cp>The practical consequence is that there is \u003cstrong>one URL per page\u003c/strong>, one \u003ccode>canonical\u003c/code>\nand one \u003ccode>sitemap.xml\u003c/code>. The language is a browser state and not an address, so\nthere is no duplicated content to maintain and no links crossing between\nversions.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Note\u003c/p>\n  \u003cdiv class=\"callout__body\">The price is that a crawler that does not run JavaScript sees the Spanish\nversion. It is offset by rewriting the metadata on language change and by not\ndeclaring \u003ccode>hreflang\u003c/code> at all: there are not two documents to relate.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"the-dictionary-234-keys\">The dictionary: 234 keys\u003c/h2>\n\u003cp>\u003ccode>dict\u003c/code> has two branches, \u003ccode>es\u003c/code> and \u003ccode>en\u003c/code>, with \u003cstrong>exactly the same 234 keys\u003c/strong>. They\nare grouped by prefix, and the ten most populated ones say where the weight of\nthe site is:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Prefix\u003c/th>\n\u003cth>Keys\u003c/th>\n\u003cth>What they are\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>github.*\u003c/code>\u003c/td>\n\u003ctd>52\u003c/td>\n\u003ctd>Contribution calendar, synchronisation and its errors\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>contact.*\u003c/code>\u003c/td>\n\u003ctd>27\u003c/td>\n\u003ctd>Email access, copy to clipboard and social networks\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>status.*\u003c/code>\u003c/td>\n\u003ctd>25\u003c/td>\n\u003ctd>The status page and the incident.io panel\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>meta.*\u003c/code>\u003c/td>\n\u003ctd>16\u003c/td>\n\u003ctd>Title and description of each page, by route\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>project.*\u003c/code>\u003c/td>\n\u003ctd>14\u003c/td>\n\u003ctd>Project card: stars, forks, demo and load failures\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>footer.*\u003c/code>\u003c/td>\n\u003ctd>12\u003c/td>\n\u003ctd>Footer, link columns and legal notice\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>hero.*\u003c/code>\u003c/td>\n\u003ctd>11\u003c/td>\n\u003ctd>Home page: headline, calls to action and activity line\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>about.*\u003c/code>\u003c/td>\n\u003ctd>10\u003c/td>\n\u003ctd>The about section and its card\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>discord.*\u003c/code>\u003c/td>\n\u003ctd>10\u003c/td>\n\u003ctd>Discord presence and its states\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>aria.*\u003c/code>\u003c/td>\n\u003ctd>8\u003c/td>\n\u003ctd>Accessible labels with no visible text\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>The eleven remaining prefixes —\u003ccode>skills\u003c/code>, \u003ccode>nav\u003c/code>, \u003ccode>projects\u003c/code>, \u003ccode>social\u003c/code>, \u003ccode>blog\u003c/code>,\n\u003ccode>legal\u003c/code>, \u003ccode>profile\u003c/code>, \u003ccode>notFound\u003c/code>, \u003ccode>projectsPage\u003c/code>, \u003ccode>projectsTeaser\u003c/code> and \u003ccode>readme\u003c/code>—\nadd up to the other 49 keys.\u003c/p>\n\u003ch3 id=\"the-module-s-functions\">The module&#39;s functions\u003c/h3>\n\u003cp>Eight declared functions plus the animation loop, which lives inside one of them:\u003c/p>\n\u003cul>\n\u003cli>\u003ccode>applyLang(lang, { persist, animate })\u003c/code> — applies a language to the whole page\nand tells the rest of the site.\u003c/li>\n\u003cli>\u003ccode>detectDefaultLang()\u003c/code> — decides which language the page opens in.\u003c/li>\n\u003cli>\u003ccode>storageGet(key)\u003c/code> and \u003ccode>storageSet(key, value)\u003c/code> — \u003ccode>localStorage\u003c/code> wrapped in\n\u003ccode>try/catch\u003c/code>, because private mode throws.\u003c/li>\n\u003cli>\u003ccode>retypePage()\u003c/code> — the retyping animation.\u003c/li>\n\u003cli>\u003ccode>collectTypingBlocks()\u003c/code> — which blocks get typed and which do not.\u003c/li>\n\u003cli>\u003ccode>stopRetyping()\u003c/code> — cancels a running animation and cleans up after it.\u003c/li>\n\u003cli>\u003ccode>motionAllowed()\u003c/code> — queries \u003ccode>prefers-reduced-motion\u003c/code>.\u003c/li>\n\u003cli>\u003ccode>frame(timestamp)\u003c/code> — the \u003ccode>requestAnimationFrame\u003c/code> callback, declared inside\n\u003ccode>retypePage\u003c/code>.\u003c/li>\n\u003c/ul>\n\u003cp>Everything is published on \u003ccode>window.i18n\u003c/code> so that \u003ccode>main.js\u003c/code> can request a language\nchange or retype the page after painting new content.\u003c/p>\n\u003ch2 id=\"the-attributes-that-drive-the-substitution\">The attributes that drive the substitution\u003c/h2>\n\u003cp>Five attributes plus one more query. The first four look at the dictionary; the\nfifth looks at the page&#39;s own JSON block:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Attribute\u003c/th>\n\u003cth>What it replaces\u003c/th>\n\u003cth>Detail\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>data-i18n=&quot;key&quot;\u003c/code>\u003c/td>\n\u003ctd>the \u003ccode>innerHTML\u003c/code>\u003c/td>\n\u003ctd>Values may carry markup: \u003ccode>&lt;span&gt;\u003c/code>, \u003ccode>&lt;strong&gt;\u003c/code>, \u003ccode>&lt;br&gt;\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>data-i18n-aria=&quot;key&quot;\u003c/code>\u003c/td>\n\u003ctd>the \u003ccode>aria-label\u003c/code>\u003c/td>\n\u003ctd>For icons and buttons with no visible text\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>data-i18n-title=&quot;key&quot;\u003c/code>\u003c/td>\n\u003ctd>the \u003ccode>title\u003c/code>\u003c/td>\n\u003ctd>The tooltip follows the chosen language\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>data-i18n-date\u003c/code>\u003c/td>\n\u003ctd>the text of a \u003ccode>&lt;time&gt;\u003c/code>\u003c/td>\n\u003ctd>The \u003ccode>datetime\u003c/code> stays ISO and is never touched\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>data-content-key=&quot;field&quot;\u003c/code>\u003c/td>\n\u003ctd>from \u003ccode>pageTranslations\u003c/code>\u003c/td>\n\u003ctd>The page body, not the dictionary\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch3 id=\"data-content-key-and-data-content-language\">data-content-key and data-content-language\u003c/h3>\n\u003cp>The interface fits in a dictionary; the body of a post or the text of a legal\npage does not. Those fields go in \u003ccode>pageTranslations\u003c/code> and are applied through\n\u003ccode>data-content-key\u003c/code>. When the element also carries \u003ccode>data-content-language\u003c/code>, the\ncontent is treated as HTML and the element&#39;s \u003ccode>lang\u003c/code> attribute is adjusted, so a\nscreen reader pronounces English as English even though the document declares\n\u003ccode>lang=&quot;es&quot;\u003c/code>.\u003c/p>\n\u003ch3 id=\"data-i18n-date\">data-i18n-date\u003c/h3>\n\u003cp>Dates are not translated: they are formatted. \u003ccode>data-i18n-date\u003c/code> on a\n\u003ccode>&lt;time datetime=&quot;2026-03-14&quot;&gt;\u003c/code> goes through \u003ccode>Intl.DateTimeFormat\u003c/code> with the\n\u003ccode>es-ES\u003c/code> or \u003ccode>en-US\u003c/code> locale according to the active language, and the \u003ccode>datetime\u003c/code>\n—the one read by search engines and stylesheets— never changes.\u003c/p>\n\u003ch2 id=\"detection-persistence-and-several-tabs\">Detection, persistence and several tabs\u003c/h2>\n\u003cpre data-lang=\"js\">\u003ccode class=\"language-js\">function detectDefaultLang() {\n  const saved = storageGet(&quot;lang&quot;);\n  if (saved &amp;&amp; dict[saved]) return saved;\n  const browserLang = (navigator.language || &quot;es&quot;).slice(0, 2).toLowerCase();\n  return dict[browserLang] ? browserLang : &quot;en&quot;;\n}\u003c/code>\u003c/pre>\n\u003cp>The order is saved preference, browser language, and English as the fallback. The\npreference is stored in \u003ccode>localStorage\u003c/code> under the \u003ccode>lang\u003c/code> key, and a listener for\nthe \u003ccode>storage\u003c/code> event makes \u003cstrong>several open tabs change at once\u003c/strong>: choosing English\nin one rewrites the others without reloading them.\u003c/p>\n\u003cp>That key is the same one this documentation uses, and it is not a coincidence:\nthe language chosen on the website is kept when entering \u003ccode>/Docs/\u003c/code> and the other\nway round.\u003c/p>\n\u003ch2 id=\"the-switch\">The switch\u003c/h2>\n\u003ch3 id=\"the-flag-and-its-gesture\">The flag and its gesture\u003c/h3>\n\u003cp>The \u003ccode>#langSwitch\u003c/code> button carries a Spanish flag and a British one drawn as SVG\npatterns, with their gradient, their three circles and two \u003ccode>&lt;use&gt;\u003c/code> elements, and\nshows one or the other according to \u003ccode>data-active\u003c/code>. Its \u003ccode>aria-label\u003c/code> comes from\n\u003ccode>aria.langSwitch\u003c/code> and announces the \u003cstrong>destination\u003c/strong>, not the state: &quot;Switch to\nEnglish&quot; while in Spanish. Next to it, \u003ccode>#languageName\u003c/code> says &quot;Español&quot; or\n&quot;English&quot; as text.\u003c/p>\n\u003cp>Pressing it adds the \u003ccode>is-switching\u003c/code> class for 760 ms, which triggers\n\u003ccode>@keyframes globe-spin\u003c/code> —the globe turns once— and \u003ccode>globe-ring\u003c/code> —its ring expands\nand fades—. The class is removed, the reflow is forced by reading \u003ccode>offsetWidth\u003c/code>\nand it is added again: without that step, two presses in a row would not replay\nthe animation.\u003c/p>\n\u003ch3 id=\"the-retyping\">The retyping\u003c/h3>\n\u003cp>Changing language does not swap the texts bluntly: it erases them and types them\nagain. It is the site&#39;s most characteristic animation and it has its own numbers:\u003c/p>\n\u003cul>\n\u003cli>Each block starts \u003cstrong>15 ms\u003c/strong> after the previous one, capped at \u003cstrong>380 ms\u003c/strong> so a\npage with a hundred texts does not take long to begin.\u003c/li>\n\u003cli>Speed goes from \u003cstrong>3 to 13 ms per character\u003c/strong>, computed as \u003ccode>900 / total\u003c/code> and\nclamped, so a short text reads like typing and a long one does not drag.\u003c/li>\n\u003cli>Only blocks of between \u003cstrong>2 and 320 characters\u003c/strong> are typed: under 2 is not\nnoticeable and over 320 would take seconds.\u003c/li>\n\u003cli>Before emptying a block its height is measured and reserved with \u003ccode>min-height\u003c/code>;\notherwise the whole page shrinks and grows again while typing and the reader\nloses their place.\u003c/li>\n\u003cli>While it lasts, the block carries \u003ccode>aria-busy=&quot;true&quot;\u003c/code>, which is what a screen\nreader needs to avoid reading it half way.\u003c/li>\n\u003c/ul>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Important\u003c/p>\n  \u003cdiv class=\"callout__body\">Three guards disable it: the first language application is never animated,\n\u003ccode>prefers-reduced-motion: reduce\u003c/code> turns it off entirely, and a background tab\ndoes not type. Also excluded are \u003ccode>#typedRole\u003c/code>, which already has its own\ntyping, \u003ccode>[data-content-language]\u003c/code>, \u003ccode>[aria-live]\u003c/code> —retyping a live region shouts\nevery character at whoever is listening—, \u003ccode>.jg-loader\u003c/code>, \u003ccode>pre\u003c/code>, \u003ccode>code\u003c/code> and\n\u003ccode>textarea\u003c/code>.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"translating-content-not-just-interface\">Translating content, not just interface\u003c/h2>\n\u003ch3 id=\"the-blog\">The blog\u003c/h3>\n\u003cp>Each post is two files, \u003ccode>content/blog/&lt;slug&gt;.md\u003c/code> and \u003ccode>&lt;slug&gt;.en.md\u003c/code>, and the\nbuild forgives neither a missing one nor two that have drifted apart:\u003c/p>\n\u003cpre data-lang=\"js\">\u003ccode class=\"language-js\">if (![&quot;es&quot;, &quot;en&quot;].includes(post.lang)) throw new Error(`Unsupported blog language: ${post.lang}`);\nif (translations.es.date !== translations.en.date) throw new Error(`Translation dates differ: ${slug}`);\u003c/code>\u003c/pre>\n\u003cp>The second check is the interesting one: two translations with different dates\nwould produce two entries in the blog list for the same post, and it is a mistake\nnobody would spot by looking at the page.\u003c/p>\n\u003ch3 id=\"the-legal-pages\">The legal pages\u003c/h3>\n\u003cp>The legal texts are complete HTML versioned in both languages: \u003ccode>terms.es.html\u003c/code>\n(13,216 bytes) with \u003ccode>terms.en.html\u003c/code> (12,288), and \u003ccode>privacy.es.html\u003c/code> (11,479) with\n\u003ccode>privacy.en.html\u003c/code> (10,760). They are narrated in full in each language instead of\nbeing translated sentence by sentence, and they apply to every project without\nnaming any.\u003c/p>\n\u003ch2 id=\"metadata-and-search-engines\">Metadata and search engines\u003c/h2>\n\u003cp>A language change also rewrites what cannot be seen:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>What\u003c/th>\n\u003cth>Where it comes from\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>\u003ccode>document.title\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>meta.&lt;route&gt;.title\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>description\u003c/code>, \u003ccode>og:description\u003c/code>, \u003ccode>twitter:description\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>meta.&lt;route&gt;.description\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>og:title\u003c/code> and \u003ccode>twitter:title\u003c/code>\u003c/td>\n\u003ctd>the same title\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>\u003ccode>og:locale\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>es_ES\u003c/code> or \u003ccode>en_US\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>JSON-LD \u003ccode>person.description\u003c/code> and \u003ccode>person.inLanguage\u003c/code>\u003c/td>\n\u003ctd>the \u003ccode>#personStructuredData\u003c/code> block\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>Rewriting the structured data is what makes a rich result match what the page\nshows after changing language.\u003c/p>\n\u003ch2 id=\"what-this-documentation-inherits\">What this documentation inherits\u003c/h2>\n\u003cp>The model was copied whole, with two adaptations that come from being a\ndocumentation site rather than a portfolio:\u003c/p>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Piece\u003c/th>\n\u003cth>On the website\u003c/th>\n\u003cth>In this documentation\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Dictionary\u003c/td>\n\u003ctd>Inside \u003ccode>i18n.js\u003c/code>, 234 keys\u003c/td>\n\u003ctd>One \u003ccode>#uiStrings\u003c/code> block per page, with keys derived from the registry\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Page body\u003c/td>\n\u003ctd>\u003ccode>pageTranslations\u003c/code>\u003c/td>\n\u003ctd>The same, plus sidebar index, reading time and edit link\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Attributes\u003c/td>\n\u003ctd>\u003ccode>data-i18n-title\u003c/code>\u003c/td>\n\u003ctd>\u003ccode>data-i18n-placeholder\u003c/code>, for the search field\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Stored key\u003c/td>\n\u003ctd>\u003ccode>localStorage[&quot;lang&quot;]\u003c/code>\u003c/td>\n\u003ctd>The same one, shared between the two sites\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Retyping\u003c/td>\n\u003ctd>Yes\u003c/td>\n\u003ctd>Yes, ported with its numbers\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Switch\u003c/td>\n\u003ctd>Globe with two flags\u003c/td>\n\u003ctd>The same globe and the same 760 ms\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003cp>That last column deserves a nuance. The block does not carry only the\nhand-written texts: \u003ccode>scripts/dict.mjs\u003c/code> joins the 157 keys of \u003ccode>content/ui.mjs\u003c/code>\nwith those derived from the registry —the name, tagline, summary and status of\neach project, the title of each guide and the title and description of each\ngroup—, and the block adds up to 237 keys. This way the sidebar index, the cards\nand the filters are written once in HTML and translated in the browser like any\nother text.\u003c/p>\n\u003cp>The third row is the only real difference in the contract: here no element needs\na translated \u003ccode>title\u003c/code> —the six that exist are project proper names— and instead\nthe search field needs its \u003ccode>placeholder\u003c/code> translated.\u003c/p>\n\u003cp>To edit the interface texts, the way is in\n\u003ca href=\"/Docs/website/content/\">Editing content\u003c/a>; to see where the data being translated\ncomes from, in \u003ca href=\"/Docs/website/architecture/\">Site architecture\u003c/a>.\u003c/p>\n\u003ch2 id=\"the-tests-that-watch-it\">The tests that watch it\u003c/h2>\n\u003cp>Eight of the 35 tests in \u003ccode>tests/site.test.mjs\u003c/code> deal only with languages:\u003c/p>\n\u003cul>\n\u003cli>That the globe alternates the flag state with an accessible destination label\nand persists the choice.\u003c/li>\n\u003cli>That every generated label and metadata has a translation in both languages.\u003c/li>\n\u003cli>That the profile and the public repositories really are painted \u003cstrong>and survive a\nlanguage change\u003c/strong>.\u003c/li>\n\u003cli>That the blog translates the complete article, the dates, the image\ndescriptions and the SEO without duplicating posts.\u003c/li>\n\u003cli>That the legal texts are narrated in full and mirrored in both languages.\u003c/li>\n\u003cli>That a README&#39;s accessible labels follow the chosen language \u003cstrong>without\nmodifying the original document\u003c/strong>.\u003c/li>\n\u003cli>That changing language retypes the page and honours \u003ccode>prefers-reduced-motion\u003c/code>.\u003c/li>\n\u003cli>That a page&#39;s localized payload \u003cstrong>cannot close its own JSON \u003ccode>&lt;script&gt;\u003c/code>\nelement\u003c/strong>, which is the way a translated text would break the page.\u003c/li>\n\u003c/ul>\n\u003cdiv class=\"callout callout--tip\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-sparkles\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Tip\u003c/p>\n  \u003cdiv class=\"callout__body\">The last one is worth remembering when adding keys: every dictionary value ends\nup serialized inside a \u003ccode>&lt;script type=&quot;application/json&quot;&gt;\u003c/code>, so a \u003ccode>&lt;/script&gt;\u003c/code>\nsequence in a text —even one coming from a README— would close the block early.\u003c/div>\n\u003c/div>\n\u003cp>This documentation applies the same pattern and checks it the same way: its tests\nload a generated page in \u003ccode>jsdom\u003c/code> with its own scripts and press the switch for\nreal. The complete tour of the site is in\n\u003ca href=\"/Docs/website/\">Overview\u003c/a>.\u003c/p>\n","desc":"The website's two-language system: the 234-key dictionary, the attributes that drive the substitution, detection, the switch and the retyping animation.","readtime":"9 min read","editHref":"https://github.com/jaime-gaming/jaime-gaming.github.io/blob/main/content/docs/website/i18n.en.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#one-html-two-languages\">One HTML, two languages\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#the-dictionary-234-keys\">The dictionary: 234 keys\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#the-module-s-functions\">The module's functions\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#the-attributes-that-drive-the-substitution\">The attributes that drive the substitution\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#data-content-key-and-data-content-language\">data-content-key and data-content-language\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#data-i18n-date\">data-i18n-date\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#detection-persistence-and-several-tabs\">Detection, persistence and several tabs\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#the-switch\">The switch\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#the-flag-and-its-gesture\">The flag and its gesture\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#the-retyping\">The retyping\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#translating-content-not-just-interface\">Translating content, not just interface\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#the-blog\">The blog\u003c/a>\u003c/li>\n  \u003cli>\u003ca class=\"toc__h3\" href=\"#the-legal-pages\">The legal pages\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#metadata-and-search-engines\">Metadata and search engines\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#what-this-documentation-inherits\">What this documentation inherits\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#the-tests-that-watch-it\">The tests that watch it\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}}}</script>
+<script type="application/json" id="searchConfig">{"index":"/Docs/assets/data/search-index.json","scope":"website"}</script>
+<script src="/Docs/assets/js/i18n.js?v=9f6d93c1fd7c"></script>
+<script src="/Docs/assets/js/search.js?v=014a801e4757"></script>
+<script src="/Docs/assets/js/main.js?v=83aa4a0803d7"></script>
+</body>
+</html>

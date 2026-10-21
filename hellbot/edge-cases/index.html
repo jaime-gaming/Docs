@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Casos límite — Docs de Jaime Gaming</title>
+<meta name="description" content="Los 32 casos límite de hellbot y qué hace el bot en cada uno: hitos, gracia, roll call, pausa, reinicios, caídas y ediciones en marcha." />
+<meta name="author" content="Jaime Gaming" />
+<meta name="theme-color" content="#10120f" />
+<meta name="robots" content="index, follow" />
+<meta name="docs:base" content="/Docs/" />
+<meta name="docs:project" content="hellbot" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Jaime Gaming Docs" />
+<meta property="og:title" content="Casos límite — Docs de Jaime Gaming" />
+<meta property="og:description" content="Los 32 casos límite de hellbot y qué hace el bot en cada uno: hitos, gracia, roll call, pausa, reinicios, caídas y ediciones en marcha." />
+<meta property="og:url" content="https://jaime-gaming.github.io/Docs/hellbot/edge-cases/" />
+<meta property="og:image" content="https://jaime-gaming.github.io/assets/img/social-card.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@JaimeGamingPro" />
+<meta name="twitter:title" content="Casos límite — Docs de Jaime Gaming" />
+<meta name="twitter:description" content="Los 32 casos límite de hellbot y qué hace el bot en cada uno: hitos, gracia, roll call, pausa, reinicios, caídas y ediciones en marcha." />
+<link rel="canonical" href="https://jaime-gaming.github.io/Docs/hellbot/edge-cases/" />
+<link rel="icon" href="/Docs/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/Docs/assets/css/style.css?v=d74cfec89052" />
+</head>
+<body data-icons="/Docs/assets/img/icons.svg?v=eea9c3fe56aa" data-page="docs" data-project="hellbot" data-path="/hellbot/edge-cases/">
+
+<a class="skip-link" href="#top" data-i18n="aria.skipToContent">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="/Docs/" class="nav__logo" aria-label="Jaime Gaming Docs — inicio" data-i18n-aria="aria.homeLogo">JG<span class="dot">.</span><span class="nav__logo-badge">docs</span></a>
+  <nav class="nav__links" aria-label="Navegación principal" data-i18n-aria="aria.mainNav">
+    <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+    <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+    <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+    <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+    <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="search-trigger" id="searchTrigger" type="button" aria-label="Buscar" data-i18n-aria="nav.search">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg>
+      <span class="search-trigger__label" data-i18n="search.button">Buscar</span>
+      <kbd class="search-trigger__kbd" aria-hidden="true">Ctrl K</kbd>
+    </button>
+    <button class="lang-switch" id="langSwitch" data-active="es" type="button" aria-label="Cambiar idioma" data-i18n-aria="aria.langSwitch">
+      <svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="languageFlagEs" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#aa151b" d="M0 0h24v24H0z"/><path fill="#f1bf00" d="M0 6h24v12H0z"/></g>
+          </pattern>
+          <pattern id="languageFlagEn" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g><path fill="#012169" d="M0 0h24v24H0z"/><path stroke="#fff" stroke-width="5" d="m0 0 24 24M24 0 0 24"/><path stroke="#c8102e" stroke-width="2" d="m0 0 24 24M24 0 0 24"/><path stroke="#fff" stroke-width="8" d="M12 0v24M0 12h24"/><path stroke="#c8102e" stroke-width="4" d="M12 0v24M0 12h24"/></g>
+          </pattern>
+          <radialGradient id="languageGloss" cx="34%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".42"/>
+            <stop offset="55%" stop-color="#fff" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="flag flag-es" cx="12" cy="12" r="9.5" fill="url(#languageFlagEs)"/>
+        <circle class="flag flag-en" cx="12" cy="12" r="9.5" fill="url(#languageFlagEn)"/>
+        <circle class="language-globe__gloss" cx="12" cy="12" r="9.5" fill="url(#languageGloss)" aria-hidden="true"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#0d100d" stroke-opacity=".55" stroke-width="1.9" stroke-linecap="round"/>
+        <use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width=".9" stroke-linecap="round"/>
+      </svg>
+      <span class="sr-only" id="languageName">Español</span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="nav.openMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil" data-i18n-aria="aria.mainNav">
+  <a href="/Docs/" data-i18n="nav.home">Inicio</a>
+  <a href="/Docs/projects/" data-i18n="nav.projects">Proyectos</a>
+  <a href="https://jaime-gaming.github.io/blog/" target="_blank" rel="noopener noreferrer" data-i18n="nav.blog">Blog</a>
+  <a href="https://jaime-gaming.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="nav.site">Mi web</a>
+  <a href="https://jaime-gaming.github.io/contact/" target="_blank" rel="noopener noreferrer" data-i18n="nav.contact">Contacto</a>
+</nav>
+
+<main id="top" class="layout--docs">
+<div class="docs docs--with-rails">
+    <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir índice" aria-expanded="false" aria-controls="docsSidebar" data-i18n-aria="aria.openSidebar">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-panel"></use></svg>
+    </button>
+    <aside class="docs__sidebar" id="docsSidebar" aria-label="Índice de esta documentación" data-i18n-aria="aria.sidebar">
+    <nav class="side-nav">
+      <div class="side-nav__head">
+        <span class="side-nav__eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+        <a class="side-nav__project" href="/Docs/hellbot/">
+          <span class="side-nav__project-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg></span>
+          <span class="side-nav__project-name" data-i18n="proj.hellbot.name">hellbot</span>
+        </a>
+      </div>
+      <p class="side-nav__group" data-i18n="docs.sidebarTitle">En esta documentación</p>
+      <ol class="side-nav__list">
+      <li><a class="side-nav__link" href="/Docs/hellbot/" data-i18n="page.hellbot.index"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-compass"></use></svg><span>Visión general</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/rules/" data-i18n="page.hellbot.rules"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-scroll"></use></svg><span>Reglas del evento</span></a></li>
+      <li><a class="side-nav__link active" href="/Docs/hellbot/edge-cases/" data-i18n="page.hellbot.edge-cases"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert"></use></svg><span>Casos límite</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/install/" data-i18n="page.hellbot.install"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-download"></use></svg><span>Instalación y despliegue</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/commands/" data-i18n="page.hellbot.commands"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-terminal"></use></svg><span>Comandos</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/dashboard/" data-i18n="page.hellbot.dashboard"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-monitor"></use></svg><span>Dashboard en vivo</span></a></li>
+      <li><a class="side-nav__link" href="/Docs/hellbot/architecture/" data-i18n="page.hellbot.architecture"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-boxes"></use></svg><span>Arquitectura</span></a></li>
+      </ol>
+      <div class="side-nav__foot">
+        <a class="side-nav__all" href="/Docs/projects/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.allProjects">Todos los proyectos</span></a>
+        <div class="side-nav__switch">
+          <span class="side-nav__switch-label" data-i18n="docs.otherProjects">Otros proyectos</span>
+          <ul class="side-nav__switch-list">
+        <li><a class="side-nav__chip" href="/Docs/wave/" title="Wave"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-music"></use></svg><span>Wave</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/jaigent/" title="jAIgent"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bot"></use></svg><span>jAIgent</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/rngdle-infinite/" title="RNGdle Infinite"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-dice"></use></svg><span>RNGdle Infinite</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/daily-diary/" title="Diario"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-notebook"></use></svg><span>Diario</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/void/" title="VOID"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-ghost"></use></svg><span>VOID</span></a></li>
+        <li><a class="side-nav__chip" href="/Docs/website/" title="jaime-gaming.github.io"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-globe"></use></svg><span>jaime-gaming.github.io</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </aside>
+    <div class="docs__main">
+
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="/Docs/">Docs</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="/Docs/hellbot/" data-i18n="proj.hellbot.name">hellbot</a>
+      <span class="breadcrumb__sep">/</span>
+      <span class="breadcrumb__current" data-i18n="page.hellbot.edge-cases">Casos límite</span>
+    </nav>
+    <header class="doc-head reveal">
+      <p class="doc-head__kicker"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-flame"></use></svg><span data-i18n="proj.hellbot.name">hellbot</span></p>
+      <h1 class="doc-head__title" data-i18n="page.hellbot.edge-cases">Casos límite</h1>
+      <p class="doc-head__desc" data-content-key="desc">Los 32 casos límite de hellbot y qué hace el bot en cada uno: hitos, gracia, roll call, pausa, reinicios, caídas y ediciones en marcha.</p>
+      <div class="doc-head__meta">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-calendar"></use></svg><span data-i18n="docs.updated">Última revisión</span> <time datetime="2026-10-19" data-i18n-date>19 de octubre de 2026</time></span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-clock"></use></svg><span data-content-key="readtime">5 min de lectura</span></span>
+        <a class="doc-head__edit" href="https://github.com/jaime-gaming/hellbot/blob/main/content/docs/hellbot/edge-cases.md" data-content-key="editHref" data-content-attr="href" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-code"></use></svg><span data-i18n="docs.editOnGithub">Editar esta página en GitHub</span></a>
+      </div>
+    </header>
+    <article class="doc-body reveal" lang="es" data-content-key="body" data-content-language>
+<p>Un evento de 160 horas no se puede repetir. Si algo sale mal a la hora 90, no hay segunda partida, así que los casos raros no son un apéndice: son el reglamento. El <a href="https://github.com/jaime-gaming/hellbot/blob/main/README.md" target="_blank" rel="noopener noreferrer"><code>README.md</code></a> del repositorio los lista en una tabla de 32 filas con la nota de que <strong>todos están cubiertos por pruebas</strong>. Aquí están agrupados por tema, que es como se consultan cuando algo está pasando.</p>
+<div class="callout callout--note">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb"></use></svg>
+  <p class="callout__title">Nota</p>
+  <div class="callout__body">La columna de la derecha es el comportamiento, no la intención. Si el bot hace otra cosa, es un fallo: estos casos tienen prueba detrás.</div>
+</div>
+<h2 id="hitos-y-clasificacion">Hitos y clasificación</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Caso</th>
+<th>Qué hace</th>
+</tr>
+</thead><tbody><tr>
+<td>Alguien entra <strong>justo</strong> cuando cae un hito</td>
+<td>Queda incluido en la instantánea de elegibles de ese hito</td>
+</tr>
+<tr>
+<td>Alguien sale <strong>justo</strong> cuando cae un hito</td>
+<td>Queda excluido de la instantánea</td>
+</tr>
+<tr>
+<td>Un hito cae con el canal de voz vacío</td>
+<td>Se retiene y se entrega a quien esté presente cuando el canal se recupere, o se pierde con la partida</td>
+</tr>
+<tr>
+<td>El bot reinicia alrededor de un hito</td>
+<td>La reclamación atómica en la base de datos impide duplicados, y los anuncios no enviados se vuelven a publicar al arrancar</td>
+</tr>
+<tr>
+<td>Las 160 h caen durante una actualización de 10 s</td>
+<td>El tick de 1 s lo recorta todo a <code>start_ts + 160h</code>; <strong>la compleción gana</strong> a un canal vacío en la fecha límite</td>
+</tr>
+<tr>
+<td>Dos personas con el mismo tiempo total</td>
+<td>Rango compartido y orden de presentación determinista</td>
+</tr>
+<tr>
+<td>250 personas en el canal cuando cae un hito</td>
+<td>El mensaje se divide entre campos del embed y <strong>nunca supera los límites de Discord</strong></td>
+</tr>
+</tbody></table></div>
+<h2 id="quien-cuenta-como-participante">Quién cuenta como participante</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Caso</th>
+<th>Qué hace</th>
+</tr>
+</thead><tbody><tr>
+<td>Un bot entra al canal</td>
+<td>Ignorado en todas partes; <strong>no puede mantener vivo el evento</strong></td>
+</tr>
+<tr>
+<td>Entra un <code>@clanker</code></td>
+<td>Desconectado de inmediato, sin tiempo en la clasificación y sin poder mantener vivo el evento</td>
+</tr>
+<tr>
+<td>Entradas y salidas rápidas y repetidas</td>
+<td>El muestreo de un segundo mantiene correctos los totales por persona</td>
+</tr>
+<tr>
+<td>Alguien sale y vuelve</td>
+<td>Los totales siguen acumulando</td>
+</tr>
+<tr>
+<td>Alguien entra en mitad de una comprobación de vida</td>
+<td>No recibe ping, no está obligado a responder y <strong>nunca se le expulsa por ello</strong></td>
+</tr>
+</tbody></table></div>
+<h2 id="canal-vacio-gracia-y-comprobaciones-de-vida">Canal vacío, gracia y comprobaciones de vida</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Caso</th>
+<th>Qué hace</th>
+</tr>
+</thead><tbody><tr>
+<td>Sale el último participante válido</td>
+<td>Ventana de gracia de <strong>15 s</strong> más un aviso sin ping; <code>FAILED</code> solo si no vuelve nadie</td>
+</tr>
+<tr>
+<td>Alguien vuelve con 1 s de margen</td>
+<td>La ventana se cierra, sale el aviso <strong>«SAVED»</strong> y la partida continúa intacta</td>
+</tr>
+<tr>
+<td>El canal se vacía varias veces</td>
+<td><strong>Cada periodo vacío tiene su propia ventana</strong>; el tiempo sobrevivido nunca se infla</td>
+</tr>
+<tr>
+<td>Reinicio en mitad de la ventana de gracia</td>
+<td>La ventana se reanuda desde el <code>grace_started_ts</code> persistido</td>
+</tr>
+<tr>
+<td>Comprobación de vida más reinicio</td>
+<td>El estado de la comprobación está persistido: las respuestas enviadas mientras no había conexión se recuperan, y una comprobación caducada <strong>se cancela en vez de expulsar gente</strong></td>
+</tr>
+<tr>
+<td>Todo el mundo ignora la comprobación</td>
+<td>Se desconecta a todos, el canal se vacía y arranca un <strong>periodo de recuperación de 2 minutos</strong> antes del fallo</td>
+</tr>
+</tbody></table></div>
+<h2 id="la-pausa">La pausa</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Caso</th>
+<th>Qué hace</th>
+</tr>
+</thead><tbody><tr>
+<td>El bot reinicia estando en pausa</td>
+<td>El evento vuelve pausado: los dos relojes siguen congelados hasta <code>/hell resume</code></td>
+</tr>
+<tr>
+<td>Se pausa durante un fallo</td>
+<td>Se congelan el reloj global y los por persona; no hay hitos, ni roll call, ni caducidad de gracia, ni fallo. <strong>El tiempo en pausa no cuenta nunca</strong></td>
+</tr>
+<tr>
+<td>La pausa sorprende a una ventana de gracia abierta</td>
+<td>La cuenta atrás también se congela; al reanudar <strong>continúa con el tiempo que le quedaba</strong></td>
+</tr>
+<tr>
+<td>La pausa cruza la marca de las 160 h</td>
+<td>La compleción espera al tiempo <strong>efectivo</strong>: una partida pausada no puede completarse antes de tiempo</td>
+</tr>
+</tbody></table></div>
+<h2 id="reinicios-caidas-y-la-api-de-discord">Reinicios, caídas y la API de Discord</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Caso</th>
+<th>Qué hace</th>
+</tr>
+</thead><tbody><tr>
+<td>El evento termina con mensajes directos sin enviar</td>
+<td><code>dm_log</code> reanuda la entrega en el siguiente arranque, <strong>sin duplicados</strong></td>
+</tr>
+<tr>
+<td>Un participante tiene los MD cerrados</td>
+<td>Se registra como bloqueado, se reporta en el resumen y <code>/hell mystats</code> sigue funcionando</td>
+</tr>
+<tr>
+<td>La API de Discord va lenta durante un roll call</td>
+<td>Las expulsiones y los anuncios corren <strong>fuera del bucle de un segundo</strong>, así que la vigilancia del canal nunca se atasca</td>
+</tr>
+<tr>
+<td>Sin internet, token malo o intent que falta</td>
+<td>Error limpio de una línea y un código de salida distinto; la traza completa queda en <code>logs/</code></td>
+</tr>
+<tr>
+<td>El bot reinicia a mitad de evento</td>
+<td>El estado se recarga desde SQLite; el tiempo transcurrido es <code>now - start_ts</code> y <strong>no se reinicia nada</strong></td>
+</tr>
+<tr>
+<td>El bot cae un rato (reinicio, despliegue, crash)</td>
+<td>El cronómetro sigue corriendo y <strong>quien estaba en el canal antes <em>y</em> después de la caída recupera ese tiempo</strong>: nadie pierde progreso por una caída del bot</td>
+</tr>
+<tr>
+<td>El bot cae durante mucho tiempo</td>
+<td>El cronómetro sigue corriendo, pero la ventana no observada <strong>no se acredita a nadie</strong> y se reporta en el mensaje de progreso</td>
+</tr>
+<tr>
+<td>La API de Discord falla al enviar un mensaje</td>
+<td>Se registra y se reintenta en el ciclo siguiente; <strong>el estado del evento no se toca</strong></td>
+</tr>
+</tbody></table></div>
+<h2 id="editar-el-evento-en-marcha">Editar el evento en marcha</h2>
+<div class="doc-table"><table><thead><tr>
+<th>Caso</th>
+<th>Qué hace</th>
+</tr>
+</thead><tbody><tr>
+<td>Un hito se edita a una forma inválida</td>
+<td>Se rechaza con un motivo legible y <strong>la tabla anterior sigue viva</strong></td>
+</tr>
+<tr>
+<td>La duración del evento se edita con la partida en marcha</td>
+<td>Se rechaza y se registra: <strong>el reloj en marcha nunca se remodela</strong></td>
+</tr>
+</tbody></table></div>
+<h2 id="dos-decisiones-de-diseno">Dos decisiones de diseño</h2>
+<p>Las dos las explica el propio README y merecen quedar aparte, porque son elecciones y no consecuencias.</p>
+<div class="callout callout--important">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert"></use></svg>
+  <p class="callout__title">Importante</p>
+  <div class="callout__body"><strong>Una caída no hace fallar el evento.</strong> El bot no puede demostrar que el canal se vaciara mientras estaba ciego, así que no falla. Pero nadie gana tiempo de clasificación por esa ventana, y el hueco se muestra en la salida de progreso y de estado.</div>
+</div>
+<div class="callout callout--warning">
+  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn"></use></svg>
+  <p class="callout__title">Aviso</p>
+  <div class="callout__body"><strong>Si el canal está vacío en el mismo tick en que caería un hito, gana el fallo.</strong> No había nadie presente para reclamar la recompensa.</div>
+</div>
+<h2 id="donde-seguir">Dónde seguir</h2>
+<ul>
+<li><a href="/Docs/hellbot/rules/">Reglas del evento</a> — el reglamento normal, del que estos casos son el borde.</li>
+<li><a href="/Docs/hellbot/architecture/">Arquitectura</a> — las invariantes que hacen que estos comportamientos se sostengan tras un reinicio.</li>
+<li><a href="/Docs/hellbot/commands/">Comandos</a> — <code>/hell pause</code>, <code>/hell resume</code>, <code>/hell reset</code> y <code>/hell mystats</code>.</li>
+</ul>
+
+    </article>
+    <nav class="pager reveal" aria-label="paginación">
+    <a class="pager__link" href="/Docs/hellbot/rules/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-left"></use></svg><span data-i18n="docs.prev">Anterior</span></span>
+      <span class="pager__title" data-i18n="page.hellbot.rules">Reglas del evento</span>
+    </a>
+    <a class="pager__link pager__link--next" href="/Docs/hellbot/install/">
+      <span class="pager__label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-right"></use></svg><span data-i18n="docs.next">Siguiente</span></span>
+      <span class="pager__title" data-i18n="page.hellbot.install">Instalación y despliegue</span>
+    </a>
+    </nav>
+    <p class="source-note reveal" data-i18n="docs.sourceNote">Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.</p>
+    </div>
+    <aside class="docs__toc" id="docsToc" aria-label="En esta página" data-i18n-aria="aria.toc" data-content-key="toc" data-content-language>
+    <p class="toc__title" data-i18n="docs.tocTitle">En esta página</p>
+    <ol class="toc__list">
+      <li><a href="#hitos-y-clasificacion">Hitos y clasificación</a></li>
+      <li><a href="#quien-cuenta-como-participante">Quién cuenta como participante</a></li>
+      <li><a href="#canal-vacio-gracia-y-comprobaciones-de-vida">Canal vacío, gracia y comprobaciones de vida</a></li>
+      <li><a href="#la-pausa">La pausa</a></li>
+      <li><a href="#reinicios-caidas-y-la-api-de-discord">Reinicios, caídas y la API de Discord</a></li>
+      <li><a href="#editar-el-evento-en-marcha">Editar el evento en marcha</a></li>
+      <li><a href="#dos-decisiones-de-diseno">Dos decisiones de diseño</a></li>
+      <li><a href="#donde-seguir">Dónde seguir</a></li>
+    </ol>
+    <p class="toc__progress" aria-hidden="true"><span></span></p>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="https://jaime-gaming.github.io/" class="footer__logo" aria-label="Jaime Gaming — inicio" data-i18n-aria="aria.footerLogo">JG<span class="dot">.</span></a>
+      <p class="footer__tagline" data-i18n="footer.tagline">Juegos para navegador, aplicaciones web y vídeos.</p>
+      <div class="footer__socials" role="group" aria-label="Redes sociales" data-i18n-aria="aria.socials">
+        <a class="social-icon" href="https://github.com/jaime-gaming" aria-label="GitHub" data-i18n-aria="social.github" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-github"></use></svg></a>
+        <a class="social-icon" href="https://www.youtube.com/@jaimegaming5731" aria-label="YouTube" data-i18n-aria="social.youtube" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-youtube"></use></svg></a>
+        <a class="social-icon" href="https://x.com/JaimeGamingPro" aria-label="X / Twitter" data-i18n-aria="social.x" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-x"></use></svg></a>
+        <a class="social-icon" href="https://discord.com/users/984083829767675965" aria-label="Discord" data-i18n-aria="social.discord" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-discord"></use></svg></a>
+        <a class="social-icon" href="mailto:jaimegamingpro@gmail.com" aria-label="Correo electrónico" data-i18n-aria="social.email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-mail"></use></svg></a>
+      </div>
+    </div>
+    <nav class="footer__col" aria-label="Enlaces del sitio" data-i18n-aria="footer.siteAria">
+      <h2 class="footer__title" data-i18n="footer.site">Sitio</h2>
+      <a href="/Docs/"><span data-i18n="nav.home">Inicio</span></a>
+      <a href="/Docs/projects/"><span data-i18n="nav.projects">Proyectos</span></a>
+      <a href="https://jaime-gaming.github.io/blog/"><span data-i18n="nav.blog">Blog</span></a>
+      <a href="https://jaime-gaming.github.io/contact/"><span data-i18n="nav.contact">Contacto</span></a>
+    </nav>
+    <nav class="footer__col" aria-label="Recursos y enlaces externos" data-i18n-aria="footer.resourcesAria">
+      <h2 class="footer__title" data-i18n="footer.resources">Recursos</h2>
+      <a href="https://jaime-gaming.github.io/"><span data-i18n="footer.mainSite">Mi web</span></a>
+      <a class="footer__status" href="/Docs/status/"><span class="footer__status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Estado del servicio</span></a>
+      <a href="https://github.com/jaime-gaming" target="_blank" rel="noopener noreferrer">GitHub<span class="footer__arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:jaimegamingpro@gmail.com"><span data-i18n="footer.email">Correo</span></a>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© <span id="year"></span> Jaime Gaming. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+    <div class="footer__bottom-actions">
+      <nav class="footer__legal" aria-label="Términos y privacidad" data-i18n-aria="footer.legalAria">
+        <a href="https://jaime-gaming.github.io/terms/" data-i18n="footer.terms">Términos del servicio</a>
+        <a href="https://jaime-gaming.github.io/privacy/" data-i18n="footer.privacy">Privacidad</a>
+      </nav>
+      <a href="https://github.com/jaime-gaming/Docs" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Código fuente ↗</a>
+      <button class="to-top" id="toTop" type="button" aria-label="Volver arriba" data-i18n-aria="aria.backToTop"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-arrow"></use></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" hidden>
+  <div class="search-modal__backdrop" data-search-close></div>
+  <div class="search-modal__panel">
+    <h2 class="sr-only" id="searchModalTitle" data-i18n="search.dialogTitle">Buscar en la documentación</h2>
+    <div class="search-modal__head">
+      <span class="search-modal__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-search"></use></svg></span>
+      <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Buscar en la documentación…" data-i18n-placeholder="search.placeholder" aria-describedby="searchModalHint" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" aria-activedescendant="" />
+      <button class="search-modal__close" type="button" data-search-close aria-label="Cerrar búsqueda" data-i18n-aria="search.close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-close"></use></svg></button>
+    </div>
+    <div class="search-modal__hintrow">
+      <p class="search-modal__hint" id="searchModalHint" data-i18n="search.hint">Escribe para filtrar páginas y apartados</p>
+      <p class="search-modal__keys" id="searchKeys" aria-hidden="true">
+        <span class="keyhint"><kbd>↑</kbd><kbd>↓</kbd><span data-i18n="search.kbdNavigate">navegar</span></span>
+        <span class="keyhint"><kbd>↵</kbd><span data-i18n="search.kbdOpen">abrir</span></span>
+        <span class="keyhint"><kbd>Esc</kbd><span data-i18n="search.kbdClose">cerrar</span></span>
+      </p>
+    </div>
+    <div class="search-modal__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" data-i18n-aria="search.resultsLabel"></div>
+  </div>
+</div>
+
+<script type="application/json" id="uiStrings">{"es":{"nav.home":"Inicio","nav.projects":"Proyectos","nav.search":"Buscar","nav.site":"Mi web","nav.blog":"Blog","nav.contact":"Contacto","nav.openMenu":"Abrir menú","nav.closeMenu":"Cerrar menú","aria.skipToContent":"Saltar al contenido","aria.homeLogo":"Jaime Gaming Docs — inicio","aria.mainNav":"Navegación principal","aria.backToTop":"Volver arriba","aria.langSwitch":"Español. Cambiar a inglés","aria.sidebar":"Índice de esta documentación","aria.toc":"En esta página","aria.openSidebar":"Abrir índice","aria.closeSidebar":"Cerrar índice","search.button":"Buscar","search.placeholder":"Buscar en la documentación…","search.hint":"Escribe para filtrar páginas y apartados","search.empty":"Sin resultados para","search.noQuery":"Prueba con «instalar», «comandos», «privacidad»…","search.results":"resultados","search.result":"resultado","search.close":"Cerrar búsqueda","search.scopeAll":"Toda la documentación","search.scopeProject":"Solo este proyecto","search.kbdNavigate":"navegar","search.kbdOpen":"abrir","search.kbdClose":"cerrar","search.dialogTitle":"Buscar en la documentación","search.resultsLabel":"Resultados de búsqueda","docs.eyebrow":"Documentación","docs.sidebarTitle":"En esta documentación","docs.tocTitle":"En esta página","docs.editOnGithub":"Editar esta página en GitHub","docs.sourceNote":"Documentación escrita a mano para este sitio, basada en el README y los docs del repositorio.","docs.updated":"Última revisión","docs.prev":"Anterior","docs.next":"Siguiente","docs.allProjects":"Todos los proyectos","docs.readTime":"min de lectura","docs.jumpTo":"Ir a","home.kicker":"DOCUMENTACIÓN","home.title":"Todos mis proyectos, \u003cspan class=\"hero__title-accent\">documentados\u003c/span>","home.subtitle":"Un solo sitio con la documentación de todo lo que construyo: reproductores, agentes, bots, juegos y webs. Guías de instalación, arquitectura, uso y referencia.","home.ctaPrimary":"Empezar a leer","home.ctaSecondary":"Ver todos los proyectos","home.stats.projects":"proyectos","home.stats.pages":"páginas","home.stats.languages":"idiomas","home.stats.updated":"actualizada","home.about.title":"Sobre esta documentación","home.about.sub":"Cómo está hecha y cómo se mantiene.","home.about.card.label":"CÓMO FUNCIONA","home.about.card.title":"Escrita a mano, generada con Node","home.about.card.text":"Cada página es un Markdown en content/docs/. El build las convierte en HTML estático con el mismo sistema, la misma paleta y las mismas animaciones que mi web principal.","home.about.card.stamp":"VER EL REPOSITORIO ↗","home.contribute.title":"¿Ves un error?","home.contribute.text":"Toda la documentación está en un repositorio público. Abre una issue o envía una pull request con la corrección.","home.contribute.issue":"Abrir una issue","home.contribute.pr":"Proponer un cambio","home.contribute.email":"Escribirme un correo","projects.title":"Proyectos","projects.sub":"Toda la documentación, proyecto por proyecto. Cada tarjeta enlaza a su guía completa.","projects.pages":"páginas","projects.openDocs":"Abrir documentación","projects.demo":"Probar","projects.code":"Código","projects.group.all":"Todos","callout.note":"Nota","callout.tip":"Consejo","callout.warning":"Aviso","callout.important":"Importante","callout.caution":"Precaución","code.copy":"Copiar","code.copied":"Copiado","footer.rights":"Todos los derechos reservados.","footer.mainSite":"Mi web","footer.tagline":"Juegos para navegador, aplicaciones web y vídeos.","footer.site":"Sitio","footer.siteAria":"Enlaces del sitio","footer.resources":"Recursos","footer.resourcesAria":"Recursos y enlaces externos","footer.status":"Estado del servicio","footer.email":"Correo","footer.terms":"Términos del servicio","footer.privacy":"Privacidad","footer.source":"Código fuente ↗","footer.legalAria":"Términos y privacidad","aria.socials":"Redes sociales","aria.footerLogo":"Jaime Gaming — inicio","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Correo electrónico","status.title":"Estado del servicio","status.sub":"Estado en directo de la web, la documentación y los proyectos, desde el panel oficial de incident.io.","status.note":"Datos del panel oficial de estado","status.open":"Abrir panel completo ↗","status.loading":"Consultando el estado…","status.unknown":"Estado no disponible","status.error":"No se pudo consultar el estado en directo. Puedes abrir el panel completo.","status.updated":"Actualizado el {date}","status.componentsAria":"Componentes del servicio","status.allOperational":"Todos los sistemas operativos","status.minorIssues":"Incidencias menores","status.majorIssues":"Incidencia grave","status.criticalIssues":"Incidencia crítica","status.maintenanceOverall":"Mantenimiento en curso","status.operational":"Operativo","status.degraded":"Rendimiento degradado","status.partial":"Interrupción parcial","status.major":"Interrupción grave","status.underMaintenance":"En mantenimiento","status.maintenanceTitle":"Mantenimiento programado","status.maintenanceBody":"Texto publicado en el panel de estado.","status.frameNotice":"El panel completo pertenece a incident.io y solo se carga si lo pides. Al cargarlo puede usar sus propias cookies.","status.loadFrame":"Cargar panel incrustado","status.frameTitle":"Panel de estado de Jaime Gaming","status.hint":"El resumen se actualiza al abrir esta página. Si el panel incrustado no aparece, ábrelo con el botón superior.","notFound.title":"Página no encontrada","notFound.sub":"Puede que el enlace esté roto o que esta guía se haya movido.","notFound.home":"Volver al inicio de la documentación","notFound.projects":"Ver todos los proyectos","home.guide.title":"Cómo están organizadas las guías","home.guide.sub":"Todas siguen la misma anatomía, para que sepas dónde buscar en cada proyecto.","home.guide.overview.num":"01","home.guide.overview.title":"Visión general","home.guide.overview.desc":"Qué es el proyecto, qué problema resuelve, en qué estado está y qué lo distingue. Es la puerta de entrada de cada guía.","home.guide.install.num":"02","home.guide.install.title":"Instalación","home.guide.install.desc":"Requisitos, comandos para ponerlo en marcha y la primera comprobación de que todo funciona.","home.guide.usage.num":"03","home.guide.usage.title":"Uso","home.guide.usage.desc":"El día a día: funciones, comandos, mecánicas o flujos de trabajo, con ejemplos concretos.","home.guide.deep.num":"04","home.guide.deep.title":"Cómo está hecho","home.guide.deep.desc":"Arquitectura, estructura de carpetas, decisiones técnicas y los límites conocidos del proyecto.","home.guide.reference.num":"05","home.guide.reference.title":"Referencia","home.guide.reference.desc":"Tablas de consulta: opciones, formatos de datos, modelos, plataformas o preguntas frecuentes.","home.about.text1":"Este sitio reúne en un mismo lugar la documentación de los siete proyectos que mantengo en GitHub. Cada guía está escrita a mano a partir del README y de los documentos del repositorio, y se revisa cuando el proyecto cambia.","home.about.text2":"Nada se genera automáticamente desde GitHub ni depende de servicios externos: el contenido vive en este repositorio como Markdown, se compila a HTML estático con Node y se publica en GitHub Pages. El buscador usa un índice que se crea en ese mismo build.","home.about.row.stack":"Generador","home.about.row.palette":"Paleta","home.about.row.fonts":"Tipografías","home.about.row.host":"Publicación","home.about.row.search":"Buscador","home.about.row.searchValue":"Índice estático, sin servicios externos","docs.otherProjects":"Otros proyectos","projects.empty":"No hay proyectos en esta categoría.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentación de todos los proyectos de Jaime Gaming: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID y su web personal.","meta.projects.title":"Proyectos — Docs de Jaime Gaming","meta.projects.description":"Índice de toda la documentación, agrupada por aplicaciones, juegos, bots y web.","proj.wave.name":"Wave","proj.wave.tagline":"Reproductor de música local-first para web, Android y Windows.","proj.wave.summary":"Un hogar para la música que ya tienes. Wave guarda tu colección en el dispositivo: sin cuenta, sin suscripción y sin subir audio a ningún servidor.","proj.wave.status":"0.1.0 · activa","page.wave.index":"Visión general","page.wave.install":"Instalación","page.wave.features":"Funciones y uso","page.wave.platforms":"Plataformas","page.wave.architecture":"Arquitectura","page.wave.privacy":"Privacidad y datos","page.wave.dev":"Desarrollo","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"Todos tus agentes de IA en un mismo sitio.","proj.jaigent.summary":"Un binario y diez proveedores. Los mismos tools en la terminal, en ChatGPT Web por MCP remoto, en Claude Desktop y en cualquier app que hable OpenAI. Con deshacer en cada escritura y tope de gasto.","proj.jaigent.status":"0.5.x · activa","page.jaigent.index":"Visión general","page.jaigent.install":"Instalación y claves","page.jaigent.cli":"Uso en la terminal","page.jaigent.models":"Modelos y proveedores","page.jaigent.mcp":"MCP y tu propia API","page.jaigent.extend":"Skills, plugins y horarios","page.jaigent.reference":"Referencia de tools","page.jaigent.security":"Seguridad","page.jaigent.dev":"Desarrollo","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"El bot de Discord que ejecuta el evento de resistencia Welcome to Hell.","proj.hellbot.summary":"Mantén al menos a una persona real en un canal de voz durante 160 horas seguidas. Si el canal se vacía y nadie vuelve en el periodo de gracia, la partida muere para siempre.","proj.hellbot.status":"producción · estable","page.hellbot.index":"Visión general","page.hellbot.rules":"Reglas del evento","page.hellbot.edge-cases":"Casos límite","page.hellbot.install":"Instalación y despliegue","page.hellbot.commands":"Comandos","page.hellbot.dashboard":"Dashboard en vivo","page.hellbot.architecture":"Arquitectura","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"Un número, infinitas posibilidades.","proj.rngdle-infinite.summary":"Tira un número entre 0 y 1.000.000 y descubre qué lo hace especial. Un incremental de navegador con EP, insignias, compañeros, skills, rebirth, prestige y rollback.","proj.rngdle-infinite.status":"jugable · activa","page.rngdle-infinite.index":"Visión general","page.rngdle-infinite.play":"Cómo se juega","page.rngdle-infinite.systems":"Sistemas y progresión","page.rngdle-infinite.save":"Partida y sincronización","page.rngdle-infinite.faq":"Preguntas frecuentes","page.rngdle-infinite.dev":"Desarrollo","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Tu espacio personal: un diario minimalista y 100 % local.","proj.daily-diary.summary":"Sin backend, sin cuentas, sin IA y sin APIs externas. Los resúmenes, estadísticas y tendencias se calculan en tu navegador con reglas y plantillas de texto.","proj.daily-diary.status":"completo · local","page.daily-diary.index":"Visión general","page.daily-diary.install":"Instalación y uso","page.daily-diary.areas":"Las cinco áreas","page.daily-diary.data":"Datos y privacidad","page.daily-diary.dev":"Estructura y desarrollo","proj.void.name":"VOID","proj.void.tagline":"Michael Burns desapareció el año pasado. ¿Quieres entrar?","proj.void.summary":"Un juego psicológico ambientado en una corporación misteriosa donde todo el mundo y todo desaparece. Interfaz CRT de alto contraste, en español e inglés.","proj.void.status":"beta · en desarrollo","page.void.index":"Visión general","page.void.install":"Instalación y juego","page.void.world":"El mundo de VOID Corp","page.void.engine":"Las tripas del archivo","page.void.faq":"Avisos y preguntas","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"El sitio personal que da origen a esta documentación.","proj.website.summary":"Portfolio oscuro y bilingüe generado con Node: proyectos sincronizados desde GitHub, calendario de contribuciones, presencia de Discord y blog desde Markdown.","proj.website.status":"publicada · activa","page.website.index":"Visión general","page.website.build":"Build y preview","page.website.content":"Editar el contenido","page.website.i18n":"Los dos idiomas","page.website.architecture":"Arquitectura del sitio","group.apps.title":"Aplicaciones y herramientas","group.apps.sub":"Software que resuelve algo concreto: música, agentes y organización personal.","group.games.title":"Juegos","group.games.sub":"Del incremental de navegador al terror psicológico.","group.bots.title":"Bots y eventos","group.bots.sub":"Automatización en directo para comunidades.","group.web.title":"Web","group.web.sub":"Los sitios que publico, incluido el que estás leyendo."},"en":{"nav.home":"Home","nav.projects":"Projects","nav.search":"Search","nav.site":"My site","nav.blog":"Blog","nav.contact":"Contact","nav.openMenu":"Open menu","nav.closeMenu":"Close menu","aria.skipToContent":"Skip to content","aria.homeLogo":"Jaime Gaming Docs — home","aria.mainNav":"Main navigation","aria.backToTop":"Back to top","aria.langSwitch":"English. Switch to Spanish","aria.sidebar":"Index of this documentation","aria.toc":"On this page","aria.openSidebar":"Open index","aria.closeSidebar":"Close index","search.button":"Search","search.placeholder":"Search the docs…","search.hint":"Type to filter pages and sections","search.empty":"No results for","search.noQuery":"Try “install”, “commands”, “privacy”…","search.results":"results","search.result":"result","search.close":"Close search","search.scopeAll":"All documentation","search.scopeProject":"This project only","search.kbdNavigate":"navigate","search.kbdOpen":"open","search.kbdClose":"close","search.dialogTitle":"Search the documentation","search.resultsLabel":"Search results","docs.eyebrow":"Documentation","docs.sidebarTitle":"In this documentation","docs.tocTitle":"On this page","docs.editOnGithub":"Edit this page on GitHub","docs.sourceNote":"Documentation written by hand for this site, based on the repository's README and docs.","docs.updated":"Last reviewed","docs.prev":"Previous","docs.next":"Next","docs.allProjects":"All projects","docs.readTime":"min read","docs.jumpTo":"Go to","home.kicker":"DOCUMENTATION","home.title":"All my projects, \u003cspan class=\"hero__title-accent\">documented\u003c/span>","home.subtitle":"One single site with the documentation of everything I build: players, agents, bots, games and websites. Install guides, architecture, usage and reference.","home.ctaPrimary":"Start reading","home.ctaSecondary":"See all projects","home.stats.projects":"projects","home.stats.pages":"pages","home.stats.languages":"languages","home.stats.updated":"updated","home.about.title":"About these docs","home.about.sub":"How they are made and how they are kept up to date.","home.about.card.label":"HOW IT WORKS","home.about.card.title":"Written by hand, generated with Node","home.about.card.text":"Every page is a Markdown file in content/docs/. The build turns them into static HTML with the same system, the same palette and the same animations as my main website.","home.about.card.stamp":"SEE THE REPOSITORY ↗","home.contribute.title":"Found a mistake?","home.contribute.text":"All of this documentation lives in a public repository. Open an issue or send a pull request with the fix.","home.contribute.issue":"Open an issue","home.contribute.pr":"Propose a change","home.contribute.email":"Send me an email","projects.title":"Projects","projects.sub":"All the documentation, project by project. Each card links to its complete guide.","projects.pages":"pages","projects.openDocs":"Open documentation","projects.demo":"Try it","projects.code":"Code","projects.group.all":"All","callout.note":"Note","callout.tip":"Tip","callout.warning":"Warning","callout.important":"Important","callout.caution":"Caution","code.copy":"Copy","code.copied":"Copied","footer.rights":"All rights reserved.","footer.mainSite":"My site","footer.tagline":"Browser games, web applications and videos.","footer.site":"Site","footer.siteAria":"Site links","footer.resources":"Resources","footer.resourcesAria":"Resources and external links","footer.status":"Service status","footer.email":"Email","footer.terms":"Terms of Service","footer.privacy":"Privacy","footer.source":"Source code ↗","footer.legalAria":"Terms and privacy","aria.socials":"Social links","aria.footerLogo":"Jaime Gaming — home","social.github":"GitHub","social.youtube":"YouTube","social.x":"X / Twitter","social.discord":"Discord","social.email":"Email","status.title":"Service status","status.sub":"Live status of the website, documentation and projects, from the official incident.io panel.","status.note":"Data from the official status panel","status.open":"Open full status page ↗","status.loading":"Checking status…","status.unknown":"Status unavailable","status.error":"Couldn't fetch the live status. You can open the full status page.","status.updated":"Updated {date}","status.componentsAria":"Service components","status.allOperational":"All systems operational","status.minorIssues":"Minor issues","status.majorIssues":"Major incident","status.criticalIssues":"Critical incident","status.maintenanceOverall":"Maintenance in progress","status.operational":"Operational","status.degraded":"Degraded performance","status.partial":"Partial outage","status.major":"Major outage","status.underMaintenance":"Under maintenance","status.maintenanceTitle":"Scheduled maintenance","status.maintenanceBody":"Text published on the status page.","status.frameNotice":"The full panel belongs to incident.io and is only loaded if you ask for it. Once loaded, it may use its own cookies.","status.loadFrame":"Load embedded panel","status.frameTitle":"Jaime Gaming status page","status.hint":"The summary refreshes when you open this page. If the embedded panel doesn’t appear, open it with the button above.","notFound.title":"Page not found","notFound.sub":"The link may be broken or this guide may have moved.","notFound.home":"Back to the docs home","notFound.projects":"See all projects","home.guide.title":"How the guides are organised","home.guide.sub":"They all follow the same anatomy, so you know where to look in every project.","home.guide.overview.num":"01","home.guide.overview.title":"Overview","home.guide.overview.desc":"What the project is, which problem it solves, what state it is in and what sets it apart. It is the entry page of every guide.","home.guide.install.num":"02","home.guide.install.title":"Installation","home.guide.install.desc":"Requirements, the commands to get it running and the first check that everything works.","home.guide.usage.num":"03","home.guide.usage.title":"Usage","home.guide.usage.desc":"Day to day: features, commands, mechanics or workflows, with concrete examples.","home.guide.deep.num":"04","home.guide.deep.title":"How it is built","home.guide.deep.desc":"Architecture, folder structure, technical decisions and the project's known limits.","home.guide.reference.num":"05","home.guide.reference.title":"Reference","home.guide.reference.desc":"Lookup tables: options, data formats, models, platforms or frequently asked questions.","home.about.text1":"This site gathers, in one single place, the documentation of the seven projects I maintain on GitHub. Every guide is written by hand from the repository's README and docs, and reviewed when the project changes.","home.about.text2":"Nothing is generated automatically from GitHub and nothing depends on external services: the content lives in this repository as Markdown, it is compiled to static HTML with Node and published on GitHub Pages. Search uses an index created in that same build.","home.about.row.stack":"Generator","home.about.row.palette":"Palette","home.about.row.fonts":"Fonts","home.about.row.host":"Publishing","home.about.row.search":"Search","home.about.row.searchValue":"Static index, no external services","docs.otherProjects":"Other projects","projects.empty":"There are no projects in this category.","meta.home.title":"Docs — Jaime Gaming","meta.home.description":"Documentation for all of Jaime Gaming's projects: Wave, jAIgent, hellbot, RNGdle Infinite, Diario, VOID and his personal website.","meta.projects.title":"Projects — Jaime Gaming Docs","meta.projects.description":"Index of all the documentation, grouped by apps, games, bots and web.","proj.wave.name":"Wave","proj.wave.tagline":"A local-first music player for web, Android and Windows.","proj.wave.summary":"A home for the music you already own. Wave keeps your collection on the device: no account, no subscription and no audio uploaded to any server.","proj.wave.status":"0.1.0 · active","page.wave.index":"Overview","page.wave.install":"Installation","page.wave.features":"Features & usage","page.wave.platforms":"Platforms","page.wave.architecture":"Architecture","page.wave.privacy":"Privacy & data","page.wave.dev":"Development","proj.jaigent.name":"jAIgent","proj.jaigent.tagline":"All your agents in one place.","proj.jaigent.summary":"One binary, ten providers. The same tools in the terminal, in ChatGPT Web over remote MCP, in Claude Desktop and in any app that speaks OpenAI. With undo on every write and a hard spend cap.","proj.jaigent.status":"0.5.x · active","page.jaigent.index":"Overview","page.jaigent.install":"Install & API keys","page.jaigent.cli":"Using the CLI","page.jaigent.models":"Models & providers","page.jaigent.mcp":"MCP & your own API","page.jaigent.extend":"Skills, plugins & schedules","page.jaigent.reference":"Tools reference","page.jaigent.security":"Security","page.jaigent.dev":"Development","proj.hellbot.name":"hellbot","proj.hellbot.tagline":"The Discord bot that runs the Welcome to Hell endurance event.","proj.hellbot.summary":"Keep at least one real human in a single voice channel for 160 consecutive hours. If that channel empties and nobody returns within the grace period, the run is dead permanently.","proj.hellbot.status":"production · stable","page.hellbot.index":"Overview","page.hellbot.rules":"Event rules","page.hellbot.edge-cases":"Edge cases","page.hellbot.install":"Install & deploy","page.hellbot.commands":"Commands","page.hellbot.dashboard":"Live dashboard","page.hellbot.architecture":"Architecture","proj.rngdle-infinite.name":"RNGdle Infinite","proj.rngdle-infinite.tagline":"One number, infinite possibilities.","proj.rngdle-infinite.summary":"Roll a number from 0 to 1,000,000 and find out what makes it special. A browser incremental with EP, badges, companions, skills, rebirth, prestige and rollback.","proj.rngdle-infinite.status":"playable · active","page.rngdle-infinite.index":"Overview","page.rngdle-infinite.play":"How to play","page.rngdle-infinite.systems":"Systems & progression","page.rngdle-infinite.save":"Save & sync","page.rngdle-infinite.faq":"FAQ","page.rngdle-infinite.dev":"Development","proj.daily-diary.name":"Diario","proj.daily-diary.tagline":"Your personal space: a minimalist, 100% local diary.","proj.daily-diary.summary":"No backend, no accounts, no AI and no external APIs. Summaries, statistics and trends are computed in your browser with rules and text templates.","proj.daily-diary.status":"complete · local","page.daily-diary.index":"Overview","page.daily-diary.install":"Install & run","page.daily-diary.areas":"The five areas","page.daily-diary.data":"Data & privacy","page.daily-diary.dev":"Structure & development","proj.void.name":"VOID","proj.void.tagline":"Michael Burns disappeared last year. Would you come in?","proj.void.summary":"A psychological game set in a mysterious corporation where everyone and everything disappears. High-contrast CRT interface, in Spanish and English.","proj.void.status":"beta · in development","page.void.index":"Overview","page.void.install":"Install & play","page.void.world":"The VOID Corp world","page.void.engine":"Inside the single file","page.void.faq":"Warnings & FAQ","proj.website.name":"jaime-gaming.github.io","proj.website.tagline":"The personal site this documentation is built from.","proj.website.summary":"Dark, bilingual portfolio generated with Node: projects synced from GitHub, contributions calendar, Discord presence and a Markdown blog.","proj.website.status":"published · active","page.website.index":"Overview","page.website.build":"Build & preview","page.website.content":"Editing content","page.website.i18n":"The two languages","page.website.architecture":"Site architecture","group.apps.title":"Apps & tools","group.apps.sub":"Software that solves something concrete: music, agents and personal organisation.","group.games.title":"Games","group.games.sub":"From the browser incremental to psychological horror.","group.bots.title":"Bots & events","group.bots.sub":"Live automation for communities.","group.web.title":"Web","group.web.sub":"The sites I publish, including the one you are reading."}}</script>
+<script type="application/json" id="pageTranslations">{"es":{"title":"Casos límite · hellbot — Docs de Jaime Gaming","description":"Los 32 casos límite de hellbot y qué hace el bot en cada uno: hitos, gracia, roll call, pausa, reinicios, caídas y ediciones en marcha.","fields":{"body":"\u003cp>Un evento de 160 horas no se puede repetir. Si algo sale mal a la hora 90, no hay segunda partida, así que los casos raros no son un apéndice: son el reglamento. El \u003ca href=\"https://github.com/jaime-gaming/hellbot/blob/main/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">\u003ccode>README.md\u003c/code>\u003c/a> del repositorio los lista en una tabla de 32 filas con la nota de que \u003cstrong>todos están cubiertos por pruebas\u003c/strong>. Aquí están agrupados por tema, que es como se consultan cuando algo está pasando.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Nota\u003c/p>\n  \u003cdiv class=\"callout__body\">La columna de la derecha es el comportamiento, no la intención. Si el bot hace otra cosa, es un fallo: estos casos tienen prueba detrás.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"hitos-y-clasificacion\">Hitos y clasificación\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Caso\u003c/th>\n\u003cth>Qué hace\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Alguien entra \u003cstrong>justo\u003c/strong> cuando cae un hito\u003c/td>\n\u003ctd>Queda incluido en la instantánea de elegibles de ese hito\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alguien sale \u003cstrong>justo\u003c/strong> cuando cae un hito\u003c/td>\n\u003ctd>Queda excluido de la instantánea\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Un hito cae con el canal de voz vacío\u003c/td>\n\u003ctd>Se retiene y se entrega a quien esté presente cuando el canal se recupere, o se pierde con la partida\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>El bot reinicia alrededor de un hito\u003c/td>\n\u003ctd>La reclamación atómica en la base de datos impide duplicados, y los anuncios no enviados se vuelven a publicar al arrancar\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Las 160 h caen durante una actualización de 10 s\u003c/td>\n\u003ctd>El tick de 1 s lo recorta todo a \u003ccode>start_ts + 160h\u003c/code>; \u003cstrong>la compleción gana\u003c/strong> a un canal vacío en la fecha límite\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Dos personas con el mismo tiempo total\u003c/td>\n\u003ctd>Rango compartido y orden de presentación determinista\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>250 personas en el canal cuando cae un hito\u003c/td>\n\u003ctd>El mensaje se divide entre campos del embed y \u003cstrong>nunca supera los límites de Discord\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"quien-cuenta-como-participante\">Quién cuenta como participante\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Caso\u003c/th>\n\u003cth>Qué hace\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Un bot entra al canal\u003c/td>\n\u003ctd>Ignorado en todas partes; \u003cstrong>no puede mantener vivo el evento\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Entra un \u003ccode>@clanker\u003c/code>\u003c/td>\n\u003ctd>Desconectado de inmediato, sin tiempo en la clasificación y sin poder mantener vivo el evento\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Entradas y salidas rápidas y repetidas\u003c/td>\n\u003ctd>El muestreo de un segundo mantiene correctos los totales por persona\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alguien sale y vuelve\u003c/td>\n\u003ctd>Los totales siguen acumulando\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alguien entra en mitad de una comprobación de vida\u003c/td>\n\u003ctd>No recibe ping, no está obligado a responder y \u003cstrong>nunca se le expulsa por ello\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"canal-vacio-gracia-y-comprobaciones-de-vida\">Canal vacío, gracia y comprobaciones de vida\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Caso\u003c/th>\n\u003cth>Qué hace\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Sale el último participante válido\u003c/td>\n\u003ctd>Ventana de gracia de \u003cstrong>15 s\u003c/strong> más un aviso sin ping; \u003ccode>FAILED\u003c/code> solo si no vuelve nadie\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alguien vuelve con 1 s de margen\u003c/td>\n\u003ctd>La ventana se cierra, sale el aviso \u003cstrong>«SAVED»\u003c/strong> y la partida continúa intacta\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>El canal se vacía varias veces\u003c/td>\n\u003ctd>\u003cstrong>Cada periodo vacío tiene su propia ventana\u003c/strong>; el tiempo sobrevivido nunca se infla\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Reinicio en mitad de la ventana de gracia\u003c/td>\n\u003ctd>La ventana se reanuda desde el \u003ccode>grace_started_ts\u003c/code> persistido\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Comprobación de vida más reinicio\u003c/td>\n\u003ctd>El estado de la comprobación está persistido: las respuestas enviadas mientras no había conexión se recuperan, y una comprobación caducada \u003cstrong>se cancela en vez de expulsar gente\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Todo el mundo ignora la comprobación\u003c/td>\n\u003ctd>Se desconecta a todos, el canal se vacía y arranca un \u003cstrong>periodo de recuperación de 2 minutos\u003c/strong> antes del fallo\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"la-pausa\">La pausa\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Caso\u003c/th>\n\u003cth>Qué hace\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>El bot reinicia estando en pausa\u003c/td>\n\u003ctd>El evento vuelve pausado: los dos relojes siguen congelados hasta \u003ccode>/hell resume\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Se pausa durante un fallo\u003c/td>\n\u003ctd>Se congelan el reloj global y los por persona; no hay hitos, ni roll call, ni caducidad de gracia, ni fallo. \u003cstrong>El tiempo en pausa no cuenta nunca\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>La pausa sorprende a una ventana de gracia abierta\u003c/td>\n\u003ctd>La cuenta atrás también se congela; al reanudar \u003cstrong>continúa con el tiempo que le quedaba\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>La pausa cruza la marca de las 160 h\u003c/td>\n\u003ctd>La compleción espera al tiempo \u003cstrong>efectivo\u003c/strong>: una partida pausada no puede completarse antes de tiempo\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"reinicios-caidas-y-la-api-de-discord\">Reinicios, caídas y la API de Discord\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Caso\u003c/th>\n\u003cth>Qué hace\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>El evento termina con mensajes directos sin enviar\u003c/td>\n\u003ctd>\u003ccode>dm_log\u003c/code> reanuda la entrega en el siguiente arranque, \u003cstrong>sin duplicados\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Un participante tiene los MD cerrados\u003c/td>\n\u003ctd>Se registra como bloqueado, se reporta en el resumen y \u003ccode>/hell mystats\u003c/code> sigue funcionando\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>La API de Discord va lenta durante un roll call\u003c/td>\n\u003ctd>Las expulsiones y los anuncios corren \u003cstrong>fuera del bucle de un segundo\u003c/strong>, así que la vigilancia del canal nunca se atasca\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Sin internet, token malo o intent que falta\u003c/td>\n\u003ctd>Error limpio de una línea y un código de salida distinto; la traza completa queda en \u003ccode>logs/\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>El bot reinicia a mitad de evento\u003c/td>\n\u003ctd>El estado se recarga desde SQLite; el tiempo transcurrido es \u003ccode>now - start_ts\u003c/code> y \u003cstrong>no se reinicia nada\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>El bot cae un rato (reinicio, despliegue, crash)\u003c/td>\n\u003ctd>El cronómetro sigue corriendo y \u003cstrong>quien estaba en el canal antes \u003cem>y\u003c/em> después de la caída recupera ese tiempo\u003c/strong>: nadie pierde progreso por una caída del bot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>El bot cae durante mucho tiempo\u003c/td>\n\u003ctd>El cronómetro sigue corriendo, pero la ventana no observada \u003cstrong>no se acredita a nadie\u003c/strong> y se reporta en el mensaje de progreso\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>La API de Discord falla al enviar un mensaje\u003c/td>\n\u003ctd>Se registra y se reintenta en el ciclo siguiente; \u003cstrong>el estado del evento no se toca\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"editar-el-evento-en-marcha\">Editar el evento en marcha\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Caso\u003c/th>\n\u003cth>Qué hace\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Un hito se edita a una forma inválida\u003c/td>\n\u003ctd>Se rechaza con un motivo legible y \u003cstrong>la tabla anterior sigue viva\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>La duración del evento se edita con la partida en marcha\u003c/td>\n\u003ctd>Se rechaza y se registra: \u003cstrong>el reloj en marcha nunca se remodela\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"dos-decisiones-de-diseno\">Dos decisiones de diseño\u003c/h2>\n\u003cp>Las dos las explica el propio README y merecen quedar aparte, porque son elecciones y no consecuencias.\u003c/p>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Importante\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>Una caída no hace fallar el evento.\u003c/strong> El bot no puede demostrar que el canal se vaciara mientras estaba ciego, así que no falla. Pero nadie gana tiempo de clasificación por esa ventana, y el hueco se muestra en la salida de progreso y de estado.\u003c/div>\n\u003c/div>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Aviso\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>Si el canal está vacío en el mismo tick en que caería un hito, gana el fallo.\u003c/strong> No había nadie presente para reclamar la recompensa.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"donde-seguir\">Dónde seguir\u003c/h2>\n\u003cul>\n\u003cli>\u003ca href=\"/Docs/hellbot/rules/\">Reglas del evento\u003c/a> — el reglamento normal, del que estos casos son el borde.\u003c/li>\n\u003cli>\u003ca href=\"/Docs/hellbot/architecture/\">Arquitectura\u003c/a> — las invariantes que hacen que estos comportamientos se sostengan tras un reinicio.\u003c/li>\n\u003cli>\u003ca href=\"/Docs/hellbot/commands/\">Comandos\u003c/a> — \u003ccode>/hell pause\u003c/code>, \u003ccode>/hell resume\u003c/code>, \u003ccode>/hell reset\u003c/code> y \u003ccode>/hell mystats\u003c/code>.\u003c/li>\n\u003c/ul>\n","desc":"Los 32 casos límite de hellbot y qué hace el bot en cada uno: hitos, gracia, roll call, pausa, reinicios, caídas y ediciones en marcha.","readtime":"5 min de lectura","editHref":"https://github.com/jaime-gaming/hellbot/blob/main/content/docs/hellbot/edge-cases.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#hitos-y-clasificacion\">Hitos y clasificación\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#quien-cuenta-como-participante\">Quién cuenta como participante\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#canal-vacio-gracia-y-comprobaciones-de-vida\">Canal vacío, gracia y comprobaciones de vida\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#la-pausa\">La pausa\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#reinicios-caidas-y-la-api-de-discord\">Reinicios, caídas y la API de Discord\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#editar-el-evento-en-marcha\">Editar el evento en marcha\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#dos-decisiones-de-diseno\">Dos decisiones de diseño\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#donde-seguir\">Dónde seguir\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}},"en":{"title":"Edge cases · hellbot — Docs de Jaime Gaming","description":"hellbot's 32 edge cases and what the bot does in each: milestones, grace, roll call, pause, restarts, outages and mid-run edits.","fields":{"body":"\u003cp>A 160-hour event cannot be repeated. If something goes wrong at hour 90 there is no second run, so the odd cases are not an appendix: they are the rules. The repository&#39;s \u003ca href=\"https://github.com/jaime-gaming/hellbot/blob/main/README.md\" target=\"_blank\" rel=\"noopener noreferrer\">\u003ccode>README.md\u003c/code>\u003c/a> lists them in a 32-row table, noting that \u003cstrong>all of them are covered by tests\u003c/strong>. Here they are grouped by theme, which is how you look them up when something is actually happening.\u003c/p>\n\u003cdiv class=\"callout callout--note\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-bulb\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Note\u003c/p>\n  \u003cdiv class=\"callout__body\">The right-hand column is the behaviour, not the intention. If the bot does something else, that is a bug: these cases have a test behind them.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"milestones-and-ranking\">Milestones and ranking\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Case\u003c/th>\n\u003cth>What it does\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>Someone joins \u003cstrong>exactly\u003c/strong> as a milestone lands\u003c/td>\n\u003ctd>Included in that milestone&#39;s eligible snapshot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Someone leaves \u003cstrong>exactly\u003c/strong> as a milestone lands\u003c/td>\n\u003ctd>Excluded from the snapshot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>A milestone lands while the voice channel is empty\u003c/td>\n\u003ctd>Held back, then awarded to whoever is present when the channel recovers, or lost with the run\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>The bot restarts around a milestone\u003c/td>\n\u003ctd>The atomic database claim prevents duplicates, and unsent announcements are re-posted on boot\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>160 h hits during a 10 s update\u003c/td>\n\u003ctd>The 1 s tick clamps everything to \u003ccode>start_ts + 160h\u003c/code>; \u003cstrong>completion wins\u003c/strong> over an empty channel at the deadline\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Two people with identical total times\u003c/td>\n\u003ctd>Shared rank and a deterministic display order\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>250 people in the channel when a milestone lands\u003c/td>\n\u003ctd>The message is split across embed fields and \u003cstrong>never exceeds Discord&#39;s limits\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"who-counts-as-a-participant\">Who counts as a participant\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Case\u003c/th>\n\u003cth>What it does\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>A bot joins the channel\u003c/td>\n\u003ctd>Ignored everywhere; it \u003cstrong>cannot keep the event alive\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>A \u003ccode>@clanker\u003c/code> joins\u003c/td>\n\u003ctd>Disconnected immediately, no leaderboard time, and it cannot keep the event alive\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Rapid, repeated joins and leaves\u003c/td>\n\u003ctd>One-second sampling keeps the per-user totals correct\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Someone leaves and returns\u003c/td>\n\u003ctd>Totals continue accumulating\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Someone joins in the middle of an alive check\u003c/td>\n\u003ctd>Not pinged, not required to answer, and \u003cstrong>never kicked for it\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"empty-channel-grace-and-alive-checks\">Empty channel, grace and alive checks\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Case\u003c/th>\n\u003cth>What it does\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>The last valid participant leaves\u003c/td>\n\u003ctd>A \u003cstrong>15 s\u003c/strong> grace window plus a no-ping warning; \u003ccode>FAILED\u003c/code> only if nobody returns\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Someone rejoins with 1 s to spare\u003c/td>\n\u003ctd>The window closes, the \u003cstrong>«SAVED»\u003c/strong> notice appears and the run continues untouched\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>The channel empties repeatedly\u003c/td>\n\u003ctd>\u003cstrong>Each empty period gets its own window\u003c/strong>; survived time is never inflated\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Restart in the middle of a grace window\u003c/td>\n\u003ctd>The window resumes from the persisted \u003ccode>grace_started_ts\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Alive check plus restart\u003c/td>\n\u003ctd>The check state is persisted: replies sent while offline are recovered, and an expired check \u003cstrong>is cancelled instead of kicking people\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Everybody ignores the alive check\u003c/td>\n\u003ctd>Everyone is disconnected, the channel empties and a \u003cstrong>2-minute recovery grace period\u003c/strong> starts before failure\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"pause\">Pause\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Case\u003c/th>\n\u003cth>What it does\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>The bot restarts while paused\u003c/td>\n\u003ctd>The event comes back paused: both clocks stay frozen until \u003ccode>/hell resume\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Paused during a bug\u003c/td>\n\u003ctd>The global and per-user clocks freeze; no milestones, no roll calls, no grace expiry, no failure. \u003cstrong>Pause time is never counted\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Pause catches an open grace window\u003c/td>\n\u003ctd>The countdown freezes too; on resume it \u003cstrong>continues with the time it had left\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>Pause crosses the 160 h mark\u003c/td>\n\u003ctd>Completion waits for \u003cstrong>effective\u003c/strong> time: a paused run can never complete early\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"restarts-outages-and-the-discord-api\">Restarts, outages and the Discord API\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Case\u003c/th>\n\u003cth>What it does\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>The event ends with DMs unsent\u003c/td>\n\u003ctd>\u003ccode>dm_log\u003c/code> resumes delivery on the next start, \u003cstrong>without duplicates\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>A contestant has DMs closed\u003c/td>\n\u003ctd>Recorded as blocked, reported in the summary, and \u003ccode>/hell mystats\u003c/code> still works\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>The Discord API is slow during a roll call\u003c/td>\n\u003ctd>Kicks and announcements run \u003cstrong>off the one-second loop\u003c/strong>, so channel monitoring never stalls\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>No internet, bad token or a missing intent\u003c/td>\n\u003ctd>A clean one-line error and a distinct exit code; the full traceback stays in \u003ccode>logs/\u003c/code>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>The bot restarts mid-event\u003c/td>\n\u003ctd>State is reloaded from SQLite; elapsed is \u003ccode>now - start_ts\u003c/code> and \u003cstrong>nothing resets\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>The bot is offline briefly (restart, deploy, crash)\u003c/td>\n\u003ctd>The timer keeps running and \u003cstrong>anyone in the channel before \u003cem>and\u003c/em> after the outage gets that time credited back\u003c/strong>: nobody loses progress to the bot&#39;s downtime\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>The bot is offline for a long time\u003c/td>\n\u003ctd>The timer still keeps running, but the unobserved window is \u003cstrong>not credited to anyone\u003c/strong> and is reported in the progress message\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>The Discord API fails to send a message\u003c/td>\n\u003ctd>Logged and retried on the next cycle; \u003cstrong>the event state is untouched\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"editing-the-event-mid-run\">Editing the event mid-run\u003c/h2>\n\u003cdiv class=\"doc-table\">\u003ctable>\u003cthead>\u003ctr>\n\u003cth>Case\u003c/th>\n\u003cth>What it does\u003c/th>\n\u003c/tr>\n\u003c/thead>\u003ctbody>\u003ctr>\n\u003ctd>A milestone is edited into a broken shape\u003c/td>\n\u003ctd>Rejected with a readable reason and \u003cstrong>the previous table stays live\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003ctr>\n\u003ctd>The event length is edited while the run is going\u003c/td>\n\u003ctd>Refused and logged: \u003cstrong>the running clock is never reshaped\u003c/strong>\u003c/td>\n\u003c/tr>\n\u003c/tbody>\u003c/table>\u003c/div>\n\u003ch2 id=\"two-deliberate-policy-calls\">Two deliberate policy calls\u003c/h2>\n\u003cp>Both are explained by the README itself and deserve to stand apart, because they are choices rather than consequences.\u003c/p>\n\u003cdiv class=\"callout callout--important\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-alert\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Important\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>Downtime does not fail the event.\u003c/strong> The bot cannot prove the channel emptied while it was blind, so it does not fail. But nobody earns leaderboard time for that window, and the gap is shown in the progress and status output.\u003c/div>\n\u003c/div>\n\u003cdiv class=\"callout callout--warning\">\n  \u003csvg class=\"icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\u003cuse href=\"/Docs/assets/img/icons.svg?v=eea9c3fe56aa#icon-warn\">\u003c/use>\u003c/svg>\n  \u003cp class=\"callout__title\">Warning\u003c/p>\n  \u003cdiv class=\"callout__body\">\u003cstrong>If the channel is empty in the same tick a milestone would land, the failure wins.\u003c/strong> Nobody was present to claim the reward.\u003c/div>\n\u003c/div>\n\u003ch2 id=\"where-to-go-next\">Where to go next\u003c/h2>\n\u003cul>\n\u003cli>\u003ca href=\"/Docs/hellbot/rules/\">Event rules\u003c/a> — the normal rules, whose edge these cases are.\u003c/li>\n\u003cli>\u003ca href=\"/Docs/hellbot/architecture/\">Architecture\u003c/a> — the invariants that keep these behaviours holding after a restart.\u003c/li>\n\u003cli>\u003ca href=\"/Docs/hellbot/commands/\">Commands\u003c/a> — \u003ccode>/hell pause\u003c/code>, \u003ccode>/hell resume\u003c/code>, \u003ccode>/hell reset\u003c/code> and \u003ccode>/hell mystats\u003c/code>.\u003c/li>\n\u003c/ul>\n","desc":"hellbot's 32 edge cases and what the bot does in each: milestones, grace, roll call, pause, restarts, outages and mid-run edits.","readtime":"4 min read","editHref":"https://github.com/jaime-gaming/hellbot/blob/main/content/docs/hellbot/edge-cases.en.md","toc":"\u003cp class=\"toc__title\" data-i18n=\"docs.tocTitle\">En esta página\u003c/p>\n\u003col class=\"toc__list\">\n  \u003cli>\u003ca href=\"#milestones-and-ranking\">Milestones and ranking\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#who-counts-as-a-participant\">Who counts as a participant\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#empty-channel-grace-and-alive-checks\">Empty channel, grace and alive checks\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#pause\">Pause\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#restarts-outages-and-the-discord-api\">Restarts, outages and the Discord API\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#editing-the-event-mid-run\">Editing the event mid-run\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#two-deliberate-policy-calls\">Two deliberate policy calls\u003c/a>\u003c/li>\n  \u003cli>\u003ca href=\"#where-to-go-next\">Where to go next\u003c/a>\u003c/li>\n\u003c/ol>\n\u003cp class=\"toc__progress\" aria-hidden=\"true\">\u003cspan>\u003c/span>\u003c/p>"}}}</script>
+<script type="application/json" id="searchConfig">{"index":"/Docs/assets/data/search-index.json","scope":"hellbot"}</script>
+<script src="/Docs/assets/js/i18n.js?v=9f6d93c1fd7c"></script>
+<script src="/Docs/assets/js/search.js?v=014a801e4757"></script>
+<script src="/Docs/assets/js/main.js?v=83aa4a0803d7"></script>
+</body>
+</html>
